@@ -1,6 +1,6 @@
 # outers - a small package for console color printing
 
-## This package provides a simple way to print colored text to the console.
+### This package provides a simple way to print colored text to the console.
 
 ## Usage
 ```shell

@@ -1,6 +1,6 @@
 {
   "name": "outers",
-  "version": "1.0.5",
+  "version": "1.2.5",
   "description": "Outer is a small package",
   "main": "./library/outer.js",
   "types": "./library/outer.d.ts",
