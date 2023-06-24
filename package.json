@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git"
+    "url": "https://github.com/AnkanSaha/outers.git"
   },
   "keywords": [
     "outer",
@@ -33,5 +33,8 @@
     "eslint-plugin-n": "^15.7.0",
     "eslint-plugin-promise": "^6.1.1",
     "typescript": "^4.1.6"
+  },
+  "sponsor": {
+    "url": "https://github.com/sponsors/AnkanSaha"
   }
 }
