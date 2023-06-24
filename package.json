@@ -1,0 +1,37 @@
+{
+  "name": "outers",
+  "version": "1.0.5",
+  "description": "Outer is a small package",
+  "main": "./library/outer.js",
+  "types": "./library/outer.d.ts",
+  "scripts": {
+    "test": "eslint source/**/*.ts --fix",
+    "build": "npm test && tsc",
+    "prepare": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git"
+  },
+  "keywords": [
+    "outer",
+    "outer package",
+    "outer library",
+    "console",
+    "log",
+    "logger",
+    "log to console",
+    "log to console in color"
+  ],
+  "author": "Ankan Saha",
+  "license": "MIT",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.60.0",
+    "eslint": "^8.43.0",
+    "eslint-config-standard-with-typescript": "^35.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.7.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "typescript": "^4.1.6"
+  }
+}
