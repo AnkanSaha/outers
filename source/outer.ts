@@ -13,8 +13,8 @@ type globe = string | number | boolean | object | null | undefined | symbol | bi
  * green. Finally, the function returns the
  * @returns an array of objects of type `globe`.
  */
-export function green (...Payload: globe[]): globe {
-  Payload.forEach((payload: globe) => {
+export function green (...Payload: unknown[]): globe {
+  Payload.forEach((payload: unknown) => {
     console.log(color.green, payload)
   })
   return {
@@ -33,8 +33,8 @@ export function green (...Payload: globe[]): globe {
  * the original array of "globe"
  * @returns an array of objects of type `globe`.
  */
-export function yellow (...Payload: globe[]): globe {
-  Payload.forEach((payload: globe) => {
+export function yellow (...Payload: unknown[]): globe {
+  Payload.forEach((payload: unknown) => {
     console.log(color.yellow, payload)
   })
   return {
@@ -53,8 +53,8 @@ export function yellow (...Payload: globe[]): globe {
  * the original array of "globe"
  * @returns an array of objects of type `globe`.
  */
-export function red (...Payload: globe[]): globe {
-  Payload.forEach((payload: globe) => {
+export function red (...Payload: unknown[]): globe {
+  Payload.forEach((payload: unknown) => {
     console.log(color.red, payload)
   })
   return {
@@ -73,8 +73,8 @@ export function red (...Payload: globe[]): globe {
  * function returns the original array of globe objects.
  * @returns The function `blue` is returning an array of `globe` objects.
  */
-export function blue (...Payload: globe[]): globe {
-  Payload.forEach((payload: globe) => {
+export function blue (...Payload: unknown[]): globe {
+  Payload.forEach((payload: unknown) => {
     console.log(color.blue, payload)
   })
   return {
@@ -94,8 +94,8 @@ export function blue (...Payload: globe[]): globe {
  * magenta color using the "color" object
  * @returns an array of objects of type `globe`.
  */
-export function magenta (...Payload: globe[]): globe {
-  Payload.forEach((payload: globe) => {
+export function magenta (...Payload: unknown[]): globe {
+  Payload.forEach((payload: unknown) => {
     console.log(color.magenta, payload)
   })
   return {
@@ -114,8 +114,8 @@ export function magenta (...Payload: globe[]): globe {
  * cyan. Finally, the function returns the
  * @returns The function `cyan` is returning an array of `globe` objects.
  */
-export function cyan (...Payload: globe[]): globe {
-  Payload.forEach((payload: globe) => {
+export function cyan (...Payload: unknown[]): globe {
+  Payload.forEach((payload: unknown) => {
     console.log(color.cyan, payload)
   })
   return {
@@ -136,8 +136,8 @@ export function cyan (...Payload: globe[]): globe {
  * @returns an array of `globe` objects, which is the same as the `Payload` parameter passed to the
  * function.
  */
-export function gray (...Payload: globe[]): globe {
-  Payload.forEach((payload: globe) => {
+export function gray (...Payload: unknown[]): globe {
+  Payload.forEach((payload: unknown) => {
     console.log(color.gray, payload)
   })
   return {
@@ -158,8 +158,8 @@ export function gray (...Payload: globe[]): globe {
  * @returns The function `dimmed` is returning an array of `globe` objects, which is the same as the
  * `Payload` parameter passed to the function.
  */
-export function dimmed (...Payload: globe[]): globe {
-  Payload.forEach((payload: globe) => {
+export function dimmed (...Payload: unknown[]): globe {
+  Payload.forEach((payload: unknown) => {
     console.log(color.dimmed, payload)
   })
   return {
@@ -180,8 +180,8 @@ export function dimmed (...Payload: globe[]): globe {
  * @returns The function `bright` is returning an array of `globe` objects after logging each object
  * with the `color.bright` property to the console.
  */
-export function bright (...Payload: globe[]): globe {
-  Payload.forEach((payload: globe) => {
+export function bright (...Payload: unknown[]): globe {
+  Payload.forEach((payload: unknown) => {
     console.log(color.bright, payload)
   })
   return {
@@ -201,8 +201,8 @@ export function bright (...Payload: globe[]): globe {
  * @returns an array of `globe` objects, which is the same as the `Payload` parameter passed to the
  * function.
  */
-export function underscore (...Payload: globe[]): globe {
-  Payload.forEach((payload: globe) => {
+export function underscore (...Payload: unknown[]): globe {
+  Payload.forEach((payload: unknown) => {
     console.log(color.underscore, payload)
   })
   return {
@@ -222,8 +222,8 @@ export function underscore (...Payload: globe[]): globe {
  * @returns an array of `globe` elements after logging each element in the array to the console with
  * the color `reverse`.
  */
-export function reverse (...Payload: globe[]): globe {
-  Payload.forEach((payload: globe) => {
+export function reverse (...Payload: unknown[]): globe {
+  Payload.forEach((payload: unknown) => {
     console.log(color.reverse, payload)
   })
   return {
