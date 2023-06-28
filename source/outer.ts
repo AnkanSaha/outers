@@ -17,7 +17,11 @@ export function green (...Payload: globe[]): globe {
   Payload.forEach((payload: globe) => {
     console.log(color.green, payload)
   })
-  return Payload
+  return {
+    Status: 'Success',
+    Payload,
+    Message: `The function ${color.green} has been executed successfully`
+  }
 }; // end of green
 
 // function for yellow
@@ -33,7 +37,11 @@ export function yellow (...Payload: globe[]): globe {
   Payload.forEach((payload: globe) => {
     console.log(color.yellow, payload)
   })
-  return Payload
+  return {
+    Status: 'Success',
+    Payload,
+    Message: `The function ${color.yellow} has been executed successfully`
+  }
 }; // end of yellow
 
 // function for red
@@ -49,7 +57,11 @@ export function red (...Payload: globe[]): globe {
   Payload.forEach((payload: globe) => {
     console.log(color.red, payload)
   })
-  return Payload
+  return {
+    Status: 'Success',
+    Payload,
+    Message: `The function ${color.red} has been executed successfully`
+  }
 }; // end of red
 
 // function for blue
@@ -65,7 +77,11 @@ export function blue (...Payload: globe[]): globe {
   Payload.forEach((payload: globe) => {
     console.log(color.blue, payload)
   })
-  return Payload
+  return {
+    Status: 'Success',
+    Payload,
+    Message: `The function ${color.blue} has been executed successfully`
+  }
 }; // end of blue
 
 // function for magenta
@@ -82,7 +98,11 @@ export function magenta (...Payload: globe[]): globe {
   Payload.forEach((payload: globe) => {
     console.log(color.magenta, payload)
   })
-  return Payload
+  return {
+    Status: 'Success',
+    Payload,
+    Message: `The function ${color.magenta} has been executed successfully`
+  }
 }; // end of magenta
 
 // function for cyan
@@ -98,7 +118,11 @@ export function cyan (...Payload: globe[]): globe {
   Payload.forEach((payload: globe) => {
     console.log(color.cyan, payload)
   })
-  return Payload
+  return {
+    Status: 'Success',
+    Payload,
+    Message: `The function ${color.cyan} has been executed successfully`
+  }
 }; // end of cyan
 
 // function for gray
@@ -116,7 +140,11 @@ export function gray (...Payload: globe[]): globe {
   Payload.forEach((payload: globe) => {
     console.log(color.gray, payload)
   })
-  return Payload
+  return {
+    Status: 'Success',
+    Payload,
+    Message: `The function ${color.gray} has been executed successfully`
+  }
 }; // end of gray
 
 // function for dimmed
@@ -134,7 +162,11 @@ export function dimmed (...Payload: globe[]): globe {
   Payload.forEach((payload: globe) => {
     console.log(color.dimmed, payload)
   })
-  return Payload
+  return {
+    Status: 'Success',
+    Payload,
+    Message: `The function ${color.dimmed} has been executed successfully`
+  }
 }; // end of dimmed
 
 // function for bright
@@ -152,7 +184,11 @@ export function bright (...Payload: globe[]): globe {
   Payload.forEach((payload: globe) => {
     console.log(color.bright, payload)
   })
-  return Payload
+  return {
+    Status: 'Success',
+    Payload,
+    Message: `The function ${color.bright} has been executed successfully`
+  }
 }; // end of bright
 
 // function for underscore
@@ -169,7 +205,11 @@ export function underscore (...Payload: globe[]): globe {
   Payload.forEach((payload: globe) => {
     console.log(color.underscore, payload)
   })
-  return Payload
+  return {
+    Status: 'Success',
+    Payload,
+    Message: `The function ${color.underscore} has been executed successfully`
+  }
 }; // end of Underscore
 
 // function for reverse
@@ -186,5 +226,9 @@ export function reverse (...Payload: globe[]): globe {
   Payload.forEach((payload: globe) => {
     console.log(color.reverse, payload)
   })
-  return Payload
+  return {
+    Status: 'Success',
+    Payload,
+    Message: `The function ${color.reverse} has been executed successfully`
+  }
 }; // end of Underscore
