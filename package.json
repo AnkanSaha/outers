@@ -26,7 +26,7 @@
   "author": "Ankan Saha",
   "license": "MIT",
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.60.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
     "eslint": "^8.43.0",
     "eslint-config-standard-with-typescript": "^36.0.0",
     "eslint-plugin-import": "^2.27.5",
