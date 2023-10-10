@@ -1,6 +1,6 @@
 {
   "name": "outers",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "description": "Outer is a small package, This package provides a simple way to print colored text to the console.",
   "main": "./library/outer.js",
   "types": "./library/outer.d.ts",

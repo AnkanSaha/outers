@@ -274,7 +274,7 @@ class nodeDecryption {
     return ReadyData
   }
 
-  public async Encrypt (Data: string): Promise<string> {
+  public async Encrypt (Data: any): Promise<string> {
     // Convert data to string
     const ReadyData = JSON.stringify(Data)
     // Encrypt data

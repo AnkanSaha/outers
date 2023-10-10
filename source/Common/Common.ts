@@ -23,7 +23,7 @@ export function reActUpdateDocumentTitle (title: str): void {
  * key used to encrypt the data. If no key is provided, the default value is set to 'YourKey'.
  * @returns the encrypted data as a string.
  */
-export async function Encrypt (Data: any, Key = 'YourKey'): Promise<str> {
+export async function Encrypt (Data: str, Key = 'YourKey'): Promise<str> {
   // Encrypt data
   const encryptedData = CryptoJS.AES.encrypt(Data, Key).toString() // Encrypt data
   return encryptedData // Return encrypted data
