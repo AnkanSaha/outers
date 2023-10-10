@@ -1,6 +1,6 @@
 {
   "name": "outers",
-  "version": "2.3.5",
+  "version": "2.3.8",
   "description": "Outer is a small package, This package provides a simple way to print colored text to the console.",
   "main": "./library/outer.js",
   "types": "./library/outer.d.ts",
@@ -26,6 +26,7 @@
   "author": "Ankan Saha",
   "license": "MIT",
   "devDependencies": {
+    "@types/crypto-js": "^4.1.2",
     "@typescript-eslint/eslint-plugin": "^5.60.0",
     "eslint": "^8.43.0",
     "eslint-config-standard-with-typescript": "^35.0.0",
@@ -36,5 +37,9 @@
   },
   "sponsor": {
     "url": "https://github.com/sponsors/AnkanSaha"
+  },
+  "dependencies": {
+    "crypto": "^1.0.1",
+    "crypto-js": "^4.1.1"
   }
 }

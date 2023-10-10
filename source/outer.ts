@@ -3,6 +3,9 @@ import color from './color/color' // import color object from color.ts
 // Import API functions from API.ts
 import { GetFetch, PostFetch, PutFetch, DeleteFetch } from './API/Fetch' // import API functions from API.ts
 
+// Common Functions
+import { reActUpdateDocumentTitle, Decrypt, Encrypt } from './Common/Common'
+
 // global types
 type globe = string | number | boolean | object | null | undefined | symbol | bigint
 
@@ -236,10 +239,59 @@ export function reverse (...Payload: unknown[]): globe {
   }
 }; // end of Underscore
 
-// Export the Fetch functions from API.ts
-export const Fetch = {
-  Get: GetFetch,
-  Post: PostFetch,
-  Put: PutFetch,
-  Delete: DeleteFetch
-} // end of Fetch
+// React Encryption Class
+class ReactEncryption {
+  Key: string
+  constructor (Key: string) {
+    this.Key = Key
+  }
+
+  public async Encrypt (Data: string): Promise<string> {
+    // Encrypt data
+    const encryptedData = await Encrypt(Data, this.Key)
+    return encryptedData
+  }
+
+  public async Decrypt (Data: string): Promise<unknown> {
+    // Encrypt data
+    const decryptedData = await Decrypt(Data, this.Key)
+    return decryptedData
+  }
+}
+
+// Node Encryption Class
+class nodeDecryption {
+  Key: string
+  constructor (Key: string) {
+    this.Key = Key
+  }
+
+  public async Decrypt (Data: string): Promise<unknown> {
+    // Encrypt data
+    const decryptedData = await Decrypt(Data, this.Key)
+    return decryptedData
+  }
+
+  public async Encrypt (Data: string): Promise<string> {
+    // Encrypt data
+    const encryptedData = await Encrypt(Data, this.Key)
+    return encryptedData
+  }
+}
+
+// Export React Common Functions
+export const React = {
+  UpdateDocumentTitle: reActUpdateDocumentTitle,
+  ReactEncrypt: ReactEncryption,
+  Fetch: {
+    Get: GetFetch,
+    Post: PostFetch,
+    Put: PutFetch,
+    Delete: DeleteFetch
+  }
+} // end of React
+
+// Export Node Common Functions
+export const Node = {
+  NodeEncrypt: nodeDecryption
+}
