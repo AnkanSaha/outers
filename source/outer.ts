@@ -269,12 +269,16 @@ class nodeDecryption {
   public async Decrypt (Data: string): Promise<unknown> {
     // Encrypt data
     const decryptedData = await Decrypt(Data, this.Key)
-    return decryptedData
+    // Convert data from string to its original type
+    const ReadyData = JSON.parse(String(decryptedData))
+    return ReadyData
   }
 
   public async Encrypt (Data: string): Promise<string> {
+    // Convert data to string
+    const ReadyData = JSON.stringify(Data)
     // Encrypt data
-    const encryptedData = await Encrypt(Data, this.Key)
+    const encryptedData = await Encrypt(ReadyData, this.Key)
     return encryptedData
   }
 }

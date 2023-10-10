@@ -39,10 +39,10 @@ export async function Encrypt (Data: any, Key = 'YourKey'): Promise<str> {
  * the value is set to 'YourKey', but you can provide your own key as an argument when calling the `
  * @returns the decrypted data as a UTF-8 string.
  */
-export async function Decrypt (Data: str, Key = 'YourKey'): Promise<unknown> {
+export async function Decrypt (Data: str, Key = 'YourKey'): Promise<str> {
   // Decrypt data
   const bytes = CryptoJS.AES.decrypt(Data, Key)
   const decryptedText = bytes.toString(CryptoJS.enc.Utf8)
-
+  // Return decrypted data
   return decryptedText // Return decrypted data
 }
