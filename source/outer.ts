@@ -1,5 +1,8 @@
 import color from './color/color' // import color object from color.ts
 
+// Import API functions from API.ts
+import { GetFetch, PostFetch, PutFetch, DeleteFetch } from './API/Fetch' // import API functions from API.ts
+
 // global types
 type globe = string | number | boolean | object | null | undefined | symbol | bigint
 
@@ -232,3 +235,11 @@ export function reverse (...Payload: unknown[]): globe {
     Message: `The function ${color.reverse} has been executed successfully`
   }
 }; // end of Underscore
+
+// Export the Fetch functions from API.ts
+export const Fetch = {
+  Get: GetFetch,
+  Post: PostFetch,
+  Put: PutFetch,
+  Delete: DeleteFetch
+} // end of Fetch
