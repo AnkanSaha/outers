@@ -4,3 +4,5 @@ tslint.json
 a.js
 .eslintrc.js
 .github
+library
+dist

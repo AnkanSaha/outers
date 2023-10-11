@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import color from './color/color' // import color object from color.ts
 
 // Import API functions from API.ts
@@ -28,7 +29,7 @@ export function green (...Payload: unknown[]): globe {
     Payload,
     Message: `The function ${color.green} has been executed successfully`
   }
-}; // end of green
+} // end of green
 
 // function for yellow
 /**
@@ -48,7 +49,7 @@ export function yellow (...Payload: unknown[]): globe {
     Payload,
     Message: `The function ${color.yellow} has been executed successfully`
   }
-}; // end of yellow
+} // end of yellow
 
 // function for red
 /**
@@ -68,7 +69,7 @@ export function red (...Payload: unknown[]): globe {
     Payload,
     Message: `The function ${color.red} has been executed successfully`
   }
-}; // end of red
+} // end of red
 
 // function for blue
 /**
@@ -88,7 +89,7 @@ export function blue (...Payload: unknown[]): globe {
     Payload,
     Message: `The function ${color.blue} has been executed successfully`
   }
-}; // end of blue
+} // end of blue
 
 // function for magenta
 /**
@@ -109,7 +110,7 @@ export function magenta (...Payload: unknown[]): globe {
     Payload,
     Message: `The function ${color.magenta} has been executed successfully`
   }
-}; // end of magenta
+} // end of magenta
 
 // function for cyan
 /**
@@ -129,7 +130,7 @@ export function cyan (...Payload: unknown[]): globe {
     Payload,
     Message: `The function ${color.cyan} has been executed successfully`
   }
-}; // end of cyan
+} // end of cyan
 
 // function for gray
 /**
@@ -151,7 +152,7 @@ export function gray (...Payload: unknown[]): globe {
     Payload,
     Message: `The function ${color.gray} has been executed successfully`
   }
-}; // end of gray
+} // end of gray
 
 // function for dimmed
 /**
@@ -173,7 +174,7 @@ export function dimmed (...Payload: unknown[]): globe {
     Payload,
     Message: `The function ${color.dimmed} has been executed successfully`
   }
-}; // end of dimmed
+} // end of dimmed
 
 // function for bright
 /**
@@ -195,7 +196,7 @@ export function bright (...Payload: unknown[]): globe {
     Payload,
     Message: `The function ${color.bright} has been executed successfully`
   }
-}; // end of bright
+} // end of bright
 
 // function for underscore
 /**
@@ -216,7 +217,7 @@ export function underscore (...Payload: unknown[]): globe {
     Payload,
     Message: `The function ${color.underscore} has been executed successfully`
   }
-}; // end of Underscore
+} // end of Underscore
 
 // function for reverse
 /**
@@ -237,7 +238,7 @@ export function reverse (...Payload: unknown[]): globe {
     Payload,
     Message: `The function ${color.reverse} has been executed successfully`
   }
-}; // end of Underscore
+} // end of Underscore
 
 // React Encryption Class
 class ReactEncryption {
@@ -274,7 +275,7 @@ class nodeDecryption {
     return ReadyData
   }
 
-  public async Encrypt (Data: string): Promise<string> {
+  public async Encrypt (Data: any): Promise<string> {
     // Convert data to string
     const ReadyData = JSON.stringify(Data)
     // Encrypt data

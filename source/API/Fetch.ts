@@ -1,5 +1,5 @@
 // Data Types
-type str = string
+type str = string;
 
 /**
  * The function `PostFetch` is an asynchronous function that sends a POST request to an API with the
@@ -15,17 +15,17 @@ type str = string
  * value by
  * @returns a Promise that resolves to an unknown value.
  */
-export async function PostFetch (API: str, Data: unknown, Headers = { 'Content-Type': 'application/json' }): Promise<unknown> {
-  const Response = await fetch(API, {
-    method: 'POST',
-    headers: Headers,
-    body: JSON.stringify(Data)
-  }) // fetch the API
-  const JSONResponse: unknown = await Response.json() // convert the response to JSON
+export async function PostFetch(API: str, Data: unknown, Headers = {'Content-Type': 'application/json'}): Promise<unknown> {
+	const Response = await fetch(API, {
+		method: 'POST',
+		headers: Headers,
+		body: JSON.stringify(Data),
+	}); // Fetch the API
+	const JSONResponse: unknown = await Response.json(); // Convert the response to JSON
 
-  // return the response
-  return JSONResponse
-}; // end of PostFetch
+	// return the response
+	return JSONResponse;
+} // End of PostFetch
 
 // function for GET requests
 /**
@@ -39,19 +39,19 @@ export async function PostFetch (API: str, Data: unknown, Headers = { 'Content-T
  * request body will
  * @returns a Promise that resolves to an unknown value.
  */
-export async function GetFetch (API: str, Headers = { 'Content-Type': 'application/json' }): Promise<unknown> {
-  const Response = await fetch(API, {
-    method: 'GET',
-    headers: Headers
-  }) // fetch the API
+export async function GetFetch(API: str, Headers = {'Content-Type': 'application/json'}): Promise<unknown> {
+	const Response = await fetch(API, {
+		method: 'GET',
+		headers: Headers,
+	}); // Fetch the API
 
-  const JSONResponse: unknown = await Response.json() // convert the response to JSON
+	const JSONResponse: unknown = await Response.json(); // Convert the response to JSON
 
-  // return the response
-  return JSONResponse
+	// return the response
+	return JSONResponse;
 }
 
-// function for PUT requests
+// Function for PUT requests
 /**
  * The function `PutFetch` is an asynchronous function that sends a PUT request to an API with the
  * provided data and headers, and returns the response as JSON.
@@ -67,20 +67,20 @@ export async function GetFetch (API: str, Headers = { 'Content-Type': 'applicati
  * your
  * @returns a Promise that resolves to an unknown value.
  */
-export async function PutFetch (API: str, Data: unknown, Headers = { 'Content-Type': 'application/json' }): Promise<unknown> {
-  const Response = await fetch(API, {
-    method: 'PUT',
-    headers: Headers,
-    body: JSON.stringify(Data)
-  }) // fetch the API
+export async function PutFetch(API: str, Data: unknown, Headers = {'Content-Type': 'application/json'}): Promise<unknown> {
+	const Response = await fetch(API, {
+		method: 'PUT',
+		headers: Headers,
+		body: JSON.stringify(Data),
+	}); // Fetch the API
 
-  const JSONResponse: unknown = await Response.json() // convert the response to JSON
+	const JSONResponse: unknown = await Response.json(); // Convert the response to JSON
 
-  // return the response
-  return JSONResponse
+	// return the response
+	return JSONResponse;
 }
 
-// function for DELETE requests
+// Function for DELETE requests
 /**
  * The above function is an asynchronous function that sends a DELETE request to an API and returns the
  * response as a JSON object.
@@ -91,14 +91,14 @@ export async function PutFetch (API: str, Data: unknown, Headers = { 'Content-Ty
  * which sets the content type of the request to JSON. However, you can pass a different set of headers
  * @returns a Promise that resolves to an unknown value.
  */
-export async function DeleteFetch (API: str, Headers = { 'Content-Type': 'application/json' }): Promise<unknown> {
-  const Response = await fetch(API, {
-    method: 'DELETE',
-    headers: Headers
-  }) // fetch the API
+export async function DeleteFetch(API: str, Headers = {'Content-Type': 'application/json'}): Promise<unknown> {
+	const Response = await fetch(API, {
+		method: 'DELETE',
+		headers: Headers,
+	}); // Fetch the API
 
-  const JSONResponse: unknown = await Response.json() // convert the response to JSON
+	const JSONResponse: unknown = await Response.json(); // Convert the response to JSON
 
-  // return the response
-  return JSONResponse
+	// return the response
+	return JSONResponse;
 }

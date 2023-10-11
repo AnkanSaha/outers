@@ -1,17 +1,17 @@
-/* eslint-disable @typescript-eslint/restrict-plus-operands */
+
 // Encrypt and Decrypt Imports
-import CryptoJS from 'crypto-js'
+import CryptoJS from 'crypto-js';
 
 // Data Types
-type str = string
+type str = string;
 
 /**
  * The function reActUpdateDocumentTitle updates the title of the document.
  * @param {str} title - The `title` parameter is a string that represents the new title for the
  * document.
  */
-export function reActUpdateDocumentTitle (title: str): void {
-  document.title = title // Update the document title
+export function reActUpdateDocumentTitle(title: str): void {
+	document.title = title; // Update the document title
 } // Import CryptoJS
 
 /**
@@ -23,10 +23,10 @@ export function reActUpdateDocumentTitle (title: str): void {
  * key used to encrypt the data. If no key is provided, the default value is set to 'YourKey'.
  * @returns the encrypted data as a string.
  */
-export async function Encrypt (Data: any, Key = 'YourKey'): Promise<str> {
-  // Encrypt data
-  const encryptedData = CryptoJS.AES.encrypt(Data, Key).toString() // Encrypt data
-  return encryptedData // Return encrypted data
+export async function Encrypt(Data: str, Key = 'YourKey'): Promise<str> {
+	// Encrypt data
+	const encryptedData = CryptoJS.AES.encrypt(Data, Key).toString(); // Encrypt data
+	return encryptedData; // Return encrypted data
 }
 
 /**
@@ -39,10 +39,10 @@ export async function Encrypt (Data: any, Key = 'YourKey'): Promise<str> {
  * the value is set to 'YourKey', but you can provide your own key as an argument when calling the `
  * @returns the decrypted data as a UTF-8 string.
  */
-export async function Decrypt (Data: str, Key = 'YourKey'): Promise<str> {
-  // Decrypt data
-  const bytes = CryptoJS.AES.decrypt(Data, Key)
-  const decryptedText = bytes.toString(CryptoJS.enc.Utf8)
-  // Return decrypted data
-  return decryptedText // Return decrypted data
+export async function Decrypt(Data: str, Key = 'YourKey'): Promise<str> {
+	// Decrypt data
+	const bytes = CryptoJS.AES.decrypt(Data, Key);
+	const decryptedText = bytes.toString(CryptoJS.enc.Utf8);
+	// Return decrypted data
+	return decryptedText; // Return decrypted data
 }
