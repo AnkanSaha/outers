@@ -10,9 +10,6 @@ type str = string;
  * @param {str} title - The `title` parameter is a string that represents the new title for the
  * document.
  */
-export function reActUpdateDocumentTitle(title: str): void {
-	document.title = title; // Update the document title
-} // Import CryptoJS
 
 /**
  * The function reActEncrypt takes a string of data and encrypts it using the AES algorithm with a
