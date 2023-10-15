@@ -247,7 +247,7 @@ class nodeDecryption {
     this.Key = Key
   }
 
-  public async Decrypt (Data: string): Promise<string | number | object | bigint | string[] | number[] | bigint[] | object[] | null | undefined> {
+  public async Decrypt (Data: string) {
     // Encrypt data
     const decryptedData = await Decrypt(Data, this.Key)
     return decryptedData
