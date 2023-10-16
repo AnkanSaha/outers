@@ -43,3 +43,19 @@ export async function Decrypt(Data: str, Key = 'YourKey'): Promise<str> {
 	// Return decrypted data
 	return decryptedText; // Return decrypted data
 }
+
+
+// Sync Functions
+export function EncryptSync(Data: str, Key = 'YourKey'): str {
+	// Encrypt data
+	const encryptedData = CryptoJS.AES.encrypt(Data, Key).toString(); // Encrypt data
+	return encryptedData; // Return encrypted data
+}
+
+export function DecryptSync(Data: str, Key = 'YourKey'): str {
+	// Decrypt data
+	const bytes = CryptoJS.AES.decrypt(Data, Key);
+	const decryptedText = bytes.toString(CryptoJS.enc.Utf8);
+	// Return decrypted data
+	return decryptedText; // Return decrypted data
+}
