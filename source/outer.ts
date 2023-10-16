@@ -2,7 +2,7 @@
 import color from './color/color' // import color object from color.ts
 
 // Common Functions
-import { Decrypt, Encrypt } from './Common/Common'
+import { Decrypt, Encrypt, DecryptSync, EncryptSync } from './Common/Common'
 
 // API Functions
 import { GetFetch, DeleteFetch, PostFetch, PutFetch } from './API/Fetch'; // import Fetch functions from Fetch.ts
@@ -242,7 +242,7 @@ export function reverse (...Payload: unknown[]): globe {
 
 // Node Encryption Class
 class nodeDecryption {
-  Key: string
+  private Key: string
   constructor (Key: string) {
     this.Key = Key
   }
@@ -258,6 +258,20 @@ class nodeDecryption {
     const ReadyData = JSON.stringify(Data)
     // Encrypt data
     const encryptedData = await Encrypt(ReadyData, this.Key)
+    return encryptedData
+  }
+
+  public DecryptSync (Data: string) {
+    // Encrypt data
+    const decryptedData = DecryptSync(Data, this.Key)
+    return decryptedData
+  }
+
+  public EncryptSync (Data: any): string {
+    // Convert data to string
+    const ReadyData = JSON.stringify(Data)
+    // Encrypt data
+    const encryptedData = EncryptSync(ReadyData, this.Key)
     return encryptedData
   }
 }
