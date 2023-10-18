@@ -1,15 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 // Encrypt and Decrypt Imports
 import CryptoJS from 'crypto-js';
 
 // Data Types
 type str = string;
-
-/**
- * The function reActUpdateDocumentTitle updates the title of the document.
- * @param {str} title - The `title` parameter is a string that represents the new title for the
- * document.
- */
 
 /**
  * The function reActEncrypt takes a string of data and encrypts it using the AES algorithm with a
@@ -59,3 +54,41 @@ export function DecryptSync(Data: str, Key = 'YourKey'): str {
 	// Return decrypted data
 	return decryptedText; // Return decrypted data
 }
+
+
+
+// Node Encryption Class
+export class nodeDecryption {
+	private Key: string
+	constructor (Key: string) {
+	this.Key = Key
+	}
+  
+	public async Decrypt (Data: string) {
+ // Encrypt data
+	const decryptedData = await Decrypt(Data, this.Key)
+	return decryptedData
+	}
+  
+	public async Encrypt (Data: any): Promise<string> {
+	// Convert data to string
+	const ReadyData = JSON.stringify(Data)
+	// Encrypt data
+	const encryptedData = await Encrypt(ReadyData, this.Key)
+	return encryptedData
+	}
+  
+	public DecryptSync (Data: string) {
+	// Encrypt data
+	const decryptedData = DecryptSync(Data, this.Key)
+	return decryptedData
+	}
+  
+	public EncryptSync (Data: any): string {
+	// Convert data to string
+const ReadyData = JSON.stringify(Data)
+	// Encrypt data
+ const encryptedData = EncryptSync(ReadyData, this.Key)
+	return encryptedData
+	}
+  }
