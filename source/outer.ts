@@ -3,6 +3,9 @@ import {Encryption} from './Encryption - Decryption/Crypto'; // Import Crypto Mo
 import {blue, bright, cyan, dimmed, gray, green, magenta, red, reverse, underscore, yellow } from './color/Console.log'; // Import Console Module
 import {APiCall} from './API/Dispatcher'; // Import API Module
 import {StatusCode} from './StatusCode/Code'; // Import StatusCode Module
+import { JSONSendResponse } from './Response/JSON-Response'; // Import JSON Response Module
+import { SendFileResponse } from './Response/File-Response'; // Import File Response Module
+import { UniqueGen } from './UniqueGen/Base'; // Import UniqueGen Module
 
 // Export All Feature from  internal module
 
@@ -41,3 +44,17 @@ export const API = APiCall; // Export API Module
 `StatusCode` object from the `Code` module as `StatusCodes`. This allows other modules or files to
 import and use the `StatusCode` object by importing `StatusCodes` from this module. */
 export const StatusCodes = StatusCode; // Export StatusCode Module
+
+
+// export all feature from internal module
+/* The code is exporting an object named `Response` that contains two properties: `JSON` and `File`. */
+export const Response = {
+    JSON : JSONSendResponse,
+    File : SendFileResponse
+}; // Export JSON Response Module
+
+// Export UniqueGen Module
+/* The line `export const UniqueGenerator = UniqueGen; // Export UniqueGen Module` is exporting the
+`UniqueGen` object from the `Base` module as `UniqueGenerator`. This allows other modules or files
+to import and use the `UniqueGen` object by importing `UniqueGenerator` from this module. */
+export const UniqueGenerator = UniqueGen; // Export UniqueGen Module
