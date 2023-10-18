@@ -4,7 +4,7 @@
     "target": "ES6",
     "module": "CommonJS",
     "declaration": true,
-    "moduleResolution": "Classic",
+    "moduleResolution": "Node",
     "sourceMap": true,
     "jsx": "react", // Specify the JSX factory function
     "strict": true,
