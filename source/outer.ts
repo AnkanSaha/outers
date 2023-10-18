@@ -2,6 +2,7 @@
 import {Encryption} from './Encryption - Decryption/Crypto'; // Import Crypto Module
 import {blue, bright, cyan, dimmed, gray, green, magenta, red, reverse, underscore, yellow } from './color/Console.log'; // Import Console Module
 import {APiCall} from './API/Dispatcher'; // Import API Module
+import {StatusCode} from './StatusCode/Code'; // Import StatusCode Module
 
 // Export All Feature from  internal module
 
@@ -34,3 +35,9 @@ export const Console = {
 the `Dispatcher` module as `API`. This allows other modules or files to import and use the `APiCall`
 function by importing `API` from this module. */
 export const API = APiCall; // Export API Module
+
+
+/* The line `export const StatusCodes = StatusCode; // Export StatusCode Module` is exporting the
+`StatusCode` object from the `Code` module as `StatusCodes`. This allows other modules or files to
+import and use the `StatusCode` object by importing `StatusCodes` from this module. */
+export const StatusCodes = StatusCode; // Export StatusCode Module
