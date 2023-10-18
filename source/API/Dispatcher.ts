@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // Import API from internal module
-import { GetFetch, PostFetch, DeleteFetch, PutFetch } from './Fetch'; // Import Fetch Module
+import { GetFetch, PostFetch, DeleteFetch, PutFetch } from './bin/Fetch'; // Import Fetch Module
 
 // Create A Class for API
 /* The `APiCall` class is a TypeScript class that provides a method for making GET requests to a

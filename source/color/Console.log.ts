@@ -1,4 +1,4 @@
-import color from './color' // import color object from color.ts
+import color from './bin/color' // import color object from color.ts
 
 // global types
 type globe = string | number | boolean | object | null | undefined | symbol | bigint

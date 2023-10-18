@@ -1,20 +1,21 @@
 // Import All Feature from  internal module
-import {nodeDecryption} from './Encryption - Decryption/Crypto'; // Import Crypto Module
+import {Encryption} from './Encryption - Decryption/Crypto'; // Import Crypto Module
 import {blue, bright, cyan, dimmed, gray, green, magenta, red, reverse, underscore, yellow } from './color/Console.log'; // Import Console Module
 import {APiCall} from './API/Dispatcher'; // Import API Module
 
 // Export All Feature from  internal module
-/* The line `export const CryptoGraphy = nodeDecryption;` is exporting the `nodeDecryption` function
-from the `Crypto` module as `CryptoGraphy`. This allows other modules or files to import and use the
-`nodeDecryption` function by importing `CryptoGraphy` from this module. */
-export const CryptoGraphy = nodeDecryption; // Export Crypto Module
+
+/* The line `export const CryptoGraphy = Encryption; // Export Crypto Module` is exporting the
+`Encryption` object from the `Crypto` module as `CryptoGraphy`. This allows other modules or files
+to import and use the `Encryption` object by importing `CryptoGraphy` from this module. */
+export const CryptoGraphy = Encryption; // Export Crypto Module
 
 // Export All Feature from  internal module
 /* The code is exporting an object named `ConsoleColors` that contains various color functions from the
 `Console.log` module. These color functions can be used to format console output with different
 colors. By exporting this object, other modules or files can import and use these color functions by
 accessing them through the `ConsoleColors` object. */
-export const ConsoleColors = {
+export const Console = {
     blue,
     bright,
     cyan,
