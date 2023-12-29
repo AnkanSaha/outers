@@ -7,24 +7,9 @@
 ```shell
 npm install outers@latest --save  # install the package
 ```
-
-## Console Colorful Print
-```javascript
-const {Console} = require('outers'); // import the package
-
-Console.green('Hello World!'); // print a string to the console with green color
-
-Console.red('Hello World!'); // print a string to the console with red color
-
-Console.blue('Hello World!'); // print a string to the console with blue color
-
-Console.yellow('Hello World!'); // print a string to the console with yellow color
-
-Console.magenta('Hello World!'); // print a string to the console with magenta color
-
-Console.bright('Hello World!'); // print a string to the console with bright color
-
-Console.cyan('Hello World!'); // print a string to the console with cyan color
+### If You Want to Use Encrypt and Decrypt, You Need To Install in your Client Side
+```shell
+npm i react-caches@latest --save
 ```
 
 ## Encrypt and Decrypt
@@ -145,6 +130,25 @@ const Symbols = Unique.RandomSymbol(["Custom Symbols"]); // generate a random sy
 
 ** Custom Numbers, Words, Mixed and Symbols are optional, you can pass anything or you can pass undefined **
 
+```
+
+## Console Colorful Print
+```javascript
+const {Console} = require('outers'); // import the package
+
+Console.green('Hello World!'); // print a string to the console with green color
+
+Console.red('Hello World!'); // print a string to the console with red color
+
+Console.blue('Hello World!'); // print a string to the console with blue color
+
+Console.yellow('Hello World!'); // print a string to the console with yellow color
+
+Console.magenta('Hello World!'); // print a string to the console with magenta color
+
+Console.bright('Hello World!'); // print a string to the console with bright color
+
+Console.cyan('Hello World!'); // print a string to the console with cyan color
 ```
 
 ## License
