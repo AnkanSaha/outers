@@ -2,6 +2,7 @@
 import {Encryption} from './Encryption - Decryption/Crypto'; // Import Crypto Module
 import {blue, bright, cyan, dimmed, gray, green, magenta, red, reverse, underscore, yellow } from './color/Console.log'; // Import Console Module
 import {APiCall} from './API/Dispatcher'; // Import API Module
+import {PutFetch, DeleteFetch, GetFetch, PostFetch} from './API/bin/Fetch'; // Import Fetch Module
 import {StatusCode} from './StatusCode/Code'; // Import StatusCode Module
 import { JSONSendResponse } from './Response/JSON-Response'; // Import JSON Response Module
 import { SendFileResponse } from './Response/File-Response'; // Import File Response Module
@@ -39,6 +40,13 @@ the `Dispatcher` module as `API`. This allows other modules or files to import a
 function by importing `API` from this module. */
 export const API = APiCall; // Export API Module
 
+// Export Fetch Module
+export const Fetch = {
+    Put : PutFetch,
+    Delete : DeleteFetch,
+    Get : GetFetch,
+    Post : PostFetch
+}; // Export Fetch Module
 
 /* The line `export const StatusCodes = StatusCode; // Export StatusCode Module` is exporting the
 `StatusCode` object from the `Code` module as `StatusCodes`. This allows other modules or files to

@@ -21,17 +21,16 @@ type str = string;
 // @param {string} data - The `data` parameter is the string that you want to encrypt. It is the data that
 // you want to keep secure and confidential.
 //
-// @param {string} [key='YourKey'] - The `key` parameter is an optional parameter that represents the encryption
-// key used to encrypt the data. If no key is provided, the default value is set to 'YourKey'.
+// @param {string} [key] - The `key` parameter is an optional parameter that represents the encryption
+// key used to encrypt the data. If no key is provided.
 //
 // @returns the encrypted data as a string.
-export async function Encrypt(data: str, key = "YourKey"): Promise<string> {
-  if (!key) {
+export async function Encrypt(data: str, Key:str): Promise<string> {
+  if (!Key) {
      throw new Error("Missing key");
   }
- 
-  const encryptedData = CryptoJS.AES.encrypt(data, key).toString();
- 
+ // Encrypt data using CryptoJS
+  const encryptedData = CryptoJS.AES.encrypt(data, Key).toString();
   return encryptedData;
  }
  
@@ -46,7 +45,10 @@ export async function Encrypt(data: str, key = "YourKey"): Promise<string> {
  // key used to encrypt the data. If no key is provided, the default value is set to 'YourKey'.
  //
  // @returns the encrypted data as a string.
- export function EncryptSync(Data: string, Key = "YourKey"): string {
+ export function EncryptSync(Data: str, Key:str): string {
+   if (!Key) {
+      throw new Error("Missing key");
+   }
   // Encrypt data
   const encryptedData = CryptoJS.AES.encrypt(Data, Key).toString(); // Encrypt data
   return encryptedData; // Return encrypted data
