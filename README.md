@@ -40,6 +40,19 @@ Response.JSON({ // send a JSON response to the client
           message: 'Hello World!' // message of the response
      },
      message: 'Hello World!' // message of the response (you can pass anything or yo can pass undefined) ** Mainly used in Modal POP-UP Text **
+     cookieData: [ // cookieData array of the response (you can pass anything or yo can pass undefined)
+            {
+                 name: 'cookieName', // name of the cookie
+                 value: 'cookieValue', // value of the cookie
+                 options: { // options of the cookie
+                        maxAge: 1000 * 60 * 60 * 24 * 30, // 30 days
+                        httpOnly: true,
+                        secure: true,
+                        sameSite: 'none',
+                 }
+            }
+         
+     ]
 }) // send a JSON response to the client
 
 Response.File({ // send a file to the client
@@ -47,6 +60,19 @@ Response.File({ // send a file to the client
     rootName: 'public', // root directory name or your static directory name
     statusCode: StatusCodes.OK, // HTTP Status Code
     Filename: 'index.html', // Name of the File that you want to send, it can be anything like, image, html file, pdf, audio, video etc.
+    cookieData: [ // cookieData array of the response (you can pass anything or yo can pass undefined)
+            {
+                 name: 'cookieName', // name of the cookie
+                 value: 'cookieValue', // value of the cookie
+                 options: { // options of the cookie
+                        maxAge: 1000 * 60 * 60 * 24 * 30, // 30 days
+                        httpOnly: true,
+                        secure: true,
+                        sameSite: 'none',
+                 }
+            }
+         
+     ]
 }) // send a file to the client
 ```
 
