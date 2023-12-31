@@ -16,7 +16,10 @@ type str = string;
  * the value is set to 'YourKey', but you can provide your own key as an argument when calling the `
  * @returns the decrypted data as a UTF-8 string.
  */
-export async function Decrypt(Data: str, Key = "YourKey"): Promise<str> {
+export async function Decrypt(Data: str, Key: str): Promise<str> {
+  if (!Key) {
+    throw new Error("Missing key");
+  }
   // Decrypt data
   const bytes = CryptoJS.AES.decrypt(Data, Key);
   const decryptedText = bytes.toString(CryptoJS.enc.Utf8);
@@ -24,7 +27,11 @@ export async function Decrypt(Data: str, Key = "YourKey"): Promise<str> {
   return decryptedText; // Return decrypted data
 }
 
-export function DecryptSync(Data: str, Key = "YourKey"): str {
+export function DecryptSync(Data: str, Key: str): str {
+  if (!Key) {
+    throw new Error("Missing key");
+  }
+
   // Decrypt data
   const bytes = CryptoJS.AES.decrypt(Data, Key);
   const decryptedText = bytes.toString(CryptoJS.enc.Utf8);
