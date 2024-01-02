@@ -43,5 +43,8 @@
   "dependencies": {
     "crypto-js": "^4.2.0",
     "uniquegen": "^8.4.7"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 }
