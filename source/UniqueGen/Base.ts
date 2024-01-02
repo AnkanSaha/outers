@@ -1,4 +1,4 @@
-import {randomMixed, randomNumber, randomSymbol, randomWord} from 'uniquegen'; // Import the module
+import {randomMixed, randomNumber, randomSymbol, randomWord} from '@ankansaha/uniquegen'; // Import the module
 
 
 export class UniqueGen {
