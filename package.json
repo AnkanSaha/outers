@@ -1,6 +1,6 @@
 {
   "name": "@AnkanSaha/outers",
-  "version": "3.6.4",
+  "version": "3.6.5",
   "description": "outers - a all in one package for your day to day use",
   "main": "./lib/outer.js",
   "types": "./lib/outer.d.ts",
@@ -41,8 +41,8 @@
     "url": "https://github.com/sponsors/AnkanSaha"
   },
   "dependencies": {
-    "crypto-js": "^4.2.0",
-    "uniquegen": "^8.4.7"
+    "@ankansaha/uniquegen": "npm:@AnkanSaha/uniquegen@^8.4.8",
+    "crypto-js": "^4.2.0"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
