@@ -9,19 +9,24 @@ export default async (
   Response: Response,
   Next: NextFunction
 ) => {
-  // Allow only PUT, POST, PATCH, DELETE methods
-  const AllowedMethods = ["PUT", "POST", "PATCH", "DELETE"]; // Allowed Methods
-
   try {
+    // Allow only PUT, POST, PATCH, DELETE methods
+    const AllowedMethods = ["PUT", "POST", "PATCH", "DELETE"]; // Allowed Methods
+
     // Check if Request Method is Allowed
     if (AllowedMethods.includes(Request.method)) {
-      const RequesterIPaddress: string =
-        String(Request.headers["x-forwarded-for"]) ||
-        String(Request.connection.remoteAddress) ||
-        String(Request.socket.remoteAddress) ||
-        String(Request.socket.remoteAddress); // Get Requester IP Address
-      Request.body["RequesterIPaddress"] = RequesterIPaddress; // Inject Requester IP Address
+      const RequesterIPaddress =
+        Request.headers["x-forwarded-for"] ||
+        Request.connection.remoteAddress ||
+        Request.socket.remoteAddress ||
+        Request.socket.remoteAddress; // Get Requester IP Address
+        
+        // Inject Requester IP Address
+      Request.body.RequesterIPaddress = RequesterIPaddress; // Inject Requester IP Address
       Next(); // Next Middleware
+    }
+    else{
+      Next(); // Proceed Without Injecting IP Address
     }
   } catch (Error) {
     Console.red(Error); // Log Error
