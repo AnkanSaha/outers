@@ -20,7 +20,7 @@ export default async (
         String(Request.connection.remoteAddress) ||
         String(Request.socket.remoteAddress) ||
         String(Request.socket.remoteAddress); // Get Requester IP Address
-      Request.body["RequesterIPaddress"] = RequesterIPaddress; // Inject Requester IP Address
+      Request.body.RequesterIPaddress = RequesterIPaddress; // Inject Requester IP Address
       Next(); // Next Middleware
     }
   } catch (Error) {
