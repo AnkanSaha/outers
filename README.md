@@ -177,5 +177,20 @@ Console.bright('Hello World!'); // print a string to the console with bright col
 Console.cyan('Hello World!'); // print a string to the console with cyan color
 ```
 
+## Get Requester IP Address in Request.body Object
+```javascript
+const { Middleware } = require('outers'); // import the package
+app.use('/api', Middleware.RequestInjectIP, MainFunction); // inject the IP Address in Request.body 
+```
+- Note : You can access the IP Address in Request.body Object
+- Example : Request.body.RequesterIPaddress
+- Requirement : This Middleware work only can with POST, PATCH, PUT and DELETE Request
+- Note : You can use this Middleware in any route, but it is recommended to use in the first route
+- Example : app.use('/api', Middleware.RequestInjectIP, MainFunction);
+- You need to set trust proxy to true in express app to get the IP Address
+- Example : app.set('trust proxy', true);
+- You Need to Set X-Forwarded-For in the Header of the Request in Nginx or Apache or any other server
+- Example : proxy_set_header X-Forwarded-For $remote_addr;
+
 ## License
 MIT

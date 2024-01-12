@@ -7,6 +7,7 @@ import {StatusCode} from './StatusCode/Code'; // Import StatusCode Module
 import { JSONSendResponse } from './Response/JSON-Response'; // Import JSON Response Module
 import { SendFileResponse } from './Response/File-Response'; // Import File Response Module
 import { UniqueGen } from './UniqueGen/Base'; // Import UniqueGen Module
+import InjectIP from './Request IP Injector/Base.middleware'; 
 
 // Export All Feature from  internal module
 
@@ -20,7 +21,7 @@ export const CryptoGraphy = Encryption; // Export Crypto Module
 `Console.log` module. These color functions can be used to format console output with different
 colors. By exporting this object, other modules or files can import and use these color functions by
 accessing them through the `ConsoleColors` object. */
-export const Console = {
+export const Console = Object.freeze({
     blue,
     bright,
     cyan,
@@ -32,7 +33,7 @@ export const Console = {
     reverse,
     underscore,
     yellow
-}; // Export Console Module
+}); // Export Console Module
 
 // export all feature from internal module
 /* The line `export const API = APiCall; // Export API Module` is exporting the `APiCall` function from
@@ -41,12 +42,12 @@ function by importing `API` from this module. */
 export const API = APiCall; // Export API Module
 
 // Export Fetch Module
-export const Fetch = {
+export const Fetch = Object.freeze({
     Put : PutFetch,
     Delete : DeleteFetch,
     Get : GetFetch,
     Post : PostFetch
-}; // Export Fetch Module
+}); // Export Fetch Module
 
 /* The line `export const StatusCodes = StatusCode; // Export StatusCode Module` is exporting the
 `StatusCode` object from the `Code` module as `StatusCodes`. This allows other modules or files to
@@ -56,10 +57,15 @@ export const StatusCodes = StatusCode; // Export StatusCode Module
 
 // export all feature from internal module
 /* The code is exporting an object named `Response` that contains two properties: `JSON` and `File`. */
-export const Response = {
+export const Response = Object.freeze({
     JSON : JSONSendResponse,
     File : SendFileResponse
-}; // Export JSON Response Module
+}); // Export JSON Response Module
+
+// Export IP Injector Module as Middleware
+export const Middleware = Object.freeze({
+    RequestInjectIP: InjectIP // Export IP Injector Module as Middleware
+}); // Export IP Injector Module as Middleware
 
 // Export UniqueGen Module
 /* The line `export const UniqueGenerator = UniqueGen; // Export UniqueGen Module` is exporting the
