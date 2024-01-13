@@ -51,7 +51,7 @@ export const StatusCodes = StatusCode; // Export StatusCode Module
 
 // export all feature from internal module
 /* The code is exporting an object named `Response` that contains two properties: `JSON` and `File`. */
-export const Response = Object.freeze({
+export const Serve = Object.freeze({
     JSON : JSONSendResponse,
     File : SendFileResponse
 }); // Export JSON Response Module
