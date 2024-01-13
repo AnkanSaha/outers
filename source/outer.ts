@@ -7,14 +7,8 @@ import {StatusCode} from './StatusCode/Code'; // Import StatusCode Module
 import { JSONSendResponse } from './Response/JSON-Response'; // Import JSON Response Module
 import { SendFileResponse } from './Response/File-Response'; // Import File Response Module
 import { UniqueGen } from './UniqueGen/Base'; // Import UniqueGen Module
-import InjectIP from './Request IP Injector/Base.middleware'; 
-
-// Export All Feature from  internal module
-
-/* The line `export const CryptoGraphy = Encryption; // Export Crypto Module` is exporting the
-`Encryption` object from the `Crypto` module as `CryptoGraphy`. This allows other modules or files
-to import and use the `Encryption` object by importing `CryptoGraphy` from this module. */
-export const CryptoGraphy = Encryption; // Export Crypto Module
+import InjectIP from './Request IP Injector/Base.middleware'; // Import Inject IP Module
+import Jwt from './JWT/JWT.method'; // Import JWT Manager Module 
 
 // Export All Feature from  internal module
 /* The code is exporting an object named `ConsoleColors` that contains various color functions from the
@@ -62,13 +56,15 @@ export const Response = Object.freeze({
     File : SendFileResponse
 }); // Export JSON Response Module
 
-// Export IP Injector Module as Middleware
+// Export All Middlewares
 export const Middleware = Object.freeze({
     RequestInjectIP: InjectIP // Export IP Injector Module as Middleware
 }); // Export IP Injector Module as Middleware
 
-// Export UniqueGen Module
-/* The line `export const UniqueGenerator = UniqueGen; // Export UniqueGen Module` is exporting the
-`UniqueGen` object from the `Base` module as `UniqueGenerator`. This allows other modules or files
-to import and use the `UniqueGen` object by importing `UniqueGenerator` from this module. */
-export const UniqueGenerator = UniqueGen; // Export UniqueGen Module
+
+// Export All Methods
+export const methods = Object.freeze({
+    JWT_Manager : Jwt, // Export JWT Manager Module
+    CryptoGraphy: Encryption, // Export Crypto Module
+    UniqueGenerator : UniqueGen // Export UniqueGen Module
+}); // Export All Methods

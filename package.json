@@ -1,6 +1,6 @@
 {
-  "name": "outers",
-  "version": "3.6.9",
+  "name": "@AnkanSaha/outers",
+  "version": "4.2.0",
   "description": "outers - a all in one package for your day to day use",
   "main": "./lib/outer.js",
   "types": "./lib/outer.d.ts",
@@ -42,8 +42,10 @@
     "url": "https://github.com/sponsors/AnkanSaha"
   },
   "dependencies": {
+    "@types/jsonwebtoken": "^9.0.5",
     "crypto-js": "^4.2.0",
     "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
     "uniquegen": "^8.4.7"
   },
   "publishConfig": {
