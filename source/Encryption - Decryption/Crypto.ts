@@ -7,7 +7,7 @@ import {Decrypt, DecryptSync} from './bin/Decrypt'; // Import Decrypt Module
 
 
 // Node Encryption Class
-export class Encryption {
+export default class Encryption {
   private Key: string;
   constructor(Key: string) {
     this.Key = Key;

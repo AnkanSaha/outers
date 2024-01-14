@@ -1,5 +1,4 @@
 // Import All Feature from  internal module
-import {Encryption} from './Encryption - Decryption/Crypto'; // Import Crypto Module
 import {blue, bright, cyan, dimmed, gray, green, magenta, red, reverse, underscore, yellow } from './color/Console.log'; // Import Console Module
 import {APiCall} from './API/Dispatcher'; // Import API Module
 import {PutFetch, DeleteFetch, GetFetch, PostFetch} from './API/bin/Fetch'; // Import Fetch Module
@@ -9,6 +8,8 @@ import { SendFileResponse } from './Response/File-Response'; // Import File Resp
 import { UniqueGen } from './UniqueGen/Base'; // Import UniqueGen Module
 import InjectIP from './Request IP Injector/Base.middleware'; // Import Inject IP Module
 import Jwt from './JWT/JWT.method'; // Import JWT Manager Module 
+import Config from './Cluster/CreateCluster.method'; // Import Cluster Module
+import Encryption from './Encryption - Decryption/Crypto'; // Import Crypto Module
 
 // Export All Feature from  internal module
 /* The code is exporting an object named `ConsoleColors` that contains various color functions from the
@@ -65,6 +66,7 @@ export const Middleware = Object.freeze({
 // Export All Methods
 export const methods = Object.freeze({
     JWT_Manager : Jwt, // Export JWT Manager Module
+    ClusterCreator: Config, // Export Cluster Creator Module
+    UniqueGenerator : UniqueGen, // Export UniqueGen Module
     CryptoGraphy: Encryption, // Export Crypto Module
-    UniqueGenerator : UniqueGen // Export UniqueGen Module
 }); // Export All Methods
