@@ -1,7 +1,7 @@
 ## outers - a all in one package for your day to day use
 [![npm version](https://badge.fury.io/js/outers.svg)](https://badge.fury.io/js/outers)
 
-### This package provides services like Response Sender, Colorful Console, HTTP Status Codes, API Call, Random Number Generate, Encryption and Decryption and many more.
+### This package provides services like Response Sender, Colorful Console, HTTP Status Codes, API Call, Random Number Generate, Create Cluster in NodeJS Easily
 
 ## Usage
 ```shell
@@ -14,9 +14,9 @@ npm i react-caches@latest --save
 
 ## Encrypt and Decrypt
 ```javascript
-const { CryptoGraphy } = require('outers'); // import the package
+const { methods } = require('outers'); // import the package
 
-const Crypto = new CryptoGraphy('secretKey'); // create a new instance of CryptoGraphy class
+const Crypto = new methods.CryptoGraphy('secretKey'); // create a new instance of CryptoGraphy class
 
 const ASYNCencrypted = Crypto.Encrypt('Hello World!'); // encrypt the string with secret key in async way
 
@@ -29,9 +29,9 @@ const SYNCdecrypted = Crypto.DecryptSync(SYNCencrypted); // decrypt the string w
 
 ## Send HTTP Response in Efficient Way with HTTP Status Code
 ```javascript
-const { Response, StatusCodes } = require('outers'); // import the package
+const { Serve, StatusCodes } = require('outers'); // import the package
 
-Response.JSON({ // send a JSON response to the client
+Serve.JSON({ // send a JSON response to the client
      status: true, // boolean value
      response: response, // response object in Express or Node Server
      statusCode: StatusCodes.OK, // HTTP Status Code
@@ -55,7 +55,7 @@ Response.JSON({ // send a JSON response to the client
      ]
 }) // send a JSON response to the client
 
-Response.File({ // send a file to the client
+Serve.File({ // send a file to the client
     response: response, // response object in Express or Node Server
     rootName: 'public', // root directory name or your static directory name
     statusCode: StatusCodes.OK, // HTTP Status Code
@@ -136,9 +136,9 @@ Call.Delete('/posts/1', false, {"Custom Headers"}).then((response) => {}); // se
 ## Generate Random Number, Words, Symbols
 ```javascript
 
-const { UniqueGenerator } = require('outers'); // import the package
+const { methods } = require('outers'); // import the package
 
-const Unique = new UniqueGenerator(10); // create a new instance of UniqueGenerator class with length of the random string or number or symbol
+const Unique = new methods.UniqueGenerator(10); // create a new instance of UniqueGenerator class with length of the random string or number or symbol
 
 const Number = Unique.RandomNumber(true, ["Custom Numbers"]); // generate a random number with custom numbers with Zero
 
@@ -192,5 +192,42 @@ app.use('/api', Middleware.RequestInjectIP, MainFunction); // inject the IP Addr
 - You Need to Set X-Forwarded-For in the Header of the Request in Nginx or Apache or any other server
 - Example : proxy_set_header X-Forwarded-For $remote_addr;
 
+
+## Create Cluster in NodeJS Easily
+```javascript
+const { methods } = require('outers'); // import the package
+methods.ClusterCreator(ExpressServer, PORT, CustomWorkerCount); // create a cluster with custom worker count
+```
+
+# Full Example
+```javascript
+const Express = require('express'); // import express
+const { methods} = require('outers'); // import the package
+const app = Express(); // create a new express app
+const CORS = require('cors'); // import cors
+const PORT = process.env.PORT || 3000; // set the port
+
+// Set the All Middlewares & First with the Express App like Body Parser, Cookie Parser, CORS, Helmet, Compression, Request Inject IP etc.
+app.static('public'); // set the static directory
+app.set('trust proxy', true); // set trust proxy to true
+app.use(CORS); // use CORS
+app.use(Express.json()); // use Express.json()
+app.use(Express.urlencoded({ extended: true })); // use Express.urlencoded()
+app.use(Middleware.RequestInjectIP); // inject the IP Address in Request.body
+
+// Set the Routes with the Express App
+app.use('/api', Routes); // set the routes
+
+// At Last Create a Cluster with the Express App
+methods.ClusterCreator(app, PORT, 2); // create a cluster with custom worker count
+
+// Default Value of CustomWorkerCount is length of the CPU Core & Default Value of PORT is 3000
+
+// If you want to use the default value of CustomWorkerCount then you can pass undefined in the third parameter of the function
+
+// You Don't need to listen the app, it will automatically listen the app in the cluster
+
+// After all the setup, you can connect Database or anything else that you want to do
+```
 ## License
 MIT
