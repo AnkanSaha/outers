@@ -26,7 +26,7 @@ export interface JSONresponseInterface {
     Title: str,
     message: str,
     data: obj | undefined | unknown
-    cookieData: [
+    cookieData?: [
         {
             name: str,
             value: str,

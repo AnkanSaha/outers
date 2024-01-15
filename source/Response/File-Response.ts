@@ -41,8 +41,8 @@ export interface FileResponseInterfaces {
  */
 export const SendFileResponse = ({ statusCode, response, Filename, rootName, cookieData }: FileResponseInterfaces) => {
     if(cookieData){
-        cookieData.forEach(({ name, value, options }) => {
-            response.cookie(name, value, options); // sets cookie for each cookie in cookieData
+        cookieData.forEach(CookieItems => {
+            response.cookie(CookieItems.name, CookieItems.value, CookieItems.options); // sets cookie for each cookie in cookieData
         });
         response.status(statusCode).sendFile(Filename, { root: rootName }); // sends response with cookie
     }
