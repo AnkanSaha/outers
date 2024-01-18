@@ -196,7 +196,7 @@ app.use('/api', Middleware.RequestInjectIP, MainFunction); // inject the IP Addr
 ## Create Cluster in NodeJS Easily
 ```javascript
 const { methods } = require('outers'); // import the package
-methods.ClusterCreator(ExpressServer, PORT, CustomWorkerCount); // create a cluster with custom worker count
+methods.ClusterCreator(ExpressServer, PORT, CustomWorkerCount, engineMiddlewares?, BeforeListenFunctions? AfterListenFunctions?, ...FunctionMiddlewares?); // create a cluster with custom worker count
 ```
 
 # Full Example
@@ -219,7 +219,37 @@ app.use(Middleware.RequestInjectIP); // inject the IP Address in Request.body
 app.use('/api', Routes); // set the routes
 
 // At Last Create a Cluster with the Express App
-methods.ClusterCreator(app, PORT, 2); // create a cluster with custom worker count
+methods.ClusterCreator(app, PORT, 2, [{
+    Key: 'trust proxy',
+    Value: true
+},
+{
+    Key: 'view engine',
+    Value: 'ejs'
+}
+], [
+    () => {
+        Console.green('Server Started Not Listening');
+    }
+], [
+    () => {
+        Console.green('Server Started Listening');
+    }
+],
+[
+    (req, res, next) => {
+        Console.green('Function Middleware 1');
+        next();
+    },
+    (req, res, next) => {
+        Console.green('Function Middleware 2');
+        next();
+    },
+    (req, res, next) => {
+        Console.green('Function Middleware 3');
+        next();
+    }
+]); // create a cluster with custom worker count
 
 // Default Value of CustomWorkerCount is length of the CPU Core & Default Value of PORT is 3000
 
@@ -228,6 +258,14 @@ methods.ClusterCreator(app, PORT, 2); // create a cluster with custom worker cou
 // You Don't need to listen the app, it will automatically listen the app in the cluster
 
 // After all the setup, you can connect Database or anything else that you want to do
+
+// If you want to use the engine middlewares, then you can pass the engine middlewares in the fourth parameter of the function or you can pass undefined if you don't want to use engine middlewares or you want to use outside of the cluster
+
+// If you want to use the before listen functions, then you can pass the before listen functions in the fifth parameter of the function or you can pass undefined if you don't want to use before listen functions or you want to use outside of the cluster
+
+// If you want to use the after listen functions, then you can pass the after listen functions in the sixth parameter of the function or you can pass undefined if you don't want to use after listen functions or you want to use outside of the cluster
+
+// If you want to use the function middlewares, then you can pass the function middlewares in the seventh parameter of the function or you can pass undefined if you don't want to use function middlewares or you want to use outside of the cluster, you can pass as many as you want
 ```
 ## License
 MIT
