@@ -8,7 +8,7 @@ const { isPrimary } = ClusterConfig; // Import isPrimary from Cluster
 import { Console } from "../outer"; // Import Console module
 
 // Import Interfaces
-import {BeforeListenFunctions, AfterListenFunctions, FunctionMiddlewares, EngineMiddlewares} from './interfaces'; // Import Interfaces
+import {BeforeListenFunctions, AfterListenFunctions, FunctionMiddlewares, EngineMiddlewares, ResponseObject} from './interfaces'; // Import Interfaces
 
 // Main Function
 export default function Config(
@@ -31,6 +31,13 @@ export default function Config(
     throw new Error("Port is not provided");
   }
 
+// Global Response Object
+const GlobalResponseObject: ResponseObject = {
+  ActiveServer: ExpressServer ,
+  ActiveWorker: 0,
+  BeforeListenFunctionsResponse: [],
+  AfterListenFunctionsResponse: [],
+};
 
   // Number of Workers to be forked
   let ProcessCopy: number = NumberOfWorkers; // Copy Number of Workers
@@ -59,17 +66,20 @@ export default function Config(
       Console.blue(
         `Environment Variables Loaded Successfully in Worker : ${worker.process.pid}`
       );
+      GlobalResponseObject.ActiveWorker++; // Increment Active Worker Count by 1
       Console.yellow(`Worker ${worker.process.pid} is listening`);
     });
 
     // Listen for Cluster Exit
     ClusterConfig.on("exit", (worker) => {
       Console.red(`Worker ${worker.process.pid} died`);
+      GlobalResponseObject.ActiveWorker++; // Increment Active Worker Count by 1
       ClusterConfig.fork();
       Console.green(`🚀 Worker ${worker.process.pid} restarted 🚀`);
       Console.blue(
         `Environment Variables Loaded Successfully in Worker : ${worker.process.pid}`
       );
+      GlobalResponseObject.ActiveWorker++; // Increment Active Worker Count by 1
       Console.yellow(`Worker ${worker.process.pid} is listening`);
     });
   } else {
@@ -91,7 +101,13 @@ export default function Config(
     // Run Before Listen Functions
     if(BeforeListenFunctions.length > 0) {
       BeforeListenFunctions.forEach(({Function}) => {
-        Function(); // Run Function one by one
+        const Response = Function(); // Run Function one by one
+
+        // Push Response to Global Response Object
+        GlobalResponseObject.BeforeListenFunctionsResponse.push({
+          FunctionName: `${Function.name}`,
+          Response: Response
+        }); // Push Response to Global Response Object
       }); // Run Functions
     }
     // Server Listen
@@ -102,17 +118,27 @@ export default function Config(
         ); // Print Message for Server Start
       }); // Start Server on Port
 
-      // Return the Active Server Instance
-      return ActiveServer; // Active Server Instance After Listen
+      // Return the Active Server Instance in Response Object
+      GlobalResponseObject.ActiveServer = ActiveServer; // Active Server Instance After Listen
     } catch (error) {
       Console.red(`Error in Starting Server : ${error}`); // Print Error Message for Server Start
+      return error; // Return Error to User
     }
 
     // Run After Listen Functions
     if(AfterListenFunctions.length > 0) {
       AfterListenFunctions.forEach(({Function}) => {
-        Function(); // Run Function one by one
+        const Response = Function(); // Run Function one by one
+
+        // Push Response to Global Response Object
+        GlobalResponseObject.BeforeListenFunctionsResponse.push({
+          FunctionName: `${Function.name}`,
+          Response: Response
+        }); // Push Response to Global Response Object
+
       }); // Run Functions
     }
+
+    return GlobalResponseObject; // Return Response Object to User for further use
   }
 }

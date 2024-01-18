@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // Imports
 import { Request, Response, NextFunction } from "express"; // Express
 
@@ -30,4 +31,13 @@ export interface EngineMiddlewares {
       | (() => void)
       | ((Request: Request, Response: Response, next: NextFunction) => void); // Index signature for string keys with an array of functions
   };
+}
+
+// This interface is used to define the type of the ResponseObject object
+export interface ResponseObject {
+  ActiveServer: any;
+  ActiveWorker: number;
+  BeforeListenFunctionsResponse: object[],
+  AfterListenFunctionsResponse: object[],
+  [key: string]: any | number | undefined | object | (() => void)[] | undefined;
 }
