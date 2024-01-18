@@ -18,7 +18,7 @@ export default function Config(
   engineMiddlewares: EngineMiddlewares[] = [], // Any Middlewares to apply
   BeforeListenFunctions: BeforeListenFunctions[] = [], // Any Functions to run before listen
   AfterListenFunctions: AfterListenFunctions[] = [], // Any Functions to run after listen
-  FunctionMiddlewares: FunctionMiddlewares[] // Any Middlewares to apply
+  FunctionMiddlewares: FunctionMiddlewares[] = [] // Any Middlewares to apply
 ) {
 
   // Check if User Provided Express Server or not
