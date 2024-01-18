@@ -1,21 +1,36 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // main code for creating a cluster in node js
 import { cpus, platform, arch, freemem } from "node:os"; // Import os module
 import { Express } from "express"; // Import express module
+import express from "express"; // Express Instance for Server
 import ClusterConfig from "node:cluster"; // Import Cluster module
 const { isPrimary } = ClusterConfig; // Import isPrimary from Cluster
 import { Console } from "../outer"; // Import Console module
 
+// Import Interfaces
+import {BeforeListenFunctions, AfterListenFunctions, FunctionMiddlewares, EngineMiddlewares} from './interfaces'; // Import Interfaces
+
 // Main Function
 export default function Config(
-  ExpressServer: Express,
-  PORT: 3000,
-  NumberOfWorkers = cpus().length
+  ExpressServer: Express = express(), // Main Express Server Instance
+  PORT: number = 3000, // Port Number to Listen
+  NumberOfWorkers: number = cpus().length, // Number of Copies of Workers
+  engineMiddlewares: EngineMiddlewares[] = [], // Any Middlewares to apply
+  BeforeListenFunctions: BeforeListenFunctions[] = [], // Any Functions to run before listen
+  AfterListenFunctions: AfterListenFunctions[] = [], // Any Functions to run after listen
+  FunctionMiddlewares: FunctionMiddlewares[] // Any Middlewares to apply
 ) {
 
   // Check if User Provided Express Server or not
   if(!ExpressServer) {
     throw new Error("Express Server is not provided");
   }
+
+  // Check if User Provided Port or not
+  if(!PORT) {
+    throw new Error("Port is not provided");
+  }
+
 
   // Number of Workers to be forked
   let ProcessCopy: number = NumberOfWorkers; // Copy Number of Workers
@@ -58,15 +73,46 @@ export default function Config(
       Console.yellow(`Worker ${worker.process.pid} is listening`);
     });
   } else {
+
+    // Apply String Middlewares to Express Server Instance like PUG, EJS, Trust Proxy, etc.
+    if(engineMiddlewares.length > 0) {
+      engineMiddlewares.forEach(({Key, Value}) => {
+        ExpressServer.set(String(Key), Value); // Apply Middleware to Express Server Instance one by one
+      }); // Apply Middlewares to Express Server Instance
+    }
+
+    // Apply Function Middlewares to Express Server Instance like CORS, Body Parser, etc.
+    if(FunctionMiddlewares.length > 0) {
+      FunctionMiddlewares.forEach(({FunctionMiddleware}) => {
+        ExpressServer.use(FunctionMiddleware); // Apply Middleware to Express Server Instance one by one
+      }); // Apply Middlewares to Express Server Instance
+    }
+
+    // Run Before Listen Functions
+    if(BeforeListenFunctions.length > 0) {
+      BeforeListenFunctions.forEach(({Function}) => {
+        Function(); // Run Function one by one
+      }); // Run Functions
+    }
     // Server Listen
     try {
-      ExpressServer.listen(PORT, async () => {
+      const ActiveServer = ExpressServer.listen(PORT, async () => {
         Console.green(
           `🚀 Server is listening on Port ${PORT} 🚀`
         ); // Print Message for Server Start
       }); // Start Server on Port
+
+      // Return the Active Server Instance
+      return ActiveServer; // Active Server Instance After Listen
     } catch (error) {
       Console.red(`Error in Starting Server : ${error}`); // Print Error Message for Server Start
+    }
+
+    // Run After Listen Functions
+    if(AfterListenFunctions.length > 0) {
+      AfterListenFunctions.forEach(({Function}) => {
+        Function(); // Run Function one by one
+      }); // Run Functions
     }
   }
 }
