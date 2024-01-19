@@ -8,7 +8,7 @@ import { SendFileResponse } from './Response/File-Response'; // Import File Resp
 import { UniqueGen } from './UniqueGen/Base'; // Import UniqueGen Module
 import InjectIP from './Request IP Injector/Base.middleware'; // Import Inject IP Module
 import Jwt from './JWT/JWT.method'; // Import JWT Manager Module 
-import Config from './Cluster/CreateCluster.method'; // Import Cluster Module
+import CreateClusterByFunction from './Cluster/CreateClusterByFunction.method'; // Import Cluster Module
 import Encryption from './Encryption - Decryption/Crypto'; // Import Crypto Module
 
 // Export All Feature from  internal module
@@ -66,7 +66,9 @@ export const Middleware = Object.freeze({
 // Export All Methods
 export const methods = Object.freeze({
     JWT_Manager : Jwt, // Export JWT Manager Module
-    ClusterCreator: Config, // Export Cluster Creator Module
+    ClusterCreator: {
+        CreateByFunction : CreateClusterByFunction
+    }, // Export Cluster Creator Module
     UniqueGenerator : UniqueGen, // Export UniqueGen Module
     CryptoGraphy: Encryption, // Export Crypto Module
 }); // Export All Methods
