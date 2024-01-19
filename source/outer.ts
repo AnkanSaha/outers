@@ -63,7 +63,7 @@ export const Middleware = Object.freeze({
 }); // Export IP Injector Module as Middleware
 
 
-// Export All Methods
+// Export All Methods with Freeze
 export const methods = Object.freeze({
     JWT_Manager : Jwt, // Export JWT Manager Module
     ClusterCreator: {
