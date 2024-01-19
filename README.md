@@ -1,4 +1,5 @@
 ## outers - a all in one package for your day to day use
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/89818dfa840843debed74a096817f465)](https://app.codacy.com/gh/AnkanSaha/outers?utm_source=github.com&utm_medium=referral&utm_content=AnkanSaha/outers&utm_campaign=Badge_Grade)
 [![npm version](https://badge.fury.io/js/outers.svg)](https://badge.fury.io/js/outers)
 
 ### This package provides services like Response Sender, Colorful Console, HTTP Status Codes, API Call, Random Number Generate, Create Cluster in NodeJS Easily
