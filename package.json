@@ -1,6 +1,6 @@
 {
   "name": "@AnkanSaha/outers",
-  "version": "5.3.8",
+  "version": "5.4.9",
   "description": "outers - a all in one package for your day to day use",
   "main": "./lib/outer.js",
   "types": "./lib/outer.d.ts",
