@@ -7,6 +7,7 @@
 ```shell
 npm install outers@latest --save  # install the package
 ```
+
 ### If You Want to Use Encrypt and Decrypt, You Need To Install in your Client Side
 ```shell
 npm i react-caches@latest --save
@@ -78,9 +79,9 @@ Serve.File({ // send a file to the client
 
 ## API Call in Efficient Way
 ```javascript
-const { API } = require('outers'); // import the package
+const { methods } = require('outers'); // import the package
 
-const Call = new API("https://jsonplaceholder.typicode.com"); // create a new instance of API class with base URL
+const Call = new methods.APiCall.ClassBased("https://jsonplaceholder.typicode.com"); // create a new instance of API class with base URL
 
 Call.Get('/todos/1', true, {"Custom Headers"}).then((response) => {
     Console.log(response)
@@ -196,7 +197,7 @@ app.use('/api', Middleware.RequestInjectIP, MainFunction); // inject the IP Addr
 ## Create Cluster in NodeJS Easily
 ```javascript
 const { methods } = require('outers'); // import the package
-methods.ClusterCreator(ExpressServer, PORT, CustomWorkerCount, engineMiddlewares?, BeforeListenFunctions? AfterListenFunctions?, ...FunctionMiddlewares?); // create a cluster with custom worker count
+methods.ClusterCreator.CreateByFunction(ExpressServer, PORT, CustomWorkerCount, engineMiddlewares?, BeforeListenFunctions? AfterListenFunctions?, ...FunctionMiddlewares?); // create a cluster with custom worker count
 ```
 
 # Full Example
@@ -219,7 +220,7 @@ app.use(Middleware.RequestInjectIP); // inject the IP Address in Request.body
 app.use('/api', Routes); // set the routes
 
 // At Last Create a Cluster with the Express App
-methods.ClusterCreator(app, PORT, 2, [{
+methods.ClusterCreator.CreateByFunction(app, PORT, 2, [{
     Key: 'trust proxy',
     Value: true
 },
