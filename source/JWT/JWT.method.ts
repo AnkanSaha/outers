@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-await-in-loop */
-import {red} from '../color/Console.log'; // Importing from outers for coloring the output
+import {red} from '../Logs/Console.log'; // Importing from outers for coloring the output
 import {sign, verify} from 'jsonwebtoken'; // Importing jsonwebtoken for generating the token
 
 // Current Time
