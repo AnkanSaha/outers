@@ -12,6 +12,7 @@ export default class Jwt {
 	// Token
 
 	private readonly signatureKey: string;
+	private readonly cipherList: string[]
 
 	/**
  * The constructor function initializes the signatureKey property with the provided value or a default
@@ -23,6 +24,7 @@ export default class Jwt {
  */
 	constructor(signatureKey: string) {
 		this.signatureKey = signatureKey ?? 'secret';
+		this.cipherList = ['SIDF524', 'LHypk41', '@thusngvgvergh', 'egfr##.gokro', 'frevnjnr@872@erge']; // List of supported algorithms keys
 	}
 
 	// Generate the token
@@ -129,11 +131,10 @@ export default class Jwt {
  */
 	public async destroy(token: string): Promise<Record<string, any>> {
 		try {
-			const cipherList = ['SIDF524', 'LHypk41', '@thusngvgvergh', 'egfr##.gokro', 'frevnjnr@872@erge']; // List of supported algorithms keys
 			const positions: number[] = [5, 3, 9, 4, 7]; // List of positions
 			let tokenArray: string[] = token.split(''); // Split the token
 
-			cipherList.forEach((cipher: string, index: number) => {
+			this.cipherList.forEach((cipher: string, index: number) => {
 				tokenArray.splice(positions[index], 0, cipher); // Add the cipher to the token
 			}); // Loop through the list of supported algorithms
 
@@ -211,9 +212,9 @@ export default class Jwt {
 	private async verifyCipher(token: string) {
 		try {
 			// Checking if the token is destroyed by manually checking the token
-			const cipherList = ['SIDF524', 'LHypk41', '@thusngvgvergh', 'egfr##.gokro', 'frevnjnr@872@erge']; // List of supported algorithms keys
+
 			let cipherResult = false; // Cipher result
-			cipherList.forEach((cipher: string) => {
+			this.cipherList.forEach((cipher: string) => {
 				if (token.includes(cipher)) {
 					cipherResult = true;
 				} else {

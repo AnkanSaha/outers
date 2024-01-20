@@ -8,7 +8,7 @@ const { isPrimary } = ClusterConfig; // Import isPrimary from Cluster
 import { Console } from "../outer"; // Import Console module
 
 // Import Interfaces
-import { EngineMiddlewares, ResponseObject } from "./interfaces"; // Import Interfaces
+import { EngineMiddlewares, ResponseObject } from "./Interface/CreateClusterByFunction.interfaces"; // Import Interfaces
 
 // Main Function
 export default async function Config(
