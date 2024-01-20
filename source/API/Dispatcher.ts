@@ -8,9 +8,11 @@ specified API endpoint and returning the response as JSON. */
 
 export class APiCall {
     private Domain: string;
+    private ContentType : object
 
-    constructor(Domain: string) {
+    constructor(Domain: string, ContentType = {'Content-Type': 'application/json'}) {
         this.Domain = Domain;
+        this.ContentType = ContentType
     }
 
     // Function for GET requests
@@ -29,7 +31,7 @@ export class APiCall {
     * no custom headers are provided
     * @returns the result of the `GetFetch` function, which is being awaited.
     */
-    public async Get(path: string, Responsejson=true,  headers: any = {'Content-Type': 'application/json'}){
+    public async Get(path: string, Responsejson = true,  headers: object = this.ContentType){
         return await GetFetch(this.Domain + path, Responsejson, headers);
     }
 
@@ -52,7 +54,7 @@ export class APiCall {
      * 'application/json'}` which sets the content type of the request to JSON.
      * @returns the result of the `PostFetch` function, which is awaited.
      */
-    public async Post(path: string, Data: any, Responsejson=true, headers: any = {'Content-Type': 'application/json'}){ // Function for POST requests
+    public async Post(path: string, Data: any, Responsejson=true, headers: object = this.ContentType){ // Function for POST requests
         return await PostFetch(this.Domain + path, Data, Responsejson, headers);
     }
 
@@ -73,7 +75,7 @@ export class APiCall {
     * However, you can override this default value by
     * @returns the result of the `DeleteFetch` function, which is being awaited.
     */
-    public async Delete(path: string, Responsejson=true, headers: any = {'Content-Type': 'application/json'}){ // Function for DELETE requests
+    public async Delete(path: string, Responsejson=true, headers: object = this.ContentType){ // Function for DELETE requests
         return await DeleteFetch(this.Domain + path, Responsejson, headers);
     }
 
@@ -95,7 +97,7 @@ export class APiCall {
  * 'application/json'}` which sets the content type of the request to JSON.
  * @returns the result of the `PutFetch` function.
  */
-    public async Put(path: string, Data: any, Responsejson=true, headers: any = {'Content-Type': 'application/json'}){ // Function for PUT requests
+    public async Put(path: string, Data: any, Responsejson=true, headers: object = this.ContentType){ // Function for PUT requests
         return await PutFetch(this.Domain + path, Data, Responsejson, headers);
     }
 }

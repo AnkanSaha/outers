@@ -16,7 +16,7 @@ type str = string;
  * value by
  * @returns a Promise that resolves to an any value.
  */
-export async function PostFetch(API: str, Data: any, Responsejson=true, Headers: any): Promise<any> {
+export async function PostFetch(API: str, Data: any, Responsejson = true, Headers?: any): Promise<any> {
 	const Response = await fetch(API, {
 		method: 'POST',
 		headers: Headers,
@@ -45,7 +45,7 @@ export async function PostFetch(API: str, Data: any, Responsejson=true, Headers:
  * request body will
  * @returns a Promise that resolves to an any value.
  */
-export async function GetFetch(API: str, Responsejson=true, Headers: any): Promise<any> {
+export async function GetFetch(API: str, Responsejson = true, Headers?: any): Promise<any> {
 	const Response = await fetch(API, {
 		method: 'GET',
 		headers: Headers,
@@ -77,7 +77,7 @@ export async function GetFetch(API: str, Responsejson=true, Headers: any): Promi
  * your
  * @returns a Promise that resolves to an any value.
  */
-export async function PutFetch(API: str, Data: any, Responsejson = true, Headers: any): Promise<any> {
+export async function PutFetch(API: str, Data: any, Responsejson = true, Headers?: any): Promise<any> {
 	const Response = await fetch(API, {
 		method: 'PUT',
 		headers: Headers,
@@ -105,7 +105,7 @@ export async function PutFetch(API: str, Data: any, Responsejson = true, Headers
  * which sets the content type of the request to JSON. However, you can pass a different set of headers
  * @returns a Promise that resolves to an any value.
  */
-export async function DeleteFetch(API: str, Responsejson = true, Headers: any): Promise<any> {
+export async function DeleteFetch(API: str, Responsejson = true, Headers?: any): Promise<any> {
 	const Response = await fetch(API, {
 		method: 'DELETE',
 		headers: Headers,
