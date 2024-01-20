@@ -10,6 +10,7 @@ import InjectIP from './Request IP Injector/Base.middleware'; // Import Inject I
 import Jwt from './JWT/JWT.method'; // Import JWT Manager Module 
 import CreateClusterByFunction from './Cluster/CreateClusterByFunction.method'; // Import Cluster Module
 import Encryption from './Encryption - Decryption/Dispatcher'; // Import Crypto Module
+import CreateNewShortStorage from './Storage Management/ShortStorage.storage'; // Import Short Storage Module
 
 // Export All Feature from  internal module
 /* The code is exporting an object named `ConsoleColors` that contains various color functions from the
@@ -66,5 +67,8 @@ export const methods = Object.freeze({
             Delete: DeleteFetch            
         },
         ClassBased: APiCall
+    },
+    Storage: {
+        CreateNewShortStorage: CreateNewShortStorage
     }
 }); // Export All Methods
