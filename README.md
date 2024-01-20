@@ -1,7 +1,7 @@
 ## outers - a all in one package for your day to day use
 [![npm version](https://badge.fury.io/js/outers.svg)](https://badge.fury.io/js/outers)
 
-### This package provides services like Response Sender, Colorful Console, HTTP Status Codes, API Call, Random Number Generate, Create Cluster in NodeJS Easily
+### This package provides services like Response Sender, Colorful Console, HTTP Status Codes, API Call, Random Number Generate, Create Cluster in NodeJS Easily also you can Store Temporary Data in Server Side like localStorage in Client Side
 
 ## Usage
 ```shell
@@ -268,5 +268,37 @@ methods.ClusterCreator.CreateByFunction(app, PORT, 2, [{
 
 // If you want to use the function middlewares, then you can pass the function middlewares in the seventh parameter of the function or you can pass undefined if you don't want to use function middlewares or you want to use outside of the cluster, you can pass as many as you want
 ```
+
+# Store Temporary Data in Server Side like localStorage in Client Side
+```javascript
+const { methods } = require('outers'); // import the package
+const storage = new methods.Storage.CreateNewShortStorage('Ankan Saha', 100); // create a new instance of Storage class with name of the storage with 100 KB of storage size
+
+storage.createShortStorage(); // create a new short storage with name of the storage with 100 KB of storage size
+
+storage.Save("Ankan", { // save a data in the storage with key and value with .then() method
+        Name: "Ankan",
+        Roll: 67
+    }).then((res) => {
+        console.log(res)
+    })
+
+await storage.Save("Ankan", { // save a data in the storage with key and value with await keyword
+        Name: "Ankan",
+        Roll: 67
+    })
+
+
+storage.Get("Ankan").then((res) => { // get a data from the storage with key with .then() method
+    console.log(res)
+})
+
+await storage.Get("Ankan") // get a data from the storage with key with await keyword
+
+await storage.Delete("Ankan") // delete a data from the storage with key with await keyword
+
+storage.Delete("Ankan").then((res) => { // delete a data from the storage with key with .then() method
+    console.log(res)
+})
 ## License
 MIT
