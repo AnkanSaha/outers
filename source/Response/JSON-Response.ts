@@ -2,7 +2,7 @@
 // types
 
 // Interfaces
-import JSONresponseInterface from "./Interface/JSONresponseInterface";  // JSON Interface
+import JSONresponseInterface from "./Interface/JSON-Response.Interface";  // JSON Interface
 
 /**
  * The SendResponse function sends a JSON response with the specified status, status code, message, and

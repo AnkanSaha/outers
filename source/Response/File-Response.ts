@@ -1,34 +1,9 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // types
-type str = string;
-type int = number;
-type obj = object;
 
-//  The SendFileResponse function sends a file response with the specified status, status code, message, and
-export interface FileResponseInterfaces {
-    response: {
-        status: (statusCode: int) => {
-            sendFile: (Filename: unknown, { root }: { root : str }) => void
-            cookie : (name: str, value: str, options: obj) => {
-                sendFile: (Filename: unknown, { root }: { root : str }) => void
-            }
-        },
-        cookie: (name: str, value: str, options: obj) => {
-            json: (data: obj) => void
-        }
-    },
-    statusCode: int,
-    Filename?: str,
-    rootName: str,
-    cookieData?: [
-        {
-            name: str,
-            value: str,
-            options: obj
-        }
-    ] | undefined
-}
+// Interfaces
+import FileResponseInterfaces from "./Interface/File-Response.Interface"; // File Response Interfaces
 
 // Send File Response
 /**
