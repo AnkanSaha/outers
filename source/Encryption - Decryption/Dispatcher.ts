@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // Import  Encrypt and Decrypt
-import {Encrypt, EncryptSync} from './bin/Encrypt'; // Import Encrypt Module
-import {Decrypt, DecryptSync} from './bin/Decrypt'; // Import Decrypt Module
+import {Encrypt, EncryptSync} from './functions/Encrypt'; // Import Encrypt Module
+import {Decrypt, DecryptSync} from './functions/Decrypt'; // Import Decrypt Module
 
 
 

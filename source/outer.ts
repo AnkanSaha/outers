@@ -1,7 +1,7 @@
 // Import All Feature from  internal module
-import {blue, bright, cyan, dimmed, gray, green, magenta, red, reverse, underscore, yellow } from './color/Console.log'; // Import Console Module
+import {blue, bright, cyan, dimmed, gray, green, magenta, red, reverse, underscore, yellow } from './Logs/Console.log'; // Import Console Module
 import {APiCall} from './API/Dispatcher'; // Import API Module
-import {PutFetch, DeleteFetch, GetFetch, PostFetch} from './API/bin/Fetch'; // Import Fetch Module
+import {PutFetch, DeleteFetch, GetFetch, PostFetch} from './API/functions/Fetch'; // Import Fetch Module
 import {StatusCode} from './StatusCode/Code'; // Import StatusCode Module
 import { JSONSendResponse } from './Response/JSON-Response'; // Import JSON Response Module
 import { SendFileResponse } from './Response/File-Response'; // Import File Response Module
@@ -9,7 +9,7 @@ import { UniqueGen } from './UniqueGen/Base'; // Import UniqueGen Module
 import InjectIP from './Request IP Injector/Base.middleware'; // Import Inject IP Module
 import Jwt from './JWT/JWT.method'; // Import JWT Manager Module 
 import CreateClusterByFunction from './Cluster/CreateClusterByFunction.method'; // Import Cluster Module
-import Encryption from './Encryption - Decryption/Crypto'; // Import Crypto Module
+import Encryption from './Encryption - Decryption/Dispatcher'; // Import Crypto Module
 
 // Export All Feature from  internal module
 /* The code is exporting an object named `ConsoleColors` that contains various color functions from the
@@ -30,19 +30,6 @@ export const Console = Object.freeze({
     yellow
 }); // Export Console Module
 
-// export all feature from internal module
-/* The line `export const API = APiCall; // Export API Module` is exporting the `APiCall` function from
-the `Dispatcher` module as `API`. This allows other modules or files to import and use the `APiCall`
-function by importing `API` from this module. */
-export const API = APiCall; // Export API Module
-
-// Export Fetch Module
-export const Fetch = Object.freeze({
-    Put : PutFetch,
-    Delete : DeleteFetch,
-    Get : GetFetch,
-    Post : PostFetch
-}); // Export Fetch Module
 
 /* The line `export const StatusCodes = StatusCode; // Export StatusCode Module` is exporting the
 `StatusCode` object from the `Code` module as `StatusCodes`. This allows other modules or files to
@@ -71,4 +58,13 @@ export const methods = Object.freeze({
     }, // Export Cluster Creator Module
     UniqueGenerator : UniqueGen, // Export UniqueGen Module
     CryptoGraphy: Encryption, // Export Crypto Module
+    APiCall: {
+        FunctionBased: {
+            Get: GetFetch,
+            Post: PostFetch,
+            Put: PutFetch,
+            Delete: DeleteFetch            
+        },
+        ClassBased: APiCall
+    }
 }); // Export All Methods
