@@ -300,5 +300,10 @@ await storage.Delete("Ankan") // delete a data from the storage with key with aw
 storage.Delete("Ankan").then((res) => { // delete a data from the storage with key with .then() method
     console.log(res)
 })
+
+storage.DeleteStorage().(res=> console.log(res)); // Delete The All Data & also Delete the Data Storage with .then method
+
+await storage.DeleteStorage() // Delete The All Data & also Delete the Data Storage with await keyword
+
 ## License
 MIT

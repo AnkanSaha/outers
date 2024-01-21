@@ -3,6 +3,6 @@
 export interface ShortStorage {
     status: number;
     message: string;
-    Data: any;
-    TotalData: number;
+    Data?: any;
+    TotalData?: number;
 }

@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { writeFile, readFile, stat } from "node:fs/promises"; // Import Node.js Dependencies
-import { writeFileSync, mkdirSync, accessSync } from "node:fs"; // Import Node.js Dependencies
+import { writeFile, readFile, stat, mkdir, access, unlink, rmdir } from "node:fs/promises"; // Import Node.js Dependencies
 
 // Interfaces for ShortStorage Response
 import { ShortStorage } from "./Interface/ShortStorage.interface"; // Import ShortStorage Interface
@@ -21,9 +20,10 @@ export default class CreateNewShortStorage {
    * @param {number} [MaxStorageSize] - The maximum size of the storage in kilobytes. Defaults to 10 kilobytes if not provided.
    */
   constructor(StorageName: string, MaxStorageSize?: number) {
-    this.StorageName = StorageName ?? 'OutersManagement'; // Set Storage Name
-    this.StoragePath = `source/Storage Management/`; // Set Storage Path
+    this.StorageName = StorageName ?? "OutersManagement"; // Set Storage Name
+    this.StoragePath = `source/Storage-Management/`; // Set Storage Path
     this.MaxStorageSize = MaxStorageSize ?? 10; // Set Max Storage Size to 10 Kilobyte
+    this.createShortStorage(); // Create Short Storage
   }
 
   /**
@@ -47,8 +47,6 @@ export default class CreateNewShortStorage {
       return {
         status: 400,
         message: "Storage Size is Bigger Than Max Storage Size",
-        Data: undefined,
-        TotalData: 0,
       };
     }
 
@@ -57,10 +55,8 @@ export default class CreateNewShortStorage {
 
     if (FindData.Data.length !== 0) {
       return {
-        status: 400,
+        status: 403,
         message: "Data Already Exists",
-        Data: undefined,
-        TotalData: 0,
       };
     }
 
@@ -90,7 +86,6 @@ export default class CreateNewShortStorage {
         Title: Title,
         Data: Data,
       },
-      TotalData: ParsedData.length,
     };
   }
 
@@ -99,7 +94,7 @@ export default class CreateNewShortStorage {
    * @param Title - The title of the data to retrieve.
    * @returns A promise that resolves to an object containing the status, message, and retrieved data.
    */
-  public async Get(Title: string): Promise<ShortStorage> {
+  public async Get(Title?: string): Promise<ShortStorage> {
     const RawData = await readFile(
       `${this.StoragePath}.${this.StorageName}.storage.json`,
       "utf-8"
@@ -107,14 +102,13 @@ export default class CreateNewShortStorage {
     const ParsedData: any[] = JSON.parse(RawData); // Parsed The Data
 
     // Find The Data
-    const Data = ParsedData.filter((Data) => Data.Title === Title);
+    const  Data = ParsedData.filter((Data) => Title === undefined ? Data : Data.Title === Title);
+
 
     if (!Data) {
       return {
         status: 404,
         message: "Data Not Found",
-        Data: undefined,
-        TotalData: ParsedData.length,
       };
     }
 
@@ -122,11 +116,16 @@ export default class CreateNewShortStorage {
       status: 200,
       message: "Data Found Successfully",
       Data: Data,
-      TotalData: ParsedData.length,
+      TotalData: Data.length,
     };
   }
 
   // Delete Data From Short Storage
+  /**
+   * Deletes a data entry from the storage based on the provided title.
+   * @param {string} Title - The title of the data entry to be deleted.
+   * @returns {Promise<ShortStorage>} A promise that resolves to the deleted data entry or an error object.
+   */
   public async Delete(Title: string): Promise<ShortStorage> {
     const RawData = await readFile(
       `${this.StoragePath}.${this.StorageName}.storage.json`,
@@ -141,8 +140,6 @@ export default class CreateNewShortStorage {
       return {
         status: 404,
         message: "Data Not Found",
-        Data: undefined,
-        TotalData: ParsedData.length,
       };
     }
 
@@ -159,35 +156,65 @@ export default class CreateNewShortStorage {
     return {
       status: 200,
       message: "Data Deleted Successfully",
-      Data: Data,
-      TotalData: NewData.length,
     };
   }
 
+  // A Public Method to Delete Data Storage File
+  /**
+   * Deletes the storage directory and file.
+   * 
+   * @returns A promise that resolves to a ShortStorage object with the status and message.
+   *          If the storage is deleted successfully, the object will also contain the data and total data count.
+   *          If the storage is not found, the object will have a status of 404 and a corresponding error message.
+   */
+  public async DeleteStorage(): Promise<ShortStorage> {
+        // Check if the directory exists, and create it if not
+        try {
+          await access(this.StoragePath); // Check if Directory Exists
+
+          // Get All Data in Storage File Before Delete
+          const AllDataInStorage = await this.Get(); // Get All Data in Storage File
+
+          // Delete All Data in Storage File
+          await unlink(`${this.StoragePath}.${this.StorageName}.storage.json`); // Delete Storage File
+          await rmdir(this.StoragePath, { recursive: true }); // Delete Storage Directory
+          return {
+            status: 200,
+            message: "Storage Deleted Successfully",
+            Data: AllDataInStorage.Data,
+            TotalData: AllDataInStorage.TotalData,
+          }
+        }
+        catch (error) {
+          return {
+            status: 404,
+            message: "Storage Not Found in Management PATH",
+          }
+        }
+  }
+  
   // A Private Method for Create Short Storage Folder
   /**
    * Creates a short storage by checking if the directory exists and creating it if not.
    * Then, it creates a short storage file with an empty JSON object.
    */
-  public createShortStorage() {
+  private async createShortStorage() {
     // Check if the directory exists, and create it if not
     try {
-      accessSync(this.StoragePath);
+      await access(this.StoragePath); // Check if Directory Exists
     } catch (error) {
       // Directory does not exist, create it
-      mkdirSync(this.StoragePath, { recursive: true });
+      await mkdir(this.StoragePath, { recursive: true }); // Create Directory
+      await writeFile(
+        `${this.StoragePath}.${this.StorageName}.storage.json`,
+        JSON.stringify([
+          {
+            Title: "Outers",
+            Data: "Data Manager",
+          },
+        ]),
+        "utf-8"
+      );
     }
-
-    // Create Short Storage File
-    writeFileSync(
-      `${this.StoragePath}.${this.StorageName}.storage.json`,
-      JSON.stringify([
-        {
-          Title: "Outers",
-          Data: "Data Manager",
-        },
-      ]),
-      "utf-8"
-    );
   }
 }
