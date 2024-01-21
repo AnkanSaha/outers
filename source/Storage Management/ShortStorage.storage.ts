@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { writeFile, readFile, stat, mkdir, access, unlink, rmdir } from "node:fs/promises"; // Import Node.js Dependencies
+import { writeFile, readFile, stat, access } from "node:fs/promises"; // Import Node.js Dependencies
+import {methods} from '../outer'; // Import Outer Module
 
 // Interfaces for ShortStorage Response
 import { ShortStorage } from "./Interface/ShortStorage.interface"; // Import ShortStorage Interface
@@ -19,9 +20,9 @@ export default class CreateNewShortStorage {
    * @param {string} StorageName - The name of the storage.
    * @param {number} [MaxStorageSize] - The maximum size of the storage in kilobytes. Defaults to 10 kilobytes if not provided.
    */
-  constructor(StorageName: string, MaxStorageSize?: number) {
+  constructor(StorageName?: string, MaxStorageSize?: number) {
     this.StorageName = StorageName ?? "OutersManagement"; // Set Storage Name
-    this.StoragePath = `source/Storage-Management/`; // Set Storage Path
+    this.StoragePath = `/var/cache/Outers-Storage-Management/`; // Set Storage Path
     this.MaxStorageSize = MaxStorageSize ?? 10; // Set Max Storage Size to 10 Kilobyte
     this.createShortStorage(); // Create Short Storage
   }
@@ -176,8 +177,7 @@ export default class CreateNewShortStorage {
           const AllDataInStorage = await this.Get(); // Get All Data in Storage File
 
           // Delete All Data in Storage File
-          await unlink(`${this.StoragePath}.${this.StorageName}.storage.json`); // Delete Storage File
-          await rmdir(this.StoragePath, { recursive: true }); // Delete Storage Directory
+          await methods.Command.Execute(`sudo rm -r ${this.StoragePath}`); // Delete Storage Directory
           return {
             status: 200,
             message: "Storage Deleted Successfully",
@@ -201,10 +201,17 @@ export default class CreateNewShortStorage {
   private async createShortStorage() {
     // Check if the directory exists, and create it if not
     try {
-      await access(this.StoragePath); // Check if Directory Exists
+      await access(`${this.StoragePath}.${this.StorageName}.storage.json`); // Check if Directory Exists
     } catch (error) {
       // Directory does not exist, create it
-      await mkdir(this.StoragePath, { recursive: true }); // Create Directory
+      await methods.Command.Execute(`sudo mkdir ${this.StoragePath}`); // Create Directory
+
+      await methods.Command.Execute(`sudo chmod 777 ${this.StoragePath}`); // Set Directory Permission
+
+      await methods.Command.Execute(`sudo touch ${this.StoragePath}.${this.StorageName}.storage.json`); // Create Storage File
+
+      await methods.Command.Execute(`sudo chmod 777 ${this.StoragePath}.${this.StorageName}.storage.json`); // Set Storage File Permission
+
       await writeFile(
         `${this.StoragePath}.${this.StorageName}.storage.json`,
         JSON.stringify([
