@@ -11,6 +11,7 @@ import Jwt from './JWT/JWT.method'; // Import JWT Manager Module
 import CreateClusterByFunction from './Cluster/CreateClusterByFunction.method'; // Import Cluster Module
 import Encryption from './Encryption - Decryption/Dispatcher'; // Import Crypto Module
 import CreateNewShortStorage from './Storage Management/ShortStorage.storage'; // Import Short Storage Module
+import executeCommand from './command/executor'; // Linux Command Executor
 
 // Export All Feature from  internal module
 /* The code is exporting an object named `ConsoleColors` that contains various color functions from the
@@ -70,5 +71,8 @@ export const methods = Object.freeze({
     },
     Storage: {
         CreateNewShortStorage: CreateNewShortStorage
+    },
+    Command: {
+        Execute: executeCommand
     }
 }); // Export All Methods
