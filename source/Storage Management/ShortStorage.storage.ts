@@ -1,6 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { writeFile, readFile, stat, access } from "node:fs/promises"; // Import Node.js Dependencies
-import {methods} from '../outer'; // Import Outer Module
+import {
+  writeFile,
+  readFile,
+  stat,
+  access,
+  mkdir,
+  rmdir,
+  unlink,
+} from "node:fs/promises"; // Import Node.js Dependencies
 
 // Interfaces for ShortStorage Response
 import { ShortStorage } from "./Interface/ShortStorage.interface"; // Import ShortStorage Interface
@@ -22,7 +29,7 @@ export default class CreateNewShortStorage {
    */
   constructor(StorageName?: string, MaxStorageSize?: number) {
     this.StorageName = StorageName ?? "OutersManagement"; // Set Storage Name
-    this.StoragePath = `/var/cache/Outers-Storage-Management/`; // Set Storage Path
+    this.StoragePath = `source/.temp/`; // Set Storage Path
     this.MaxStorageSize = MaxStorageSize ?? 10; // Set Max Storage Size to 10 Kilobyte
     this.createShortStorage(); // Create Short Storage
   }
@@ -103,8 +110,9 @@ export default class CreateNewShortStorage {
     const ParsedData: any[] = JSON.parse(RawData); // Parsed The Data
 
     // Find The Data
-    const  Data = ParsedData.filter((Data) => Title === undefined ? Data : Data.Title === Title);
-
+    const Data = ParsedData.filter((Data) =>
+      Title === undefined ? Data : Data.Title === Title
+    );
 
     if (!Data) {
       return {
@@ -113,11 +121,64 @@ export default class CreateNewShortStorage {
       };
     }
 
+
     return {
       status: 200,
       message: "Data Found Successfully",
       Data: Data,
       TotalData: Data.length,
+    };
+  }
+
+  // Update Data in Short Storage
+  /**
+   * Updates the data in the Short Storage with the specified title.
+   * If the data is not found, returns a 404 status with a "Data Not Found" message.
+   * Otherwise, deletes the old data, adds the new data, and writes the updated data to the storage file.
+   * Returns a 200 status with a "Data Updated Successfully" message and the updated data.
+   * @param {string} Title - The title of the data to be updated.
+   * @param {any} NewData - The new data to be added.
+   * @returns {Promise<{ status: number, message: string, Data?: { Title: string, Data: any } }>} - The status, message, and updated data (if successful).
+   */
+  public async Update(Title: string, NewData: any): Promise<ShortStorage> {
+    const FindData = await this.Get(Title); // Get Data
+
+    // Check if Data is Already Exists in Short Storage
+    if (FindData.Data.length === 0) {
+      return {
+        status: 404,
+        message: "Data Not Found",
+      };
+    }
+
+    // Delete The Old Data
+    const AllFindData = await this.Get(); // Get All Data in Storage File
+
+    // Delete The Data
+    const RemovedData = AllFindData.Data.filter(
+      (Data: { Title: string }) => Data.Title !== Title
+    );
+
+    // Push The New Data In The Array
+    RemovedData.push({
+      Title: Title,
+      Data: NewData,
+    }); // Push The New Data In The Array
+
+    // Write The New Data in File
+    await writeFile(
+      `${this.StoragePath}.${this.StorageName}.storage.json`,
+      JSON.stringify(RemovedData),
+      "utf-8"
+    );
+
+    return {
+      status: 200,
+      message: "Data Updated Successfully",
+      Data: {
+        Title: Title,
+        Data: NewData,
+      },
     };
   }
 
@@ -163,36 +224,37 @@ export default class CreateNewShortStorage {
   // A Public Method to Delete Data Storage File
   /**
    * Deletes the storage directory and file.
-   * 
+   *
    * @returns A promise that resolves to a ShortStorage object with the status and message.
    *          If the storage is deleted successfully, the object will also contain the data and total data count.
    *          If the storage is not found, the object will have a status of 404 and a corresponding error message.
    */
   public async DeleteStorage(): Promise<ShortStorage> {
-        // Check if the directory exists, and create it if not
-        try {
-          await access(this.StoragePath); // Check if Directory Exists
+    // Check if the directory exists, and create it if not
+    try {
+      await access(this.StoragePath); // Check if Directory Exists
 
-          // Get All Data in Storage File Before Delete
-          const AllDataInStorage = await this.Get(); // Get All Data in Storage File
+      // Get All Data in Storage File Before Delete
+      const AllDataInStorage = await this.Get(); // Get All Data in Storage File
 
-          // Delete All Data in Storage File
-          await methods.Command.Execute(`sudo rm -r ${this.StoragePath}`); // Delete Storage Directory
-          return {
-            status: 200,
-            message: "Storage Deleted Successfully",
-            Data: AllDataInStorage.Data,
-            TotalData: AllDataInStorage.TotalData,
-          }
-        }
-        catch (error) {
-          return {
-            status: 404,
-            message: "Storage Not Found in Management PATH",
-          }
-        }
+      // Delete All Data in Storage File
+      await unlink(`${this.StoragePath}.${this.StorageName}.storage.json`); // Delete File
+      await rmdir(`${this.StoragePath}`); // Delete Storage Directory
+
+      return {
+        status: 200,
+        message: "Storage Deleted Successfully",
+        Data: AllDataInStorage.Data,
+        TotalData: AllDataInStorage.TotalData,
+      };
+    } catch (error) {
+      return {
+        status: 404,
+        message: "Storage Not Found in Management PATH",
+      };
+    }
   }
-  
+
   // A Private Method for Create Short Storage Folder
   /**
    * Creates a short storage by checking if the directory exists and creating it if not.
@@ -204,24 +266,14 @@ export default class CreateNewShortStorage {
       await access(`${this.StoragePath}.${this.StorageName}.storage.json`); // Check if Directory Exists
     } catch (error) {
       // Directory does not exist, create it
-      await methods.Command.Execute(`sudo mkdir ${this.StoragePath}`); // Create Directory
+      await mkdir(`${this.StoragePath}`, { recursive: true }); // Create Directory
 
-      await methods.Command.Execute(`sudo chmod 777 ${this.StoragePath}`); // Set Directory Permission
-
-      await methods.Command.Execute(`sudo touch ${this.StoragePath}.${this.StorageName}.storage.json`); // Create Storage File
-
-      await methods.Command.Execute(`sudo chmod 777 ${this.StoragePath}.${this.StorageName}.storage.json`); // Set Storage File Permission
-
+      // Write Empty Data in this File
       await writeFile(
         `${this.StoragePath}.${this.StorageName}.storage.json`,
-        JSON.stringify([
-          {
-            Title: "Outers",
-            Data: "Data Manager",
-          },
-        ]),
+        JSON.stringify([]),
         "utf-8"
-      );
+      ); // Create Storage File
     }
   }
 }
