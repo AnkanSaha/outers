@@ -12,6 +12,7 @@ import CreateClusterByFunction from './Cluster/CreateClusterByFunction.method'; 
 import Encryption from './Encryption - Decryption/Dispatcher'; // Import Crypto Module
 import CreateNewShortStorage from './Storage Management/ShortStorage.storage'; // Import Short Storage Module
 import executeCommand from './command/executor'; // Linux Command Executor
+import {Mongo} from 'mongosuper'; //  Mongo Super Module
 
 // Export All Feature from  internal module
 /* The code is exporting an object named `ConsoleColors` that contains various color functions from the
@@ -55,6 +56,7 @@ export const Middleware = Object.freeze({
 // Export All Methods with Freeze
 export const methods = Object.freeze({
     JWT_Manager : Jwt, // Export JWT Manager Module
+    MongoSuper : Mongo,
     ClusterCreator: {
         CreateByFunction : CreateClusterByFunction
     }, // Export Cluster Creator Module

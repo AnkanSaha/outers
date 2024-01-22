@@ -304,6 +304,15 @@ storage.Delete("Ankan").then((res) => { // delete a data from the storage with k
 storage.DeleteStorage().(res=> console.log(res)); // Delete The All Data & also Delete the Data Storage with .then method
 
 await storage.DeleteStorage() // Delete The All Data & also Delete the Data Storage with await keyword
+```
+
+# Use MongoSuper Within Outers
+```javascript
+const {methods} = require('outers'); // import the package
+const MongoSuper = new methods.MongoSuper(); // create a new instance of MongoSuper class
+```
+
+## [Follow MongoSuper Documentation for Usage](https://github.com/AnkanSaha/Code-Compiler)
 
 ## License
 MIT
