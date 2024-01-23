@@ -26,7 +26,7 @@ export default function (
 
     // Check if Request Hostname is available in Array or not
     isAllowed = AllowedURLs.some((url: string) => url.toLowerCase() === Request.hostname.toLowerCase());
-   
+   try {
     if (ReverseParams === false) {
       if (isAllowed === true) {
         Next(); // Next Middleware
@@ -62,5 +62,16 @@ export default function (
         }); // Serve JSON
       }
     }
+   }
+   catch (error){
+    Serve.JSON({
+      response: Response,
+      status: false,
+      statusCode: StatusCodes.EXPECTATION_FAILED,
+      Title: "Failed To Proceed",
+      data: error,
+      message: "Unable to Proceed your Request further, there is some error in configuration in Server"
+    }); // Send Error Response
+   }
   };
 }
