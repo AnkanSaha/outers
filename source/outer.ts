@@ -6,13 +6,16 @@ import {StatusCode} from './StatusCode/Code'; // Import StatusCode Module
 import { JSONSendResponse } from './Response/JSON-Response'; // Import JSON Response Module
 import { SendFileResponse } from './Response/File-Response'; // Import File Response Module
 import { UniqueGen } from './UniqueGen/Base'; // Import UniqueGen Module
-import InjectIP from './Request IP Injector/Base.middleware'; // Import Inject IP Module
 import Jwt from './JWT/JWT.method'; // Import JWT Manager Module 
 import CreateClusterByFunction from './Cluster/CreateClusterByFunction.method'; // Import Cluster Module
 import Encryption from './Encryption - Decryption/Dispatcher'; // Import Crypto Module
 import CreateNewShortStorage from './Storage Management/ShortStorage.storage'; // Import Short Storage Module
 import executeCommand from './command/executor'; // Linux Command Executor
 import {Mongo} from 'mongosuper'; //  Mongo Super Module
+
+// Import All Middlewares
+import InjectIP from './Middlewares/Request IP Injector/Base.middleware'; // Import Inject IP Module
+import URL_Controller from './Middlewares/URL Controller/Base.middleware'; // Import URL Controller Module
 
 // Export All Feature from  internal module
 /* The code is exporting an object named `ConsoleColors` that contains various color functions from the
@@ -49,7 +52,8 @@ export const Serve = Object.freeze({
 
 // Export All Middlewares
 export const Middleware = Object.freeze({
-    RequestInjectIP: InjectIP // Export IP Injector Module as Middleware
+    RequestInjectIP: InjectIP, // Export IP Injector Module as Middleware
+    AccessController: URL_Controller, // Export URL Controller Module as Middleware
 }); // Export IP Injector Module as Middleware
 
 

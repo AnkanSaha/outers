@@ -314,5 +314,16 @@ const MongoSuper = new methods.MongoSuper(); // create a new instance of MongoSu
 
 ## [Follow MongoSuper Documentation for Usage](https://github.com/AnkanSaha/Code-Compiler)
 
+# Control URL Access in NodeJS
+```javascript
+const {Middleware} = require('outers'); // import the package
+
+app.use('/api', Middleware.AccessController(['ARRAY OF URLs'], FailedStatusCode, ErrorMessage, Reverse), MainFunction); // control the URL Access in NodeJS with the Middleware function
+```
+- Note : You can pass as many as you want URLs in the first parameter of the function
+- Note : You can pass the Failed Status Code in the second parameter of the function, by default it is set to 403, it will send a 403 status code if the verification failed
+- Note : You can pass the Error Message in the third parameter of the function, by default it is set to 'You are not allowed to access this URL', it will send a error message if the verification failed
+- Note : You can pass the Reverse in the fourth parameter of the function, by default it is set to false, if you set it to true then it will reverse the verification, it will send a 403 status code if the verification success
+
 ## License
 MIT
