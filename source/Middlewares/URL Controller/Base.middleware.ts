@@ -5,7 +5,7 @@ import { Serve, StatusCodes } from "../../outer"; // Import red from outers
 
 // Main Function
 /**
- * Middleware function to check if the request URL is allowed.
+ * Middleware function to check if the request URL is allowed or not.
  * 
  * @param AllowedURLs - An array of allowed URLs.
  * @param StatusCode - Optional. The status code to be sent if the URL is not allowed. Defaults to 406 (Not Acceptable).
