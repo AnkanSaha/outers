@@ -1,7 +1,7 @@
 import { Request, NextFunction, Response } from "express"; // Import Request from express
 
 // Import Interfaces
-import { Console, Serve, StatusCodes } from "../outer"; // Import red from outers
+import { Console, Serve, StatusCodes } from "../../outer"; // Import red from outers
 
 // main function
 export default async (
