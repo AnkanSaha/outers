@@ -7,7 +7,7 @@ import { Console, Serve, StatusCodes } from "../../outer"; // Import red from ou
 export default async (
   Request: Request,
   Response: Response,
-  Next: NextFunction
+  Next: NextFunction,
 ) => {
   try {
     // Allow only PUT, POST, PATCH, DELETE methods
@@ -20,12 +20,11 @@ export default async (
         Request.connection.remoteAddress ||
         Request.socket.remoteAddress ||
         Request.socket.remoteAddress; // Get Requester IP Address
-        
-        // Inject Requester IP Address
+
+      // Inject Requester IP Address
       Request.body.RequesterIPaddress = RequesterIPaddress; // Inject Requester IP Address
       Next(); // Next Middleware
-    }
-    else{
+    } else {
       Next(); // Proceed Without Injecting IP Address
     }
   } catch (Error) {

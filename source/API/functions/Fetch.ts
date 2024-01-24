@@ -16,21 +16,25 @@ type str = string;
  * value by
  * @returns a Promise that resolves to an any value.
  */
-export async function PostFetch(API: str, Data: any, Responsejson = true, Headers?: any): Promise<any> {
-	const Response = await fetch(API, {
-		method: 'POST',
-		headers: Headers,
-		body: JSON.stringify(Data),
-	}); // Fetch the API
+export async function PostFetch(
+  API: str,
+  Data: any,
+  Responsejson = true,
+  Headers?: any,
+): Promise<any> {
+  const Response = await fetch(API, {
+    method: "POST",
+    headers: Headers,
+    body: JSON.stringify(Data),
+  }); // Fetch the API
 
-	if(Responsejson === false) {
-		return Response;
-	}
-	else {
-	const JSONResponse: any = await Response.json(); // Convert the response to JSON
-	// return the response
-	return JSONResponse;
-	}
+  if (Responsejson === false) {
+    return Response;
+  } else {
+    const JSONResponse: any = await Response.json(); // Convert the response to JSON
+    // return the response
+    return JSONResponse;
+  }
 } // End of PostFetch
 
 // function for GET requests
@@ -45,20 +49,23 @@ export async function PostFetch(API: str, Data: any, Responsejson = true, Header
  * request body will
  * @returns a Promise that resolves to an any value.
  */
-export async function GetFetch(API: str, Responsejson = true, Headers?: any): Promise<any> {
-	const Response = await fetch(API, {
-		method: 'GET',
-		headers: Headers,
-	}); // Fetch the API
+export async function GetFetch(
+  API: str,
+  Responsejson = true,
+  Headers?: any,
+): Promise<any> {
+  const Response = await fetch(API, {
+    method: "GET",
+    headers: Headers,
+  }); // Fetch the API
 
-	if(Responsejson === false) {
-		return Response;
-	}
-	else {
-	const JSONResponse: any = await Response.json(); // Convert the response to JSON
-	// return the response
-	return JSONResponse;
-	}
+  if (Responsejson === false) {
+    return Response;
+  } else {
+    const JSONResponse: any = await Response.json(); // Convert the response to JSON
+    // return the response
+    return JSONResponse;
+  }
 }
 
 // Function for PUT requests
@@ -77,21 +84,25 @@ export async function GetFetch(API: str, Responsejson = true, Headers?: any): Pr
  * your
  * @returns a Promise that resolves to an any value.
  */
-export async function PutFetch(API: str, Data: any, Responsejson = true, Headers?: any): Promise<any> {
-	const Response = await fetch(API, {
-		method: 'PUT',
-		headers: Headers,
-		body: JSON.stringify(Data),
-	}); // Fetch the API
+export async function PutFetch(
+  API: str,
+  Data: any,
+  Responsejson = true,
+  Headers?: any,
+): Promise<any> {
+  const Response = await fetch(API, {
+    method: "PUT",
+    headers: Headers,
+    body: JSON.stringify(Data),
+  }); // Fetch the API
 
-	if(Responsejson === false) {
-		return Response;
-	}
-	else {
-	const JSONResponse: any = await Response.json(); // Convert the response to JSON
-	// return the response
-	return JSONResponse;
-	}
+  if (Responsejson === false) {
+    return Response;
+  } else {
+    const JSONResponse: any = await Response.json(); // Convert the response to JSON
+    // return the response
+    return JSONResponse;
+  }
 }
 
 // Function for DELETE requests
@@ -105,19 +116,21 @@ export async function PutFetch(API: str, Data: any, Responsejson = true, Headers
  * which sets the content type of the request to JSON. However, you can pass a different set of headers
  * @returns a Promise that resolves to an any value.
  */
-export async function DeleteFetch(API: str, Responsejson = true, Headers?: any): Promise<any> {
-	const Response = await fetch(API, {
-		method: 'DELETE',
-		headers: Headers,
-	}); // Fetch the API
+export async function DeleteFetch(
+  API: str,
+  Responsejson = true,
+  Headers?: any,
+): Promise<any> {
+  const Response = await fetch(API, {
+    method: "DELETE",
+    headers: Headers,
+  }); // Fetch the API
 
-	if(Responsejson === false) {
-		return Response;
-	}
-	else {
-	const JSONResponse: any = await Response.json(); // Convert the response to JSON
-	// return the response
-	return JSONResponse;
-	}
-
+  if (Responsejson === false) {
+    return Response;
+  } else {
+    const JSONResponse: any = await Response.json(); // Convert the response to JSON
+    // return the response
+    return JSONResponse;
+  }
 }

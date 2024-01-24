@@ -1,7 +1,15 @@
-import color from './bin/color' // import color object from color.ts
+import color from "./bin/color"; // import color object from color.ts
 
 // global types
-type globe = string | number | boolean | object | null | undefined | symbol | bigint
+type globe =
+  | string
+  | number
+  | boolean
+  | object
+  | null
+  | undefined
+  | symbol
+  | bigint;
 
 // function for green
 /**
@@ -13,15 +21,15 @@ type globe = string | number | boolean | object | null | undefined | symbol | bi
  * green. Finally, the function returns the
  * @returns an array of objects of type `globe`.
  */
-export function green (...Payload: unknown[]): globe {
+export function green(...Payload: unknown[]): globe {
   Payload.forEach((payload: unknown) => {
-    console.log(color.green, payload)
-  })
+    console.log(color.green, payload);
+  });
   return {
-    Status: 'Success',
+    Status: "Success",
     Payload,
-    Message: `The function ${color.green} has been executed successfully`
-  }
+    Message: `The function ${color.green} has been executed successfully`,
+  };
 } // end of green
 
 // function for yellow
@@ -33,15 +41,15 @@ export function green (...Payload: unknown[]): globe {
  * the original array of "globe"
  * @returns an array of objects of type `globe`.
  */
-export function yellow (...Payload: unknown[]): globe {
+export function yellow(...Payload: unknown[]): globe {
   Payload.forEach((payload: unknown) => {
-    console.log(color.yellow, payload)
-  })
+    console.log(color.yellow, payload);
+  });
   return {
-    Status: 'Success',
+    Status: "Success",
     Payload,
-    Message: `The function ${color.yellow} has been executed successfully`
-  }
+    Message: `The function ${color.yellow} has been executed successfully`,
+  };
 } // end of yellow
 
 // function for red
@@ -53,15 +61,15 @@ export function yellow (...Payload: unknown[]): globe {
  * the original array of "globe"
  * @returns an array of objects of type `globe`.
  */
-export function red (...Payload: unknown[]): globe {
+export function red(...Payload: unknown[]): globe {
   Payload.forEach((payload: unknown) => {
-    console.log(color.red, payload)
-  })
+    console.log(color.red, payload);
+  });
   return {
-    Status: 'Success',
+    Status: "Success",
     Payload,
-    Message: `The function ${color.red} has been executed successfully`
-  }
+    Message: `The function ${color.red} has been executed successfully`,
+  };
 } // end of red
 
 // function for blue
@@ -73,15 +81,15 @@ export function red (...Payload: unknown[]): globe {
  * function returns the original array of globe objects.
  * @returns The function `blue` is returning an array of `globe` objects.
  */
-export function blue (...Payload: unknown[]): globe {
+export function blue(...Payload: unknown[]): globe {
   Payload.forEach((payload: unknown) => {
-    console.log(color.blue, payload)
-  })
+    console.log(color.blue, payload);
+  });
   return {
-    Status: 'Success',
+    Status: "Success",
     Payload,
-    Message: `The function ${color.blue} has been executed successfully`
-  }
+    Message: `The function ${color.blue} has been executed successfully`,
+  };
 } // end of blue
 
 // function for magenta
@@ -94,15 +102,15 @@ export function blue (...Payload: unknown[]): globe {
  * magenta color using the "color" object
  * @returns an array of objects of type `globe`.
  */
-export function magenta (...Payload: unknown[]): globe {
+export function magenta(...Payload: unknown[]): globe {
   Payload.forEach((payload: unknown) => {
-    console.log(color.magenta, payload)
-  })
+    console.log(color.magenta, payload);
+  });
   return {
-    Status: 'Success',
+    Status: "Success",
     Payload,
-    Message: `The function ${color.magenta} has been executed successfully`
-  }
+    Message: `The function ${color.magenta} has been executed successfully`,
+  };
 } // end of magenta
 
 // function for cyan
@@ -114,15 +122,15 @@ export function magenta (...Payload: unknown[]): globe {
  * cyan. Finally, the function returns the
  * @returns The function `cyan` is returning an array of `globe` objects.
  */
-export function cyan (...Payload: unknown[]): globe {
+export function cyan(...Payload: unknown[]): globe {
   Payload.forEach((payload: unknown) => {
-    console.log(color.cyan, payload)
-  })
+    console.log(color.cyan, payload);
+  });
   return {
-    Status: 'Success',
+    Status: "Success",
     Payload,
-    Message: `The function ${color.cyan} has been executed successfully`
-  }
+    Message: `The function ${color.cyan} has been executed successfully`,
+  };
 } // end of cyan
 
 // function for gray
@@ -136,15 +144,15 @@ export function cyan (...Payload: unknown[]): globe {
  * @returns an array of `globe` objects, which is the same as the `Payload` parameter passed to the
  * function.
  */
-export function gray (...Payload: unknown[]): globe {
+export function gray(...Payload: unknown[]): globe {
   Payload.forEach((payload: unknown) => {
-    console.log(color.gray, payload)
-  })
+    console.log(color.gray, payload);
+  });
   return {
-    Status: 'Success',
+    Status: "Success",
     Payload,
-    Message: `The function ${color.gray} has been executed successfully`
-  }
+    Message: `The function ${color.gray} has been executed successfully`,
+  };
 } // end of gray
 
 // function for dimmed
@@ -158,15 +166,15 @@ export function gray (...Payload: unknown[]): globe {
  * @returns The function `dimmed` is returning an array of `globe` objects, which is the same as the
  * `Payload` parameter passed to the function.
  */
-export function dimmed (...Payload: unknown[]): globe {
+export function dimmed(...Payload: unknown[]): globe {
   Payload.forEach((payload: unknown) => {
-    console.log(color.dimmed, payload)
-  })
+    console.log(color.dimmed, payload);
+  });
   return {
-    Status: 'Success',
+    Status: "Success",
     Payload,
-    Message: `The function ${color.dimmed} has been executed successfully`
-  }
+    Message: `The function ${color.dimmed} has been executed successfully`,
+  };
 } // end of dimmed
 
 // function for bright
@@ -180,15 +188,15 @@ export function dimmed (...Payload: unknown[]): globe {
  * @returns The function `bright` is returning an array of `globe` objects after logging each object
  * with the `color.bright` property to the console.
  */
-export function bright (...Payload: unknown[]): globe {
+export function bright(...Payload: unknown[]): globe {
   Payload.forEach((payload: unknown) => {
-    console.log(color.bright, payload)
-  })
+    console.log(color.bright, payload);
+  });
   return {
-    Status: 'Success',
+    Status: "Success",
     Payload,
-    Message: `The function ${color.bright} has been executed successfully`
-  }
+    Message: `The function ${color.bright} has been executed successfully`,
+  };
 } // end of bright
 
 // function for underscore
@@ -201,15 +209,15 @@ export function bright (...Payload: unknown[]): globe {
  * @returns an array of `globe` objects, which is the same as the `Payload` parameter passed to the
  * function.
  */
-export function underscore (...Payload: unknown[]): globe {
+export function underscore(...Payload: unknown[]): globe {
   Payload.forEach((payload: unknown) => {
-    console.log(color.underscore, payload)
-  })
+    console.log(color.underscore, payload);
+  });
   return {
-    Status: 'Success',
+    Status: "Success",
     Payload,
-    Message: `The function ${color.underscore} has been executed successfully`
-  }
+    Message: `The function ${color.underscore} has been executed successfully`,
+  };
 } // end of Underscore
 
 // function for reverse
@@ -222,13 +230,13 @@ export function underscore (...Payload: unknown[]): globe {
  * @returns an array of `globe` elements after logging each element in the array to the console with
  * the color `reverse`.
  */
-export function reverse (...Payload: unknown[]): globe {
+export function reverse(...Payload: unknown[]): globe {
   Payload.forEach((payload: unknown) => {
-    console.log(color.reverse, payload)
-  })
+    console.log(color.reverse, payload);
+  });
   return {
-    Status: 'Success',
+    Status: "Success",
     Payload,
-    Message: `The function ${color.reverse} has been executed successfully`
-  }
+    Message: `The function ${color.reverse} has been executed successfully`,
+  };
 } // end of Underscore

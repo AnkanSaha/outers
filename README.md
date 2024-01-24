@@ -1,27 +1,31 @@
 ## outers - a all in one package for your day to day use
+
 [![npm version](https://badge.fury.io/js/outers.svg)](https://badge.fury.io/js/outers)
 
 ### This package provides services like Response Sender, Colorful Console, HTTP Status Codes, API Call, Random Number Generate, Create Cluster in NodeJS Easily also you can Store Temporary Data in Server Side like localStorage in Client Side
 
 ## Usage
+
 ```shell
 npm install outers@latest --save  # install the package
 ```
 
 ### If You Want to Use Encrypt and Decrypt, You Need To Install in your Client Side
+
 ```shell
 npm i react-caches@latest --save
 ```
 
 ## Encrypt and Decrypt
+
 ```javascript
-const { methods } = require('outers'); // import the package
+const { methods } = require("outers"); // import the package
 
-const Crypto = new methods.CryptoGraphy('secretKey'); // create a new instance of CryptoGraphy class
+const Crypto = new methods.CryptoGraphy("secretKey"); // create a new instance of CryptoGraphy class
 
-const ASYNCencrypted = Crypto.Encrypt('Hello World!'); // encrypt the string with secret key in async way
+const ASYNCencrypted = Crypto.Encrypt("Hello World!"); // encrypt the string with secret key in async way
 
-const SYNCencrypted = Crypto.EncryptSync('Hello World!'); // encrypt the string with secret key in sync way
+const SYNCencrypted = Crypto.EncryptSync("Hello World!"); // encrypt the string with secret key in sync way
 
 const ASYNCdecrypted = Crypto.Decrypt(ASYNCencrypted); // decrypt the string with secret key in async way
 
@@ -29,6 +33,7 @@ const SYNCdecrypted = Crypto.DecryptSync(SYNCencrypted); // decrypt the string w
 ```
 
 ## Send HTTP Response in Efficient Way with HTTP Status Code
+
 ```javascript
 const { Serve, StatusCodes } = require('outers'); // import the package
 
@@ -52,7 +57,7 @@ Serve.JSON({ // send a JSON response to the client
                         sameSite: 'none',
                  }
             }
-         
+
      ]
 }) // send a JSON response to the client
 
@@ -72,12 +77,13 @@ Serve.File({ // send a file to the client
                         sameSite: 'none',
                  }
             }
-         
+
      ]
 }) // send a file to the client
 ```
 
 ## API Call in Efficient Way
+
 ```javascript
 const { methods } = require('outers'); // import the package
 
@@ -90,7 +96,7 @@ Call.Get('/todos/1', true, {"Custom Headers"}).then((response) => {
 Call.Get('/todos', false, {"Custom Headers"}).then((response) => {
     Console.log(response)
 }); // send a POST request to the server with you want to not parse the response to JSON
- 
+
 Call.Post('/posts', {
     title: 'foo',
     body: 'bar',
@@ -135,6 +141,7 @@ Call.Delete('/posts/1', false, {"Custom Headers"}).then((response) => {}); // se
 ```
 
 ## Generate Random Number, Words, Symbols
+
 ```javascript
 
 const { methods } = require('outers'); // import the package
@@ -160,29 +167,32 @@ const Symbols = Unique.RandomSymbol(["Custom Symbols"]); // generate a random sy
 ```
 
 ## Console Colorful Print
+
 ```javascript
-const {Console} = require('outers'); // import the package
+const { Console } = require("outers"); // import the package
 
-Console.green('Hello World!'); // print a string to the console with green color
+Console.green("Hello World!"); // print a string to the console with green color
 
-Console.red('Hello World!'); // print a string to the console with red color
+Console.red("Hello World!"); // print a string to the console with red color
 
-Console.blue('Hello World!'); // print a string to the console with blue color
+Console.blue("Hello World!"); // print a string to the console with blue color
 
-Console.yellow('Hello World!'); // print a string to the console with yellow color
+Console.yellow("Hello World!"); // print a string to the console with yellow color
 
-Console.magenta('Hello World!'); // print a string to the console with magenta color
+Console.magenta("Hello World!"); // print a string to the console with magenta color
 
-Console.bright('Hello World!'); // print a string to the console with bright color
+Console.bright("Hello World!"); // print a string to the console with bright color
 
-Console.cyan('Hello World!'); // print a string to the console with cyan color
+Console.cyan("Hello World!"); // print a string to the console with cyan color
 ```
 
 ## Get Requester IP Address in Request.body Object
+
 ```javascript
-const { Middleware } = require('outers'); // import the package
-app.use('/api', Middleware.RequestInjectIP, MainFunction); // inject the IP Address in Request.body 
+const { Middleware } = require("outers"); // import the package
+app.use("/api", Middleware.RequestInjectIP, MainFunction); // inject the IP Address in Request.body
 ```
+
 - Note : You can access the IP Address in Request.body Object
 - Example : Request.body.RequesterIPaddress
 - Requirement : This Middleware work only can with POST, PATCH, PUT and DELETE Request
@@ -193,64 +203,73 @@ app.use('/api', Middleware.RequestInjectIP, MainFunction); // inject the IP Addr
 - You Need to Set X-Forwarded-For in the Header of the Request in Nginx or Apache or any other server
 - Example : proxy_set_header X-Forwarded-For $remote_addr;
 
-
 ## Create Cluster in NodeJS Easily
+
 ```javascript
 const { methods } = require('outers'); // import the package
 methods.ClusterCreator.CreateByFunction(ExpressServer, PORT, CustomWorkerCount, engineMiddlewares?, BeforeListenFunctions? AfterListenFunctions?, ...FunctionMiddlewares?); // create a cluster with custom worker count
 ```
 
 # Full Example
+
 ```javascript
-const Express = require('express'); // import express
-const { methods} = require('outers'); // import the package
+const Express = require("express"); // import express
+const { methods } = require("outers"); // import the package
 const app = Express(); // create a new express app
-const CORS = require('cors'); // import cors
+const CORS = require("cors"); // import cors
 const PORT = process.env.PORT || 3000; // set the port
 
 // Set the All Middlewares & First with the Express App like Body Parser, Cookie Parser, CORS, Helmet, Compression, Request Inject IP etc.
-app.static('public'); // set the static directory
-app.set('trust proxy', true); // set trust proxy to true
+app.static("public"); // set the static directory
+app.set("trust proxy", true); // set trust proxy to true
 app.use(CORS); // use CORS
 app.use(Express.json()); // use Express.json()
 app.use(Express.urlencoded({ extended: true })); // use Express.urlencoded()
 app.use(Middleware.RequestInjectIP); // inject the IP Address in Request.body
 
 // Set the Routes with the Express App
-app.use('/api', Routes); // set the routes
+app.use("/api", Routes); // set the routes
 
 // At Last Create a Cluster with the Express App
-methods.ClusterCreator.CreateByFunction(app, PORT, 2, [{
-    Key: 'trust proxy',
-    Value: true
-},
-{
-    Key: 'view engine',
-    Value: 'ejs'
-}
-], [
+methods.ClusterCreator.CreateByFunction(
+  app,
+  PORT,
+  2,
+  [
+    {
+      Key: "trust proxy",
+      Value: true,
+    },
+    {
+      Key: "view engine",
+      Value: "ejs",
+    },
+  ],
+  [
     () => {
-        Console.green('Server Started Not Listening');
-    }
-], [
+      Console.green("Server Started Not Listening");
+    },
+  ],
+  [
     () => {
-        Console.green('Server Started Listening');
-    }
-],
-[
+      Console.green("Server Started Listening");
+    },
+  ],
+  [
     (req, res, next) => {
-        Console.green('Function Middleware 1');
-        next();
+      Console.green("Function Middleware 1");
+      next();
     },
     (req, res, next) => {
-        Console.green('Function Middleware 2');
-        next();
+      Console.green("Function Middleware 2");
+      next();
     },
     (req, res, next) => {
-        Console.green('Function Middleware 3');
-        next();
-    }
-]); // create a cluster with custom worker count
+      Console.green("Function Middleware 3");
+      next();
+    },
+  ],
+); // create a cluster with custom worker count
 
 // Default Value of CustomWorkerCount is length of the CPU Core & Default Value of PORT is 3000
 
@@ -270,6 +289,7 @@ methods.ClusterCreator.CreateByFunction(app, PORT, 2, [{
 ```
 
 # Store Temporary Data in Server Side like localStorage in Client Side
+
 ```javascript
 const { methods } = require('outers'); // import the package
 const storage = new methods.Storage.CreateNewShortStorage('Ankan Saha', 100); // create a new instance of Storage class with name of the storage with 100 KB of storage size
@@ -307,34 +327,58 @@ await storage.DeleteStorage() // Delete The All Data & also Delete the Data Stor
 ```
 
 # Use MongoSuper Within Outers
+
 ```javascript
-const {methods} = require('outers'); // import the package
+const { methods } = require("outers"); // import the package
 const MongoSuper = new methods.MongoSuper(); // create a new instance of MongoSuper class
 ```
 
 ## [Follow MongoSuper Documentation for Usage](https://github.com/AnkanSaha/Code-Compiler)
 
 # Control URL Access in NodeJS
-```javascript
-const {Middleware} = require('outers'); // import the package
 
-app.use('/api', Middleware.AccessController(['ARRAY OF URLs'], FailedStatusCode, ErrorMessage, Reverse), MainFunction); // control the URL Access in NodeJS with the Middleware function
+```javascript
+const { Middleware } = require("outers"); // import the package
+
+app.use(
+  "/api",
+  Middleware.AccessController(
+    ["ARRAY OF URLs"],
+    FailedStatusCode,
+    ErrorMessage,
+    Reverse,
+  ),
+  MainFunction,
+); // control the URL Access in NodeJS with the Middleware function
 ```
+
 - Note : You can pass as many as you want URLs in the first parameter of the function
 - Note : You can pass the Failed Status Code in the second parameter of the function, by default it is set to 403, it will send a 403 status code if the verification failed
 - Note : You can pass the Error Message in the third parameter of the function, by default it is set to 'You are not allowed to access this URL', it will send a error message if the verification failed
 - Note : You can pass the Reverse in the fourth parameter of the function, by default it is set to false, if you set it to true then it will reverse the verification, it will send a 403 status code if the verification success
 
 # Control IP Address Access in NodeJS
-```javascript
-const {Middleware} = require('outers'); // import the package
 
-app.use('/api', Middleware.IPAccessController(['ARRAY OF IP ADDRESSES'], FailedStatusCode, ErrorMessage, Reverse), MainFunction); // control the IP Address Access in NodeJS with the Middleware function
+```javascript
+const { Middleware } = require("outers"); // import the package
+
+app.use(
+  "/api",
+  Middleware.IPAccessController(
+    ["ARRAY OF IP ADDRESSES"],
+    FailedStatusCode,
+    ErrorMessage,
+    Reverse,
+  ),
+  MainFunction,
+); // control the IP Address Access in NodeJS with the Middleware function
 ```
+
 - Note : You can pass as many as you want IP Addresses in the first parameter of the function
 - Note : You can pass the Failed Status Code in the second parameter of the function, by default it is set to 403, it will send a 403 status code if the verification failed
 - Note : You can pass the Error Message in the third parameter of the function, by default it is set to 'You are not allowed to access this URL', it will send a error message if the verification failed
 - Note : You can pass the Reverse in the fourth parameter of the function, by default it is set to false, if you set it to true then it will reverse the verification, it will send a 403 status code if the verification success
 
 ## License
+
 MIT

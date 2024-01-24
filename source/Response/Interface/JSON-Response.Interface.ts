@@ -9,37 +9,46 @@ type bool = boolean;
 /* The `interface responseInterface` is defining the structure of an object that has the following
 properties: */
 export default interface JSONresponseInterface {
-    response: {
-        status: (statusCode: int) => {
-            json: (data: obj) => void
-            cookie : (name: str, value: str, options: cookieOptions) => {
-                json: (data: obj) => void
-            }
-        },
-        cookie: (name: str, value: str, options: cookieOptions) => {
-            json: (data: obj) => void
-        }
-    },
-    status: bool,
-    statusCode: int,
-    Title: str,
-    message: str,
-    data: obj | undefined | unknown
-    cookieData?: [
+  response: {
+    status: (statusCode: int) => {
+      json: (data: obj) => void;
+      cookie: (
+        name: str,
+        value: str,
+        options: cookieOptions,
+      ) => {
+        json: (data: obj) => void;
+      };
+    };
+    cookie: (
+      name: str,
+      value: str,
+      options: cookieOptions,
+    ) => {
+      json: (data: obj) => void;
+    };
+  };
+  status: bool;
+  statusCode: int;
+  Title: str;
+  message: str;
+  data: obj | undefined | unknown;
+  cookieData?:
+    | [
         {
-            name: str,
-            value: str,
-            options: cookieOptions
-        }
-    ] | undefined
+          name: str;
+          value: str;
+          options: cookieOptions;
+        },
+      ]
+    | undefined;
 }
-
 
 // Section Interfaces
 
 interface cookieOptions {
-    maxAge: int,
-    httpOnly: bool,
-    secure: bool,
-    sameSite: str
+  maxAge: int;
+  httpOnly: bool;
+  secure: bool;
+  sameSite: str;
 }
