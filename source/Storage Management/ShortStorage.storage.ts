@@ -29,7 +29,7 @@ export default class CreateNewShortStorage {
    */
   constructor(StorageName?: string, MaxStorageSize?: number) {
     this.StorageName = StorageName ?? "OutersManagement"; // Set Storage Name
-    this.StoragePath = `source/.temp/`; // Set Storage Path
+    this.StoragePath = "source/.temp/"; // Set Storage Path
     this.MaxStorageSize = MaxStorageSize ?? 10; // Set Max Storage Size to 10 Kilobyte
     this.createShortStorage(); // Create Short Storage
   }
