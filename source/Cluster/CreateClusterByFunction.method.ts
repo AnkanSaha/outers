@@ -15,7 +15,7 @@ import {
 // Main Function
 export default async function Config(
   ExpressServer: Express = express(), // Main Express Server Instance
-  PORT: number = 3000, // Port Number to Listen
+  PORT = 3000, // Port Number to Listen
   NumberOfWorkers: number = cpus().length, // Number of Copies of Workers
   engineMiddlewares: EngineMiddlewares[] = [], // Any Middlewares to apply
   BeforeListenFunctions: any[] = [], // Any Functions to run before listen
