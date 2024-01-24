@@ -20,5 +20,5 @@ export interface ResponseObject {
   ActiveServer: any;
   ActiveWorker: number;
   BeforeListenFunctionsResponse: object[];
-  [key: string]: any | number | undefined | object | (() => void)[] | undefined;
+  [key: string]: any | number | undefined | object | undefined;
 }
