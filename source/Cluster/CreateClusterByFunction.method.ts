@@ -13,7 +13,7 @@ import {
 } from "./Interface/CreateClusterByFunction.interfaces"; // Import Interfaces
 
 // Main Function
-export default async function Config(
+export default function Config(
   ExpressServer: Express = express(), // Main Express Server Instance
   PORT: number = 3000, // Port Number to Listen
   NumberOfWorkers: number = cpus().length, // Number of Copies of Workers
@@ -21,7 +21,7 @@ export default async function Config(
   BeforeListenFunctions: any[] = [], // Any Functions to run before listen
   AfterListenFunctions: any[] = [], // Any Functions to run after listen
   FunctionMiddlewares: any[] = [], // Any Middlewares to apply
-): Promise<ResponseObject | undefined> {
+): ResponseObject | undefined {
   // Check if User Provided Express Server or not
   if (!ExpressServer || ExpressServer === undefined) {
     throw new Error("Express Server is not provided");
@@ -120,7 +120,7 @@ export default async function Config(
 
     // Server Listen
     try {
-      const ActiveServer = ExpressServer.listen(PORT, async () => {
+      const ActiveServer = ExpressServer.listen(PORT, () => {
         Console.green(`🚀 Server is listening on Port ${PORT} 🚀`); // Print Message for Server Start
 
         // Run After Listen Functions
