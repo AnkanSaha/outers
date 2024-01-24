@@ -27,6 +27,13 @@ export async function Decrypt(Data: str, Key: str): Promise<str> {
   return decryptedText; // Return decrypted data
 }
 
+/**
+ * Decrypts the given data using the specified key.
+ * @param {string} Data - The data to be decrypted.
+ * @param {string} Key - The key used for decryption.
+ * @returns {string} - The decrypted data.
+ * @throws {Error} - If the key is missing.
+ */
 export function DecryptSync(Data: str, Key: str): str {
   if (!Key) {
     throw new Error("Missing key");
