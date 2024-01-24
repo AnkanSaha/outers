@@ -92,7 +92,7 @@ export const methods = Object.freeze({
     ClassBased: APiCall,
   },
   Storage: {
-    CreateNewShortStorage: CreateNewShortStorage,
+    CreateNewShortStorage,
   },
   Command: {
     Execute: executeCommand,
