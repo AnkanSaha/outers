@@ -33,14 +33,13 @@ export default interface JSONresponseInterface {
   Title: str;
   message: str;
   data: obj | undefined | unknown;
-  cookieData?:
-    | [
-        {
-          name: str;
-          value: str;
-          options: cookieOptions;
-        },
-      ];
+  cookieData?: [
+    {
+      name: str;
+      value: str;
+      options: cookieOptions;
+    },
+  ];
 }
 
 // Section Interfaces

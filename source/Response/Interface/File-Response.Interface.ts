@@ -29,14 +29,13 @@ export default interface FileResponseInterfaces {
   statusCode: int;
   Filename?: str;
   rootName: str;
-  cookieData?:
-    | [
-        {
-          name: str;
-          value: str;
-          options: cookieOptions;
-        },
-      ];
+  cookieData?: [
+    {
+      name: str;
+      value: str;
+      options: cookieOptions;
+    },
+  ];
 }
 
 // Section Interfaces
