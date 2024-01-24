@@ -1,4 +1,3 @@
-
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // types
 
@@ -14,14 +13,19 @@ import FileResponseInterfaces from "./Interface/File-Response.Interface"; // Fil
  * @param {FileResponseInterface}  - - `rootName`: The root directory of the file to be sent in the response.
  * @param {FileResponseInterface}  - - `cookieData`: The cookie data to be sent in the response.
  */
-export const SendFileResponse = ({ statusCode, response, Filename, rootName, cookieData }: FileResponseInterfaces) => {
-    if(cookieData){
-        cookieData.forEach(CookieItems => {
-            response.cookie(CookieItems.name, CookieItems.value, CookieItems.options); // sets cookie for each cookie in cookieData
-        });
-        response.status(statusCode).sendFile(Filename, { root: rootName }); // sends response with cookie
-    }
-    else {
-        response.status(statusCode).sendFile(Filename, { root: rootName }); // sends response without cookie
-    }
+export const SendFileResponse = ({
+  statusCode,
+  response,
+  Filename,
+  rootName,
+  cookieData,
+}: FileResponseInterfaces) => {
+  if (cookieData) {
+    cookieData.forEach((CookieItems) => {
+      response.cookie(CookieItems.name, CookieItems.value, CookieItems.options); // sets cookie for each cookie in cookieData
+    });
+    response.status(statusCode).sendFile(Filename, { root: rootName }); // sends response with cookie
+  } else {
+    response.status(statusCode).sendFile(Filename, { root: rootName }); // sends response without cookie
+  }
 };

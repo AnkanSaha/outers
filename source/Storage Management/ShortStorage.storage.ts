@@ -43,7 +43,7 @@ export default class CreateNewShortStorage {
   public async Save(Title: string, Data: any): Promise<ShortStorage> {
     // Check if File size is bigger than Max Storage Size
     const FileStats = await stat(
-      `${this.StoragePath}.${this.StorageName}.storage.json`
+      `${this.StoragePath}.${this.StorageName}.storage.json`,
     ); // Get File Stats
 
     // Convert File Size to Megabytes and Check if it's bigger than Max Storage Size
@@ -70,7 +70,7 @@ export default class CreateNewShortStorage {
 
     const RawData = await readFile(
       `${this.StoragePath}.${this.StorageName}.storage.json`,
-      "utf-8"
+      "utf-8",
     ); // Get Raw Data
     const ParsedData: any[] = JSON.parse(RawData); // Parsed The Data
 
@@ -84,7 +84,7 @@ export default class CreateNewShortStorage {
     await writeFile(
       `${this.StoragePath}.${this.StorageName}.storage.json`,
       JSON.stringify(ParsedData),
-      "utf-8"
+      "utf-8",
     );
 
     return {
@@ -105,13 +105,13 @@ export default class CreateNewShortStorage {
   public async Get(Title?: string): Promise<ShortStorage> {
     const RawData = await readFile(
       `${this.StoragePath}.${this.StorageName}.storage.json`,
-      "utf-8"
+      "utf-8",
     ); // Get Raw Data
     const ParsedData: any[] = JSON.parse(RawData); // Parsed The Data
 
     // Find The Data
     const Data = ParsedData.filter((Data) =>
-      Title === undefined ? Data : Data.Title === Title
+      Title === undefined ? Data : Data.Title === Title,
     );
 
     if (!Data) {
@@ -120,7 +120,6 @@ export default class CreateNewShortStorage {
         message: "Data Not Found",
       };
     }
-
 
     return {
       status: 200,
@@ -156,7 +155,7 @@ export default class CreateNewShortStorage {
 
     // Delete The Data
     const RemovedData = AllFindData.Data.filter(
-      (Data: { Title: string }) => Data.Title !== Title
+      (Data: { Title: string }) => Data.Title !== Title,
     );
 
     // Push The New Data In The Array
@@ -169,7 +168,7 @@ export default class CreateNewShortStorage {
     await writeFile(
       `${this.StoragePath}.${this.StorageName}.storage.json`,
       JSON.stringify(RemovedData),
-      "utf-8"
+      "utf-8",
     );
 
     return {
@@ -191,7 +190,7 @@ export default class CreateNewShortStorage {
   public async Delete(Title: string): Promise<ShortStorage> {
     const RawData = await readFile(
       `${this.StoragePath}.${this.StorageName}.storage.json`,
-      "utf-8"
+      "utf-8",
     ); // Get Raw Data
     const ParsedData: any[] = JSON.parse(RawData); // Parsed The Data
 
@@ -212,7 +211,7 @@ export default class CreateNewShortStorage {
     await writeFile(
       `${this.StoragePath}.${this.StorageName}.storage.json`,
       JSON.stringify(NewData),
-      "utf-8"
+      "utf-8",
     );
 
     return {
@@ -272,7 +271,7 @@ export default class CreateNewShortStorage {
       await writeFile(
         `${this.StoragePath}.${this.StorageName}.storage.json`,
         JSON.stringify([]),
-        "utf-8"
+        "utf-8",
       ); // Create Storage File
     }
   }
