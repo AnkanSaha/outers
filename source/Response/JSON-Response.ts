@@ -2,7 +2,7 @@
 // types
 
 // Interfaces
-import JSONresponseInterface from "./Interface/JSON-Response.Interface";  // JSON Interface
+import JSONresponseInterface from "./Interface/JSON-Response.Interface"; // JSON Interface
 
 /**
  * The SendResponse function sends a JSON response with the specified status, status code, message, and
@@ -14,14 +14,25 @@ import JSONresponseInterface from "./Interface/JSON-Response.Interface";  // JSO
  * @param {responseInterface}  - - `data`: The data to be sent in the response.
  * @param {responseInterface}  - - `cookieData`: The cookie data to be sent in the response.
  */
-export const JSONSendResponse = ({ status, statusCode, Title, message, response, data, cookieData }: JSONresponseInterface) => {
-    if(cookieData){
-        cookieData.forEach(({ name, value, options }) => {
-            response.cookie(name, value, options); // sets cookie
-        }); // end forEach loop
-        response.status(statusCode).json({ status, statusCode, Title, message, data }); // sends response with cookie
-    }
-    else {
-        response.status(statusCode).json({ status, statusCode, Title, message, data }); // sends response without cookie
-    }
+export const JSONSendResponse = ({
+  status,
+  statusCode,
+  Title,
+  message,
+  response,
+  data,
+  cookieData,
+}: JSONresponseInterface) => {
+  if (cookieData) {
+    cookieData.forEach(({ name, value, options }) => {
+      response.cookie(name, value, options); // sets cookie
+    }); // end forEach loop
+    response
+      .status(statusCode)
+      .json({ status, statusCode, Title, message, data }); // sends response with cookie
+  } else {
+    response
+      .status(statusCode)
+      .json({ status, statusCode, Title, message, data }); // sends response without cookie
+  }
 };

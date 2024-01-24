@@ -1,10 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // Import  Encrypt and Decrypt
-import {Encrypt, EncryptSync} from './functions/Encrypt'; // Import Encrypt Module
-import {Decrypt, DecryptSync} from './functions/Decrypt'; // Import Decrypt Module
-
-
-
+import { Encrypt, EncryptSync } from "./functions/Encrypt"; // Import Encrypt Module
+import { Decrypt, DecryptSync } from "./functions/Decrypt"; // Import Decrypt Module
 
 // Node Encryption Class
 export default class Encryption {
@@ -52,13 +49,13 @@ export default class Encryption {
     return decryptedData;
   }
 
-/**
- * The function takes in data, converts it to a string, encrypts it using a specified key, and returns
- * the encrypted data as a string.
- * @param {any} Data - The "Data" parameter is of type "any", which means it can accept any data type.
- * It is the data that you want to encrypt.
- * @returns the encrypted data as a string.
- */
+  /**
+   * The function takes in data, converts it to a string, encrypts it using a specified key, and returns
+   * the encrypted data as a string.
+   * @param {any} Data - The "Data" parameter is of type "any", which means it can accept any data type.
+   * It is the data that you want to encrypt.
+   * @returns the encrypted data as a string.
+   */
   public EncryptSync(Data: any): string {
     // Convert data to string
     const ReadyData = JSON.stringify(Data);

@@ -44,7 +44,9 @@ export default class Jwt {
    * expire after 1 hour.
    * @returns a Promise that resolves to a Record<string, unknown> object.
    */
+
   public generate(Payload: unknown, expiry = "1h"): Record<string, any> {
+
     try {
       if (!Payload) {
         red("Payload is required"); // Log the error
@@ -98,13 +100,17 @@ export default class Jwt {
    * - algoRithm: a string indicating the algorithm used for token generation (HS256 in this case).
    * - expiry: a string indicating the expiration time of
    */
+
   public generateLoginToken(Payload: unknown, Rounds = 5, expiry = "1h") {
+
     try {
       let daTa: unknown = Payload; // Set the data to the payload
       let tiMes = Rounds; // Set the times to the rounds
 
       while (tiMes > 0) {
+
         const result = this.generate(daTa, expiry); // Destroy the token
+
         daTa = result.toKen; // Set the data to the token
         tiMes--; // Reduce the times
       }
@@ -137,7 +143,9 @@ export default class Jwt {
    * @returns The `destroy` function returns a Promise that resolves to a `Record<string, unknown>`
    * object.
    */
+
   public destroy(token: string): Record<string, any> {
+
     try {
       const positions: number[] = [5, 3, 9, 4, 7]; // List of positions
       let tokenArray: string[] = token.split(""); // Split the token
@@ -176,7 +184,9 @@ export default class Jwt {
    * @returns The function `decode` returns a Promise that resolves to an unknown value. The value being
    * returned depends on the conditions inside the function.
    */
+
   public decode(token: string): any {
+
     try {
       if (!token) {
         return {
@@ -187,7 +197,9 @@ export default class Jwt {
         }; // Create an error object
       }
 
+
       const cipherResult = this.verifyCipher(token);
+
       if (cipherResult.status === "Already Destroyed") {
         return cipherResult;
       }
@@ -218,7 +230,9 @@ export default class Jwt {
    * @param {string} token - The `token` parameter is a string that represents a token.
    * @returns an object with the following properties:
    */
+
   private verifyCipher(token: string) {
+
     try {
       // Checking if the token is destroyed by manually checking the token
 
