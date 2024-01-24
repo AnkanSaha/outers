@@ -6,7 +6,6 @@ import { Console, Serve, StatusCodes } from "../../outer"; // Import red from ou
 // main function
 
 export default (Request: Request, Response: Response, Next: NextFunction) => {
-
   try {
     // Allow only PUT, POST, PATCH, DELETE methods
     const AllowedMethods = ["PUT", "POST", "PATCH", "DELETE"]; // Allowed Methods

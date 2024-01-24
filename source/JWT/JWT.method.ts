@@ -46,7 +46,6 @@ export default class Jwt {
    */
 
   public generate(Payload: unknown, expiry = "1h"): Record<string, any> {
-
     try {
       if (!Payload) {
         red("Payload is required"); // Log the error
@@ -102,13 +101,11 @@ export default class Jwt {
    */
 
   public generateLoginToken(Payload: unknown, Rounds = 5, expiry = "1h") {
-
     try {
       let daTa: unknown = Payload; // Set the data to the payload
       let tiMes = Rounds; // Set the times to the rounds
 
       while (tiMes > 0) {
-
         const result = this.generate(daTa, expiry); // Destroy the token
 
         daTa = result.toKen; // Set the data to the token
@@ -145,7 +142,6 @@ export default class Jwt {
    */
 
   public destroy(token: string): Record<string, any> {
-
     try {
       const positions: number[] = [5, 3, 9, 4, 7]; // List of positions
       let tokenArray: string[] = token.split(""); // Split the token
@@ -186,7 +182,6 @@ export default class Jwt {
    */
 
   public decode(token: string): any {
-
     try {
       if (!token) {
         return {
@@ -196,7 +191,6 @@ export default class Jwt {
           algoRithm: "HS256 (Default)",
         }; // Create an error object
       }
-
 
       const cipherResult = this.verifyCipher(token);
 
@@ -232,7 +226,6 @@ export default class Jwt {
    */
 
   private verifyCipher(token: string) {
-
     try {
       // Checking if the token is destroyed by manually checking the token
 
