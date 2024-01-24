@@ -4,6 +4,7 @@ import { Request, NextFunction, Response } from "express"; // Import Request fro
 import { Console, Serve, StatusCodes } from "../../outer"; // Import red from outers
 
 // main function
+
 export default (Request: Request, Response: Response, Next: NextFunction) => {
   try {
     // Allow only PUT, POST, PATCH, DELETE methods
