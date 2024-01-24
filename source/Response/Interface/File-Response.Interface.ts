@@ -36,8 +36,7 @@ export default interface FileResponseInterfaces {
           value: str;
           options: cookieOptions;
         },
-      ]
-    | undefined;
+      ];
 }
 
 // Section Interfaces

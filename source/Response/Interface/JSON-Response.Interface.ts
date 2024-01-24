@@ -40,8 +40,7 @@ export default interface JSONresponseInterface {
           value: str;
           options: cookieOptions;
         },
-      ]
-    | undefined;
+      ];
 }
 
 // Section Interfaces

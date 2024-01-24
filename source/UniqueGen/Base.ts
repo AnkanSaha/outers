@@ -20,7 +20,7 @@ export class UniqueGen {
    * parameter, the function will generate a random number
    * @returns a random number.
    */
-  public RandomNumber(withzero: boolean = true, CustomNumbers?: number[]) {
+  public RandomNumber(withzero = true, CustomNumbers?: number[]) {
     return randomNumber(this._length, withzero, CustomNumbers);
   }
 
@@ -36,7 +36,7 @@ export class UniqueGen {
    * don't provide any custom words, the function will use a default set of words.
    * @returns a random word.
    */
-  public RandomWord(isCAPITAL: boolean = false, CustomWords?: string[]) {
+  public RandomWord(isCAPITAL = false, CustomWords?: string[]) {
     return randomWord(this._length, isCAPITAL, CustomWords);
   }
 
@@ -54,7 +54,7 @@ export class UniqueGen {
    * @returns The function `RandomMixed` returns the result of calling the `randomMixed` function with
    * the `_length` property, `isCAPITAL` argument, and `CustomMixeds` argument.
    */
-  public RandomMixed(isCAPITAL: boolean = false, CustomMixeds?: string[]) {
+  public RandomMixed(isCAPITAL = false, CustomMixeds?: string[]) {
     return randomMixed(this._length, isCAPITAL, CustomMixeds);
   }
 
