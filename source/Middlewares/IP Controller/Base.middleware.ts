@@ -6,19 +6,19 @@ import { Serve, StatusCodes } from "../../outer"; // Import red from outers
 // Main Function
 /**
  * Middleware function to restrict access based on IP address or URL.
- * 
+ *
  * @param AllowedIP - An array of allowed IP addresses. must be in string format
  * @param StatusCode - Optional. The status code to be sent in the response if access is denied. Defaults to 406 (Not Acceptable).
  * @param ErrorMessage - Optional. The error message to be sent in the response if access is denied. Defaults to "You are not allowed to access this server from this IP/URL."
  * @param Reverse - Optional. If true, the middleware will allow access only if the requester IP/URL is not in the allowed list. Defaults to false.
- * 
+ *
  * @returns The middleware function.
  */
 export default function (
   AllowedIP: string[],
   StatusCode?: number,
   ErrorMessage?: string,
-  Reverse?: boolean
+  Reverse?: boolean,
 ) {
   return (Request: Request, Response: Response, Next: NextFunction) => {
     const ReverseParams = Reverse ?? false; // Set Reverse to false if it is undefined
@@ -26,14 +26,16 @@ export default function (
       Request.headers["x-forwarded-for"] ||
         Request.connection.remoteAddress ||
         Request.socket.remoteAddress ||
-        Request.socket.remoteAddress
+        Request.socket.remoteAddress,
     ); // Get Requester IP Address
 
     let isAllowed = false; // Set isAllowed to false
 
     try {
       // Check if Request Hostname is available in Array or not
-      isAllowed = AllowedIP.some((IP: string) => IP.toLowerCase() === RequesterIPaddress.toLowerCase()); // Check if Requester IP is Allowed or not
+      isAllowed = AllowedIP.some(
+        (IP: string) => IP.toLowerCase() === RequesterIPaddress.toLowerCase(),
+      ); // Check if Requester IP is Allowed or not
       if (ReverseParams === false) {
         if (isAllowed === true) {
           Next(); // Next Middleware

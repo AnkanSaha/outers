@@ -4,11 +4,7 @@ import { Request, NextFunction, Response } from "express"; // Import Request fro
 import { Console, Serve, StatusCodes } from "../../outer"; // Import red from outers
 
 // main function
-export default (
-  Request: Request,
-  Response: Response,
-  Next: NextFunction
-) => {
+export default (Request: Request, Response: Response, Next: NextFunction) => {
   try {
     // Allow only PUT, POST, PATCH, DELETE methods
     const AllowedMethods = ["PUT", "POST", "PATCH", "DELETE"]; // Allowed Methods
@@ -20,12 +16,11 @@ export default (
         Request.connection.remoteAddress ||
         Request.socket.remoteAddress ||
         Request.socket.remoteAddress; // Get Requester IP Address
-        
-        // Inject Requester IP Address
+
+      // Inject Requester IP Address
       Request.body.RequesterIPaddress = RequesterIPaddress; // Inject Requester IP Address
       Next(); // Next Middleware
-    }
-    else{
+    } else {
       Next(); // Proceed Without Injecting IP Address
     }
   } catch (Error) {

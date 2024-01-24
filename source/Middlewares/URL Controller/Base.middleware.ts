@@ -18,60 +18,62 @@ export default function (
   AllowedURLs: string[],
   StatusCode?: number,
   ErrorMessage?: string,
-  Reverse?: boolean
+  Reverse?: boolean,
 ) {
   return (Request: Request, Response: Response, Next: NextFunction) => {
     const ReverseParams = Reverse ?? false; // Set Reverse to false if it is undefined
     let isAllowed = false; // Set isAllowed to false
 
     // Check if Request Hostname is available in Array or not
-    isAllowed = AllowedURLs.some((url: string) => url.toLowerCase() === Request.hostname.toLowerCase());
-   try {
-    if (ReverseParams === false) {
-      if (isAllowed === true) {
-        Next(); // Next Middleware
+    isAllowed = AllowedURLs.some(
+      (url: string) => url.toLowerCase() === Request.hostname.toLowerCase(),
+    );
+    try {
+      if (ReverseParams === false) {
+        if (isAllowed === true) {
+          Next(); // Next Middleware
+        } else {
+          // Handle the case when no match is found
+          Serve.JSON({
+            response: Response,
+            status: false,
+            Title: "URL Not Allowed to Access",
+            statusCode: StatusCode ?? StatusCodes.NOT_ACCEPTABLE,
+            message:
+              ErrorMessage ??
+              "You are not allowed to access this server from this URL.",
+            data: undefined,
+            cookieData: undefined,
+          }); // Serve JSON
+          // You may choose to send an error response or redirect the user to an error page
+        }
       } else {
-        // Handle the case when no match is found
-        Serve.JSON({
-          response: Response,
-          status: false,
-          Title: "URL Not Allowed to Access",
-          statusCode: StatusCode ?? StatusCodes.NOT_ACCEPTABLE,
-          message:
-            ErrorMessage ??
-            "You are not allowed to access this server from this URL.",
-          data: undefined,
-          cookieData: undefined,
-        }); // Serve JSON
-        // You may choose to send an error response or redirect the user to an error page
+        if (isAllowed === false) {
+          Next(); // Next Middleware
+        } else {
+          Serve.JSON({
+            response: Response,
+            status: false,
+            Title: "URL Not Allowed to Access",
+            statusCode: StatusCode ?? StatusCodes.NOT_ACCEPTABLE,
+            message:
+              ErrorMessage ??
+              "You are not allowed to access this server from this URL.",
+            data: undefined,
+            cookieData: undefined,
+          }); // Serve JSON
+        }
       }
-    } else {
-      if (isAllowed === false) {
-        Next(); // Next Middleware
-      } else {
-        Serve.JSON({
-          response: Response,
-          status: false,
-          Title: "URL Not Allowed to Access",
-          statusCode: StatusCode ?? StatusCodes.NOT_ACCEPTABLE,
-          message:
-            ErrorMessage ??
-            "You are not allowed to access this server from this URL.",
-          data: undefined,
-          cookieData: undefined,
-        }); // Serve JSON
-      }
+    } catch (error) {
+      Serve.JSON({
+        response: Response,
+        status: false,
+        statusCode: StatusCodes.EXPECTATION_FAILED,
+        Title: "Failed To Proceed",
+        data: error,
+        message:
+          "Unable to Proceed your Request further, there is some error in configuration in Server",
+      }); // Send Error Response
     }
-   }
-   catch (error){
-    Serve.JSON({
-      response: Response,
-      status: false,
-      statusCode: StatusCodes.EXPECTATION_FAILED,
-      Title: "Failed To Proceed",
-      data: error,
-      message: "Unable to Proceed your Request further, there is some error in configuration in Server"
-    }); // Send Error Response
-   }
   };
 }
