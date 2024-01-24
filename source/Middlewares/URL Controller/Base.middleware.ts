@@ -20,7 +20,7 @@ export default function (
   ErrorMessage?: string,
   Reverse?: boolean
 ) {
-  return async (Request: Request, Response: Response, Next: NextFunction) => {
+  return (Request: Request, Response: Response, Next: NextFunction) => {
     const ReverseParams = Reverse ?? false; // Set Reverse to false if it is undefined
     let isAllowed = false; // Set isAllowed to false
 

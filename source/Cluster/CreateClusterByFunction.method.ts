@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // main code for creating a cluster in node js
 import { cpus, platform, arch, freemem } from "node:os"; // Import os module
-import { Express } from "express"; // Import express module
-import express from "express"; // Express Instance for Server
+import express, { Express } from "express"; // Import express module
 import ClusterConfig from "node:cluster"; // Import Cluster module
 const { isPrimary } = ClusterConfig; // Import isPrimary from Cluster
 import { Console } from "../outer"; // Import Console module
