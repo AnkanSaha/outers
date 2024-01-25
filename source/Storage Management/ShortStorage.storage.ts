@@ -403,6 +403,13 @@ export default class CreateNewShortStorage {
     return EncryptedData.filter(Boolean); // Filter out null values (where Title did not match)
   }
 
+  /**
+   * Locks the file by changing its permission.
+   * If the file is already readable, writable, and executable for the current user, it returns a status of 403.
+   * If the file does not exist, it returns a status of 404.
+   * If the file exists and its permission is successfully changed to 0o000, it returns a status of 200.
+   * @returns An object containing the status and message.
+   */
   private async LockFile() {
     // Change File Permission
     try {
@@ -435,6 +442,19 @@ export default class CreateNewShortStorage {
     }
   }
 
+  /**
+   * Unlocks the file by changing its permission if necessary.
+   * If the file is not readable, writable, and executable for the current user,
+   * it changes the file permission to 0o777.
+   * If the file does not exist, it returns a status of 404.
+   * If the file permission is successfully changed or the file already has the required permission,
+   * it returns a status of 200.
+   * 
+   * @returns An object containing the status and message.
+   * - If the file is not readable, writable, and executable for the current user, status is 403.
+   * - If the file does not exist, status is 404.
+   * - If the file permission is successfully changed or the file already has the required permission, status is 200.
+   */
   private async UnlockFile() {
     // Change File Permission to 0o777 if it is 0o000
     try {
