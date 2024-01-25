@@ -9,6 +9,9 @@ import {
   unlink,
 } from "node:fs/promises"; // Import Node.js Dependencies
 
+// Import Encryption and Decryption Functions
+import { methods } from "../outer"; // Import Encryption and Decryption Functions
+
 // Interfaces for ShortStorage Response
 import { ShortStorage } from "./Interface/ShortStorage.interface"; // Import ShortStorage Interface
 
@@ -21,17 +24,26 @@ export default class CreateNewShortStorage {
   private readonly StorageName: string; // Storage Name
   private readonly StoragePath: string; // Storage Path
   private readonly MaxStorageSize: number; // Max Storage Size
+  private readonly EncryptionKey?: string; // Encryption Key
 
   /**
    * Creates a new instance of the ShortStorage class.
    * @param {string} StorageName - The name of the storage.
    * @param {number} [MaxStorageSize] - The maximum size of the storage in kilobytes. Defaults to 10 kilobytes if not provided.
+   * @param {string} [EncryptionKey] - The encryption key to use for encrypting and decrypting data. Defaults to undefined if not provided.
+   * @param {string} [StoragePath] - The path to the storage file. Defaults to "source/.temp/" if not provided.
    */
-  constructor(StorageName?: string, MaxStorageSize?: number) {
+  constructor(
+    StorageName?: string,
+    MaxStorageSize?: number,
+    EncryptionKey?: string,
+    StoragePath?: string
+  ) {
     this.StorageName = StorageName ?? "OutersManagement"; // Set Storage Name
-    this.StoragePath = "source/.temp/"; // Set Storage Path
+    this.StoragePath = StoragePath ?? "source/.temp/"; // Set Storage Path
     this.MaxStorageSize = MaxStorageSize ?? 10; // Set Max Storage Size to 10 Kilobyte
     this.createShortStorage(); // Create Short Storage
+    this.EncryptionKey = EncryptionKey ?? this.StorageName; // Set Encryption Key
   }
 
   /**
@@ -43,7 +55,7 @@ export default class CreateNewShortStorage {
   public async Save(Title: string, Data: any): Promise<ShortStorage> {
     // Check if File size is bigger than Max Storage Size
     const FileStats = await stat(
-      `${this.StoragePath}.${this.StorageName}.storage.json`,
+      `${this.StoragePath}.${this.StorageName}.storage.json`
     ); // Get File Stats
 
     // Convert File Size to Megabytes and Check if it's bigger than Max Storage Size
@@ -55,6 +67,8 @@ export default class CreateNewShortStorage {
       return {
         status: 400,
         message: "Storage Size is Bigger Than Max Storage Size",
+        Data: [],
+        TotalData: 0,
       };
     }
 
@@ -65,35 +79,48 @@ export default class CreateNewShortStorage {
       return {
         status: 403,
         message: "Data Already Exists",
+        Data: FindData.Data,
+        TotalData: FindData.TotalData,
       };
     }
 
     const RawData = await readFile(
       `${this.StoragePath}.${this.StorageName}.storage.json`,
-      "utf-8",
+      "utf-8"
     ); // Get Raw Data
     const ParsedData: any[] = JSON.parse(RawData); // Parsed The Data
 
+    // Encrypt Data if Encryption Key is Provided
+    const UserProvidedData = await new methods.CryptoGraphy(
+      String(this.EncryptionKey)
+    ).Encrypt(Data); // Set User Provided Data
+    const UserProvidedTitle = await new methods.CryptoGraphy(
+      String(this.EncryptionKey)
+    ).Encrypt(Title); // Set User Provided Title
+
     // Push The New Data In The Array
     ParsedData.push({
-      Title: Title,
-      Data: Data,
+      Title: UserProvidedTitle,
+      Data: UserProvidedData,
     });
 
     // Write The New Data in File
     await writeFile(
       `${this.StoragePath}.${this.StorageName}.storage.json`,
       JSON.stringify(ParsedData),
-      "utf-8",
+      "utf-8"
     );
 
     return {
       status: 200,
       message: "Data Saved Successfully",
-      Data: {
-        Title: Title,
-        Data: Data,
-      },
+      Data: [
+        {
+          Title: Title,
+          Data: Data,
+        },
+      ],
+      TotalData: 1,
     };
   }
 
@@ -105,28 +132,56 @@ export default class CreateNewShortStorage {
   public async Get(Title?: string): Promise<ShortStorage> {
     const RawData = await readFile(
       `${this.StoragePath}.${this.StorageName}.storage.json`,
-      "utf-8",
+      "utf-8"
     ); // Get Raw Data
+
     const ParsedData: any[] = JSON.parse(RawData); // Parsed The Data
 
-    // Find The Data
-    const Data = ParsedData.filter((Data) =>
-      Title === undefined ? Data : Data.Title === Title,
+    // Find The Data with Decryption if Encryption Key is Provided
+    const EncryptedData = await Promise.all(
+      ParsedData.map(async (Data) => {
+        const DecryptedTitle = JSON.parse(
+          await new methods.CryptoGraphy(String(this.EncryptionKey)).Decrypt(
+            Data.Title
+          )
+        ); // Decrypt Title if Encryption Key is Provided
+        const DecryptedData = JSON.parse(
+          await new methods.CryptoGraphy(String(this.EncryptionKey)).Decrypt(
+            Data.Data
+          )
+        ); // Decrypt Data if Encryption Key is Provided
+
+        // Check if Title is Provided and Match with Decrypted Title
+        if (Title === undefined || DecryptedTitle === Title) {
+          return {
+            Title: DecryptedTitle,
+            Data: DecryptedData,
+          };
+        } else {
+          return null; // Do not include in the final result
+        }
+      })
     );
 
-    if (!Data) {
-      return {
+    // Filter out null values (where Title did not match)
+    const EncryptedFilteredData = EncryptedData.filter(Boolean); // Filter out null values (where Title did not match)
+
+    if (EncryptedFilteredData.length === 0) {
+      const PreparedDataForError = {
         status: 404,
         message: "Data Not Found",
+        Data: [],
+        TotalData: 0,
       };
+      return PreparedDataForError;
     }
 
     return {
       status: 200,
       message: "Data Found Successfully",
-      Data: Data,
-      TotalData: Data.length,
-    };
+      Data: EncryptedFilteredData,
+      TotalData: EncryptedFilteredData.length,
+    }; // Return Data;
   }
 
   // Update Data in Short Storage
@@ -139,6 +194,7 @@ export default class CreateNewShortStorage {
    * @param {any} NewData - The new data to be added.
    * @returns {Promise<{ status: number, message: string, Data?: { Title: string, Data: any } }>} - The status, message, and updated data (if successful).
    */
+
   public async Update(Title: string, NewData: any): Promise<ShortStorage> {
     const FindData = await this.Get(Title); // Get Data
 
@@ -147,6 +203,8 @@ export default class CreateNewShortStorage {
       return {
         status: 404,
         message: "Data Not Found",
+        Data: [],
+        TotalData: 0,
       };
     }
 
@@ -155,7 +213,7 @@ export default class CreateNewShortStorage {
 
     // Delete The Data
     const RemovedData = AllFindData.Data.filter(
-      (Data: { Title: string }) => Data.Title !== Title,
+      (Data: { Title: string }) => Data.Title !== Title
     );
 
     // Push The New Data In The Array
@@ -164,20 +222,26 @@ export default class CreateNewShortStorage {
       Data: NewData,
     }); // Push The New Data In The Array
 
+    // Filter out null values (where Title did not match)
+    const EncryptedBuiltData = await this.CreateEncryptedData(RemovedData); // Filter out null values (where Title did not match)
+
     // Write The New Data in File
     await writeFile(
       `${this.StoragePath}.${this.StorageName}.storage.json`,
-      JSON.stringify(RemovedData),
-      "utf-8",
+      JSON.stringify(EncryptedBuiltData),
+      "utf-8"
     );
 
     return {
       status: 200,
       message: "Data Updated Successfully",
-      Data: {
-        Title: Title,
-        Data: NewData,
-      },
+      Data: [
+        {
+          Title: Title,
+          Data: NewData,
+        },
+      ],
+      TotalData: 1,
     };
   }
 
@@ -188,11 +252,8 @@ export default class CreateNewShortStorage {
    * @returns {Promise<ShortStorage>} A promise that resolves to the deleted data entry or an error object.
    */
   public async Delete(Title: string): Promise<ShortStorage> {
-    const RawData = await readFile(
-      `${this.StoragePath}.${this.StorageName}.storage.json`,
-      "utf-8",
-    ); // Get Raw Data
-    const ParsedData: any[] = JSON.parse(RawData); // Parsed The Data
+    // Get All Data in Storage File Before Delete
+    const ParsedData = (await this.Get()).Data; // Parsed The Data
 
     // Find The Data
     const Data = ParsedData.filter((Data) => Data.Title === Title);
@@ -201,22 +262,29 @@ export default class CreateNewShortStorage {
       return {
         status: 404,
         message: "Data Not Found",
+        Data: [],
+        TotalData: 0,
       };
     }
 
     // Delete The Data
     const NewData = ParsedData.filter((Data) => Data.Title !== Title);
 
+    // Filter out null values (where Title did not match)
+    const EncryptedBuiltData = await this.CreateEncryptedData(NewData); // Filter out null values (where Title did not match)
+
     // Write The New Data in File
     await writeFile(
       `${this.StoragePath}.${this.StorageName}.storage.json`,
-      JSON.stringify(NewData),
-      "utf-8",
+      JSON.stringify(EncryptedBuiltData),
+      "utf-8"
     );
 
     return {
       status: 200,
       message: "Data Deleted Successfully",
+      Data: Data,
+      TotalData: Data.length,
     };
   }
 
@@ -250,6 +318,8 @@ export default class CreateNewShortStorage {
       return {
         status: 404,
         message: "Storage Not Found in Management PATH",
+        Data: [],
+        TotalData: 0,
       };
     }
   }
@@ -271,8 +341,37 @@ export default class CreateNewShortStorage {
       await writeFile(
         `${this.StoragePath}.${this.StorageName}.storage.json`,
         JSON.stringify([]),
-        "utf-8",
+        "utf-8"
       ); // Create Storage File
     }
+  }
+
+  /**
+   * Encrypts the provided data using the encryption key.
+   * @param UnEncryptedData - The data to be encrypted.
+   * @returns The encrypted data.
+   */
+  private async CreateEncryptedData(UnEncryptedData: any) {
+    // Encrypt Data if Encryption Key is Provided
+    const EncryptedData = await Promise.all(
+      UnEncryptedData.map(async (Data: { Title: any; Data: any }) => {
+        const EncryptedTitle = await new methods.CryptoGraphy(
+          String(this.EncryptionKey)
+        ).Encrypt(Data.Title);
+        // Encrypt Title if Encryption Key is Provided
+        const EncryptedData = await new methods.CryptoGraphy(
+          String(this.EncryptionKey)
+        ).Encrypt(Data.Data); // Encrypt Data if Encryption Key is Provided
+
+        // Check if Title is Provided and Match with Decrypted Title
+        return {
+          Title: EncryptedTitle,
+          Data: EncryptedData,
+        };
+      })
+    );
+
+    // Filter out null values (where Title did not match)
+    return EncryptedData.filter(Boolean); // Filter out null values (where Title did not match)
   }
 }
