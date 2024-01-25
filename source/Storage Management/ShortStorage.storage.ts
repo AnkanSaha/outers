@@ -116,8 +116,8 @@ export default class CreateNewShortStorage {
       message: "Data Saved Successfully",
       Data: [
         {
-          Title: Title,
-          Data: Data,
+          Title,
+          Data,
         },
       ],
       TotalData: 1,
@@ -237,7 +237,7 @@ export default class CreateNewShortStorage {
       message: "Data Updated Successfully",
       Data: [
         {
-          Title: Title,
+          Title,
           Data: NewData,
         },
       ],
