@@ -283,7 +283,7 @@ export default class CreateNewShortStorage {
     return {
       status: 200,
       message: "Data Deleted Successfully",
-      Data: Data,
+      Data,
       TotalData: Data.length,
     };
   }
