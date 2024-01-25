@@ -7,6 +7,7 @@ import {
   mkdir,
   rmdir,
   unlink,
+  constants,
 } from "node:fs/promises"; // Import Node.js Dependencies
 
 // Import Encryption and Decryption Functions
@@ -53,6 +54,7 @@ export default class CreateNewShortStorage {
    * @returns {Promise<ShortStorage>} - A promise that resolves when the data is successfully saved.
    */
   public async Save(Title: string, Data: any): Promise<ShortStorage> {
+    await this.UnlockFile(); // Unlock File
     // Check if File size is bigger than Max Storage Size
     const FileStats = await stat(
       `${this.StoragePath}.${this.StorageName}.storage.json`,
@@ -64,6 +66,7 @@ export default class CreateNewShortStorage {
     // const fileSizeInMegabytes = fileSizeInKilobytes / 1024;
 
     if (fileSizeInKilobytes > this.MaxStorageSize) {
+      await this.LockFile(); // Lock File
       return {
         status: 400,
         message: "Storage Size is Bigger Than Max Storage Size",
@@ -76,6 +79,7 @@ export default class CreateNewShortStorage {
     const FindData = await this.Get(Title); // Get Data
 
     if (FindData.Data.length !== 0) {
+      await this.LockFile(); // Lock File
       return {
         status: 403,
         message: "Data Already Exists",
@@ -84,6 +88,7 @@ export default class CreateNewShortStorage {
       };
     }
 
+    await this.UnlockFile(); // Unlock File
     const RawData = await readFile(
       `${this.StoragePath}.${this.StorageName}.storage.json`,
       "utf-8",
@@ -111,6 +116,9 @@ export default class CreateNewShortStorage {
       "utf-8",
     );
 
+    // Lock File After Write Data
+    await this.LockFile(); // Lock File
+
     return {
       status: 200,
       message: "Data Saved Successfully",
@@ -130,10 +138,15 @@ export default class CreateNewShortStorage {
    * @returns A promise that resolves to an object containing the status, message, and retrieved data.
    */
   public async Get(Title?: string): Promise<ShortStorage> {
+    // Unlock File
+    await this.UnlockFile(); // Unlock File
     const RawData = await readFile(
       `${this.StoragePath}.${this.StorageName}.storage.json`,
       "utf-8",
     ); // Get Raw Data
+
+    // Lock File
+    await this.LockFile(); // Lock File
 
     const ParsedData: any[] = JSON.parse(RawData); // Parsed The Data
 
@@ -225,6 +238,9 @@ export default class CreateNewShortStorage {
     // Filter out null values (where Title did not match)
     const EncryptedBuiltData = await this.CreateEncryptedData(RemovedData); // Filter out null values (where Title did not match)
 
+    // Unlock File Before Write Data
+    await this.UnlockFile(); // Unlock File
+
     // Write The New Data in File
     await writeFile(
       `${this.StoragePath}.${this.StorageName}.storage.json`,
@@ -232,6 +248,8 @@ export default class CreateNewShortStorage {
       "utf-8",
     );
 
+    // Lock File After Write Data
+    await this.LockFile(); // Lock File
     return {
       status: 200,
       message: "Data Updated Successfully",
@@ -273,12 +291,18 @@ export default class CreateNewShortStorage {
     // Filter out null values (where Title did not match)
     const EncryptedBuiltData = await this.CreateEncryptedData(NewData); // Filter out null values (where Title did not match)
 
+    // Unlock File Before Write Data
+    await this.UnlockFile(); // Unlock File
+
     // Write The New Data in File
     await writeFile(
       `${this.StoragePath}.${this.StorageName}.storage.json`,
       JSON.stringify(EncryptedBuiltData),
       "utf-8",
     );
+
+    // Lock File After Write Data
+    await this.LockFile(); // Lock File
 
     return {
       status: 200,
@@ -303,6 +327,9 @@ export default class CreateNewShortStorage {
 
       // Get All Data in Storage File Before Delete
       const AllDataInStorage = await this.Get(); // Get All Data in Storage File
+
+      // Unlock File Before Delete Data
+      await this.UnlockFile(); // Unlock File
 
       // Delete All Data in Storage File
       await unlink(`${this.StoragePath}.${this.StorageName}.storage.json`); // Delete File
@@ -343,6 +370,7 @@ export default class CreateNewShortStorage {
         JSON.stringify([]),
         "utf-8",
       ); // Create Storage File
+      await this.LockFile(); // Lock File
     }
   }
 
@@ -373,5 +401,69 @@ export default class CreateNewShortStorage {
 
     // Filter out null values (where Title did not match)
     return EncryptedData.filter(Boolean); // Filter out null values (where Title did not match)
+  }
+
+  private async LockFile() {
+    // Change File Permission
+    try {
+      await access(
+        `${this.StoragePath}.${this.StorageName}.storage.json`,
+        constants.R_OK | constants.W_OK | constants.X_OK,
+      ); // Check if File is readable, writable, and executable for the current user.
+      return {
+        status: 403,
+        message:
+          "File is readable, writable, and executable for the current user.",
+      };
+    } catch (error: any) {
+      if (error.code === "ENOENT") {
+        return {
+          status: 404,
+          message: "File Not Found",
+        }; // File does not exist
+      } else {
+        // if it is, then change the permission to 0o000
+        await methods.Command.Execute(
+          `sudo chmod 000 ${this.StoragePath}.${this.StorageName}.storage.json`,
+        ); // Change File Permission
+        return {
+          status: 200,
+          message:
+            "File is not readable, writable, and executable for the current user.",
+        }; // File exists
+      }
+    }
+  }
+
+  private async UnlockFile() {
+    // Change File Permission to 0o777 if it is 0o000
+    try {
+      await access(
+        `${this.StoragePath}.${this.StorageName}.storage.json`,
+        constants.R_OK | constants.W_OK | constants.X_OK,
+      ); // Check if File is readable, writable, and executable for the current user.
+
+      return {
+        status: 403,
+        message:
+          "File is not readable, writable, and executable for the current user.",
+      }; // File exists
+    } catch (error: any) {
+      if (error.code === "ENOENT") {
+        return {
+          status: 404,
+          message: "File Not Found",
+        }; // File does not exist
+      } else {
+        await methods.Command.Execute(
+          `sudo chmod 666 ${this.StoragePath}.${this.StorageName}.storage.json`,
+        ); // Change File Permission
+        return {
+          status: 200,
+          message:
+            "File is readable, writable, and executable for the current user.",
+        };
+      }
+    }
   }
 }
