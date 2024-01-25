@@ -424,7 +424,7 @@ export default class CreateNewShortStorage {
       } else {
         // if it is, then change the permission to 0o000
         await methods.Command.Execute(
-          `sudo chmod 000 ${this.StoragePath}.${this.StorageName}.storage.json`,
+          `chmod 000 ${this.StoragePath}.${this.StorageName}.storage.json`,
         ); // Change File Permission
         return {
           status: 200,
@@ -456,7 +456,7 @@ export default class CreateNewShortStorage {
         }; // File does not exist
       } else {
         await methods.Command.Execute(
-          `sudo chmod 666 ${this.StoragePath}.${this.StorageName}.storage.json`,
+          `chmod 666 ${this.StoragePath}.${this.StorageName}.storage.json`,
         ); // Change File Permission
         return {
           status: 200,
