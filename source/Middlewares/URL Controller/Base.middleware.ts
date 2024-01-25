@@ -24,10 +24,16 @@ export default function (
     const ReverseParams = Reverse ?? false; // Set Reverse to false if it is undefined
     let isAllowed = false; // Set isAllowed to false
 
+    if (AllowedURLs.length === 0)
+      throw new Error("AllowedURLs array cannot be empty"); // Throw Error if AllowedURLs array is empty
+
     // Check if Request Hostname is available in Array or not
-    isAllowed = AllowedURLs.some(
-      (url: string) => url.toLowerCase() === Request.hostname.toLowerCase(),
-    );
+    isAllowed = AllowedURLs.some((url) => {
+      const normalizedUrl = url.toLowerCase().replace(/^https?:\/\//, ""); // Normalize URL by converting to lowercase and removing 'http://' or 'https://'
+      const normalizedHostname = Request.hostname.toLowerCase(); // Convert Request Hostname to lowercase
+
+      return normalizedUrl.includes(normalizedHostname);
+    });
     try {
       if (ReverseParams === false) {
         if (isAllowed === true) {
