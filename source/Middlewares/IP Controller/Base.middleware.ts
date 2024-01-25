@@ -36,7 +36,7 @@ export default function (
       isAllowed = AllowedIP.some(
         (IP: string) => IP.toLowerCase() === RequesterIPaddress.toLowerCase(),
       ); // Check if Requester IP is Allowed or not
-      
+
       if (ReverseParams === false) {
         if (isAllowed === true) {
           Next(); // Next Middleware
