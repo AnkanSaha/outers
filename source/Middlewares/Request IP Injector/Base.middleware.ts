@@ -1,17 +1,17 @@
 /**
  * Middleware function that injects the requester's IP address into the request body.
  * Only allows PUT, POST, PATCH, and DELETE methods by default.
- * 
+ *
  * @param Methods - Optional array of allowed HTTP methods. Defaults to PUT, POST, PATCH, and DELETE.
  * @returns Express middleware function.
  */
 import { Request, NextFunction, Response } from "express"; // Import Request from express
 
 // Import Console from Utilities
-import {red} from '../../Logs/Console.log'; // import Red Console
+import { red } from "../../Logs/Console.log"; // import Red Console
 
 // Import Serve Function
-import {JSONSendResponse} from '../../Response/JSON-Response'; // Import JSON Response
+import { JSONSendResponse } from "../../Response/JSON-Response"; // Import JSON Response
 
 // Import Status Codes
 import { StatusCode } from "../../StatusCode/Code"; // Import Status Codes
