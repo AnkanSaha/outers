@@ -209,7 +209,7 @@ app.use("/api", Middleware.RequestInjectIP(["PUT", "POST"]), MainFunction); // i
 
 ```javascript
 const { methods } = require('outers'); // import the package
-methods.ClusterCreator.CreateByFunction(ExpressServer, PORT, CustomWorkerCount, engineMiddlewares?, BeforeListenFunctions? AfterListenFunctions?, ...FunctionMiddlewares?); // create a cluster with custom worker count
+methods.ClusterCreator(ExpressServer, PORT, CustomWorkerCount, engineMiddlewares?, BeforeListenFunctions? AfterListenFunctions?, ...FunctionMiddlewares?); // create a cluster with custom worker count
 ```
 
 # Full Example
@@ -233,7 +233,7 @@ app.use(Middleware.RequestInjectIP); // inject the IP Address in Request.body
 app.use("/api", Routes); // set the routes
 
 // At Last Create a Cluster with the Express App
-methods.ClusterCreator.CreateByFunction(
+methods.CreateByFunction(
   app,
   PORT,
   2,
