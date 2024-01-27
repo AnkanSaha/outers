@@ -18,7 +18,7 @@ export default function (
   AllowedIP: string[],
   StatusCode?: number,
   ErrorMessage?: string,
-  Reverse?: boolean,
+  Reverse?: false,
 ) {
   return (Request: Request, Response: Response, Next: NextFunction) => {
     const ReverseParams = Reverse ?? false; // Set Reverse to false if it is undefined

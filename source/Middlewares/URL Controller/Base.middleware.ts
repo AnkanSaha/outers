@@ -18,14 +18,14 @@ export default function (
   AllowedURLs: string[],
   StatusCode?: number,
   ErrorMessage?: string,
-  Reverse?: boolean,
+  Reverse?: boolean
 ) {
+  if (AllowedURLs.length === 0)
+    throw new Error("AllowedURLs array cannot be empty"); // Throw Error if AllowedURLs array is empty
+
   return (Request: Request, Response: Response, Next: NextFunction) => {
     const ReverseParams = Reverse ?? false; // Set Reverse to false if it is undefined
     let isAllowed = false; // Set isAllowed to false
-
-    if (AllowedURLs.length === 0)
-      throw new Error("AllowedURLs array cannot be empty"); // Throw Error if AllowedURLs array is empty
 
     // Check if Request Hostname is available in Array or not
     isAllowed = AllowedURLs.some((url) => {

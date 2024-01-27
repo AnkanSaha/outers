@@ -190,7 +190,9 @@ Console.cyan("Hello World!"); // print a string to the console with cyan color
 
 ```javascript
 const { Middleware } = require("outers"); // import the package
-app.use("/api", Middleware.RequestInjectIP, MainFunction); // inject the IP Address in Request.body
+app.use("/api", Middleware.RequestInjectIP(['PUT']), MainFunction); // inject the IP Address in Request.body When the Request Method is PUT
+
+app.use("/api", Middleware.RequestInjectIP(['PUT', 'POST']), MainFunction); // inject the IP Address in Request.body When the Request Method is PUT or POST
 ```
 
 - Note : You can access the IP Address in Request.body Object
