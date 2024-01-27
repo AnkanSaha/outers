@@ -1,40 +1,61 @@
+/**
+ * Middleware function that injects the requester's IP address into the request body.
+ * Only allows PUT, POST, PATCH, and DELETE methods by default.
+ *
+ * @param Methods - Optional array of allowed HTTP methods. Defaults to PUT, POST, PATCH, and DELETE.
+ * @returns Express middleware function.
+ */
 import { Request, NextFunction, Response } from "express"; // Import Request from express
 
-// Import Interfaces
-import { Console, Serve, StatusCodes } from "../../outer"; // Import red from outers
+// Import Console from Utilities
+import { red } from "../../Logs/Console.log"; // import Red Console
+
+// Import Serve Function
+import { JSONSendResponse } from "../../Response/JSON-Response"; // Import JSON Response
+
+// Import Status Codes
+import { StatusCode } from "../../StatusCode/Code"; // Import Status Codes
 
 // main function
 
-export default (Request: Request, Response: Response, Next: NextFunction) => {
-  try {
-    // Allow only PUT, POST, PATCH, DELETE methods
-    const AllowedMethods = ["PUT", "POST", "PATCH", "DELETE"]; // Allowed Methods
+export default (Methods?: string[]) => {
+  // Allow only PUT, POST, PATCH, DELETE methods
 
-    // Check if Request Method is Allowed
-    if (AllowedMethods.includes(Request.method)) {
-      const RequesterIPaddress =
-        Request.headers["x-forwarded-for"] ||
-        Request.connection.remoteAddress ||
-        Request.socket.remoteAddress ||
-        Request.socket.remoteAddress; // Get Requester IP Address
+  const AllowedMethods = Methods ?? ["PUT", "POST", "PATCH", "DELETE"]; // Allowed Methods
 
-      // Inject Requester IP Address
-      Request.body.RequesterIPaddress = RequesterIPaddress; // Inject Requester IP Address
-      Next(); // Next Middleware
-    } else {
-      Next(); // Proceed Without Injecting IP Address
+  // Convert to Upper Case in Array if any of the method is in lower case
+  AllowedMethods.forEach((Method, Index) => {
+    AllowedMethods[Index] = Method.toUpperCase(); // Convert to Upper Case
+  });
+
+  return (Request: Request, Response: Response, Next: NextFunction) => {
+    try {
+      // Check if Request Method is Allowed
+      if (AllowedMethods.includes(Request.method)) {
+        const RequesterIPaddress =
+          Request.headers["x-forwarded-for"] ||
+          Request.connection.remoteAddress ||
+          Request.socket.remoteAddress ||
+          Request.socket.remoteAddress; // Get Requester IP Address
+
+        // Inject Requester IP Address
+        Request.body.RequesterIPaddress = RequesterIPaddress; // Inject Requester IP Address
+        Next(); // Next Middleware
+      } else {
+        Next(); // Proceed Without Injecting IP Address
+      }
+    } catch (Error) {
+      red(Error); // Log Error
+      JSONSendResponse({
+        response: Response,
+        status: false,
+        Title: "Cannot Process Request",
+        statusCode: StatusCode.INTERNAL_SERVER_ERROR,
+        message:
+          "Something went wrong while processing your request. Please try again later.",
+        data: undefined,
+        cookieData: undefined,
+      });
     }
-  } catch (Error) {
-    Console.red(Error); // Log Error
-    Serve.JSON({
-      response: Response,
-      status: false,
-      Title: "Cannot Process Request",
-      statusCode: StatusCodes.INTERNAL_SERVER_ERROR,
-      message:
-        "Something went wrong while processing your request. Please try again later.",
-      data: undefined,
-      cookieData: undefined,
-    });
-  }
-}; // Export main function
+  }; // Export main function
+};
