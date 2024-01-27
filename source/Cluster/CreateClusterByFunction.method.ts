@@ -13,6 +13,19 @@ import {
 } from "./Interface/CreateClusterByFunction.interfaces"; // Import Interfaces
 
 // Main Function
+/**
+ * Configures and creates a cluster by function.
+ *
+ * @param ExpressServer - The main Express server instance.
+ * @param PORT - The port number to listen on.
+ * @param NumberOfWorkers - The number of worker copies to create.
+ * @param engineMiddlewares - Any middlewares to apply to the Express server instance.
+ * @param BeforeListenFunctions - Any functions to run before listening.
+ * @param AfterListenFunctions - Any functions to run after listening.
+ * @param FunctionMiddlewares - Any middlewares to apply to the Express server instance.
+ * @returns The response object containing the active server instance, active worker count, and responses from before listen functions.
+ * @throws Error if Express server, port, or number of workers is not provided.
+ */
 export default function Config(
   ExpressServer: Express = express(), // Main Express Server Instance
   PORT = 3000, // Port Number to Listen
