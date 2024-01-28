@@ -44,7 +44,9 @@ export default class CreateNewShortStorage {
     this.StoragePath = StoragePath ?? "Cache/"; // Set Storage Path
     this.MaxStorageSize = MaxStorageSize ?? 100; // Set Max Storage Size to 100 Kilobyte
     this.createShortStorage(); // Create Short Storage
-    this.EncryptionKey = EncryptionKey ?? `${this.StorageName}-${this.StoragePath}-${this.MaxStorageSize}`; // Set Encryption Key
+    this.EncryptionKey =
+      EncryptionKey ??
+      `${this.StorageName}-${this.StoragePath}-${this.MaxStorageSize}`; // Set Encryption Key
   }
 
   /**
