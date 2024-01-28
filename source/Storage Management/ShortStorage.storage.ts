@@ -46,7 +46,13 @@ export default class CreateNewShortStorage {
     this.createShortStorage(); // Create Short Storage
     this.EncryptionKey =
       EncryptionKey ??
-      `${this.StorageName.split("").reverse().join("").toUpperCase()}-${this.StoragePath.split("").reverse().join("").toUpperCase()}-${this.MaxStorageSize * 1000}`; // Set Encryption Key
+      `${this.StorageName.split("")
+        .reverse()
+        .join("")
+        .toUpperCase()}-${this.StoragePath.split("")
+        .reverse()
+        .join("")
+        .toUpperCase()}-${this.MaxStorageSize * 1000}`; // Set Encryption Key
   }
 
   /**
