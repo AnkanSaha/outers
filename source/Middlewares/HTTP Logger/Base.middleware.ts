@@ -7,19 +7,19 @@ import { Serve, StatusCodes } from "../../outer";
 // Main Code
 /**
  * Middleware function for logging HTTP requests.
- * 
+ *
  * @param ArrayOFmethods - Optional array of HTTP methods to log. Defaults to ["GET", "POST", "PUT", "DELETE", "PATCH"].
  * @param FileName - Optional name of the log file. Defaults to "HTTP-Logger".
  * @param FilePATH - Optional path to the log file. Defaults to "Logs/".
  * @param EncryptionKey - Optional encryption key for the log file. Defaults to a combination of the FileName and FilePATH.
- * 
+ *
  * @returns Middleware function that logs HTTP requests.
  */
 export default (
   ArrayOFmethods?: string[],
   FileName?: string,
   FilePATH?: string,
-  EncryptionKey?: string
+  EncryptionKey?: string,
 ) => {
   // Check if FileName is undefined
   if (FileName === undefined) FileName = "HTTP-Logger"; // Default FileName
@@ -28,7 +28,6 @@ export default (
 
   // Configure MaxFileSize in KB
   let MaxFileSize = 100; // Default MaxFileSize to 100KB
-
 
   // Check if ArrayOFmethods is undefined
   if (ArrayOFmethods === undefined)
@@ -41,15 +40,14 @@ export default (
       .join("")
       .toUpperCase()}-${FilePATH.split("").reverse().join("").toUpperCase()}`; // Set Encryption Key; // Default EncryptionKey
 
-
   return async (Request: Request, Response: Response, Next: NextFunction) => {
     // Create Storage Manager Instance
-  const Storage = new ShortStorage(
-    FileName,
-    MaxFileSize,
-    FilePATH,
-    EncryptionKey
-  ); // Create Storage Manager Instance
+    const Storage = new ShortStorage(
+      FileName,
+      MaxFileSize,
+      FilePATH,
+      EncryptionKey,
+    ); // Create Storage Manager Instance
 
     // Find if Request Method is in ArrayOFmethods
     const isAllowed = (ArrayOFmethods ?? []).some((method) => {
@@ -63,11 +61,13 @@ export default (
         Request.headers["x-forwarded-for"] ||
           Request.connection.remoteAddress ||
           Request.socket.remoteAddress ||
-          Request.socket.remoteAddress
+          Request.socket.remoteAddress,
       ); // Get Requester IP Address
       try {
         const StorageResult = await Storage.Save(
-          `${Request.method} - ${Request.url} - ${Request.headers["user-agent"]} - ${new Date().toLocaleString()}`,
+          `${Request.method} - ${Request.url} - ${
+            Request.headers["user-agent"]
+          } - ${new Date().toLocaleString()}`,
           {
             FullURL: `${Request.protocol}${Request.hostname}`,
             Method: Request.method,
@@ -79,16 +79,15 @@ export default (
             Params: Request.params,
             Cookies: Request.cookies,
             Time: new Date().toLocaleString(),
-          }
+          },
         ); // Save Request Data
 
         // Check Errors in StorageResult
-        if(StorageResult.status === 4000) {
-            MaxFileSize = MaxFileSize * 2; // Double MaxFileSize when it is exceeded
-            Next(); // Next Middleware after saving Request Data
-        }
-        else if(StorageResult.status === 403) {
-            Next(); // Next Middleware after saving Request Data
+        if (StorageResult.status === 4000) {
+          MaxFileSize = MaxFileSize * 2; // Double MaxFileSize when it is exceeded
+          Next(); // Next Middleware after saving Request Data
+        } else if (StorageResult.status === 403) {
+          Next(); // Next Middleware after saving Request Data
         }
 
         Next(); // Next Middleware after saving Request Data
