@@ -30,7 +30,7 @@ export default class CreateNewShortStorage {
   /**
    * Creates a new instance of the ShortStorage class.
    * @param {string} StorageName - The name of the storage.
-   * @param {number} [MaxStorageSize] - The maximum size of the storage in kilobytes. Defaults to 10 kilobytes if not provided.
+   * @param {number} [MaxStorageSize] - The maximum size of the storage in kilobytes. Defaults to 100 kilobytes if not provided.
    * @param {string} [EncryptionKey] - The encryption key to use for encrypting and decrypting data. Defaults to undefined if not provided.
    * @param {string} [StoragePath] - The path to the storage file. Defaults to "source/.temp/" if not provided.
    */
@@ -42,11 +42,11 @@ export default class CreateNewShortStorage {
   ) {
     this.StorageName = StorageName?.toLowerCase() ?? "outers"; // Set Storage Name
     this.StoragePath = StoragePath ?? "Cache/"; // Set Storage Path
-    this.MaxStorageSize = MaxStorageSize ?? 100; // Set Max Storage Size to 100 Kilobyte
+    this.MaxStorageSize = MaxStorageSize ?? 10; // Set Max Storage Size to 10 Kilobyte
     this.createShortStorage(); // Create Short Storage
     this.EncryptionKey =
       EncryptionKey ??
-      `${this.StorageName}-${this.StoragePath}-${this.MaxStorageSize}`; // Set Encryption Key
+      `${this.StorageName.split("").reverse().join("").toUpperCase()}-${this.StoragePath.split("").reverse().join("").toUpperCase()}-${this.MaxStorageSize * 1000}`; // Set Encryption Key
   }
 
   /**
