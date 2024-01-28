@@ -30,7 +30,7 @@ export default class CreateNewShortStorage {
   /**
    * Creates a new instance of the ShortStorage class.
    * @param {string} StorageName - The name of the storage.
-   * @param {number} [MaxStorageSize] - The maximum size of the storage in kilobytes. Defaults to 100 kilobytes if not provided.
+   * @param {number} [MaxStorageSize] - The maximum size of the storage in kilobytes. Defaults to 10 kilobytes if not provided.
    * @param {string} [EncryptionKey] - The encryption key to use for encrypting and decrypting data. Defaults to undefined if not provided.
    * @param {string} [StoragePath] - The path to the storage file. Defaults to "source/.temp/" if not provided.
    */
