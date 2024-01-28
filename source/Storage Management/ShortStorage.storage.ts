@@ -40,11 +40,11 @@ export default class CreateNewShortStorage {
     EncryptionKey?: string,
     StoragePath?: string,
   ) {
-    this.StorageName = StorageName ?? "OutersManagement"; // Set Storage Name
-    this.StoragePath = StoragePath ?? "Secure/"; // Set Storage Path
-    this.MaxStorageSize = MaxStorageSize ?? 10; // Set Max Storage Size to 10 Kilobyte
+    this.StorageName = StorageName?.toLowerCase() ?? "outers"; // Set Storage Name
+    this.StoragePath = StoragePath ?? "Cache/"; // Set Storage Path
+    this.MaxStorageSize = MaxStorageSize ?? 100; // Set Max Storage Size to 100 Kilobyte
     this.createShortStorage(); // Create Short Storage
-    this.EncryptionKey = EncryptionKey ?? this.StorageName; // Set Encryption Key
+    this.EncryptionKey = EncryptionKey ?? `${this.StorageName}-${this.StoragePath}-${this.MaxStorageSize}`; // Set Encryption Key
   }
 
   /**
