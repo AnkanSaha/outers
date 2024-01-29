@@ -7,15 +7,15 @@ import { GetFetch, PostFetch, DeleteFetch, PutFetch } from "./functions/Fetch"; 
 specified API endpoint and returning the response as JSON. */
 
 export class APiCall {
-  private Domain: string;
-  private ContentType: object;
+  readonly #Domain: string; // The #Domain property is a private property that can only be accessed within the class.
+  readonly #ContentType: object; // The #ContentType property is a private property that can only be accessed within the class.
 
   constructor(
     Domain: string,
     ContentType = { "Content-Type": "application/json" },
   ) {
-    this.Domain = Domain;
-    this.ContentType = ContentType;
+    this.#Domain = Domain; // Set Domain to the Domain passed in the constructor
+    this.#ContentType = ContentType; // Set ContentType to the ContentType passed in the constructor
   }
 
   // Function for GET requests
@@ -37,9 +37,9 @@ export class APiCall {
   public async Get(
     path: string,
     Responsejson = true,
-    headers: object = this.ContentType,
+    headers: object = this.#ContentType,
   ) {
-    return await GetFetch(this.Domain + path, Responsejson, headers);
+    return await GetFetch(`${this.#Domain}${path}`, Responsejson, headers);
   }
 
   // Function for POST requests
@@ -65,10 +65,15 @@ export class APiCall {
     path: string,
     Data: any,
     Responsejson = true,
-    headers: object = this.ContentType,
+    headers: object = this.#ContentType,
   ) {
     // Function for POST requests
-    return await PostFetch(this.Domain + path, Data, Responsejson, headers);
+    return await PostFetch(
+      `${this.#Domain}${path}`,
+      Data,
+      Responsejson,
+      headers,
+    );
   }
 
   // Function for DELETE requests
@@ -91,10 +96,10 @@ export class APiCall {
   public async Delete(
     path: string,
     Responsejson = true,
-    headers: object = this.ContentType,
+    headers: object = this.#ContentType,
   ) {
     // Function for DELETE requests
-    return await DeleteFetch(this.Domain + path, Responsejson, headers);
+    return await DeleteFetch(`${this.#Domain}${path}`, Responsejson, headers);
   }
 
   // Function for PUT requests
@@ -119,9 +124,14 @@ export class APiCall {
     path: string,
     Data: any,
     Responsejson = true,
-    headers: object = this.ContentType,
+    headers: object = this.#ContentType,
   ) {
     // Function for PUT requests
-    return await PutFetch(this.Domain + path, Data, Responsejson, headers);
+    return await PutFetch(
+      `${this.#Domain}${path}`,
+      Data,
+      Responsejson,
+      headers,
+    );
   }
 }

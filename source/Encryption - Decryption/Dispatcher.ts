@@ -5,9 +5,9 @@ import { Decrypt, DecryptSync } from "./functions/Decrypt"; // Import Decrypt Mo
 
 // Node Encryption Class
 export default class Encryption {
-  private Key: string;
+  readonly #Key: string; //  The #Key property is a private property that can only be accessed within the class.
   constructor(Key: string) {
-    this.Key = Key;
+    this.#Key = Key; // Set Key to the key passed in the constructor
   }
 
   /**
@@ -18,7 +18,7 @@ export default class Encryption {
    */
   public async Decrypt(Data: string) {
     // Encrypt data
-    const decryptedData = await Decrypt(Data, this.Key);
+    const decryptedData = await Decrypt(Data, this.#Key);
     return decryptedData;
   }
 
@@ -33,7 +33,7 @@ export default class Encryption {
     // Convert data to string
     const ReadyData = JSON.stringify(Data);
     // Encrypt data
-    const encryptedData = await Encrypt(ReadyData, this.Key);
+    const encryptedData = await Encrypt(ReadyData, this.#Key);
     return encryptedData;
   }
 
@@ -45,7 +45,7 @@ export default class Encryption {
    */
   public DecryptSync(Data: string) {
     // Encrypt data
-    const decryptedData = DecryptSync(Data, this.Key);
+    const decryptedData = DecryptSync(Data, this.#Key);
     return decryptedData;
   }
 
@@ -60,7 +60,7 @@ export default class Encryption {
     // Convert data to string
     const ReadyData = JSON.stringify(Data);
     // Encrypt data
-    const encryptedData = EncryptSync(ReadyData, this.Key);
+    const encryptedData = EncryptSync(ReadyData, this.#Key);
     return encryptedData;
   }
 }

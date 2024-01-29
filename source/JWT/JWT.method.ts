@@ -11,8 +11,8 @@ const todayDate = `${new Date().getDate()}-${new Date().getMonth()}-${new Date()
 export default class Jwt {
   // Token
 
-  private readonly signatureKey: string;
-  private readonly cipherList: string[];
+  readonly #signatureKey: string;
+  readonly #cipherList: string[];
 
   /**
    * The constructor function initializes the signatureKey property with the provided value or a default
@@ -23,8 +23,8 @@ export default class Jwt {
    * `'secret'`.
    */
   constructor(signatureKey: string) {
-    this.signatureKey = signatureKey ?? "secret";
-    this.cipherList = [
+    this.#signatureKey = signatureKey ?? "secret";
+    this.#cipherList = [
       "SIDF524",
       "LHypk41",
       "@thusngvgvergh",
@@ -57,7 +57,7 @@ export default class Jwt {
         }; // Return the error
       }
 
-      const signedData: string = sign({ data: Payload }, this.signatureKey, {
+      const signedData: string = sign({ data: Payload }, this.#signatureKey, {
         expiresIn: expiry,
       }); // Generate the token
       const fullResult: Record<string, any> = {
@@ -146,7 +146,7 @@ export default class Jwt {
       const positions: number[] = [5, 3, 9, 4, 7]; // List of positions
       let tokenArray: string[] = token.split(""); // Split the token
 
-      this.cipherList.forEach((cipher: string, index: number) => {
+      this.#cipherList.forEach((cipher: string, index: number) => {
         tokenArray.splice(positions[index], 0, cipher); // Add the cipher to the token
       }); // Loop through the list of supported algorithms
 
@@ -199,7 +199,7 @@ export default class Jwt {
       }
 
       // Check if the token is destroyed by manually checking the token
-      const resultData = verify(token, this.signatureKey); // Decode the token
+      const resultData = verify(token, this.#signatureKey); // Decode the token
       return {
         status: "Success",
         message: "Token decoded successfully",
@@ -230,7 +230,7 @@ export default class Jwt {
       // Checking if the token is destroyed by manually checking the token
 
       let cipherResult = false; // Cipher result
-      this.cipherList.forEach((cipher: string) => {
+      this.#cipherList.forEach((cipher: string) => {
         if (token.includes(cipher)) {
           cipherResult = true;
         } else {
