@@ -1,4 +1,10 @@
-import { randomMixed, randomNumber, randomSymbol, randomWord, randomBoolean } from "uniquegen"; // Import the module
+import {
+  randomMixed,
+  randomNumber,
+  randomSymbol,
+  randomWord,
+  randomBoolean,
+} from "uniquegen"; // Import the module
 
 export class UniqueGen {
   readonly #_length?: number;
@@ -20,7 +26,10 @@ export class UniqueGen {
    * parameter, the function will generate a random number
    * @returns a random number.
    */
-  public RandomNumber(withzero: boolean = true, CustomNumbers?: number[]): number {
+  public RandomNumber(
+    withzero: boolean = true,
+    CustomNumbers?: number[],
+  ): number {
     return randomNumber(this.#_length, withzero, CustomNumbers); // Returns a random number
   }
 
@@ -36,7 +45,10 @@ export class UniqueGen {
    * don't provide any custom words, the function will use a default set of words.
    * @returns a random word.
    */
-  public RandomWord(isCAPITAL: boolean = false, CustomWords?: string[]): string {
+  public RandomWord(
+    isCAPITAL: boolean = false,
+    CustomWords?: string[],
+  ): string {
     return randomWord(this.#_length, isCAPITAL, CustomWords); // Returns a random word
   }
 
@@ -54,7 +66,10 @@ export class UniqueGen {
    * @returns The function `RandomMixed` returns the result of calling the `randomMixed` function with
    * the `_length` property, `isCAPITAL` argument, and `CustomMixeds` argument.
    */
-  public RandomMixed(isCAPITAL: boolean = false, CustomMixeds?: string[]): string {
+  public RandomMixed(
+    isCAPITAL: boolean = false,
+    CustomMixeds?: string[],
+  ): string {
     return randomMixed(this.#_length, isCAPITAL, CustomMixeds); // Returns a random mixed string
   }
 

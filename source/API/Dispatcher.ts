@@ -68,7 +68,12 @@ export class APiCall {
     headers: object = this.#ContentType,
   ) {
     // Function for POST requests
-    return await PostFetch(`${this.#Domain}${path}`, Data, Responsejson, headers);
+    return await PostFetch(
+      `${this.#Domain}${path}`,
+      Data,
+      Responsejson,
+      headers,
+    );
   }
 
   // Function for DELETE requests
@@ -122,6 +127,11 @@ export class APiCall {
     headers: object = this.#ContentType,
   ) {
     // Function for PUT requests
-    return await PutFetch(`${this.#Domain}${path}`, Data, Responsejson, headers);
+    return await PutFetch(
+      `${this.#Domain}${path}`,
+      Data,
+      Responsejson,
+      headers,
+    );
   }
 }
