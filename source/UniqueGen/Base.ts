@@ -1,10 +1,10 @@
-import { randomMixed, randomNumber, randomSymbol, randomWord } from "uniquegen"; // Import the module
+import { randomMixed, randomNumber, randomSymbol, randomWord, randomBoolean } from "uniquegen"; // Import the module
 
 export class UniqueGen {
-  private _length?: number;
+  readonly #_length?: number;
 
   constructor(length: number) {
-    this._length = length;
+    this.#_length = length;
   }
 
   // Methods
@@ -20,8 +20,8 @@ export class UniqueGen {
    * parameter, the function will generate a random number
    * @returns a random number.
    */
-  public RandomNumber(withzero = true, CustomNumbers?: number[]) {
-    return randomNumber(this._length, withzero, CustomNumbers);
+  public RandomNumber(withzero: boolean = true, CustomNumbers?: number[]): number {
+    return randomNumber(this.#_length, withzero, CustomNumbers); // Returns a random number
   }
 
   // Random Word
@@ -36,8 +36,8 @@ export class UniqueGen {
    * don't provide any custom words, the function will use a default set of words.
    * @returns a random word.
    */
-  public RandomWord(isCAPITAL = false, CustomWords?: string[]) {
-    return randomWord(this._length, isCAPITAL, CustomWords);
+  public RandomWord(isCAPITAL: boolean = false, CustomWords?: string[]): string {
+    return randomWord(this.#_length, isCAPITAL, CustomWords); // Returns a random word
   }
 
   // Mixed
@@ -54,8 +54,8 @@ export class UniqueGen {
    * @returns The function `RandomMixed` returns the result of calling the `randomMixed` function with
    * the `_length` property, `isCAPITAL` argument, and `CustomMixeds` argument.
    */
-  public RandomMixed(isCAPITAL = false, CustomMixeds?: string[]) {
-    return randomMixed(this._length, isCAPITAL, CustomMixeds);
+  public RandomMixed(isCAPITAL: boolean = false, CustomMixeds?: string[]): string {
+    return randomMixed(this.#_length, isCAPITAL, CustomMixeds); // Returns a random mixed string
   }
 
   // Symbol
@@ -69,7 +69,16 @@ export class UniqueGen {
    * @returns the result of calling the `randomSymbol` function with the `_length` parameter and the
    * `CustomSymbols` array as arguments.
    */
-  public RandomSymbol(CustomSymbols?: string[]) {
-    return randomSymbol(this._length, CustomSymbols);
+  public RandomSymbol(CustomSymbols?: string[]): string {
+    return randomSymbol(this.#_length, CustomSymbols); // Returns a random symbol
+  }
+
+  // Boolean
+  /**
+   * Generates a random boolean value.
+   * @returns {boolean} A random boolean value.
+   */
+  public RandomBoolean(): boolean {
+    return randomBoolean(); // Returns a random boolean value
   }
 }

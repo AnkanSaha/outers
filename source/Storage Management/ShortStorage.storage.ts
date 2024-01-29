@@ -21,38 +21,46 @@ import { ShortStorage } from "./Interface/ShortStorage.interface"; // Import Sho
  * Represents a short storage for saving and retrieving data.
  */
 export default class CreateNewShortStorage {
+  
   // Properties
-  private readonly StorageName: string; // Storage Name
-  private readonly StoragePath: string; // Storage Path
-  private readonly MaxStorageSize: number; // Max Storage Size
-  private readonly EncryptionKey?: string; // Encryption Key
+  readonly #StorageName: string; // Storage Name (Private)
+  readonly #StoragePath: string; // Storage Path (Private)
+  readonly #MaxStorageSize: number; // Max Storage Size (Private)
+  readonly #EncryptionKey?: string; // Encryption Key (Private)
+  readonly #StorageFullPATH: string; // Storage Full PATH (Public)
 
   /**
-   * Creates a new instance of the ShortStorage class.
-   * @param {string} StorageName - The name of the storage.
-   * @param {number} [MaxStorageSize] - The maximum size of the storage in kilobytes. Defaults to 10 kilobytes if not provided.
-   * @param {string} [EncryptionKey] - The encryption key to use for encrypting and decrypting data. Defaults to undefined if not provided.
-   * @param {string} [StoragePath] - The path to the storage file. Defaults to "source/.temp/" if not provided.
+   * Constructs a new instance of the ShortStorage class.
+   * @param {string} [StorageName] - The name of the storage. Defaults to "outers" if not provided.
+   * @param {number} [MaxStorageSize] - The maximum size of the storage in Megabytes. Defaults to 1MB if not provided.
+   * @param {string} [EncryptionKey] - The encryption key for the storage. If not provided, a default encryption key will be generated based on the storage name, storage path, and the current version of Node.js.
+   * @param {string} [StoragePath] - The path where the storage is located. Defaults to "Cache/" if not provided.
    */
   constructor(
     StorageName?: string,
     MaxStorageSize?: number,
     EncryptionKey?: string,
-    StoragePath?: string,
+    StoragePath?: string
   ) {
-    this.StorageName = StorageName?.toLowerCase() ?? "outers"; // Set Storage Name
-    this.StoragePath = StoragePath ?? "Cache/"; // Set Storage Path
-    this.MaxStorageSize = MaxStorageSize ?? 10; // Set Max Storage Size to 10 Kilobyte
+    this.#StorageName = StorageName?.toLowerCase() ?? "outers"; // Set Storage Name
+    this.#StoragePath = StoragePath ?? "Cache/"; // Set Storage Path
+    this.#MaxStorageSize = MaxStorageSize ?? 1; // Set Max Storage Size to 1MB
+    this.#StorageFullPATH = `${this.#StoragePath}.${this.#StorageName}.storage.json` // Set Storage Full PATH
     this.createShortStorage(); // Create Short Storage
-    this.EncryptionKey =
+    this.#EncryptionKey =
       EncryptionKey ??
-      `${this.StorageName.split("")
+      `${this.#StorageName.split("")
         .reverse()
         .join("")
-        .toUpperCase()}-${this.StoragePath.split("")
+        .toUpperCase()}-${this.#StoragePath
+        .split("")
         .reverse()
         .join("")
-        .toUpperCase()}-${this.MaxStorageSize * 1000}`; // Set Encryption Key
+        .toUpperCase()}-${process.versions.v8
+        .trim()
+        .split("")
+        .reverse()
+        .join("")}`; // Create Encryption Key if it is not Provided or Use Provided Encryption Key
   }
 
   /**
@@ -64,20 +72,18 @@ export default class CreateNewShortStorage {
   public async Save(Title: string, Data: any): Promise<ShortStorage> {
     await this.UnlockFile(); // Unlock File
     // Check if File size is bigger than Max Storage Size
-    const FileStats = await stat(
-      `${this.StoragePath}.${this.StorageName}.storage.json`,
-    ); // Get File Stats
+    const FileStats = await stat(this.#StorageFullPATH); // Get File Stats
 
     // Convert File Size to Megabytes and Check if it's bigger than Max Storage Size
-    const fileSizeInBytes = FileStats.size;
-    const fileSizeInKilobytes = fileSizeInBytes / 1024;
-    // const fileSizeInMegabytes = fileSizeInKilobytes / 1024;
+    const fileSizeInMegabytes = FileStats.size / (1024 * 1024); // Convert File Size to Megabytes from bytes
 
-    if (fileSizeInKilobytes > this.MaxStorageSize) {
+    if (fileSizeInMegabytes >= this.#MaxStorageSize) {
+      // Check if File Size is Reached to Max Storage Size
       await this.LockFile(); // Lock File
       return {
         status: 400,
-        message: "Storage Size is Bigger Than Max Storage Size",
+        message:
+          "Storage is full, please use another instance or increase the storage size.",
         Data: [],
         TotalData: 0,
       };
@@ -97,18 +103,15 @@ export default class CreateNewShortStorage {
     }
 
     await this.UnlockFile(); // Unlock File
-    const RawData = await readFile(
-      `${this.StoragePath}.${this.StorageName}.storage.json`,
-      "utf-8",
-    ); // Get Raw Data
+    const RawData = await readFile(this.#StorageFullPATH, "utf-8"); // Get Raw Data
     const ParsedData: any[] = JSON.parse(RawData); // Parsed The Data
 
     // Encrypt Data if Encryption Key is Provided
     const UserProvidedData = await new methods.CryptoGraphy(
-      String(this.EncryptionKey),
+      String(this.#EncryptionKey)
     ).Encrypt(Data); // Set User Provided Data
     const UserProvidedTitle = await new methods.CryptoGraphy(
-      String(this.EncryptionKey),
+      String(this.#EncryptionKey)
     ).Encrypt(Title); // Set User Provided Title
 
     // Push The New Data In The Array
@@ -118,11 +121,7 @@ export default class CreateNewShortStorage {
     });
 
     // Write The New Data in File
-    await writeFile(
-      `${this.StoragePath}.${this.StorageName}.storage.json`,
-      JSON.stringify(ParsedData),
-      "utf-8",
-    );
+    await writeFile(this.#StorageFullPATH, JSON.stringify(ParsedData), "utf-8"); // Write Data in File
 
     // Lock File After Write Data
     await this.LockFile(); // Lock File
@@ -148,10 +147,7 @@ export default class CreateNewShortStorage {
   public async Get(Title?: string): Promise<ShortStorage> {
     // Unlock File
     await this.UnlockFile(); // Unlock File
-    const RawData = await readFile(
-      `${this.StoragePath}.${this.StorageName}.storage.json`,
-      "utf-8",
-    ); // Get Raw Data
+    const RawData = await readFile(this.#StorageFullPATH, "utf-8"); // Get Raw Data
 
     // Lock File
     await this.LockFile(); // Lock File
@@ -162,14 +158,14 @@ export default class CreateNewShortStorage {
     const EncryptedData = await Promise.all(
       ParsedData.map(async (Data) => {
         const DecryptedTitle = JSON.parse(
-          await new methods.CryptoGraphy(String(this.EncryptionKey)).Decrypt(
-            Data.Title,
-          ),
+          await new methods.CryptoGraphy(String(this.#EncryptionKey)).Decrypt(
+            Data.Title
+          )
         ); // Decrypt Title if Encryption Key is Provided
         const DecryptedData = JSON.parse(
-          await new methods.CryptoGraphy(String(this.EncryptionKey)).Decrypt(
-            Data.Data,
-          ),
+          await new methods.CryptoGraphy(String(this.#EncryptionKey)).Decrypt(
+            Data.Data
+          )
         ); // Decrypt Data if Encryption Key is Provided
 
         // Check if Title is Provided and Match with Decrypted Title
@@ -181,7 +177,7 @@ export default class CreateNewShortStorage {
         } else {
           return null; // Do not include in the final result
         }
-      }),
+      })
     );
 
     // Filter out null values (where Title did not match)
@@ -217,10 +213,8 @@ export default class CreateNewShortStorage {
    */
 
   public async Update(Title: string, NewData: any): Promise<ShortStorage> {
-    const FindData = await this.Get(Title); // Get Data
-
     // Check if Data is Already Exists in Short Storage
-    if (FindData.Data.length === 0) {
+    if ((await this.Get(Title)).Data.length === 0) {
       return {
         status: 404,
         message: "Data Not Found",
@@ -234,7 +228,7 @@ export default class CreateNewShortStorage {
 
     // Delete The Data
     const RemovedData = AllFindData.Data.filter(
-      (Data: { Title: string }) => Data.Title !== Title,
+      (Data: { Title: string }) => Data.Title !== Title
     );
 
     // Push The New Data In The Array
@@ -250,11 +244,7 @@ export default class CreateNewShortStorage {
     await this.UnlockFile(); // Unlock File
 
     // Write The New Data in File
-    await writeFile(
-      `${this.StoragePath}.${this.StorageName}.storage.json`,
-      JSON.stringify(EncryptedBuiltData),
-      "utf-8",
-    );
+    await writeFile(this.#StorageFullPATH, JSON.stringify(EncryptedBuiltData), "utf-8"); // Write Data in File
 
     // Lock File After Write Data
     await this.LockFile(); // Lock File
@@ -303,11 +293,7 @@ export default class CreateNewShortStorage {
     await this.UnlockFile(); // Unlock File
 
     // Write The New Data in File
-    await writeFile(
-      `${this.StoragePath}.${this.StorageName}.storage.json`,
-      JSON.stringify(EncryptedBuiltData),
-      "utf-8",
-    );
+    await writeFile(this.#StorageFullPATH, JSON.stringify(EncryptedBuiltData), "utf-8"); // Write Data in File
 
     // Lock File After Write Data
     await this.LockFile(); // Lock File
@@ -331,7 +317,7 @@ export default class CreateNewShortStorage {
   public async DeleteStorage(): Promise<ShortStorage> {
     // Check if the directory exists, and create it if not
     try {
-      await access(this.StoragePath); // Check if Directory Exists
+      await access(this.#StoragePath); // Check if Directory Exists
 
       // Get All Data in Storage File Before Delete
       const AllDataInStorage = await this.Get(); // Get All Data in Storage File
@@ -340,8 +326,8 @@ export default class CreateNewShortStorage {
       await this.UnlockFile(); // Unlock File
 
       // Delete All Data in Storage File
-      await unlink(`${this.StoragePath}.${this.StorageName}.storage.json`); // Delete File
-      await rmdir(`${this.StoragePath}`); // Delete Storage Directory
+      await unlink(this.#StorageFullPATH); // Delete File
+      await rmdir(`${this.#StoragePath}`); // Delete Storage Directory
 
       return {
         status: 200,
@@ -367,17 +353,13 @@ export default class CreateNewShortStorage {
   private async createShortStorage() {
     // Check if the directory exists, and create it if not
     try {
-      await access(`${this.StoragePath}.${this.StorageName}.storage.json`); // Check if Directory Exists
+      await access(this.#StorageFullPATH); // Check if Directory Exists
     } catch (error) {
       // Directory does not exist, create it
-      await mkdir(`${this.StoragePath}`, { recursive: true }); // Create Directory
+      await mkdir(`${this.#StoragePath}`, { recursive: true }); // Create Directory
 
       // Write Empty Data in this File
-      await writeFile(
-        `${this.StoragePath}.${this.StorageName}.storage.json`,
-        JSON.stringify([]),
-        "utf-8",
-      ); // Create Storage File
+      await writeFile(this.#StorageFullPATH, JSON.stringify([]), "utf-8"); // Create Storage File
       await this.LockFile(); // Lock File
     }
   }
@@ -392,11 +374,11 @@ export default class CreateNewShortStorage {
     const EncryptedData = await Promise.all(
       UnEncryptedData.map(async (Data: { Title: any; Data: any }) => {
         const EncryptedTitle = await new methods.CryptoGraphy(
-          String(this.EncryptionKey),
+          String(this.#EncryptionKey)
         ).Encrypt(Data.Title);
         // Encrypt Title if Encryption Key is Provided
         const EncryptedData = await new methods.CryptoGraphy(
-          String(this.EncryptionKey),
+          String(this.#EncryptionKey)
         ).Encrypt(Data.Data); // Encrypt Data if Encryption Key is Provided
 
         // Check if Title is Provided and Match with Decrypted Title
@@ -404,7 +386,7 @@ export default class CreateNewShortStorage {
           Title: EncryptedTitle,
           Data: EncryptedData,
         };
-      }),
+      })
     );
 
     // Filter out null values (where Title did not match)
@@ -414,10 +396,7 @@ export default class CreateNewShortStorage {
   private async LockFile() {
     // Change File Permission
     try {
-      await access(
-        `${this.StoragePath}.${this.StorageName}.storage.json`,
-        constants.R_OK | constants.W_OK | constants.X_OK,
-      ); // Check if File is readable, writable, and executable for the current user.
+      await access(this.#StorageFullPATH, constants.R_OK | constants.W_OK | constants.X_OK); // Check if File is readable, writable, and executable for the current user.
       return {
         status: 403,
         message:
@@ -432,7 +411,7 @@ export default class CreateNewShortStorage {
       } else {
         // if it is, then change the permission to 0o000
         await methods.Command.Execute(
-          `chmod 000 ${this.StoragePath}.${this.StorageName}.storage.json`,
+          `chmod 000 ${this.#StoragePath}.${this.#StorageName}.storage.json`
         ); // Change File Permission
         return {
           status: 200,
@@ -446,11 +425,7 @@ export default class CreateNewShortStorage {
   private async UnlockFile() {
     // Change File Permission to 0o777 if it is 0o000
     try {
-      await access(
-        `${this.StoragePath}.${this.StorageName}.storage.json`,
-        constants.R_OK | constants.W_OK | constants.X_OK,
-      ); // Check if File is readable, writable, and executable for the current user.
-
+      await access(this.#StorageFullPATH, constants.R_OK | constants.W_OK | constants.X_OK); // Check if File is readable, writable, and executable for the current user.
       return {
         status: 403,
         message:
@@ -464,7 +439,7 @@ export default class CreateNewShortStorage {
         }; // File does not exist
       } else {
         await methods.Command.Execute(
-          `chmod 666 ${this.StoragePath}.${this.StorageName}.storage.json`,
+          `chmod 666 ${this.#StoragePath}.${this.#StorageName}.storage.json`
         ); // Change File Permission
         return {
           status: 200,
