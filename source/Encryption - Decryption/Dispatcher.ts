@@ -5,7 +5,7 @@ import { Decrypt, DecryptSync } from "./functions/Decrypt"; // Import Decrypt Mo
 
 // Node Encryption Class
 export default class Encryption {
-  readonly #Key: string;//  The #Key property is a private property that can only be accessed within the class.
+  readonly #Key: string; //  The #Key property is a private property that can only be accessed within the class.
   constructor(Key: string) {
     this.#Key = Key; // Set Key to the key passed in the constructor
   }
