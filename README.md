@@ -294,9 +294,7 @@ methods.CreateByFunction(
 
 ```javascript
 const { methods } = require('outers'); // import the package
-const storage = new methods.Storage.CreateNewShortStorage('Ankan Saha', 100); // create a new instance of Storage class with name of the storage with 100 KB of storage size
-
-storage.createShortStorage(); // create a new short storage with name of the storage with 100 KB of storage size
+const storage = new methods.Storage.CreateNewShortStorage('Ankan Saha', 100, "ANCNCE", "Cache/"); // create a new instance of Storage class with name of the storage with 100 MB of storage size with secret key with storage directory
 
 storage.Save("Ankan", { // save a data in the storage with key and value with .then() method
         Name: "Ankan",
@@ -381,6 +379,19 @@ app.use(
 - Note : You can pass the Error Message in the third parameter of the function, by default it is set to 'You are not allowed to access this URL', it will send a error message if the verification failed
 - Note : You can pass the Reverse in the fourth parameter of the function, by default it is set to false, if you set it to true then it will reverse the verification, it will send a 403 status code if the verification success
 
+
+# Create Log File in NodeJS
+
+```javascript
+const {Middleware} = require('outers'); // import the package
+
+app.use('/api', Middleware.HTTPLogger(['POST', 'PUT', 'GET'], "Logs", "Logs/", "Aninewwecw"), MainFunction); // create a log file when the request method is POST or PUT or GET with log file name with log file directory with Encryption Key
+```
+
+- Note : You can pass as many as you want Request Methods in the first parameter of the function in an array
+- Note : You can pass the Log File Name in the second parameter of the function, by default it is set to 'HTTP-Logger', it will create a log file with the name of HTTP-Logger
+- Note : You can pass the Log File Directory in the third parameter of the function, by default it is set to 'Logs/', it will create a log file with the directory of Logs/
+- Note : You can pass the Encryption Key in the fourth parameter of the function, by default it is set make a inbuilt encryption key, it will encrypt the log file with the encryption key, i highly recommend to use your own encryption key to recover the log file easily
 ## License
 
 MIT
