@@ -27,7 +27,7 @@ export class UniqueGen {
    * @returns a random number.
    */
   public RandomNumber(
-    withzero: boolean = true,
+    withzero = true,
     CustomNumbers?: number[],
   ): number {
     return randomNumber(this.#_length, withzero, CustomNumbers); // Returns a random number
@@ -46,7 +46,7 @@ export class UniqueGen {
    * @returns a random word.
    */
   public RandomWord(
-    isCAPITAL: boolean = false,
+    isCAPITAL = false,
     CustomWords?: string[],
   ): string {
     return randomWord(this.#_length, isCAPITAL, CustomWords); // Returns a random word
@@ -67,7 +67,7 @@ export class UniqueGen {
    * the `_length` property, `isCAPITAL` argument, and `CustomMixeds` argument.
    */
   public RandomMixed(
-    isCAPITAL: boolean = false,
+    isCAPITAL = false,
     CustomMixeds?: string[],
   ): string {
     return randomMixed(this.#_length, isCAPITAL, CustomMixeds); // Returns a random mixed string
