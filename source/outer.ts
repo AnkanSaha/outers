@@ -34,6 +34,7 @@ import { Mongo } from "mongosuper"; //  Mongo Super Module
 import InjectIP from "./Middlewares/Request IP Injector/Base.middleware"; // Import Inject IP Module
 import URL_Controller from "./Middlewares/URL Controller/Base.middleware"; // Import URL Controller Module
 import IP_Controller from "./Middlewares/IP Controller/Base.middleware"; // Import IP Controller Module
+import HTTP_Logger from "./Middlewares/HTTP Logger/Base.middleware"; // Import HTTP Logger Module
 
 // Export All Feature from  internal module
 /* The code is exporting an object named `ConsoleColors` that contains various color functions from the
@@ -71,6 +72,7 @@ export const Middleware = Object.freeze({
   RequestInjectIP: InjectIP, // Export IP Injector Module as Middleware
   AccessController: URL_Controller, // Export URL Controller Module as Middleware
   IPAccessController: IP_Controller, // Export IP Controller Module as Middleware
+  HTTPLogger: HTTP_Logger, // Export HTTP Logger Module as Middleware
 }); // Export IP Injector Module as Middleware
 
 // Export All Methods with Freeze
