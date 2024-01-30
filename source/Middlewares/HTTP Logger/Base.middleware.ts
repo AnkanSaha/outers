@@ -22,37 +22,31 @@ export default (
   EncryptionKey?: string,
 ) => {
   // Check if FileName is undefined
-  if (FileName === undefined) FileName = "HTTP-Logger"; // Default FileName
+  const LocalFilename = FileName === undefined ? "HTTP-Logger" : FileName; // Default FileName
+
   // Check if FilePATH is undefined
-  if (FilePATH === undefined) FilePATH = "Logs/"; // Default Logs Folder
+  const LocalFilePATH = FilePATH === undefined ? "Logs/" : FilePATH; // Default FilePATH
 
   // Configure MaxFileSize in KB
-  let MaxFileSize = 100; // Default MaxFileSize to 100KB
+  let MaxFileSize = 10; // Default MaxFileSize to 10MB
 
   // Check if ArrayOFmethods is undefined
-  if (ArrayOFmethods === undefined)
-    ArrayOFmethods = ["GET", "POST", "PUT", "DELETE", "PATCH"]; // Default ArrayOFmethods to all methods
+  const Arrays = ArrayOFmethods === undefined ? [] : ArrayOFmethods; // Default ArrayOFmethods to empty array
 
   // Check if EncryptionKey is undefined
   if (EncryptionKey === undefined)
-    EncryptionKey = `${FileName.split("")
-      .reverse()
-      .join("")
-      .toUpperCase()}-${FilePATH.split("").reverse().join("").toUpperCase()}`; // Set Encryption Key; // Default EncryptionKey
+    EncryptionKey = `${LocalFilename}-${LocalFilePATH}`; // Set Encryption Key; // Default EncryptionKey
 
   return async (Request: Request, Response: Response, Next: NextFunction) => {
     // Create Storage Manager Instance
     const Storage = new ShortStorage(
-      FileName,
+      LocalFilename,
       MaxFileSize,
-      FilePATH,
+      LocalFilePATH,
       EncryptionKey,
     ); // Create Storage Manager Instance
-
     // Find if Request Method is in ArrayOFmethods
-    const isAllowed = (ArrayOFmethods ?? []).some((method) => {
-      return method === Request.method;
-    });
+    const isAllowed = Arrays.some((method) => method === Request.method);
 
     // If Request Method is not in ArrayOFmethods, then return Next Middleware
     if (isAllowed === false) Next(); // Next Middleware
