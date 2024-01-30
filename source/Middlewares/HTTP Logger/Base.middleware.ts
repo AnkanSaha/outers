@@ -19,7 +19,7 @@ export default (
   ArrayOFmethods?: string[],
   FileName?: string,
   FilePATH?: string,
-  EncryptionKey?: string
+  EncryptionKey?: string,
 ) => {
   // Check if FileName is undefined
   const LocalFilename = FileName === undefined ? "HTTP-Logger" : FileName; // Default FileName
@@ -43,10 +43,10 @@ export default (
       LocalFilename,
       MaxFileSize,
       LocalFilePATH,
-      EncryptionKey
+      EncryptionKey,
     ); // Create Storage Manager Instance
     // Find if Request Method is in ArrayOFmethods
-    const isAllowed = Arrays.some(method => method === Request.method);
+    const isAllowed = Arrays.some((method) => method === Request.method);
 
     // If Request Method is not in ArrayOFmethods, then return Next Middleware
     if (isAllowed === false) Next(); // Next Middleware
@@ -55,7 +55,7 @@ export default (
         Request.headers["x-forwarded-for"] ||
           Request.connection.remoteAddress ||
           Request.socket.remoteAddress ||
-          Request.socket.remoteAddress
+          Request.socket.remoteAddress,
       ); // Get Requester IP Address
       try {
         const StorageResult = await Storage.Save(
@@ -73,7 +73,7 @@ export default (
             Params: Request.params,
             Cookies: Request.cookies,
             Time: new Date().toLocaleString(),
-          }
+          },
         ); // Save Request Data
 
         // Check Errors in StorageResult
