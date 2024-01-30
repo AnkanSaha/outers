@@ -4,7 +4,8 @@
 # and commit this file to your remote git repository to share the goodness with others.
 
 # Learn more from ready-to-use templates: https://www.gitpod.io/docs/introduction/getting-started/quickstart
-# VS Code Conf
+
+# VS Code Conf Code
 vscode:
     extensions:
         - ms-azuretools.vscode-docker
@@ -20,5 +21,44 @@ vscode:
         - esbenp.prettier-vscode
         - bradlc.vscode-tailwindcss
 
+# Run Some Commands
 tasks:
-  - init: npm install && npm run build
+  - init: npm install
+  - command: npm run build
+  - command: docker pull mongodb/mongodb-community-server:latest
+  - command: docker run -d -p 27017:27017 --name MongoDB mongodb/mongodb-community-server
+
+# Expose PORTS
+ports:
+    # - name: Client
+    #   description: Client Side PORT
+    #   port: 5173
+    #   onOpen: open-browser
+    - name: MongoDB
+      description: MongoDB Port for MongoDB
+      port: 27017
+      onOpen: ignore
+
+# Additional Repositories to import from github
+additionalRepositories:
+    - url: https://github.com/AnkanSaha/PaisaPay
+      checkoutLocation: "PaisaPay"
+    - url: https://github.com/AnkanSaha/uniquegen
+      checkoutLocation: "uniquegen"
+    - url: https://github.com/AnkanSaha/react-caches
+      checkoutLocation: "react-caches"
+    - url: https://github.com/AnkanSaha/AnkanSaha
+      checkoutLocation: "AnkanSaha"
+    - url: https://github.com/AnkanSaha/SaveNet
+      checkoutLocation: "SaveNet"
+    - url: https://github.com/AnkanSaha/Portfolio
+      checkoutLocation: "Portfolio"
+    - url: https://github.com/AnkanSaha/Store-Management
+      checkoutLocation: "Store-Management"
+    - url: https://github.com/AnkanSaha/MongoSuper
+      checkoutLocation: "MongoSuper"
+    - url: https://github.com/AnkanSaha/Code-Compiler
+      checkoutLocation: "Code-Compiler"
+    - url: https://github.com/AnkanSaha/Deploy-Node-App-Enviroment-Config
+      checkoutLocation: "Deploy-Node-App-Enviroment-Config"
+
