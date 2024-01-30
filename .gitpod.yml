@@ -32,6 +32,7 @@ tasks:
 
   - name: Docker Redis Setup
     init: docker pull redis:latest && docker run -d -p 6379:6379 --name Redis redis
+
 # Expose PORTS
 ports:
     - name: MongoDB
