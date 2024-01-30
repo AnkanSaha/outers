@@ -20,24 +20,29 @@ vscode:
         - christian-kohler.npm-intellisense
         - esbenp.prettier-vscode
         - bradlc.vscode-tailwindcss
+        - gitpod.gitpod-theme
 
 # Run Some Commands
 tasks:
-  - init: npm install
-  - command: npm run build
-  - command: docker pull mongodb/mongodb-community-server:latest
-  - command: docker run -d -p 27017:27017 --name MongoDB mongodb/mongodb-community-server
+  - name: Installer
+    init: npm install && npm run build
 
+  - name: Docker MongoDB Setup
+    init: docker pull mongodb/mongodb-community-server:latest && docker run -d -p 27017:27017 --name MongoDB mongodb/mongodb-community-server
+
+  - name: Docker Redis Setup
+    init: docker pull redis:latest && docker run -d -p 6379:6379 --name Redis redis
 # Expose PORTS
 ports:
-    # - name: Client
-    #   description: Client Side PORT
-    #   port: 5173
-    #   onOpen: open-browser
     - name: MongoDB
       description: MongoDB Port for MongoDB
       port: 27017
+      visibility: public
       onOpen: ignore
+    - name: Redis
+      description: Redis Port for Redis
+      port: 6379
+      visibility: public
 
 # Additional Repositories to import from github
 additionalRepositories:
@@ -61,4 +66,3 @@ additionalRepositories:
       checkoutLocation: "Code-Compiler"
     - url: https://github.com/AnkanSaha/Deploy-Node-App-Enviroment-Config
       checkoutLocation: "Deploy-Node-App-Enviroment-Config"
-
