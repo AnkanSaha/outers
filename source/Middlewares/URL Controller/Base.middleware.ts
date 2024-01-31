@@ -28,7 +28,7 @@ export default function (
     let isAllowed = false; // Set isAllowed to false
 
     // Change Response X-Powered-By Header
-    Response.setHeader('X-Powered-By', 'AutoBlocker'); // Set X-Powered-By Header to AutoBlocker
+    Response.setHeader("X-Powered-By", "AutoBlocker"); // Set X-Powered-By Header to AutoBlocker
 
     // Check if Request Hostname is available in Array or not
     isAllowed = AllowedURLs.some((url) => {
