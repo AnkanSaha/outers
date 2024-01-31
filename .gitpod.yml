@@ -7,20 +7,19 @@
 
 # VS Code Conf Code
 vscode:
-    extensions:
-        - ms-azuretools.vscode-docker
-        - ms-vscode.azure-account
-        - dbaeumer.vscode-eslint
-        - streetsidesoftware.code-spell-checker
-        - TabNine.tabnine-vscode
-        - eamodio.gitlens
-        - gitpod.gitpod-desktop
-        - PKief.material-icon-theme
-        - mongodb.mongodb-vscode
-        - christian-kohler.npm-intellisense
-        - esbenp.prettier-vscode
-        - bradlc.vscode-tailwindcss
-        - gitpod.gitpod-theme
+  extensions:
+    - ms-azuretools.vscode-docker
+    - ms-vscode.azure-account
+    - dbaeumer.vscode-eslint
+    - streetsidesoftware.code-spell-checker
+    - TabNine.tabnine-vscode
+    - eamodio.gitlens
+    - PKief.material-icon-theme
+    - mongodb.mongodb-vscode
+    - christian-kohler.npm-intellisense
+    - esbenp.prettier-vscode
+    - bradlc.vscode-tailwindcss
+    - dracula-theme.theme-dracula
 
 # Run Some Commands
 tasks:
