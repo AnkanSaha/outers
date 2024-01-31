@@ -27,6 +27,9 @@ export default function (
     const ReverseParams = Reverse ?? false; // Set Reverse to false if it is undefined
     let isAllowed = false; // Set isAllowed to false
 
+    // Change Response X-Powered-By Header
+    Response.setHeader('X-Powered-By', 'AutoBlocker'); // Set X-Powered-By Header to AutoBlocker
+
     // Check if Request Hostname is available in Array or not
     isAllowed = AllowedURLs.some((url) => {
       const normalizedUrl = url.toLowerCase().replace(/^https?:\/\//, ""); // Normalize URL by converting to lowercase and removing 'http://' or 'https://'
@@ -48,7 +51,9 @@ export default function (
             message:
               ErrorMessage ??
               "You are not allowed to access this server from this URL.",
-            data: undefined,
+            data: {
+              ClientURL: `${Request.protocol}://${Request.headers.host}${Request.url}`,
+            },
             cookieData: undefined,
           }); // Serve JSON
           // You may choose to send an error response or redirect the user to an error page
@@ -65,7 +70,9 @@ export default function (
             message:
               ErrorMessage ??
               "You are not allowed to access this server from this URL.",
-            data: undefined,
+            data: {
+              ClientURL: `${Request.protocol}://${Request.headers.host}${Request.url}`,
+            },
             cookieData: undefined,
           }); // Serve JSON
         }

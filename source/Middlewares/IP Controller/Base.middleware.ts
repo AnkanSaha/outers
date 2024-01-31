@@ -50,7 +50,10 @@ export default function (
             message:
               ErrorMessage ??
               "You are not allowed to access this server from this IP.",
-            data: undefined,
+            data: {
+              ClientIP: RequesterIPaddress,
+              ClientURL: `${Request.protocol}://${Request.headers.host}${Request.url}`,
+            },
             cookieData: undefined,
           }); // Serve JSON
           // You may choose to send an error response or redirect the user to an error page
@@ -67,7 +70,10 @@ export default function (
             message:
               ErrorMessage ??
               "You are not allowed to access this server from this URL.",
-            data: undefined,
+            data: {
+              ClientIP: RequesterIPaddress,
+              ClientURL: `${Request.protocol}://${Request.headers.host}${Request.url}`,
+            },
             cookieData: undefined,
           }); // Serve JSON
         }
