@@ -308,9 +308,9 @@ app.use(
     ["ARRAY OF URLs"],
     FailedStatusCode,
     ErrorMessage,
-    Reverse
+    Reverse,
   ),
-  MainFunction
+  MainFunction,
 ); // control the URL Access in NodeJS with the Middleware function
 ```
 
@@ -330,9 +330,9 @@ app.use(
     ["ARRAY OF IP ADDRESSES"],
     FailedStatusCode,
     ErrorMessage,
-    Reverse
+    Reverse,
   ),
-  MainFunction
+  MainFunction,
 ); // control the IP Address Access in NodeJS with the Middleware function
 ```
 
