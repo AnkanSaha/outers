@@ -96,5 +96,5 @@ export const methods = Object.freeze({
   Command: {
     Execute: executeCommand,
   },
-  GitClone: GitCloner,
+  GitCloner: GitCloner,
 }); // Export All Methods

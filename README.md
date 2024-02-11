@@ -233,45 +233,7 @@ app.use(Middleware.RequestInjectIP); // inject the IP Address in Request.body
 app.use("/api", Routes); // set the routes
 
 // At Last Create a Cluster with the Express App
-methods.CreateByFunction(
-  app,
-  PORT,
-  2,
-  [
-    {
-      Key: "trust proxy",
-      Value: true,
-    },
-    {
-      Key: "view engine",
-      Value: "ejs",
-    },
-  ],
-  [
-    () => {
-      Console.green("Server Started Not Listening");
-    },
-  ],
-  [
-    () => {
-      Console.green("Server Started Listening");
-    },
-  ],
-  [
-    (req, res, next) => {
-      Console.green("Function Middleware 1");
-      next();
-    },
-    (req, res, next) => {
-      Console.green("Function Middleware 2");
-      next();
-    },
-    (req, res, next) => {
-      Console.green("Function Middleware 3");
-      next();
-    },
-  ],
-); // create a cluster with custom worker count
+methods.CreateByFunction(app, PORT, 2); // create a cluster with custom worker count
 
 // Default Value of CustomWorkerCount is length of the CPU Core & Default Value of PORT is 3000
 
@@ -333,7 +295,7 @@ const { methods } = require("outers"); // import the package
 const MongoSuper = new methods.MongoSuper(); // create a new instance of MongoSuper class
 ```
 
-## [Follow MongoSuper Documentation for Usage](https://github.com/AnkanSaha/Code-Compiler)
+## [Follow MongoSuper Documentation for Usage](https://www.npmjs.com/package/mongosuper)
 
 # Control URL Access in NodeJS
 
@@ -379,22 +341,36 @@ app.use(
 - Note : You can pass the Error Message in the third parameter of the function, by default it is set to 'You are not allowed to access this URL', it will send a error message if the verification failed
 - Note : You can pass the Reverse in the fourth parameter of the function, by default it is set to false, if you set it to true then it will reverse the verification, it will send a 403 status code if the verification success
 
-# Create Log File in NodeJS
+# Download Git Repository in NodeJS
 
 ```javascript
-const { Middleware } = require("outers"); // import the package
-
-app.use(
-  "/api",
-  Middleware.HTTPLogger(["POST", "PUT", "GET"], "Logs", "Logs/", "Aninewwecw"),
-  MainFunction,
-); // create a log file when the request method is POST or PUT or GET with log file name with log file directory with Encryption Key
+const { methods } = require("outers"); // import the package
+const Git = new methods.GitCloner("PROVIDER_NAME", "USERNAME"); // create a new instance of GitCloner class
 ```
 
-- Note : You can pass as many as you want Request Methods in the first parameter of the function in an array
-- Note : You can pass the Log File Name in the second parameter of the function, by default it is set to 'HTTP-Logger', it will create a log file with the name of HTTP-Logger
-- Note : You can pass the Log File Directory in the third parameter of the function, by default it is set to 'Logs/', it will create a log file with the directory of Logs/
-- Note : You can pass the Encryption Key in the fourth parameter of the function, by default it is set make a inbuilt encryption key, it will encrypt the log file with the encryption key, i highly recommend to use your own encryption key to recover the log file easily
+- Note : You can pass the Provider Name in the first parameter of the function, it can be anything like GitHub, GitLab, BitBucket etc.
+
+- Note : You can pass the Username in the second parameter of the function, it can be anything like AnkanSaha, ankan, ankan-saha etc.
+
+- Note : You can pass true/false in the third parameter of the function, by default it is set to false, if you set it to true then it will find if any repository is available in the current directory, if it is available then it will delete the repository and clone the new repository
+
+- Note : You can pass Custom Directory in the fourth parameter of the function, by default it is set to undefined, if you set it to undefined then it will clone the repository in the Repository Name Directory, if you set it to any directory then it will clone the repository in the custom directory
+
+- Caution : If you set the third parameter to true then you can't use the custom directory, it will clone the repository in the Repository Name Directory
+
+```javascript
+Git.Clone("RepositoryName").then((res) => {
+  console.log(res);
+}); // it will clone the repository in the current directory;
+```
+
+```javascript
+const { methods } = require("outers"); // import the package
+
+methods.GitCloner.Clone("REPOSITORY_URL").then((res) => {
+  console.log(res);
+}); // it will clone the repository in the current directory;
+```
 
 ## License
 
