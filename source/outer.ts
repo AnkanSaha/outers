@@ -29,6 +29,7 @@ import Encryption from "./Encryption - Decryption/Dispatcher"; // Import Crypto 
 import CreateNewShortStorage from "./Storage Management/ShortStorage.storage"; // Import Short Storage Module
 import executeCommand from "./command/executor"; // Linux Command Executor
 import { Mongo } from "mongosuper"; //  Mongo Super Module
+import GitCloner from "./Git Cloner/Cloner"; // Import Git Cloner Module
 
 // Import All Middlewares
 import InjectIP from "./Middlewares/Request IP Injector/Base.middleware"; // Import Inject IP Module
@@ -95,4 +96,5 @@ export const methods = Object.freeze({
   Command: {
     Execute: executeCommand,
   },
+  GitClone: GitCloner,
 }); // Export All Methods
