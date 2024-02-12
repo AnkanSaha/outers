@@ -12,11 +12,11 @@ export default async function GithubCloner(
   UserName: str,
   RepositoryName: str,
   Directory: str,
-  BranchName: str
+  BranchName: str,
 ): Promise<bool> {
   // Execute git clone command for GitHub repository
   const GitHubStatus = await methods.Command.Execute(
-    `git clone -b ${BranchName} https://github.com/${UserName}/${RepositoryName}.git ./${Directory}`
+    `git clone -b ${BranchName} https://github.com/${UserName}/${RepositoryName}.git ./${Directory}`,
   );
 
   // Check if Downloaded or not
