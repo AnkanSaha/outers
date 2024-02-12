@@ -6,7 +6,7 @@ type str = string; // String type
 type bool = boolean; // Boolean Type
 
 // Import Package for executeCommand
-import { methods } from "../../outer"; // import package from outer
+import { methods } from "../../Config/outer"; // import package from outer
 
 export default async function GitlabCloner(
   UserName: str,

@@ -4,7 +4,7 @@ type str = string;
 type bool = boolean;
 
 // Import Package for executeCommand
-import { methods } from "../outer"; // import package from outer
+import { methods } from "../Config/outer"; // import package from outer
 import checkFileExists from "./functions/CheckFolderExistence"; // import package from outer
 
 // Import Cloner Functions

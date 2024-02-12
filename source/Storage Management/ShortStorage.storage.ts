@@ -11,7 +11,7 @@ import {
 } from "node:fs/promises"; // Import Node.js Dependencies
 
 // Import Encryption and Decryption Functions
-import { methods } from "../outer"; // Import Encryption and Decryption Functions
+import { methods } from "../Config/outer"; // Import Encryption and Decryption Functions
 
 // Interfaces for ShortStorage Response
 import { ShortStorage } from "./Interface/ShortStorage.interface"; // Import ShortStorage Interface
