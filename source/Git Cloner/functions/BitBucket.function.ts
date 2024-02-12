@@ -6,17 +6,17 @@ type str = string; // String type
 type bool = boolean; // Boolean Type
 
 // Import Package for executeCommand
-import { methods } from "../../outer"; // import package from outer
+import { methods } from "../../Config/outer"; // import package from outer
 
 export default async function BitBucketCloner(
   UserName: str,
   RepositoryName: str,
   Directory: str,
-  BranchName: str,
+  BranchName: str
 ): Promise<bool> {
   // Execute git clone command for BitBucket repository
   const BitBucketStatus = await methods.Command.Execute(
-    `git clone -b ${BranchName} https://bitbucket.org/${UserName}/${RepositoryName}.git ./${Directory}`,
+    `git clone -b ${BranchName} https://bitbucket.org/${UserName}/${RepositoryName}.git ./${Directory}`
   );
 
   // Check if Downloaded or not

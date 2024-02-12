@@ -2,8 +2,8 @@
   "name": "@AnkanSaha/outers",
   "version": "6.3.8",
   "description": "outers - a all in one package for your day to day use",
-  "main": "./lib/outer.js",
-  "types": "./lib/outer.d.ts",
+  "main": "./lib/Config/outer.js",
+  "types": "./lib/Config/outer.d.ts",
   "scripts": {
     "test": "eslint source/**/*.ts --fix",
     "build": "npm test && tsc",
@@ -33,6 +33,7 @@
     "@types/react-dom": "^18.2.18",
     "@typescript-eslint/eslint-plugin": "^6.7.5",
     "@typescript-eslint/parser": "^6.7.5",
+    "esbuild": "^0.20.0",
     "eslint": "^8.56.0",
     "eslint-plugin-react": "^7.33.2",
     "react": "^18.2.0",

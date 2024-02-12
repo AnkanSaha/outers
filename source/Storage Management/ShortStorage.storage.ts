@@ -11,7 +11,7 @@ import {
 } from "node:fs/promises"; // Import Node.js Dependencies
 
 // Import Encryption and Decryption Functions
-import { methods } from "../outer"; // Import Encryption and Decryption Functions
+import { methods } from "../Config/outer"; // Import Encryption and Decryption Functions
 
 // Interfaces for ShortStorage Response
 import { ShortStorage } from "./Interface/ShortStorage.interface"; // Import ShortStorage Interface
@@ -39,12 +39,14 @@ export default class CreateNewShortStorage {
     StorageName?: string,
     MaxStorageSize?: number,
     EncryptionKey?: string,
-    StoragePath?: string,
+    StoragePath?: string
   ) {
     this.#StorageName = StorageName?.toLowerCase() ?? "outers"; // Set Storage Name
     this.#StoragePath = StoragePath ?? "Cache/"; // Set Storage Path
     this.#MaxStorageSize = MaxStorageSize ?? 1; // Set Max Storage Size to 1MB
-    this.#StorageFullPATH = `${this.#StoragePath}.${this.#StorageName}.storage.json`; // Set Storage Full PATH
+    this.#StorageFullPATH = `${this.#StoragePath}.${
+      this.#StorageName
+    }.storage.json`; // Set Storage Full PATH
     this.createShortStorage(); // Create Short Storage
     this.#EncryptionKey =
       EncryptionKey ??
@@ -108,10 +110,10 @@ export default class CreateNewShortStorage {
 
     // Encrypt Data if Encryption Key is Provided
     const UserProvidedData = await new methods.CryptoGraphy(
-      String(this.#EncryptionKey),
+      String(this.#EncryptionKey)
     ).Encrypt(Data); // Set User Provided Data
     const UserProvidedTitle = await new methods.CryptoGraphy(
-      String(this.#EncryptionKey),
+      String(this.#EncryptionKey)
     ).Encrypt(Title); // Set User Provided Title
 
     // Push The New Data In The Array
@@ -159,13 +161,13 @@ export default class CreateNewShortStorage {
       ParsedData.map(async (Data) => {
         const DecryptedTitle = JSON.parse(
           await new methods.CryptoGraphy(String(this.#EncryptionKey)).Decrypt(
-            Data.Title,
-          ),
+            Data.Title
+          )
         ); // Decrypt Title if Encryption Key is Provided
         const DecryptedData = JSON.parse(
           await new methods.CryptoGraphy(String(this.#EncryptionKey)).Decrypt(
-            Data.Data,
-          ),
+            Data.Data
+          )
         ); // Decrypt Data if Encryption Key is Provided
 
         // Check if Title is Provided and Match with Decrypted Title
@@ -177,7 +179,7 @@ export default class CreateNewShortStorage {
         } else {
           return null; // Do not include in the final result
         }
-      }),
+      })
     );
 
     // Filter out null values (where Title did not match)
@@ -228,7 +230,7 @@ export default class CreateNewShortStorage {
 
     // Delete The Data
     const RemovedData = AllFindData.Data.filter(
-      (Data: { Title: string }) => Data.Title !== Title,
+      (Data: { Title: string }) => Data.Title !== Title
     );
 
     // Push The New Data In The Array
@@ -247,7 +249,7 @@ export default class CreateNewShortStorage {
     await writeFile(
       this.#StorageFullPATH,
       JSON.stringify(EncryptedBuiltData),
-      "utf-8",
+      "utf-8"
     ); // Write Data in File
 
     // Lock File After Write Data
@@ -300,7 +302,7 @@ export default class CreateNewShortStorage {
     await writeFile(
       this.#StorageFullPATH,
       JSON.stringify(EncryptedBuiltData),
-      "utf-8",
+      "utf-8"
     ); // Write Data in File
 
     // Lock File After Write Data
@@ -382,11 +384,11 @@ export default class CreateNewShortStorage {
     const EncryptedData = await Promise.all(
       UnEncryptedData.map(async (Data: { Title: any; Data: any }) => {
         const EncryptedTitle = await new methods.CryptoGraphy(
-          String(this.#EncryptionKey),
+          String(this.#EncryptionKey)
         ).Encrypt(Data.Title);
         // Encrypt Title if Encryption Key is Provided
         const EncryptedData = await new methods.CryptoGraphy(
-          String(this.#EncryptionKey),
+          String(this.#EncryptionKey)
         ).Encrypt(Data.Data); // Encrypt Data if Encryption Key is Provided
 
         // Check if Title is Provided and Match with Decrypted Title
@@ -394,7 +396,7 @@ export default class CreateNewShortStorage {
           Title: EncryptedTitle,
           Data: EncryptedData,
         };
-      }),
+      })
     );
 
     // Filter out null values (where Title did not match)
@@ -406,7 +408,7 @@ export default class CreateNewShortStorage {
     try {
       await access(
         this.#StorageFullPATH,
-        constants.R_OK | constants.W_OK | constants.X_OK,
+        constants.R_OK | constants.W_OK | constants.X_OK
       ); // Check if File is readable, writable, and executable for the current user.
       return {
         status: 403,
@@ -422,7 +424,7 @@ export default class CreateNewShortStorage {
       } else {
         // if it is, then change the permission to 0o000
         await methods.Command.Execute(
-          `chmod 000 ${this.#StoragePath}.${this.#StorageName}.storage.json`,
+          `chmod 000 ${this.#StoragePath}.${this.#StorageName}.storage.json`
         ); // Change File Permission
         return {
           status: 200,
@@ -438,7 +440,7 @@ export default class CreateNewShortStorage {
     try {
       await access(
         this.#StorageFullPATH,
-        constants.R_OK | constants.W_OK | constants.X_OK,
+        constants.R_OK | constants.W_OK | constants.X_OK
       ); // Check if File is readable, writable, and executable for the current user.
       return {
         status: 403,
@@ -453,7 +455,7 @@ export default class CreateNewShortStorage {
         }; // File does not exist
       } else {
         await methods.Command.Execute(
-          `chmod 666 ${this.#StoragePath}.${this.#StorageName}.storage.json`,
+          `chmod 666 ${this.#StoragePath}.${this.#StorageName}.storage.json`
         ); // Change File Permission
         return {
           status: 200,

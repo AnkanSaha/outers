@@ -11,30 +11,31 @@ import {
   reverse,
   underscore,
   yellow,
-} from "./Logs/Console.log"; // Import Console Module
-import { APiCall } from "./API/Dispatcher"; // Import API Module
+} from "../Logs/Console.log"; // Import Console Module
+import { APiCall } from "../API/Dispatcher"; // Import API Module
 import {
   PutFetch,
   DeleteFetch,
   GetFetch,
   PostFetch,
-} from "./API/functions/Fetch"; // Import Fetch Module
-import { StatusCode } from "./StatusCode/Code"; // Import StatusCode Module
-import { JSONSendResponse } from "./Response/JSON-Response"; // Import JSON Response Module
-import { SendFileResponse } from "./Response/File-Response"; // Import File Response Module
-import { UniqueGen } from "./UniqueGen/Base"; // Import UniqueGen Module
-import Jwt from "./JWT/JWT.method"; // Import JWT Manager Module
-import CreateClusterByFunction from "./Cluster/CreateClusterByFunction.method"; // Import Cluster Module
-import Encryption from "./Encryption - Decryption/Dispatcher"; // Import Crypto Module
-import CreateNewShortStorage from "./Storage Management/ShortStorage.storage"; // Import Short Storage Module
-import executeCommand from "./command/executor"; // Linux Command Executor
+} from "../API/functions/Fetch"; // Import Fetch Module
+import { StatusCode } from "../StatusCode/Code"; // Import StatusCode Module
+import { JSONSendResponse } from "../Response/JSON-Response"; // Import JSON Response Module
+import { SendFileResponse } from "../Response/File-Response"; // Import File Response Module
+import { UniqueGen } from "../UniqueGen/Base"; // Import UniqueGen Module
+import Jwt from "../JWT/JWT.method"; // Import JWT Manager Module
+import CreateClusterByFunction from "../Cluster/CreateClusterByFunction.method"; // Import Cluster Module
+import Encryption from "../Encryption - Decryption/Dispatcher"; // Import Crypto Module
+import CreateNewShortStorage from "../Storage Management/ShortStorage.storage"; // Import Short Storage Module
+import executeCommand from "../command/executor"; // Linux Command Executor
 import { Mongo } from "mongosuper"; //  Mongo Super Module
-import GitCloner from "./Git Cloner/Cloner"; // Import Git Cloner Module
+import GitCloner from "../Git Cloner/Cloner"; // Import Git Cloner Module
 
 // Import All Middlewares
-import InjectIP from "./Middlewares/Request IP Injector/Base.middleware"; // Import Inject IP Module
-import URL_Controller from "./Middlewares/URL Controller/Base.middleware"; // Import URL Controller Module
-import IP_Controller from "./Middlewares/IP Controller/Base.middleware"; // Import IP Controller Module
+import InjectIP from "../Middlewares/Request IP Injector/Base.middleware"; // Import Inject IP Module
+import URL_Controller from "../Middlewares/URL Controller/Base.middleware"; // Import URL Controller Module
+import IP_Controller from "../Middlewares/IP Controller/Base.middleware"; // Import IP Controller Module
+import UserAccessController from "../Middlewares/User Agent Controller/Base.middleware"; // Import User Access Controller Module
 
 // Export All Feature from  internal module
 /* The code is exporting an object named `ConsoleColors` that contains various color functions from the
@@ -72,6 +73,7 @@ export const Middleware = Object.freeze({
   RequestInjectIP: InjectIP, // Export IP Injector Module as Middleware
   AccessController: URL_Controller, // Export URL Controller Module as Middleware
   IPAccessController: IP_Controller, // Export IP Controller Module as Middleware
+  UserAccessController, // Export User Access Controller Module as Middleware
 }); // Export IP Injector Module as Middleware
 
 // Export All Methods with Freeze

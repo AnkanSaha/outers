@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express"; // Import Express Module
 
 // Import Interfaces
-import { Serve, StatusCodes } from "../../outer"; // Import red from outers
+import { Serve, StatusCodes } from "../../Config/outer"; // Import red from outers
 
 // Main Function
 /**
@@ -18,7 +18,7 @@ export default function (
   AllowedURLs: string[],
   StatusCode?: number,
   ErrorMessage?: string,
-  Reverse?: boolean,
+  Reverse?: boolean
 ) {
   if (AllowedURLs.length === 0)
     throw new Error("AllowedURLs array cannot be empty"); // Throw Error if AllowedURLs array is empty
