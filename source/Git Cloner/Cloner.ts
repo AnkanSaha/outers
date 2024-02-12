@@ -31,7 +31,7 @@ export default class repositoryCloner {
     Provider: str,
     UserName: str,
     AutoDelete = false,
-    DirectoryName?: str
+    DirectoryName?: str,
   ) {
     this.#Provider = Provider.toUpperCase();
     this.#UserName = UserName;
@@ -48,7 +48,7 @@ export default class repositoryCloner {
    */
   public async Clone(
     RepositoryName?: str,
-    Branch = "main"
+    Branch = "main",
   ): Promise<bool | undefined> {
     // Check if Repository Name is provided
     if (!RepositoryName) {
@@ -73,7 +73,7 @@ export default class repositoryCloner {
     // Check if directory exists and if auto-delete is enabled
     const FolderStatus = await checkFileExists(
       this.#Directory,
-      this.#AutoDelete
+      this.#AutoDelete,
     );
 
     // If auto-delete is enabled and directory already exists, throw an error
@@ -82,7 +82,7 @@ export default class repositoryCloner {
       FolderStatus.message === "Directory Not Deleted"
     ) {
       throw new Error(
-        "Directory already exists & cannot be deleted Automatically"
+        "Directory already exists & cannot be deleted Automatically",
       );
     }
 
@@ -93,7 +93,7 @@ export default class repositoryCloner {
         this.#UserName,
         RepositoryName,
         this.#Directory,
-        Branch
+        Branch,
       );
     }
 
@@ -104,7 +104,7 @@ export default class repositoryCloner {
         this.#UserName,
         RepositoryName,
         this.#Directory,
-        Branch
+        Branch,
       );
     }
 
@@ -115,7 +115,7 @@ export default class repositoryCloner {
         this.#UserName,
         RepositoryName,
         this.#Directory,
-        Branch
+        Branch,
       ); // Clone Gitlab Repo
     }
   }
@@ -128,11 +128,11 @@ export default class repositoryCloner {
    */
   static async Clone(
     RepositoryURL?: str,
-    Branch = "main"
+    Branch = "main",
   ): Promise<bool | undefined> {
     // Execute the git clone command to clone the repository specified by RepositoryURL
     const GitStatus = await methods.Command.Execute(
-      `git clone -b ${Branch} ${RepositoryURL}.git`
+      `git clone -b ${Branch} ${RepositoryURL}.git`,
     );
 
     // Check if any error occurred during the cloning process
