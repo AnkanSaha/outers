@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/outers.svg)](https://badge.fury.io/js/outers)
 
- This package provides services like Response Sender, Colorful Console, HTTP Status Codes, API Call, Random Number Generate, Create Cluster in NodeJS Easily also you can Store Temporary Data in Server Side like localStorage in Client Side
+This package provides services like Response Sender, Colorful Console, HTTP Status Codes, API Call, Random Number Generate, Create Cluster in NodeJS Easily also you can Store Temporary Data in Server Side like localStorage in Client Side
 
 ## Usage
 
