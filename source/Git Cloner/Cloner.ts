@@ -7,6 +7,11 @@ type bool = boolean;
 import { methods } from "../outer"; // import package from outer
 import checkFileExists from "./functions/CheckFolderExistence"; // import package from outer
 
+// Import Cloner Functions
+import GithubCloner from "./functions/Github.function"; // To Clone Github Repos
+import GitlabCloner from "./functions/Gitlab.function"; // To Clone Gitlab Repos
+import BitBucketCloner from "./functions/BitBucket.function"; // To Clone BitBucket Repos
+
 // Main Class Definitions
 export default class repositoryCloner {
   // Properties
@@ -26,7 +31,7 @@ export default class repositoryCloner {
     Provider: str,
     UserName: str,
     AutoDelete = false,
-    DirectoryName?: str,
+    DirectoryName?: str
   ) {
     this.#Provider = Provider.toUpperCase();
     this.#UserName = UserName;
@@ -38,9 +43,13 @@ export default class repositoryCloner {
   /**
    * Clone a repository from a specified provider to a directory.
    * @param {string} [RepositoryName] - The name of the repository to clone.
+   * @param {string} [Branch] - Branch name to clone (Default main)
    * @returns {Promise<bool | undefined>} - A Promise that resolves to true if the download finishes successfully, false if it fails, or undefined if an error occurs.
    */
-  public async Clone(RepositoryName?: string): Promise<bool | undefined> {
+  public async Clone(
+    RepositoryName?: str,
+    Branch = "main"
+  ): Promise<bool | undefined> {
     // Check if Repository Name is provided
     if (!RepositoryName) {
       throw new Error("Repository Name is not provided");
@@ -61,100 +70,69 @@ export default class repositoryCloner {
       this.#Directory = RepositoryName;
     }
 
+    // Check if directory exists and if auto-delete is enabled
+    const FolderStatus = await checkFileExists(
+      this.#Directory,
+      this.#AutoDelete
+    );
+
+    // If auto-delete is enabled and directory already exists, throw an error
+    if (
+      this.#AutoDelete === true &&
+      FolderStatus.message === "Directory Not Deleted"
+    ) {
+      throw new Error(
+        "Directory already exists & cannot be deleted Automatically"
+      );
+    }
+
     // Clone the Repository from the specified provider to the directory
     if (this.#Provider.toUpperCase() === "GITHUB") {
-      // Check if directory exists and if auto-delete is enabled
-      const FolderStatus = await checkFileExists(
+      // Execute git clone command for GitHub repository & Return It
+      return await GithubCloner(
+        this.#UserName,
+        RepositoryName,
         this.#Directory,
-        this.#AutoDelete,
+        Branch
       );
-
-      // If auto-delete is enabled and directory already exists, throw an error
-      if (this.#AutoDelete && !FolderStatus.OldFolderDeleted) {
-        throw new Error(
-          "Directory already exists & cannot be deleted Automatically",
-        );
-      }
-
-      // Execute git clone command for GitHub repository
-      const GitHubStatus = await methods.Command.Execute(
-        `git clone https://github.com/${this.#UserName}/${RepositoryName}.git ./${this.#Directory}`,
-      );
-
-      // Check if Downloaded or not
-      if (GitHubStatus.error && (GitHubStatus.error as any).code === 128) {
-        return false; // Download Failed
-      }
-      return true; // Download finished
     }
 
     // Clone the Repository from BitBucket to directory
     if (this.#Provider.toUpperCase() === "BITBUCKET") {
-      // Check if directory exists and if auto-delete is enabled
-      const FolderStatus = await checkFileExists(
-        this.#Directory,
-        this.#AutoDelete,
-      );
-
-      // If auto-delete is enabled and directory already exists, throw an error
-      if (this.#AutoDelete && !FolderStatus.OldFolderDeleted) {
-        throw new Error(
-          "Directory already exists & cannot be deleted Automatically",
-        );
-      }
-
       // Execute git clone command for BitBucket repository
-      const BitBucketStatus = await methods.Command.Execute(
-        `git clone https://bitbucket.org/${this.#UserName}/${RepositoryName}.git ./${this.#Directory}`,
+      return await BitBucketCloner(
+        this.#UserName,
+        RepositoryName,
+        this.#Directory,
+        Branch
       );
-
-      // Check if Downloaded or not
-      if (
-        BitBucketStatus.error &&
-        (BitBucketStatus.error as any).code === 128
-      ) {
-        return false; // Download Failed
-      }
-      return true; // Download finished
     }
 
     // Clone the Repository from GitLab to directory
     if (this.#Provider.toUpperCase() === "GITLAB") {
-      // Check if directory exists and if auto-delete is enabled
-      const FolderStatus = await checkFileExists(
+      // Execute git clone command for GitLab repository & Return It
+      return await GitlabCloner(
+        this.#UserName,
+        RepositoryName,
         this.#Directory,
-        this.#AutoDelete,
-      );
-
-      // If auto-delete is enabled and directory already exists, throw an error
-      if (this.#AutoDelete && !FolderStatus.OldFolderDeleted) {
-        throw new Error(
-          "Directory already exists & cannot be deleted Automatically",
-        );
-      }
-
-      // Execute git clone command for GitLab repository
-      const GitlabStatus = await methods.Command.Execute(
-        `git clone https://gitlab.com/${this.#UserName}/${RepositoryName}.git ./${this.#Directory}`,
-      );
-
-      // Check if Downloaded or not
-      if (GitlabStatus.error && (GitlabStatus.error as any).code === 128) {
-        return false; // Download Failed
-      }
-      return true; // Download finished
+        Branch
+      ); // Clone Gitlab Repo
     }
   }
 
   /**
    * Clone a repository from the specified URL using git clone command.
    * @param {string} [RepositoryURL] - The URL of the repository to clone.
+   * @param {string} [Branch] - Branch name to clone (Default main)
    * @returns {Promise<bool | undefined>} - A Promise that resolves to true if the download finishes successfully, false if it fails, or undefined if an error occurs.
    */
-  static async Clone(RepositoryURL?: string): Promise<bool | undefined> {
+  static async Clone(
+    RepositoryURL?: str,
+    Branch = "main"
+  ): Promise<bool | undefined> {
     // Execute the git clone command to clone the repository specified by RepositoryURL
     const GitStatus = await methods.Command.Execute(
-      `git clone ${RepositoryURL}.git`,
+      `git clone -b ${Branch} ${RepositoryURL}.git`
     );
 
     // Check if any error occurred during the cloning process
