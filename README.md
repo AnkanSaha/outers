@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/outers.svg)](https://badge.fury.io/js/outers)
 
-### This package provides services like Response Sender, Colorful Console, HTTP Status Codes, API Call, Random Number Generate, Create Cluster in NodeJS Easily also you can Store Temporary Data in Server Side like localStorage in Client Side
+ This package provides services like Response Sender, Colorful Console, HTTP Status Codes, API Call, Random Number Generate, Create Cluster in NodeJS Easily also you can Store Temporary Data in Server Side like localStorage in Client Side
 
 ## Usage
 
@@ -371,6 +371,30 @@ methods.GitCloner.Clone("REPOSITORY_URL").then((res) => {
   console.log(res);
 }); // it will clone the repository in the current directory;
 ```
+
+# Control User Agent Access in NodeJS
+
+```javascript
+const { Middleware } = require("outers"); // import the package
+
+app.use(
+  "/api",
+  Middleware.UserAccessController(
+    ["ARRAY OF BROWSERS NAMES"],
+    ["ARRAY OF BROWSERS VERSIONS"]
+    FailedStatusCode,
+    ErrorMessage,
+    Reverse,
+  ),
+  MainFunction,
+); // control the User Agent Access in NodeJS with the Middleware function
+```
+
+- Note : You can pass as many as you want Browsers Names in the first parameter of the function
+- Note : You can pass as many as you want Browsers Versions in the second parameter of the function (it is optional)
+- Note : You can pass the Failed Status Code in the third parameter of the function, by default it is set to 403, it will send a 403 status code if the verification failed
+- Note : You can pass the Error Message in the fourth parameter of the function, by default it is set to 'You are not allowed to access this URL', it will send a error message if the verification failed
+- Note : You can pass the Reverse in the fifth parameter of the function, by default it is set to false, if you set it to true then it will reverse the verification, it will send a 403 status code if the verification success
 
 ## License
 
