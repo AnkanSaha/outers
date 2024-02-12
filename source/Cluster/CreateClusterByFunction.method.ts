@@ -33,7 +33,7 @@ export default function Config(
   engineMiddlewares: EngineMiddlewares[] = [], // Any Middlewares to apply
   BeforeListenFunctions: any[] = [], // Any Functions to run before listen
   AfterListenFunctions: any[] = [], // Any Functions to run after listen
-  FunctionMiddlewares: any[] = [] // Any Middlewares to apply
+  FunctionMiddlewares: any[] = [], // Any Middlewares to apply
 ): ResponseObject | undefined {
   // Check if User Provided Express Server or not
   if (!ExpressServer || ExpressServer === undefined) {
@@ -69,7 +69,7 @@ export default function Config(
         1024 /
         1024 /
         1024
-      ).toFixed(2)} GB Free Ram : ${cpus()[0].model}`
+      ).toFixed(2)} GB Free Ram : ${cpus()[0].model}`,
     );
 
     // Create a worker according to the number that is specified
@@ -82,7 +82,7 @@ export default function Config(
     ClusterConfig.on("online", (worker) => {
       Console.green(`🚀 Worker ${worker.process.pid} started 🚀`);
       Console.blue(
-        `Environment Variables Loaded Successfully in Worker : ${worker.process.pid}`
+        `Environment Variables Loaded Successfully in Worker : ${worker.process.pid}`,
       );
       GlobalResponseObject.ActiveWorker++; // Increment Active Worker Count by 1
       Console.yellow(`Worker ${worker.process.pid} is listening`);
@@ -95,7 +95,7 @@ export default function Config(
       ClusterConfig.fork();
       Console.green(`🚀 Worker ${worker.process.pid} restarted 🚀`);
       Console.blue(
-        `Environment Variables Loaded Successfully in Worker : ${worker.process.pid}`
+        `Environment Variables Loaded Successfully in Worker : ${worker.process.pid}`,
       );
       GlobalResponseObject.ActiveWorker++; // Increment Active Worker Count by 1
       Console.yellow(`Worker ${worker.process.pid} is listening`);

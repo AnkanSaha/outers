@@ -9,7 +9,7 @@ export default function (
   BrowserVersions?: string[],
   StatusCode?: number,
   ErrorMessage?: string,
-  Reverse?: boolean
+  Reverse?: boolean,
 ) {
   if (BrowserNames.length === 0)
     throw new Error("BrowserNames array cannot be empty"); // Throw Error if AllowedURLs array is empty
