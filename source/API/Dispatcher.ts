@@ -61,6 +61,7 @@ export class APiCall {
    * 'application/json'}` which sets the content type of the request to JSON.
    * @returns the result of the `PostFetch` function, which is awaited.
    */
+  
   public async Post(
     path: string,
     Data: any,
