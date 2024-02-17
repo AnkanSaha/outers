@@ -8,6 +8,7 @@ type bool = boolean;
 //  The SendFileResponse function sends a file response with the specified status, status code, message, and
 export default interface FileResponseInterfaces {
   response: {
+    setHeader: (name: str, value: str) => void;
     status: (statusCode: int) => {
       sendFile: (Filename: unknown, { root }: { root: str }) => void;
       cookie: (
@@ -36,6 +37,7 @@ export default interface FileResponseInterfaces {
       options: cookieOptions;
     },
   ];
+  contentType: str;
 }
 
 // Section Interfaces
