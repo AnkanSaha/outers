@@ -13,7 +13,7 @@ export class UniqueGen {
     this.#_length = length;
   }
 
-  // Methods
+  // Methods for generating random values
   /**
    * The function "RandomNumber" generates a random number with the option to include zero and the
    * ability to provide a custom set of numbers.
