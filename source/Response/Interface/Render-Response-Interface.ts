@@ -10,13 +10,13 @@ export default interface RenderResponseInterface {
   response: {
     setHeader: (name: str, value: str) => void;
     status: (statusCode: int) => {
-      render: (Filename: unknown, Variables?:obj) => void;
+      render: (Filename: unknown, Variables?: obj) => void;
       cookie: (
         name: str,
         value: str,
         options: cookieOptions,
       ) => {
-        render: (Filename: unknown, Variables?:obj) => void;
+        render: (Filename: unknown, Variables?: obj) => void;
       };
     };
     cookie: (
@@ -24,7 +24,7 @@ export default interface RenderResponseInterface {
       value: str,
       options: cookieOptions,
     ) => {
-        render: (Filename: unknown, Variables?:obj) => void;
+      render: (Filename: unknown, Variables?: obj) => void;
     };
   };
   statusCode: int;

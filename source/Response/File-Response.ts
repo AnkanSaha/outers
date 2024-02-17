@@ -21,9 +21,8 @@ export const SendFileResponse = ({
   cookieData,
   contentType,
 }: FileResponseInterfaces) => {
-
   // Set Content Type if available
-  if (contentType){
+  if (contentType) {
     response.setHeader("Content-Type", contentType);
   }
 
@@ -35,4 +34,4 @@ export const SendFileResponse = ({
   }
 
   response.status(statusCode).sendFile(Filename, { root: rootName }); // sends response with file
-}
+};

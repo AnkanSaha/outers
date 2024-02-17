@@ -26,9 +26,8 @@ export const JSONSendResponse = ({
   cookieData,
   contentType,
 }: JSONresponseInterface) => {
-
   // Set Content Type if available
-  if(contentType){
+  if (contentType) {
     response.setHeader("Content-Type", contentType); // Set Content Type
   }
 

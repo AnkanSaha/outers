@@ -14,26 +14,25 @@ import RenderResponseInterface from "./Interface/Render-Response-Interface";
  * @param {string} options.contentType - The content type of the response.
  */
 export default function RenderResponse({
-    statusCode,
-    FileName,
-    Variables,
-    cookieData,
-    response,
-    contentType,
-  }: RenderResponseInterface) {
+  statusCode,
+  FileName,
+  Variables,
+  cookieData,
+  response,
+  contentType,
+}: RenderResponseInterface) {
+  // Set Content Type if available
+  if (contentType) {
+    response.setHeader("Content-Type", contentType);
+  }
 
-    // Set Content Type if available
-    if (contentType) {
-        response.setHeader("Content-Type", contentType);
-    }
+  // Add Cookie Data if available
+  if (cookieData) {
+    cookieData.forEach(({ name, value, options }) => {
+      response.cookie(name, value, options); // sets cookie
+    });
+  }
 
-    // Add Cookie Data if available
-    if(cookieData){
-        cookieData.forEach(({ name, value, options }) => {
-            response.cookie(name, value, options); // sets cookie
-        });
-    }
-    
-    // Set status code and render file
-    response.status(statusCode).render(FileName, Variables);
+  // Set status code and render file
+  response.status(statusCode).render(FileName, Variables);
 }
