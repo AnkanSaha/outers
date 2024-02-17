@@ -22,6 +22,7 @@ import {
 import { StatusCode } from "../StatusCode/Code"; // Import StatusCode Module
 import { JSONSendResponse } from "../Response/JSON-Response"; // Import JSON Response Module
 import { SendFileResponse } from "../Response/File-Response"; // Import File Response Module
+import RenderResponse from "../Response/Render-Response"; // Import Render Response Module
 import { UniqueGen } from "../UniqueGen/Base"; // Import UniqueGen Module
 import Jwt from "../JWT/JWT.method"; // Import JWT Manager Module
 import CreateClusterByFunction from "../Cluster/CreateClusterByFunction.method"; // Import Cluster Module
@@ -66,6 +67,7 @@ export const StatusCodes = StatusCode; // Export StatusCode Module
 export const Serve = Object.freeze({
   JSON: JSONSendResponse,
   File: SendFileResponse,
+  Render: RenderResponse,
 }); // Export JSON Response Module
 
 // Export All Middlewares

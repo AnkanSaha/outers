@@ -59,6 +59,7 @@ Serve.JSON({ // send a JSON response to the client
             }
 
      ]
+     contentType: 'application/x-www-form-urlencoded' // set custom content type for your need
 }) // send a JSON response to the client
 
 Serve.File({ // send a file to the client
@@ -79,6 +80,7 @@ Serve.File({ // send a file to the client
             }
 
      ]
+     contentType: 'application/x-www-form-urlencoded' // set content type as your need
 }) // send a file to the client
 ```
 

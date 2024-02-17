@@ -19,13 +19,20 @@ export const SendFileResponse = ({
   Filename,
   rootName,
   cookieData,
+  contentType,
 }: FileResponseInterfaces) => {
+
+  // Set Content Type if available
+  if (contentType){
+    response.setHeader("Content-Type", contentType);
+  }
+
+  // Set Cookie Data to Response if it exists
   if (cookieData) {
     cookieData.forEach((CookieItems) => {
       response.cookie(CookieItems.name, CookieItems.value, CookieItems.options); // sets cookie for each cookie in cookieData
     });
-    response.status(statusCode).sendFile(Filename, { root: rootName }); // sends response with cookie
-  } else {
-    response.status(statusCode).sendFile(Filename, { root: rootName }); // sends response without cookie
   }
-};
+
+  response.status(statusCode).sendFile(Filename, { root: rootName }); // sends response with file
+}

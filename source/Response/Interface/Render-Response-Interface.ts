@@ -1,24 +1,22 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // types
 type str = string;
-type obj = object;
 type int = number;
+type obj = object;
 type bool = boolean;
 
-// interfaces
-/* The `interface responseInterface` is defining the structure of an object that has the following
-properties: */
-export default interface JSONresponseInterface {
+//  The SendFileResponse function sends a template response with the specified status, status code, message, and
+export default interface RenderResponseInterface {
   response: {
     setHeader: (name: str, value: str) => void;
     status: (statusCode: int) => {
-      json: (data: obj) => void;
+      render: (Filename: unknown, Variables?:obj) => void;
       cookie: (
         name: str,
         value: str,
         options: cookieOptions,
       ) => {
-        json: (data: obj) => void;
+        render: (Filename: unknown, Variables?:obj) => void;
       };
     };
     cookie: (
@@ -26,14 +24,12 @@ export default interface JSONresponseInterface {
       value: str,
       options: cookieOptions,
     ) => {
-      json: (data: obj) => void;
+        render: (Filename: unknown, Variables?:obj) => void;
     };
   };
-  status: bool;
   statusCode: int;
-  Title: str;
-  message: str;
-  data: obj | undefined | unknown;
+  FileName?: str;
+  Variables?: obj;
   cookieData?: [
     {
       name: str;
@@ -41,6 +37,7 @@ export default interface JSONresponseInterface {
       options: cookieOptions;
     },
   ];
+
   contentType?: str;
 }
 
