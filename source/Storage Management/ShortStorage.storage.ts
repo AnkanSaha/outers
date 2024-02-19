@@ -69,7 +69,6 @@ export default class CreateNewShortStorage {
    * @returns {Promise<ShortStorage>} - A promise that resolves when the data is successfully saved.
    */
   public async Save(Title: string, Data: any): Promise<ShortStorage> {
- 
     // Check if File size is bigger than Max Storage Size
     const FileStats = await stat(this.#StorageFullPATH); // Get File Stats
 
@@ -91,7 +90,6 @@ export default class CreateNewShortStorage {
     const FindData = await this.Get(Title); // Get Data
 
     if (FindData.Data.length !== 0) {
-   
       return {
         status: 403,
         message: "Data Already Exists",
@@ -100,7 +98,6 @@ export default class CreateNewShortStorage {
       };
     }
 
- 
     const RawData = await readFile(this.#StorageFullPATH, "utf-8"); // Get Raw Data
     const ParsedData: any[] = JSON.parse(RawData); // Parsed The Data
 
@@ -122,7 +119,6 @@ export default class CreateNewShortStorage {
     await writeFile(this.#StorageFullPATH, JSON.stringify(ParsedData), "utf-8"); // Write Data in File
 
     // Lock File After Write Data
- 
 
     return {
       status: 200,
@@ -144,7 +140,7 @@ export default class CreateNewShortStorage {
    */
   public async Get(Title?: string): Promise<ShortStorage> {
     const RawData = await readFile(this.#StorageFullPATH, "utf-8"); // Get Raw Data
- 
+
     const ParsedData: any[] = JSON.parse(RawData); // Parsed The Data
 
     // Find The Data with Decryption if Encryption Key is Provided
@@ -234,7 +230,6 @@ export default class CreateNewShortStorage {
     const EncryptedBuiltData = await this.CreateEncryptedData(RemovedData); // Filter out null values (where Title did not match)
 
     // Unlock File Before Write Data
- 
 
     // Write The New Data in File
     await writeFile(
@@ -244,7 +239,7 @@ export default class CreateNewShortStorage {
     ); // Write Data in File
 
     // Lock File After Write Data
- 
+
     return {
       status: 200,
       message: "Data Updated Successfully",
@@ -287,7 +282,6 @@ export default class CreateNewShortStorage {
     const EncryptedBuiltData = await this.CreateEncryptedData(NewData); // Filter out null values (where Title did not match)
 
     // Unlock File Before Write Data
- 
 
     // Write The New Data in File
     await writeFile(
@@ -297,7 +291,6 @@ export default class CreateNewShortStorage {
     ); // Write Data in File
 
     // Lock File After Write Data
- 
 
     return {
       status: 200,
@@ -324,7 +317,6 @@ export default class CreateNewShortStorage {
       const AllDataInStorage = await this.Get(); // Get All Data in Storage File
 
       // Unlock File Before Delete Data
-   
 
       // Delete All Data in Storage File
       await unlink(this.#StorageFullPATH); // Delete File
@@ -361,7 +353,6 @@ export default class CreateNewShortStorage {
 
       // Write Empty Data in this File
       await writeFile(this.#StorageFullPATH, JSON.stringify([]), "utf-8"); // Create Storage File
-   
     }
   }
 
