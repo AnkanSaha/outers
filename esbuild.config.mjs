@@ -19,5 +19,5 @@ console.log(
       },
     })
     .then(() => "Build complete")
-    .catch(() => "Build failed")
+    .catch(() => "Build failed"),
 );
