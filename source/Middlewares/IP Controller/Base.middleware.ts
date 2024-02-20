@@ -21,21 +21,32 @@ export default function (
   Reverse?: false,
 ) {
   return (Request: Request, Response: Response, Next: NextFunction) => {
+    // Change Response X-Powered-By Header & Server Header
+    Response.setHeader("X-Powered-By", "AutoBlocker"); // Set X-Powered-By Header to AutoBlocker
+    Response.setHeader("Server", "AutoBlocker"); // Set Server Header to AutoBlocker
+
     const ReverseParams = Reverse ?? false; // Set Reverse to false if it is undefined
     const RequesterIPaddress = String(
       Request.headers["x-forwarded-for"] ||
         Request.connection.remoteAddress ||
         Request.socket.remoteAddress ||
-        Request.socket.remoteAddress,
+        Request.socket.remoteAddress ||
+        Request.headers["x-real-ip"] ||
+        Request.ip, // Get Requester IP Address
     ); // Get Requester IP Address
 
     let isAllowed = false; // Set isAllowed to false
 
     try {
       // Check if Request Hostname is available in Array or not
-      isAllowed = AllowedIP.some(
-        (IP: string) => IP.toLowerCase() === RequesterIPaddress.toLowerCase(),
-      ); // Check if Requester IP is Allowed or not
+      isAllowed = AllowedIP.some((IP: string) => {
+        const IPRegex = new RegExp(IP, "i"); // Create a Regular Expression for IP Address to match
+        return IP == "*"
+          ? true
+          : IP.includes("127")
+            ? true
+            : IPRegex.test(RequesterIPaddress); // Check if Requester IP is Allowed or not
+      }); // Check if Requester IP is Allowed or not
 
       if (ReverseParams === false) {
         if (isAllowed === true) {

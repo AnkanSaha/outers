@@ -19,23 +19,25 @@ export default function (
     let BrowserIsAllowed: boolean = false; // Set BrowserIsAllowed to false
     let BrowserVersionIsAllowed: boolean = false; // Set BrowserVersionIsAllowed to false
 
-    // Change Response X-Powered-By Header
+    // Change Response X-Powered-By Header & Server Header
     Response.setHeader("X-Powered-By", "AutoBlocker"); // Set X-Powered-By Header to AutoBlocker
+    Response.setHeader("Server", "AutoBlocker"); // Set Server Header to AutoBlocker
 
     // Get User Agent & Browser Name & Version
     const UserAgent: string = Request.get("User-Agent") ?? ""; // Get User Agent
-    const BrowserName: string = UserAgent.split(" ")[0]; // Get Browser Name
     const BrowserVersion: string = UserAgent.split(" ")[1]; // Get Browser Version
 
     // Check if User Agent is available in Array or not
     BrowserIsAllowed = BrowserNames.some((name) => {
-      return name.toLowerCase() === BrowserName.toLowerCase();
+      const regex = new RegExp(name, "i"); // Create a Regular Expression for Browser Name to match
+      return regex.test(UserAgent); // Check if User Agent is Allowed or not
     });
 
     // Check if Browser Version is available in Array or not
     if (BrowserVersions) {
       BrowserVersionIsAllowed = BrowserVersions.some((version) => {
-        return version.toLowerCase() === BrowserVersion.toLowerCase();
+        const regex = new RegExp(version, "i"); // Create a Regular Expression for Browser Version to match
+        return regex.test(BrowserVersion); // Check if Browser Version is Allowed or not
       });
     }
 
@@ -55,7 +57,7 @@ export default function (
               ErrorMessage ??
               "You are not allowed to access this server from this browser and its version.",
             data: {
-              ClientBrowser: `${BrowserName} ${BrowserVersion}`,
+              BlockedBrowser: UserAgent,
             },
             cookieData: undefined,
           }); // Serve JSON
@@ -75,7 +77,7 @@ export default function (
               ErrorMessage ??
               "You are not allowed to access this server from this browser.",
             data: {
-              ClientBrowser: `${BrowserName}`,
+              BlockedBrowser: UserAgent,
             },
             cookieData: undefined,
           }); // Serve JSON
@@ -96,7 +98,7 @@ export default function (
               ErrorMessage ??
               "You are not allowed to access this server from this browser and its version.",
             data: {
-              ClientBrowser: `${BrowserName} ${BrowserVersion}`,
+              BlockedBrowser: UserAgent,
             },
             cookieData: undefined,
           }); // Serve JSON
@@ -114,7 +116,7 @@ export default function (
               ErrorMessage ??
               "You are not allowed to access this server from this browser.",
             data: {
-              ClientBrowser: `${BrowserName}`,
+              BlockedBrowser: UserAgent,
             },
             cookieData: undefined,
           }); // Serve JSON

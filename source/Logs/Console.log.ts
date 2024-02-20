@@ -1,4 +1,4 @@
-import color from "./bin/color"; // import color object from color.ts
+import { color } from "../Constant/Logs.Constant"; // import color object from color.ts
 
 // global types
 type globe =

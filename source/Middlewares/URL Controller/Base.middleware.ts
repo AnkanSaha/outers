@@ -27,15 +27,18 @@ export default function (
     const ReverseParams = Reverse ?? false; // Set Reverse to false if it is undefined
     let isAllowed = false; // Set isAllowed to false
 
-    // Change Response X-Powered-By Header
+    // Change Response X-Powered-By Header & Server Header
     Response.setHeader("X-Powered-By", "AutoBlocker"); // Set X-Powered-By Header to AutoBlocker
+    Response.setHeader("Server", "AutoBlocker"); // Set Server Header to AutoBlocker
 
     // Check if Request Hostname is available in Array or not
     isAllowed = AllowedURLs.some((url) => {
-      const normalizedUrl = url.toLowerCase().replace(/^https?:\/\//, ""); // Normalize URL by converting to lowercase and removing 'http://' or 'https://'
-      const normalizedHostname = Request.hostname.toLowerCase(); // Convert Request Hostname to lowercase
-
-      return normalizedUrl.includes(normalizedHostname);
+      const URLRegex = new RegExp(url, "i"); // Create a Regular Expression for URL to match
+      return url == "*"
+        ? true
+        : url.includes("localhost")
+          ? true
+          : URLRegex.test(Request.hostname); // Check if Requester URL is Allowed or not
     });
     try {
       if (ReverseParams === false) {
