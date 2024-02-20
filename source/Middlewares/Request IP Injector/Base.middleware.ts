@@ -20,7 +20,6 @@ import { StatusCode } from "../../StatusCode/Code"; // Import Status Codes
 
 export default (Methods?: string[]) => {
   // Allow only PUT, POST, PATCH, DELETE methods
-
   const AllowedMethods = Methods ?? ["PUT", "POST", "PATCH", "DELETE"]; // Allowed Methods
 
   // Convert to Upper Case in Array if any of the method is in lower case
@@ -30,13 +29,19 @@ export default (Methods?: string[]) => {
 
   return (Request: Request, Response: Response, Next: NextFunction) => {
     try {
+      // Change Response X-Powered-By Header & Server Header
+      Response.setHeader("X-Powered-By", "AutoBlocker"); // Set X-Powered-By Header to AutoBlocker
+      Response.setHeader("Server", "AutoBlocker"); // Set Server Header to AutoBlocker
+
       // Check if Request Method is Allowed
       if (AllowedMethods.includes(Request.method)) {
         const RequesterIPaddress =
           Request.headers["x-forwarded-for"] ||
           Request.connection.remoteAddress ||
           Request.socket.remoteAddress ||
-          Request.socket.remoteAddress; // Get Requester IP Address
+          Request.socket.remoteAddress ||
+          Request.headers["x-real-ip"] ||
+          Request.ip; // Get Requester IP Address
 
         // Inject Requester IP Address
         Request.body.RequesterIPaddress = RequesterIPaddress; // Inject Requester IP Address
