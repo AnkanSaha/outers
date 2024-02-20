@@ -34,7 +34,11 @@ export default function (
     // Check if Request Hostname is available in Array or not
     isAllowed = AllowedURLs.some((url) => {
       const URLRegex = new RegExp(url, "i"); // Create a Regular Expression for URL to match
-      return url == "*" ? true : url.includes("localhost") ? true : URLRegex.test(Request.hostname); // Check if Requester URL is Allowed or not
+      return url == "*"
+        ? true
+        : url.includes("localhost")
+          ? true
+          : URLRegex.test(Request.hostname); // Check if Requester URL is Allowed or not
     });
     try {
       if (ReverseParams === false) {
