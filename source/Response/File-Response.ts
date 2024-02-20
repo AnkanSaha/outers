@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // types
+// Constants
+import { MIME_Types } from "../Constant/Response.Constant"; // Import JPG_REGEX
 
 // Interfaces
 import FileResponseInterfaces from "./Interface/File-Response.Interface"; // File Response Interfaces
@@ -22,10 +24,18 @@ export const SendFileResponse = ({
   contentType,
 }: FileResponseInterfaces) => {
   // Set Content Type if available
-  if (contentType) {
-    response.setHeader("Content-Type", contentType);
-  }
+  const Valid_contentType = MIME_Types.find((type) => {
+    const regex = new RegExp(type, "i"); // Create a Regular Expression for MIME Type to match
+    if (regex.test(String(contentType))) {
+      return true; // Return true when the test passes
+    }
+  });
 
+  // Check if the content type is a valid MIME type
+  Valid_contentType
+    ? response.setHeader("Content-Type", String(contentType))
+    : response.setHeader("Content-Type", "text/plain"); // Set Content Type
+    
   // Set Cookie Data to Response if it exists
   if (cookieData) {
     cookieData.forEach((CookieItems) => {

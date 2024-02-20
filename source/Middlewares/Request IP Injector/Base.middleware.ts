@@ -6,6 +6,7 @@
  * @returns Express middleware function.
  */
 import { Request, NextFunction, Response } from "express"; // Import Request from express
+import { XPoweredBy, ServerName } from "../../Constant/Middleware.Constant"; // Import X-Powered-By Header
 
 // Import Console from Utilities
 import { red } from "../../Logs/Console.log"; // import Red Console
@@ -29,9 +30,9 @@ export default (Methods?: string[]) => {
 
   return (Request: Request, Response: Response, Next: NextFunction) => {
     try {
-      // Change Response X-Powered-By Header & Server Header
-      Response.setHeader("X-Powered-By", "AutoBlocker"); // Set X-Powered-By Header to AutoBlocker
-      Response.setHeader("Server", "AutoBlocker"); // Set Server Header to AutoBlocker
+    // Change Response X-Powered-By Header & Server Header
+    Response.setHeader("X-Powered-By", XPoweredBy); // Set X-Powered-By Header
+    Response.setHeader("Server", ServerName); // Set Server Header
 
       // Check if Request Method is Allowed
       if (AllowedMethods.includes(Request.method)) {

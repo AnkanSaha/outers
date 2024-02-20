@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from "express"; // Import Express Module
+import { XPoweredBy, ServerName } from "../../Constant/Middleware.Constant"; // Import X-Powered-By Header
 
 // Import Interfaces
 import { Serve, StatusCodes } from "../../Config/outer"; // Import red from outers
@@ -28,8 +29,8 @@ export default function (
     let isAllowed = false; // Set isAllowed to false
 
     // Change Response X-Powered-By Header & Server Header
-    Response.setHeader("X-Powered-By", "AutoBlocker"); // Set X-Powered-By Header to AutoBlocker
-    Response.setHeader("Server", "AutoBlocker"); // Set Server Header to AutoBlocker
+    Response.setHeader("X-Powered-By", XPoweredBy); // Set X-Powered-By Header
+    Response.setHeader("Server", ServerName); // Set Server Header
 
     // Check if Request Hostname is available in Array or not
     isAllowed = AllowedURLs.some((url) => {
