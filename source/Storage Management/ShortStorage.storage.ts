@@ -13,7 +13,7 @@ import {
 import { methods } from "../Config/outer"; // Import Encryption and Decryption Functions
 
 // Interfaces for ShortStorage Response
-import { ShortStorage } from "./Interface/ShortStorage.interface"; // Import ShortStorage Interface
+import { ShortStorage } from "../Config/Interfaces/Storage Management/ShortStorage.interface"; // Import ShortStorage Interface
 
 // Main Function Sto Store Data in Short Storage
 /**

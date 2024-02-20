@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+// Constants
+import { MIME_Types } from "../Config/Constant/Response.Constant"; // Import JPG_REGEX
 
 // Import interfaces
-import RenderResponseInterface from "./Interface/Render-Response-Interface";
+import RenderResponseInterface from "../Config/Interfaces/Response/Render-Response-Interface"; // Import RenderResponseInterface
 
 /**
  * Renders a response with provided parameters.
@@ -23,7 +25,18 @@ export default function RenderResponse({
 }: RenderResponseInterface) {
   // Set Content Type if available
   if (contentType) {
-    response.setHeader("Content-Type", contentType);
+    // Regex to check if the content type is a valid MIME type
+    const Valid_contentType = MIME_Types.find((type) => {
+      const regex = new RegExp(type, "i"); // Create a Regular Expression for MIME Type to match
+      if (regex.test(contentType)) {
+        return true; // Return true when the test passes
+      }
+    });
+
+    // Check if the content type is a valid MIME type
+    Valid_contentType
+      ? response.setHeader("Content-Type", contentType)
+      : response.setHeader("Content-Type", "text/plain"); // Set Content Type
   }
 
   // Add Cookie Data if available

@@ -7,7 +7,7 @@ type bool = boolean; // Boolean Type
 
 // Import Package for executeCommand
 import { methods } from "../../Config/outer"; // import package from outer
-import { BitbucketURL } from "../../Constant/Git Cloner.Constant"; // Import Bitbucket URL
+import { BitbucketURL } from "../../Config/Constant/Git Cloner.Constant"; // Import Bitbucket URL
 
 export default async function BitBucketCloner(
   UserName: str,

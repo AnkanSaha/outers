@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // types
+// Constants
+import { MIME_Types } from "../Config/Constant/Response.Constant"; // Import JPG_REGEX
 
 // Interfaces
-import JSONresponseInterface from "./Interface/JSON-Response.Interface"; // JSON Interface
+import JSONresponseInterface from "../Config/Interfaces/Response/JSON-Response.Interface"; // JSON Interface
 
 /**
  * Sends a JSON response with the specified status, status code, title, message, data, and optional cookie data.
@@ -28,7 +30,18 @@ export const JSONSendResponse = ({
 }: JSONresponseInterface) => {
   // Set Content Type if available
   if (contentType) {
-    response.setHeader("Content-Type", contentType); // Set Content Type
+    // Regex to check if the content type is a valid MIME type
+    const Valid_contentType = MIME_Types.find((type) => {
+      const regex = new RegExp(type, "i"); // Create a Regular Expression for MIME Type to match
+      if (regex.test(contentType)) {
+        return true; // Return true when the test passes
+      }
+    });
+
+    // Check if the content type is a valid MIME type
+    Valid_contentType
+      ? response.setHeader("Content-Type", contentType)
+      : response.setHeader("Content-Type", "text/plain"); // Set Content Type
   }
 
   // Add Cookie Data if available
