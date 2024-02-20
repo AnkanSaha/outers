@@ -23,6 +23,7 @@ import { StatusCode } from "../StatusCode/Code"; // Import StatusCode Module
 import { JSONSendResponse } from "../Response/JSON-Response"; // Import JSON Response Module
 import { SendFileResponse } from "../Response/File-Response"; // Import File Response Module
 import RenderResponse from "../Response/Render-Response"; // Import Render Response Module
+import JSONResponser from "../Response/Class/JSON-Response.class"; // Import JSON Responser Class
 import { UniqueGen } from "../UniqueGen/Base"; // Import UniqueGen Module
 import Jwt from "../JWT/JWT.method"; // Import JWT Manager Module
 import CreateClusterByFunction from "../Cluster/CreateClusterByFunction.method"; // Import Cluster Module
@@ -93,6 +94,9 @@ export const methods = Object.freeze({
       Delete: DeleteFetch,
     },
     ClassBased: APiCall,
+  },
+  Response : {
+    JSON: JSONResponser,
   },
   Storage: {
     CreateNewShortStorage,
