@@ -10,7 +10,7 @@ import { Console } from "../Config/outer"; // Import Console module
 import {
   EngineMiddlewares,
   ResponseObject,
-} from "./Interface/CreateClusterByFunction.interfaces"; // Import Interfaces
+} from "../Config/Interfaces/Cluster/CreateClusterByFunction.interfaces"; // Import Interfaces
 
 // Main Function
 /**
