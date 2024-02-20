@@ -7,6 +7,7 @@ type bool = boolean; // Boolean Type
 
 // Import Package for executeCommand
 import { methods } from "../../Config/outer"; // import package from outer
+import { GitlabURL } from "../../Constant/Git Cloner.Constant"; // Import Gitlab URL
 
 export default async function GitlabCloner(
   UserName: str,
@@ -16,7 +17,7 @@ export default async function GitlabCloner(
 ): Promise<bool> {
   // Execute git clone command for Gitlab repository
   const GitlabStatus = await methods.Command.Execute(
-    `git clone -b ${BranchName} https://gitlab.com/${UserName}/${RepositoryName}.git ./${Directory}`,
+    `git clone -b ${BranchName} ${GitlabURL}${UserName}/${RepositoryName}.git ./${Directory}`,
   );
 
   // Check if Downloaded or not
