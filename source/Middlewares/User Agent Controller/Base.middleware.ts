@@ -1,5 +1,8 @@
 import { Request, Response, NextFunction } from "express"; // Import Express Module
-import { XPoweredBy, ServerName } from "../../Config/Constant/Middleware.Constant"; // Import X-Powered-By Header
+import {
+  XPoweredBy,
+  ServerName,
+} from "../../Config/Constant/Middleware.Constant"; // Import X-Powered-By Header
 
 // Import Interfaces
 import { Serve, StatusCodes } from "../../Config/outer"; // Import red from outers

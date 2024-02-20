@@ -56,7 +56,7 @@ export default class JSONResponser {
     contentType: string,
     Title?: string,
     Message?: string,
-    CookieData?: CookieType
+    CookieData?: CookieType,
   ) {
     this.#StatusCode = StatusCode;
     this.#Title = Title;
@@ -75,7 +75,7 @@ export default class JSONResponser {
     Title?: string,
     Message?: string,
     StatusCode?: number,
-    CookieData?: CookieType
+    CookieData?: CookieType,
   ) {
     // If CookieData is provided, set the cookies. Otherwise, do nothing.
     if (this.#CookieData) {
@@ -105,15 +105,13 @@ export default class JSONResponser {
     }
 
     // Send the JSON response.
-    this.#response
-      .status(this.#StatusCode)
-      .json({
-        status: this.#Title,
-        statusCode: this.#StatusCode,
-        Title: this.#Title ?? undefined,
-        message: this.#Message ?? undefined,
-        data: Data,
-      });
+    this.#response.status(this.#StatusCode).json({
+      status: this.#Title,
+      statusCode: this.#StatusCode,
+      Title: this.#Title ?? undefined,
+      message: this.#Message ?? undefined,
+      data: Data,
+    });
   }
 
   /**

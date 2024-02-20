@@ -35,7 +35,7 @@ export const SendFileResponse = ({
   Valid_contentType
     ? response.setHeader("Content-Type", String(contentType))
     : response.setHeader("Content-Type", "text/plain"); // Set Content Type
-    
+
   // Set Cookie Data to Response if it exists
   if (cookieData) {
     cookieData.forEach((CookieItems) => {

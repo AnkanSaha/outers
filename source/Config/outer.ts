@@ -95,7 +95,7 @@ export const methods = Object.freeze({
     },
     ClassBased: APiCall,
   },
-  Response : {
+  Response: {
     JSON: JSONResponser,
   },
   Storage: {
