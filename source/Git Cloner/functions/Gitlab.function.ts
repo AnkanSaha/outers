@@ -7,7 +7,7 @@ type bool = boolean; // Boolean Type
 
 // Import Package for executeCommand
 import { methods } from "../../Config/outer"; // import package from outer
-import { GitlabURL } from "../../Constant/Git Cloner.Constant"; // Import Gitlab URL
+import { GitlabURL } from "../../Config/Constant/Git Cloner.Constant"; // Import Gitlab URL
 
 export default async function GitlabCloner(
   UserName: str,

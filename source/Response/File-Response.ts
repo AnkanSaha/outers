@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // types
 // Constants
-import { MIME_Types } from "../Constant/Response.Constant"; // Import JPG_REGEX
+import { MIME_Types } from "../Config/Constant/Response.Constant"; // Import JPG_REGEX
 
 // Interfaces
 import FileResponseInterfaces from "./Interface/File-Response.Interface"; // File Response Interfaces

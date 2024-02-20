@@ -2,7 +2,7 @@
 /* eslint-disable no-await-in-loop */
 import { red } from "../Logs/Console.log"; // Importing from outers for coloring the output
 import { sign, verify } from "jsonwebtoken"; // Importing jsonwebtoken for generating the token
-import { todayDate } from "../Constant/JWT.Constant"; // Importing todayDate from JWT.Constant
+import { todayDate } from "../Config/Constant/JWT.Constant"; // Importing todayDate from JWT.Constant
 
 // Class for all features
 /* The Jwt class is used to generate a token with a payload and optional expiry time. */

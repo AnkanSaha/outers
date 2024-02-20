@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // Constants
-import { MIME_Types } from "../Constant/Response.Constant"; // Import JPG_REGEX
+import { MIME_Types } from "../Config/Constant/Response.Constant"; // Import JPG_REGEX
 
 // Import interfaces
 import RenderResponseInterface from "./Interface/Render-Response-Interface";

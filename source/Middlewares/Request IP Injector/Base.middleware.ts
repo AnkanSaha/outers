@@ -6,7 +6,7 @@
  * @returns Express middleware function.
  */
 import { Request, NextFunction, Response } from "express"; // Import Request from express
-import { XPoweredBy, ServerName } from "../../Constant/Middleware.Constant"; // Import X-Powered-By Header
+import { XPoweredBy, ServerName } from "../../Config/Constant/Middleware.Constant"; // Import X-Powered-By Header
 
 // Import Console from Utilities
 import { red } from "../../Logs/Console.log"; // import Red Console
