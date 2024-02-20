@@ -3,7 +3,7 @@
 import { MIME_Types } from "../Config/Constant/Response.Constant"; // Import JPG_REGEX
 
 // Import interfaces
-import RenderResponseInterface from "./Interface/Render-Response-Interface";
+import RenderResponseInterface from "../Config/Interfaces/Response/Render-Response-Interface"; // Import RenderResponseInterface
 
 /**
  * Renders a response with provided parameters.

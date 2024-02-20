@@ -4,7 +4,7 @@
 import { MIME_Types } from "../Config/Constant/Response.Constant"; // Import JPG_REGEX
 
 // Interfaces
-import JSONresponseInterface from "./Interface/JSON-Response.Interface"; // JSON Interface
+import JSONresponseInterface from "../Config/Interfaces/Response/JSON-Response.Interface"; // JSON Interface
 
 /**
  * Sends a JSON response with the specified status, status code, title, message, data, and optional cookie data.

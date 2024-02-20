@@ -4,7 +4,7 @@
 import { MIME_Types } from "../Config/Constant/Response.Constant"; // Import JPG_REGEX
 
 // Interfaces
-import FileResponseInterfaces from "./Interface/File-Response.Interface"; // File Response Interfaces
+import FileResponseInterfaces from "../Config/Interfaces/Response/File-Response.Interface"; // File Response Interfaces
 
 // Send File Response
 /**
