@@ -84,6 +84,17 @@ Serve.File({ // send a file to the client
 }) // send a file to the client
 ```
 
+## Class Based Response Sender
+
+```javascript
+const { methods } = require('outers'); // import the package
+
+// Create a new instance of ResponseSender class
+const OK = new methods.Response.JSON(response, StatusCode, contentType?); // create a new instance of JSON class with response, status code and content type
+
+OK.Send(Data, Message, Title, CookieData?); // send a JSON response to the client
+```
+
 ## API Call in Efficient Way
 
 ```javascript

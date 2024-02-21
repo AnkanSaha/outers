@@ -78,8 +78,8 @@ export default class JSONResponser {
    */
   Send(
     Data: any,
-    Title?: string,
     Message?: string,
+    Title?: string,
     StatusCode?: number,
     CookieData?: CookieType
   ) {
