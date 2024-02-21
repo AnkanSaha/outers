@@ -24,17 +24,14 @@ export const SendFileResponse = ({
   contentType,
 }: FileResponseInterfaces) => {
   // Set Content Type if available
-  const Valid_contentType = MIME_Types.find((type) => {
-    const regex = new RegExp(type, "i"); // Create a Regular Expression for MIME Type to match
-    if (regex.test(String(contentType))) {
-      return true; // Return true when the test passes
+  if (contentType) {
+    for (const iterator of MIME_Types) {
+      if (iterator.toLowerCase().includes(contentType.toLowerCase())) {
+        response.setHeader("Content-Type", iterator);
+        return;
+      }
     }
-  });
-
-  // Check if the content type is a valid MIME type
-  Valid_contentType
-    ? response.setHeader("Content-Type", String(contentType))
-    : response.setHeader("Content-Type", "text/plain"); // Set Content Type
+  }
 
   // Set Cookie Data to Response if it exists
   if (cookieData) {
