@@ -56,7 +56,7 @@ export default class JSONResponser {
     contentType: string,
     Title?: string,
     Message?: string,
-    CookieData?: CookieType
+    CookieData?: CookieType,
   ) {
     this.#StatusCode = StatusCode;
     this.#Title = Title;
@@ -81,7 +81,7 @@ export default class JSONResponser {
     Message?: string,
     Title?: string,
     StatusCode?: number,
-    CookieData?: CookieType
+    CookieData?: CookieType,
   ) {
     // If CookieData is provided, set the cookies. Otherwise, do nothing.
     if (this.#CookieData) {
