@@ -19,3 +19,10 @@ export const MIME_Types = [
   "image/x-portable-graymap",
   "image/x-portable-pixmap",
 ]; // List of MIME Types
+
+// Cookie Type for Global
+export type CookieType = Array<{
+  name: string;
+  value: string;
+  options: object;
+}>; // Global Cookie Type
