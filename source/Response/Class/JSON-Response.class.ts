@@ -78,8 +78,8 @@ export default class JSONResponser {
    */
   Send(
     Data: any,
-    Title?: string,
     Message?: string,
+    Title?: string,
     StatusCode?: number,
     CookieData?: CookieType,
   ) {
@@ -126,16 +126,12 @@ export default class JSONResponser {
    */
   private setContentType() {
     if (this.#contentType) {
-      const Valid_contentType = MIME_Types.find((type) => {
-        const regex = new RegExp(type, "i");
-        if (regex.test(this.#contentType)) {
-          return true;
+      for (const iterator of MIME_Types) {
+        if (iterator.toLowerCase().includes(this.#contentType.toLowerCase())) {
+          this.#response.setHeader("Content-Type", iterator);
+          return;
         }
-      });
-
-      Valid_contentType
-        ? this.#response.setHeader("Content-Type", this.#contentType)
-        : this.#response.setHeader("Content-Type", "text/plain");
+      }
     }
   }
 }
