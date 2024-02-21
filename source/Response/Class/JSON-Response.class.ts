@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// Global Cookies Type
-type CookieType = Array<{ name: string; value: string; options: object }>; // Global Cookie Type
-
 // Express Response Object
 import { Response } from "express"; // Import Response Object
-import { MIME_Types } from "../../Config/Constant/Response.Constant"; // Import JPG_REGEX
+import {
+  MIME_Types,
+  CookieType,
+} from "../../Config/Constant/Response.Constant"; // Import JPG_REGEX
 
 // Global JSON Responser Class For Create Response to Client
 /**
@@ -68,7 +68,13 @@ export default class JSONResponser {
   }
 
   /**
-   * Sends the JSON response.
+   * Sends a JSON response.
+   *
+   * @param Data - The data to be included in the response.
+   * @param Title - The title of the response (optional).
+   * @param Message - The message of the response (optional).
+   * @param StatusCode - The status code of the response (optional).
+   * @param CookieData - The cookie data to be set in the response (optional) e.g., [{ name: "cookieName", value: "cookieValue", options: { maxAge: 900000, httpOnly: true } }]
    */
   Send(
     Data: any,
