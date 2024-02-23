@@ -22,6 +22,8 @@ vscode:
     - dracula-theme.theme-dracula
     - formulahendry.code-runner
     - pnp.polacode
+    - illixion.vscode-vibrancy-continued
+    - Anan.jetbrains-darcula-theme
 
 # Run Some Commands
 tasks:

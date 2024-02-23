@@ -15,16 +15,18 @@ type str = string;
  * key used to encrypt the data. If no key is provided, the default value is set to 'YourKey'.
  * @returns the encrypted data as a string.
  */
-// Encrypt function encrypts a string of data using the provided key.
+/**
+Encrypt function encrypts a string of data using the provided key.
 // It uses the CryptoJS library to perform the AES encryption.
 //
 // @param {string} data - The `data` parameter is the string that you want to encrypt. It is the data that
 // you want to keep secure and confidential.
 //
-// @param {string} [key] - The `key` parameter is an optional parameter that represents the encryption
+// @param {string} [Key] - The `key` parameter is an optional parameter that represents the encryption
 // key used to encrypt the data. If no key is provided.
 //
 // @returns the encrypted data as a string.
+*/
 export async function Encrypt(data: str, Key: str): Promise<string> {
   if (!Key) {
     throw new Error("Missing key");
@@ -34,17 +36,19 @@ export async function Encrypt(data: str, Key: str): Promise<string> {
   return encryptedData;
 }
 
-// EncryptSync function encrypts a string of data using the provided key.
-// It uses the CryptoJS library to perform the AES encryption.
-// This function operates synchronously, which can impact performance in some scenarios.
-//
-// @param {string} data - The `data` parameter is the string that you want to encrypt. It is the data that
-// you want to keep secure and confidential.
-//
-// @param {string} [key='YourKey'] - The `key` parameter is an optional parameter that represents the encryption
-// key used to encrypt the data. If no key is provided, the default value is set to 'YourKey'.
-//
-// @returns the encrypted data as a string.
+/** 
+EncryptSync function encrypts a string of data using the provided key.
+It uses the CryptoJS library to perform the AES encryption.
+This function operates synchronously, which can impact performance in some scenarios.
+
+@param {string} Data - The `data` parameter is the string that you want to encrypt. It is the data that
+you want to keep secure and confidential.
+
+@param {string} [Key] - The `key` parameter is an optional parameter that represents the encryption
+key used to encrypt the data. If no key is provided, the default value is set to 'YourKey'.
+
+*@returns the encrypted data as a string.
+*/
 export function EncryptSync(Data: str, Key: str): string {
   if (!Key) {
     throw new Error("Missing key");
