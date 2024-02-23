@@ -47,7 +47,8 @@
 				"ms-vscode.remote-explorer",
 				"ms-vscode.remote-repositories",
 				"bradlc.vscode-tailwindcss",
-				"redhat.vscode-yaml"
+				"redhat.vscode-yaml",
+				"formulahendry.code-runner"
 			],
 			"settings" :{
 				"editor.formatOnSave": true,

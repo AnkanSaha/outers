@@ -20,6 +20,7 @@ vscode:
     - esbenp.prettier-vscode
     - bradlc.vscode-tailwindcss
     - dracula-theme.theme-dracula
+    - formulahendry.code-runner
 
 # Run Some Commands
 tasks:
