@@ -28,7 +28,7 @@ export default function (
     Response.setHeader("Server", ServerName); // Set Server Header
 
     // Get User Agent & Browser Name & Version
-    const UserAgent: string = Request.get("User-Agent") ?? ""; // Get User Agent
+    const UserAgent: string = Request.get("User-Agent") ?? "chrome"; // Get User Agent
     const BrowserVersion: string = UserAgent.split(" ")[1]; // Get Browser Version
 
     // Check if User Agent is available in Array or not
