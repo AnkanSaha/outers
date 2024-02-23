@@ -21,6 +21,7 @@ vscode:
     - bradlc.vscode-tailwindcss
     - dracula-theme.theme-dracula
     - formulahendry.code-runner
+    - pnp.polacode
 
 # Run Some Commands
 tasks:
