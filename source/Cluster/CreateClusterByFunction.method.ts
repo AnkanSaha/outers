@@ -112,7 +112,7 @@ export default async function Config(
       for (const Function of BeforeListenFunctions) {
         const Response = await Function(); // Run Before Listen Functions one by one
 
-        if (Response!== undefined) {
+        if (Response !== undefined) {
           GlobalResponseObject.BeforeListenFunctionsResponse.push({
             FunctionName: Function.name ?? "Anonymous Function",
             Response: Response,
