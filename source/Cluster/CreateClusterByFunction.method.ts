@@ -141,7 +141,7 @@ export default async function Config(
         Error: error,
         ActiveServer: GlobalResponseObject.ActiveServer,
         ActiveWorker: GlobalResponseObject.ActiveWorker,
-        TotalBeforeFunctions:GlobalResponseObject.TotalBeforeFunctions,
+        TotalBeforeFunctions: GlobalResponseObject.TotalBeforeFunctions,
         TotalAfterFunctions: GlobalResponseObject.TotalAfterFunctions,
         ActiveMiddlewares: GlobalResponseObject.ActiveMiddlewares,
       }); // Return Error to User
