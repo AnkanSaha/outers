@@ -5,6 +5,7 @@ import express, { Express } from "express"; // Import express module
 import ClusterConfig from "node:cluster"; // Import Cluster module
 const { isPrimary } = ClusterConfig; // Import isPrimary from Cluster
 import { Console } from "../Config/outer"; // Import Console module
+import { promisify } from "util"; // Import promisify
 
 // Import Interfaces
 import { ResponseObject } from "../Config/Interfaces/Cluster/CreateClusterByFunction.interfaces"; // Import Interfaces
@@ -22,14 +23,14 @@ import { ResponseObject } from "../Config/Interfaces/Cluster/CreateClusterByFunc
  * @returns The response object containing the active server instance, active worker count, and responses from before listen functions.
  * @throws Error if Express server, port, or number of workers is not provided.
  */
-export default function Config(
+export default async function Config(
   ExpressServer: Express = express(), // Main Express Server Instance
   PORT = 3000, // Port Number to Listen
   NumberOfWorkers: number = cpus().length, // Number of Copies of Workers
   BeforeListenFunctions: any[] = [], // Any Functions to run before listen
   AfterListenFunctions: any[] = [], // Any Functions to run after listen
   FunctionMiddlewares: any[] = [], // Any Middlewares to apply
-): ResponseObject | undefined {
+): Promise<ResponseObject | undefined> {
   // Check if User Provided Express Server or not
   if (!ExpressServer || ExpressServer === undefined) {
     throw new Error("Express Server is not provided");
@@ -109,15 +110,16 @@ export default function Config(
       BeforeListenFunctions.length > 0 ||
       BeforeListenFunctions !== undefined
     ) {
-      BeforeListenFunctions.forEach((BeforeFunction) => {
-        const BeforeResponse = BeforeFunction(); // Run Function one by one
+      for (const ListenFunction of BeforeListenFunctions) {
+        const asyncBeforeFunction = promisify(ListenFunction); // Convert Function to Async if not
+        const BeforeResponse = await asyncBeforeFunction(); // Run Function one by one
 
         // Push Response to Global Response Object
         GlobalResponseObject.BeforeListenFunctionsResponse.push({
-          FunctionName: `${BeforeFunction.name}`,
+          FunctionName: ListenFunction.name || "Anonymous Function",
           Response: BeforeResponse,
         }); // Push Response to Global Response Object
-      }); // Run Functions
+      }
     }
 
     // Server Listen
@@ -130,9 +132,10 @@ export default function Config(
           AfterListenFunctions.length > 0 ||
           AfterListenFunctions !== undefined
         ) {
-          AfterListenFunctions.forEach((AfterFunction) => {
-            AfterFunction(); // Run Function one by one
-          }); // Run Functions
+          for (const ListenFunctions of AfterListenFunctions) {
+            const asyncAfterFunction = promisify(ListenFunctions); // Convert Function to Async if not
+            asyncAfterFunction(); // Run Function one by one
+          }
         }
       }); // Start Server on Port
 
