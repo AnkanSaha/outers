@@ -49,7 +49,8 @@ export default async function Config(
   const GlobalResponseObject: ResponseObject = {
     ActiveServer: ExpressServer,
     ActiveWorker: NumberOfWorkers,
-    BeforeListenFunctionsResponse: [],
+    TotalBeforeFunctions: BeforeListenFunctions.length,
+    TotalAfterFunctions: AfterListenFunctions.length,
     ActiveMiddlewares: FunctionMiddlewares,
   };
 
@@ -109,15 +110,8 @@ export default async function Config(
       BeforeListenFunctions.length > 0 ||
       BeforeListenFunctions !== undefined
     ) {
-      for (const Function of BeforeListenFunctions) {
-        const Response = await Function(); // Run Before Listen Functions one by one
-
-        if (Response !== undefined) {
-          GlobalResponseObject.BeforeListenFunctionsResponse.push({
-            FunctionName: Function.name ?? "Anonymous Function",
-            Response: Response,
-          });
-        }
+      for (const ListenFunction of BeforeListenFunctions) {
+        await ListenFunction(); // Run Before Listen Functions one by one
       }
     }
 
@@ -131,8 +125,8 @@ export default async function Config(
           AfterListenFunctions.length > 0 ||
           AfterListenFunctions !== undefined
         ) {
-          for (const ListenFunctions of AfterListenFunctions) {
-            await ListenFunctions(); // Run Function one by one
+          for (const ListenFunction of AfterListenFunctions) {
+            await ListenFunction(); // Run Function one by one
           }
         }
       }); // Start Server on Port
@@ -147,8 +141,8 @@ export default async function Config(
         Error: error,
         ActiveServer: GlobalResponseObject.ActiveServer,
         ActiveWorker: GlobalResponseObject.ActiveWorker,
-        BeforeListenFunctionsResponse:
-          GlobalResponseObject.BeforeListenFunctionsResponse,
+        TotalBeforeFunctions:GlobalResponseObject.TotalBeforeFunctions,
+        TotalAfterFunctions: GlobalResponseObject.TotalAfterFunctions,
         ActiveMiddlewares: GlobalResponseObject.ActiveMiddlewares,
       }); // Return Error to User
     }
