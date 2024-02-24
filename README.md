@@ -222,7 +222,7 @@ app.use("/api", Middleware.RequestInjectIP(["PUT", "POST"]), MainFunction); // i
 
 ```javascript
 const { methods } = require('outers'); // import the package
-methods.ClusterCreator(ExpressServer, PORT, CustomWorkerCount, engineMiddlewares?, BeforeListenFunctions? AfterListenFunctions?, ...FunctionMiddlewares?); // create a cluster with custom worker count
+methods.ClusterCreator(ExpressServer, PORT, CustomWorkerCount, BeforeListenFunctions? AfterListenFunctions?, ...FunctionMiddlewares?); // create a cluster with custom worker count
 ```
 
 # Full Example
