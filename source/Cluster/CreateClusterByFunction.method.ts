@@ -116,7 +116,7 @@ export default async function Config(
 
         // Push Response to Global Response Object
         GlobalResponseObject.BeforeListenFunctionsResponse.push({
-          FunctionName: ListenFunction.name || "Anonymous Function",
+          FunctionName: ListenFunction.name ?? "Anonymous Function",
           Response: BeforeResponse,
         }); // Push Response to Global Response Object
       }
