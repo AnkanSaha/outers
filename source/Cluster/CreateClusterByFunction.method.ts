@@ -7,9 +7,7 @@ const { isPrimary } = ClusterConfig; // Import isPrimary from Cluster
 import { Console } from "../Config/outer"; // Import Console module
 
 // Import Interfaces
-import {
-  ResponseObject,
-} from "../Config/Interfaces/Cluster/CreateClusterByFunction.interfaces"; // Import Interfaces
+import { ResponseObject } from "../Config/Interfaces/Cluster/CreateClusterByFunction.interfaces"; // Import Interfaces
 
 // Main Function
 /**
@@ -99,7 +97,6 @@ export default function Config(
       Console.yellow(`Worker ${worker.process.pid} is listening`);
     });
   } else {
-
     // Apply Function Middlewares to Express Server Instance like CORS, Body Parser, etc.
     if (FunctionMiddlewares.length > 0 || FunctionMiddlewares !== undefined) {
       FunctionMiddlewares.forEach((FunctionMiddleware) => {
@@ -151,7 +148,7 @@ export default function Config(
         ActiveWorker: GlobalResponseObject.ActiveWorker,
         BeforeListenFunctionsResponse:
           GlobalResponseObject.BeforeListenFunctionsResponse,
-          ActiveMiddlewares: GlobalResponseObject.ActiveMiddlewares,
+        ActiveMiddlewares: GlobalResponseObject.ActiveMiddlewares,
       }); // Return Error to User
     }
   }
