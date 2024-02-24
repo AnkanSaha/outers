@@ -5,7 +5,6 @@ import express, { Express } from "express"; // Import express module
 import ClusterConfig from "node:cluster"; // Import Cluster module
 const { isPrimary } = ClusterConfig; // Import isPrimary from Cluster
 import { Console } from "../Config/outer"; // Import Console module
-import { promisify } from "util"; // Import promisify
 
 // Import Interfaces
 import { ResponseObject } from "../Config/Interfaces/Cluster/CreateClusterByFunction.interfaces"; // Import Interfaces
@@ -110,21 +109,21 @@ export default async function Config(
       BeforeListenFunctions.length > 0 ||
       BeforeListenFunctions !== undefined
     ) {
-      for (const ListenFunction of BeforeListenFunctions) {
-        const asyncBeforeFunction = promisify(ListenFunction); // Convert Function to Async if not
-        const BeforeResponse = await asyncBeforeFunction(); // Run Function one by one
+      for (const Function of BeforeListenFunctions) {
+        const Response = await Function(); // Run Before Listen Functions one by one
 
-        // Push Response to Global Response Object
-        GlobalResponseObject.BeforeListenFunctionsResponse.push({
-          FunctionName: ListenFunction.name ?? "Anonymous Function",
-          Response: BeforeResponse,
-        }); // Push Response to Global Response Object
+        if (Response !== undefined) {
+          GlobalResponseObject.BeforeListenFunctionsResponse.push({
+            FunctionName: Function.name ?? "Anonymous Function",
+            Response: Response,
+          });
+        }
       }
     }
 
     // Server Listen
     try {
-      const ActiveServer = ExpressServer.listen(PORT, () => {
+      const ActiveServer = ExpressServer.listen(PORT, async () => {
         Console.green(`🚀 Server is listening on Port ${PORT} 🚀`); // Print Message for Server Start
 
         // Run After Listen Functions
@@ -133,8 +132,7 @@ export default async function Config(
           AfterListenFunctions !== undefined
         ) {
           for (const ListenFunctions of AfterListenFunctions) {
-            const asyncAfterFunction = promisify(ListenFunctions); // Convert Function to Async if not
-            asyncAfterFunction(); // Run Function one by one
+            await ListenFunctions(); // Run Function one by one
           }
         }
       }); // Start Server on Port
