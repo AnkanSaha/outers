@@ -7,10 +7,7 @@ const { isPrimary } = ClusterConfig; // Import isPrimary from Cluster
 import { Console } from "../Config/outer"; // Import Console module
 
 // Import Interfaces
-import {
-  EngineMiddlewares,
-  ResponseObject,
-} from "../Config/Interfaces/Cluster/CreateClusterByFunction.interfaces"; // Import Interfaces
+import { ResponseObject } from "../Config/Interfaces/Cluster/CreateClusterByFunction.interfaces"; // Import Interfaces
 
 // Main Function
 /**
@@ -19,7 +16,6 @@ import {
  * @param ExpressServer - The main Express server instance.
  * @param PORT - The port number to listen on.
  * @param NumberOfWorkers - The number of worker copies to create.
- * @param engineMiddlewares - Any middlewares to apply to the Express server instance.
  * @param BeforeListenFunctions - Any functions to run before listening.
  * @param AfterListenFunctions - Any functions to run after listening.
  * @param FunctionMiddlewares - Any middlewares to apply to the Express server instance.
@@ -30,7 +26,6 @@ export default function Config(
   ExpressServer: Express = express(), // Main Express Server Instance
   PORT = 3000, // Port Number to Listen
   NumberOfWorkers: number = cpus().length, // Number of Copies of Workers
-  engineMiddlewares: EngineMiddlewares[] = [], // Any Middlewares to apply
   BeforeListenFunctions: any[] = [], // Any Functions to run before listen
   AfterListenFunctions: any[] = [], // Any Functions to run after listen
   FunctionMiddlewares: any[] = [], // Any Middlewares to apply
@@ -55,6 +50,7 @@ export default function Config(
     ActiveServer: ExpressServer,
     ActiveWorker: NumberOfWorkers,
     BeforeListenFunctionsResponse: [],
+    ActiveMiddlewares: FunctionMiddlewares,
   };
 
   // Number of Workers to be forked
@@ -101,13 +97,6 @@ export default function Config(
       Console.yellow(`Worker ${worker.process.pid} is listening`);
     });
   } else {
-    // Apply String Middlewares to Express Server Instance like PUG, EJS, Trust Proxy, etc.
-    if (engineMiddlewares.length > 0 || engineMiddlewares !== undefined) {
-      engineMiddlewares.forEach(({ Key, Value }) => {
-        ExpressServer.set(String(Key), Value); // Apply Middleware to Express Server Instance one by one
-      }); // Apply Middlewares to Express Server Instance
-    }
-
     // Apply Function Middlewares to Express Server Instance like CORS, Body Parser, etc.
     if (FunctionMiddlewares.length > 0 || FunctionMiddlewares !== undefined) {
       FunctionMiddlewares.forEach((FunctionMiddleware) => {
@@ -159,6 +148,7 @@ export default function Config(
         ActiveWorker: GlobalResponseObject.ActiveWorker,
         BeforeListenFunctionsResponse:
           GlobalResponseObject.BeforeListenFunctionsResponse,
+        ActiveMiddlewares: GlobalResponseObject.ActiveMiddlewares,
       }); // Return Error to User
     }
   }
