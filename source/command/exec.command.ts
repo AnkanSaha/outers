@@ -5,9 +5,11 @@ const executor = util.promisify(exec);
 
 /**
  * Executes a command and returns the output and error.
+ * It is only for short-lived processes. long-lived processes are not recommended for security reasons.
  * @param command - The command to execute.
  * @returns An object containing the output and error.
  */
+
 export default async function executeCommand(command: string) {
   try {
     const { stdout, stderr } = await executor(command);
