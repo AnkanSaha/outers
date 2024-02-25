@@ -18,7 +18,7 @@ import { CommandResult } from "../Config/Interfaces/command/spawn.interface"; //
 export default async function executeCommand(
   command: string,
   args: string[],
-  options: SpawnOptions = {}
+  options: SpawnOptions = {},
 ): Promise<CommandResult> {
   try {
     const isWindows = os.platform() === "win32"; // check for Windows or not supported
