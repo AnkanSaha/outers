@@ -1,11 +1,15 @@
 source
 tsconfig.json
 tslint.json
-a.js
-.eslintrc.js
+.eslintrc.json
 .github
 library
 dist
 .vscode
 Cache
 .devcontainer
+node_modules
+.gitignore
+.deepsource.toml
+.gitpod.yml
+docker-compose.yml
