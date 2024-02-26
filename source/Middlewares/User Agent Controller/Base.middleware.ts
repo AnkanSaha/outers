@@ -27,6 +27,20 @@ export default function (
     Response.setHeader("X-Powered-By", XPoweredBy); // Set X-Powered-By Header
     Response.setHeader("Server", ServerName); // Set Server Header
 
+    // Check if Request has Headers
+    if (!Request.headers) {
+      return Serve.JSON({
+        response: Response,
+        status: false,
+        statusCode: StatusCodes.BAD_REQUEST,
+        Title: "Bad Request",
+        message: "No headers provided",
+        data: null,
+        cookieData: undefined,
+        contentType: "application/json",
+      });
+    }
+
     // Get User Agent & Browser Name & Version
     const UserAgent: string = Request.get("User-Agent") ?? "chrome"; // Get User Agent
     const BrowserVersion: string = UserAgent.split(" ")[1]; // Get Browser Version

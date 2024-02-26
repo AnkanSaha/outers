@@ -29,6 +29,20 @@ export default function (
     Response.setHeader("X-Powered-By", XPoweredBy); // Set X-Powered-By Header
     Response.setHeader("Server", ServerName); // Set Server Header
 
+    // Check if Request has Headers
+    if (!Request.headers) {
+      return Serve.JSON({
+        response: Response,
+        status: false,
+        statusCode: StatusCodes.BAD_REQUEST,
+        Title: "Bad Request",
+        message: "No headers provided",
+        data: null,
+        cookieData: undefined,
+        contentType: "application/json",
+      });
+    }
+
     const ReverseParams = Reverse ?? false; // Set Reverse to false if it is undefined
     const RequesterIPaddress = String(
       Request.headers["x-forwarded-for"] ||
