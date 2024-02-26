@@ -47,21 +47,21 @@ export default (TokenFieldName: string, SecretToken: string) => {
       StatusCode.UNAUTHORIZED,
       "json",
       `${TokenFieldName} is Required`,
-      `${TokenFieldName} is Required to access this route`
+      `${TokenFieldName} is Required to access this route`,
     ); // Create New JSON Response Instance for Empty Token
     const BAD_REQUEST = new JSON_Responser(
       Response,
       StatusCode.BAD_REQUEST,
       "json",
       "Bad Request",
-      "No headers provided"
+      "No headers provided",
     ); // Create New JSON Response Instance
     const INTERNAL_SERVER_ERROR = new JSON_Responser(
       Response,
       StatusCode.INTERNAL_SERVER_ERROR,
       "json",
       "Internal Server Error",
-      "Internal Server Error, Please Try Again"
+      "Internal Server Error, Please Try Again",
     ); // Create New JSON Response Instance for Internal Server Error
 
     const InvalidToken = new JSON_Responser(
@@ -69,7 +69,7 @@ export default (TokenFieldName: string, SecretToken: string) => {
       StatusCode.UNAUTHORIZED,
       "json",
       "Invalid Token",
-      "Invalid Token Provided to access this route"
+      "Invalid Token Provided to access this route",
     ); // Create New JSON Response Instance for Invalid Token
 
     // Common Data Set to send in Response
@@ -93,7 +93,7 @@ export default (TokenFieldName: string, SecretToken: string) => {
               return EmptyToken.Send(CommonResponseData); // Send Response if Token is not available
             } else {
               const toKenValidation = await JWT_Manager.decode(
-                String(Request.params[TokenFieldName])
+                String(Request.params[TokenFieldName]),
               ); // Verify Token
               if (toKenValidation.status === "Success") {
                 Next(); // Next Middleware
@@ -103,7 +103,7 @@ export default (TokenFieldName: string, SecretToken: string) => {
             }
           } else {
             const toKenValidation = await JWT_Manager.decode(
-              String(Request.query[TokenFieldName])
+              String(Request.query[TokenFieldName]),
             ); // Verify Token
             if (toKenValidation.status === "Success") {
               Next(); // Next Middleware
@@ -113,7 +113,7 @@ export default (TokenFieldName: string, SecretToken: string) => {
           }
         } else {
           const toKenValidation = await JWT_Manager.decode(
-            String(Request.body[TokenFieldName])
+            String(Request.body[TokenFieldName]),
           ); // Verify Token
           if (toKenValidation.status === "Success") {
             Next(); // Next Middleware
@@ -123,7 +123,7 @@ export default (TokenFieldName: string, SecretToken: string) => {
         }
       } else {
         const toKenValidation = await JWT_Manager.decode(
-          String(Request.headers[TokenFieldName])
+          String(Request.headers[TokenFieldName]),
         ); // Verify Token
         if (toKenValidation.status === "Success") {
           Next(); // Next Middleware

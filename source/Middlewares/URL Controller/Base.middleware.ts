@@ -22,7 +22,7 @@ export default function (
   AllowedURLs: string[],
   StatusCode?: number,
   ErrorMessage?: string,
-  Reverse?: boolean
+  Reverse?: boolean,
 ) {
   if (AllowedURLs.length === 0)
     throw new Error("AllowedURLs array cannot be empty"); // Throw Error if AllowedURLs array is empty
@@ -55,8 +55,8 @@ export default function (
       return url == "*"
         ? true
         : url.includes("localhost")
-        ? true
-        : URLRegex.test(Request.hostname); // Check if Requester URL is Allowed or not
+          ? true
+          : URLRegex.test(Request.hostname); // Check if Requester URL is Allowed or not
     });
     try {
       if (ReverseParams === false) {
