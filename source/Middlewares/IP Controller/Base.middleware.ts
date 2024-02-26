@@ -22,7 +22,7 @@ export default function (
   AllowedIP: string[],
   StatusCode?: number,
   ErrorMessage?: string,
-  Reverse?: false
+  Reverse?: false,
 ) {
   return (Request: Request, Response: Response, Next: NextFunction) => {
     // Change Response X-Powered-By Header & Server Header
@@ -36,7 +36,7 @@ export default function (
         Request.socket.remoteAddress ||
         Request.socket.remoteAddress ||
         Request.headers["x-real-ip"] ||
-        Request.ip // Get Requester IP Address
+        Request.ip, // Get Requester IP Address
     ); // Get Requester IP Address
 
     let isAllowed = false; // Set isAllowed to false
@@ -48,8 +48,8 @@ export default function (
         return IP == "*"
           ? true
           : IP.includes("127.0.0")
-          ? true
-          : IPRegex.test(RequesterIPaddress); // Check if Requester IP is Allowed or not
+            ? true
+            : IPRegex.test(RequesterIPaddress); // Check if Requester IP is Allowed or not
       }); // Check if Requester IP is Allowed or not
 
       if (ReverseParams === false) {

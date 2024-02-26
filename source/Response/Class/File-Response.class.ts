@@ -24,7 +24,7 @@ export default class FileResponse {
     rootPATH: string,
     contentType: string,
     StatusCode?: number,
-    cookieData?: CookieType
+    cookieData?: CookieType,
   ) {
     // Constructor
     this.#Response = Response; // Set Response
@@ -43,7 +43,7 @@ export default class FileResponse {
         this.#Response.cookie(
           CookieItems.name,
           CookieItems.value,
-          CookieItems.options
+          CookieItems.options,
         ); // sets cookie for each cookie in cookieData
       });
     }
