@@ -61,6 +61,7 @@ import URL_Controller from "../Middlewares/URL Controller/Base.middleware"; // I
 import IP_Controller from "../Middlewares/IP Controller/Base.middleware"; // Import IP Controller Module
 import UserAccessController from "../Middlewares/User Agent Controller/Base.middleware"; // Import User Access Controller Module
 import RequestController from "../Middlewares/Request Controller/Base.middleware"; // Import Request Controller Module
+import JWTValidator from "../Middlewares/JWT Validator/Base.middleware"; // Import JWT Validator Middleware
 
 // Export Console Color Related Modules
 export const Console = Object.freeze({
@@ -94,6 +95,7 @@ export const Middleware = Object.freeze({
   IPAccessController: IP_Controller, // Export IP Controller Module as Middleware
   UserAccessController, // Export User Access Controller Module as Middleware
   RequestController, // Export Request Controller Module as Middleware
+  JWTValidator, // Export JWT Validator Middleware
 }); // Export IP Injector Module as Middleware
 
 // Export All Methods with Freeze
