@@ -72,9 +72,9 @@ export default class FileResponse {
    */
   private setContentType() {
     if (this.#contentType) {
-      for (const iterator of MIME_Types) {
-        if (iterator.toLowerCase().includes(this.#contentType.toLowerCase())) {
-          this.#Response.setHeader("Content-Type", iterator);
+      for (const Type of MIME_Types) {
+        if (Type.toLowerCase().includes(this.#contentType.toLowerCase())) {
+          this.#Response.setHeader("Content-Type", Type);
           return;
         }
       }

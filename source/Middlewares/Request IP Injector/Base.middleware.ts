@@ -9,6 +9,7 @@ import { Request, NextFunction, Response } from "express"; // Import Request fro
 import {
   XPoweredBy,
   ServerName,
+  IPAllowedMethods,
 } from "../../Config/Constant/Middleware.Constant"; // Import X-Powered-By Header
 
 // Import Console from Utilities
@@ -24,7 +25,7 @@ import { StatusCode } from "../../StatusCode/Code"; // Import Status Codes
 
 export default (Methods?: string[]) => {
   // Allow only PUT, POST, PATCH, DELETE methods
-  const AllowedMethods = Methods ?? ["PUT", "POST", "PATCH", "DELETE"]; // Allowed Methods
+  const AllowedMethods = Methods ?? IPAllowedMethods; // Allowed Methods
 
   // Convert to Upper Case in Array if any of the method is in lower case
   AllowedMethods.forEach((Method, Index) => {
@@ -64,6 +65,7 @@ export default (Methods?: string[]) => {
           "Something went wrong while processing your request. Please try again later.",
         data: undefined,
         cookieData: undefined,
+        contentType: "application/json",
       });
     }
   }; // Export main function

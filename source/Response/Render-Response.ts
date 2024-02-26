@@ -25,9 +25,9 @@ export default function RenderResponse({
 }: RenderResponseInterface) {
   // Set Content Type if available
   if (contentType) {
-    for (const iterator of MIME_Types) {
-      if (iterator.toLowerCase().includes(contentType.toLowerCase())) {
-        response.setHeader("Content-Type", iterator);
+    for (const Type of MIME_Types) {
+      if (Type.toLowerCase().includes(contentType.toLowerCase())) {
+        response.setHeader("Content-Type", Type);
         return;
       }
     }

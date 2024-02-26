@@ -60,6 +60,7 @@ import InjectIP from "../Middlewares/Request IP Injector/Base.middleware"; // Im
 import URL_Controller from "../Middlewares/URL Controller/Base.middleware"; // Import URL Controller Module
 import IP_Controller from "../Middlewares/IP Controller/Base.middleware"; // Import IP Controller Module
 import UserAccessController from "../Middlewares/User Agent Controller/Base.middleware"; // Import User Access Controller Module
+import RequestController from "../Middlewares/Request Controller/Base.middleware"; // Import Request Controller Module
 
 // Export Console Color Related Modules
 export const Console = Object.freeze({
@@ -92,6 +93,7 @@ export const Middleware = Object.freeze({
   AccessController: URL_Controller, // Export URL Controller Module as Middleware
   IPAccessController: IP_Controller, // Export IP Controller Module as Middleware
   UserAccessController, // Export User Access Controller Module as Middleware
+  RequestController, // Export Request Controller Module as Middleware
 }); // Export IP Injector Module as Middleware
 
 // Export All Methods with Freeze

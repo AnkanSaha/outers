@@ -55,6 +55,7 @@ export default function (
             status: false,
             Title: "URL Not Allowed to Access",
             statusCode: StatusCode ?? StatusCodes.NOT_ACCEPTABLE,
+            contentType: "application/json",
             message:
               ErrorMessage ??
               "You are not allowed to access this server from this URL.",
@@ -74,6 +75,7 @@ export default function (
             status: false,
             Title: "URL Not Allowed to Access",
             statusCode: StatusCode ?? StatusCodes.NOT_ACCEPTABLE,
+            contentType: "application/json",
             message:
               ErrorMessage ??
               "You are not allowed to access this server from this URL.",
@@ -91,6 +93,7 @@ export default function (
         statusCode: StatusCodes.EXPECTATION_FAILED,
         Title: "Failed To Proceed",
         data: error,
+        contentType: "application/json",
         message:
           "Unable to Proceed your Request further, there is some error in configuration in Server",
       }); // Send Error Response

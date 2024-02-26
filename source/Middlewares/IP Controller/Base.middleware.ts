@@ -47,7 +47,7 @@ export default function (
         const IPRegex = new RegExp(IP, "i"); // Create a Regular Expression for IP Address to match
         return IP == "*"
           ? true
-          : IP.includes("127")
+          : IP.includes("127.0.0")
             ? true
             : IPRegex.test(RequesterIPaddress); // Check if Requester IP is Allowed or not
       }); // Check if Requester IP is Allowed or not
@@ -70,6 +70,7 @@ export default function (
               ClientURL: `${Request.protocol}://${Request.headers.host}${Request.url}`,
             },
             cookieData: undefined,
+            contentType: "application/json",
           }); // Serve JSON
           // You may choose to send an error response or redirect the user to an error page
         }
@@ -90,6 +91,7 @@ export default function (
               ClientURL: `${Request.protocol}://${Request.headers.host}${Request.url}`,
             },
             cookieData: undefined,
+            contentType: "application/json",
           }); // Serve JSON
         }
       }
@@ -100,6 +102,7 @@ export default function (
         statusCode: StatusCodes.EXPECTATION_FAILED,
         Title: "Failed To Proceed",
         data: error,
+        contentType: "application/json",
         message:
           "Unable to Proceed your Request further, there is some error in configuration in Server",
       }); // Send Error Response
