@@ -47,7 +47,7 @@ export default function (
         const IPRegex = new RegExp(IP, "i"); // Create a Regular Expression for IP Address to match
         return IP == "*"
           ? true
-          : IP.includes("127")
+          : IP.includes("127.0.0")
             ? true
             : IPRegex.test(RequesterIPaddress); // Check if Requester IP is Allowed or not
       }); // Check if Requester IP is Allowed or not
