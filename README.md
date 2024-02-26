@@ -414,7 +414,11 @@ app.use(
 ```javascript
 const { Middleware } = require("outers"); // import the package
 
-app.use('/api', Middleware.MethodsController(['GET', 'POST', 'PUT', 'DELETE']), MainRouter); // control the method access in NodeJS with the Middleware function
+app.use(
+  "/api",
+  Middleware.MethodsController(["GET", "POST", "PUT", "DELETE"]),
+  MainRouter,
+); // control the method access in NodeJS with the Middleware function
 ```
 
 ## Use JWT Validator Middleware in NodeJS
@@ -422,15 +426,18 @@ app.use('/api', Middleware.MethodsController(['GET', 'POST', 'PUT', 'DELETE']), 
 ```javascript
 const { Middleware } = require("outers"); // import the package
 
-app.use('/api', Middleware.JWTValidator('FieldName', Token), MainRouter); // use the JWT Validator Middleware in NodeJS
+app.use("/api", Middleware.JWTValidator("FieldName", Token), MainRouter); // use the JWT Validator Middleware in NodeJS
 ```
+
 - Note : You can pass the Field Name in the first parameter of the function, it can be anything like Authorization, Token, JWT etc.
 - Note : The Field Name is anywhere in the Request Object, it can be in the Header, Body, Query, Params etc. it automatically find the Field Name in the Request Object when you provide the Field Name
 - Note : You can pass the JWT Secret Token in the second parameter of the function, it can be anything like SecretKey, SecretToken, Secret etc. to verify the JWT Token
 
 // You can pass as many as you want methods in the first parameter of the function
+
 ```
 
 ## License
 
 MIT
+```
