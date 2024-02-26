@@ -38,6 +38,20 @@ export default (Methods?: string[]) => {
       Response.setHeader("X-Powered-By", XPoweredBy); // Set X-Powered-By Header
       Response.setHeader("Server", ServerName); // Set Server Header
 
+      // Check if Request has Headers
+      if (!Request.headers) {
+        return JSONSendResponse({
+          response: Response,
+          status: false,
+          statusCode: StatusCode.BAD_REQUEST,
+          Title: "Bad Request",
+          message: "No headers provided",
+          data: null,
+          cookieData: undefined,
+          contentType: "application/json",
+        });
+      }
+
       // Check if Request Method is Allowed
       if (AllowedMethods.includes(Request.method)) {
         const RequesterIPaddress =

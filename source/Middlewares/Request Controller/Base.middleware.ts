@@ -37,12 +37,26 @@ export default (Methods?: string[], reverse?: boolean) => {
       Response.setHeader("X-Powered-By", XPoweredBy); // Set X-Powered-By Header
       Response.setHeader("Server", ServerName); // Set Server Header
 
+      // Check if Request has Headers
+      if (!Request.headers) {
+        return JSONSendResponse({
+          response: Response,
+          status: false,
+          statusCode: StatusCode.BAD_REQUEST,
+          Title: "Bad Request",
+          message: "No headers provided",
+          data: null,
+          cookieData: undefined,
+          contentType: "application/json",
+        });
+      }
+
       // Check if Request Method is Allowed if Reverse is false
       if (Reverse == false) {
         if (AllowedMethods.includes(Request.method.toUpperCase()) === true) {
           Next(); // Request Method is Allowed if Reverse is false
         } else {
-          JSONSendResponse({
+          return JSONSendResponse({
             status: false,
             statusCode: StatusCode.METHOD_NOT_ALLOWED,
             Title: "Method Not Allowed",
@@ -56,7 +70,7 @@ export default (Methods?: string[], reverse?: boolean) => {
         if (AllowedMethods.includes(Request.method.toUpperCase()) === false) {
           Next(); // Request Method is Allowed if Reverse is true
         } else {
-          JSONSendResponse({
+          return JSONSendResponse({
             status: false,
             statusCode: StatusCode.METHOD_NOT_ALLOWED,
             Title: "Method Not Allowed",
@@ -69,7 +83,7 @@ export default (Methods?: string[], reverse?: boolean) => {
       }
     } catch (error) {
       red(error); // Send Error Response
-      JSONSendResponse({
+      return JSONSendResponse({
         status: false,
         statusCode: StatusCode.INTERNAL_SERVER_ERROR,
         Title: "Cannot Process Request",

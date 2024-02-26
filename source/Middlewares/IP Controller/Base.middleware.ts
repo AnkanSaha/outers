@@ -22,12 +22,26 @@ export default function (
   AllowedIP: string[],
   StatusCode?: number,
   ErrorMessage?: string,
-  Reverse?: false,
+  Reverse?: false
 ) {
   return (Request: Request, Response: Response, Next: NextFunction) => {
     // Change Response X-Powered-By Header & Server Header
     Response.setHeader("X-Powered-By", XPoweredBy); // Set X-Powered-By Header
     Response.setHeader("Server", ServerName); // Set Server Header
+
+    // Check if Request has Headers
+    if (!Request.headers) {
+      return Serve.JSON({
+        response: Response,
+        status: false,
+        statusCode: StatusCodes.BAD_REQUEST,
+        Title: "Bad Request",
+        message: "No headers provided",
+        data: null,
+        cookieData: undefined,
+        contentType: "application/json",
+      });
+    }
 
     const ReverseParams = Reverse ?? false; // Set Reverse to false if it is undefined
     const RequesterIPaddress = String(
@@ -36,7 +50,7 @@ export default function (
         Request.socket.remoteAddress ||
         Request.socket.remoteAddress ||
         Request.headers["x-real-ip"] ||
-        Request.ip, // Get Requester IP Address
+        Request.ip // Get Requester IP Address
     ); // Get Requester IP Address
 
     let isAllowed = false; // Set isAllowed to false
@@ -48,8 +62,8 @@ export default function (
         return IP == "*"
           ? true
           : IP.includes("127.0.0")
-            ? true
-            : IPRegex.test(RequesterIPaddress); // Check if Requester IP is Allowed or not
+          ? true
+          : IPRegex.test(RequesterIPaddress); // Check if Requester IP is Allowed or not
       }); // Check if Requester IP is Allowed or not
 
       if (ReverseParams === false) {

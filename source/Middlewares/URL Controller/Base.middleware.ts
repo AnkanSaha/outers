@@ -22,7 +22,7 @@ export default function (
   AllowedURLs: string[],
   StatusCode?: number,
   ErrorMessage?: string,
-  Reverse?: boolean,
+  Reverse?: boolean
 ) {
   if (AllowedURLs.length === 0)
     throw new Error("AllowedURLs array cannot be empty"); // Throw Error if AllowedURLs array is empty
@@ -35,14 +35,28 @@ export default function (
     Response.setHeader("X-Powered-By", XPoweredBy); // Set X-Powered-By Header
     Response.setHeader("Server", ServerName); // Set Server Header
 
+    // Check if Request has Headers
+    if (!Request.headers) {
+      return Serve.JSON({
+        response: Response,
+        status: false,
+        statusCode: StatusCodes.BAD_REQUEST,
+        Title: "Bad Request",
+        message: "No headers provided",
+        data: null,
+        cookieData: undefined,
+        contentType: "application/json",
+      });
+    }
+
     // Check if Request Hostname is available in Array or not
     isAllowed = AllowedURLs.some((url) => {
       const URLRegex = new RegExp(url, "i"); // Create a Regular Expression for URL to match
       return url == "*"
         ? true
         : url.includes("localhost")
-          ? true
-          : URLRegex.test(Request.hostname); // Check if Requester URL is Allowed or not
+        ? true
+        : URLRegex.test(Request.hostname); // Check if Requester URL is Allowed or not
     });
     try {
       if (ReverseParams === false) {

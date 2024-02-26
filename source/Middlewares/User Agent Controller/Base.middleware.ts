@@ -13,7 +13,7 @@ export default function (
   BrowserVersions?: string[],
   StatusCode?: number,
   ErrorMessage?: string,
-  Reverse?: boolean,
+  Reverse?: boolean
 ) {
   if (BrowserNames.length === 0)
     throw new Error("BrowserNames array cannot be empty"); // Throw Error if AllowedURLs array is empty
@@ -26,6 +26,20 @@ export default function (
     // Change Response X-Powered-By Header & Server Header
     Response.setHeader("X-Powered-By", XPoweredBy); // Set X-Powered-By Header
     Response.setHeader("Server", ServerName); // Set Server Header
+
+    // Check if Request has Headers
+    if (!Request.headers) {
+      return Serve.JSON({
+        response: Response,
+        status: false,
+        statusCode: StatusCodes.BAD_REQUEST,
+        Title: "Bad Request",
+        message: "No headers provided",
+        data: null,
+        cookieData: undefined,
+        contentType: "application/json",
+      });
+    }
 
     // Get User Agent & Browser Name & Version
     const UserAgent: string = Request.get("User-Agent") ?? "chrome"; // Get User Agent
