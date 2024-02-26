@@ -77,6 +77,7 @@ export default function (
             status: false,
             Title: "Browser Not Allowed to Access",
             statusCode: StatusCode ?? StatusCodes.NOT_ACCEPTABLE,
+            contentType: "application/json",
             message:
               ErrorMessage ??
               "You are not allowed to access this server from this browser.",
@@ -98,6 +99,7 @@ export default function (
             status: false,
             Title: "Browser & its Version Not Allowed to Access",
             statusCode: StatusCode ?? StatusCodes.NOT_ACCEPTABLE,
+            contentType: "application/json",
             message:
               ErrorMessage ??
               "You are not allowed to access this server from this browser and its version.",
@@ -116,6 +118,7 @@ export default function (
             status: false,
             Title: "Browser Not Allowed to Access",
             statusCode: StatusCode ?? StatusCodes.NOT_ACCEPTABLE,
+            contentType: "application/json",
             message:
               ErrorMessage ??
               "You are not allowed to access this server from this browser.",

@@ -22,7 +22,7 @@ export default function (
   AllowedURLs: string[],
   StatusCode?: number,
   ErrorMessage?: string,
-  Reverse?: boolean,
+  Reverse?: boolean
 ) {
   if (AllowedURLs.length === 0)
     throw new Error("AllowedURLs array cannot be empty"); // Throw Error if AllowedURLs array is empty
@@ -41,8 +41,8 @@ export default function (
       return url == "*"
         ? true
         : url.includes("localhost")
-          ? true
-          : URLRegex.test(Request.hostname); // Check if Requester URL is Allowed or not
+        ? true
+        : URLRegex.test(Request.hostname); // Check if Requester URL is Allowed or not
     });
     try {
       if (ReverseParams === false) {
@@ -55,6 +55,7 @@ export default function (
             status: false,
             Title: "URL Not Allowed to Access",
             statusCode: StatusCode ?? StatusCodes.NOT_ACCEPTABLE,
+            contentType: "application/json",
             message:
               ErrorMessage ??
               "You are not allowed to access this server from this URL.",
@@ -74,6 +75,7 @@ export default function (
             status: false,
             Title: "URL Not Allowed to Access",
             statusCode: StatusCode ?? StatusCodes.NOT_ACCEPTABLE,
+            contentType: "application/json",
             message:
               ErrorMessage ??
               "You are not allowed to access this server from this URL.",
@@ -91,6 +93,7 @@ export default function (
         statusCode: StatusCodes.EXPECTATION_FAILED,
         Title: "Failed To Proceed",
         data: error,
+        contentType: "application/json",
         message:
           "Unable to Proceed your Request further, there is some error in configuration in Server",
       }); // Send Error Response

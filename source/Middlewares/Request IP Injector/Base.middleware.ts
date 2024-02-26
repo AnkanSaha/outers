@@ -65,6 +65,7 @@ export default (Methods?: string[]) => {
           "Something went wrong while processing your request. Please try again later.",
         data: undefined,
         cookieData: undefined,
+        contentType: "application/json",
       });
     }
   }; // Export main function
