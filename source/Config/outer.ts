@@ -94,7 +94,7 @@ export const Middleware = Object.freeze({
   AccessController: URL_Controller, // Export URL Controller Module as Middleware
   IPAccessController: IP_Controller, // Export IP Controller Module as Middleware
   UserAccessController, // Export User Access Controller Module as Middleware
-  RequestController, // Export Request Controller Module as Middleware
+  MethodsController: RequestController, // Export Request Controller Module as Middleware
   JWTValidator, // Export JWT Validator Middleware
 }); // Export IP Injector Module as Middleware
 
