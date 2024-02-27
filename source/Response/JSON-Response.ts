@@ -33,7 +33,7 @@ export const JSONSendResponse = ({
     for (const Type of MIME_Types) {
       if (Type.toLowerCase().includes(contentType.toLowerCase())) {
         response.setHeader("Content-Type", Type);
-        return;
+        break;
       }
     }
   }
