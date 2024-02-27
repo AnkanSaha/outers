@@ -102,23 +102,23 @@ const AllServerNames = [
   "Riot Games Inc",
 ];
 
-// Constants for Server Name Headers
-export const ServerName = ((): string => {
+// Constants generator for Server Name Headers
+export const ServerName = (): string => {
   const RandomLengthPicker: number = randomNumber(1, false, [1, 2]); // Random Choice to pick a Server Name
   const RandomServerNamePicker: number = randomNumber(RandomLengthPicker, true); // Random Server Name Position Picker
 
   // Return Random Server Name
   return AllServerNames[RandomServerNamePicker]; // Return Random Server Name
-})(); // Set Server Name
+}; // Set Server Name
 
-// Constants for X-Powered-By Header
-export const XPoweredBy = ((): string => {
+// Constants generator for X-Powered-By Header
+export const XPoweredBy = (): string => {
   const RandomLengthPicker: number = randomNumber(1, false, [1, 2]); // Random Choice to pick a X-Powered-By Header
   const RandomServerNamePicker: number = randomNumber(RandomLengthPicker, true); // Random Server Name Position Picker
 
   // Return X-Powered-By Header
   return AllServerNames[RandomServerNamePicker].split(" ")[0]; // Return Random Server Name
-})(); // Set X-Powered-By Header
+}; // Set X-Powered-By Header
 
 // Constants for Allowed HTTP Methods in IP Injection Middleware
 export const IPAllowedMethods = ["PUT", "POST", "PATCH", "DELETE"]; // Allowed Methods

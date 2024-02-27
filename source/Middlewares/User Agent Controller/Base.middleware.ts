@@ -24,8 +24,8 @@ export default function (
     let BrowserVersionIsAllowed: boolean = false; // Set BrowserVersionIsAllowed to false
 
     // Change Response X-Powered-By Header & Server Header
-    Response.setHeader("X-Powered-By", XPoweredBy); // Set X-Powered-By Header
-    Response.setHeader("Server", ServerName); // Set Server Header
+    Response.setHeader("X-Powered-By", XPoweredBy()); // Set X-Powered-By Header
+    Response.setHeader("Server", ServerName()); // Set Server Header
 
     // Check if Request has Headers
     if (!Request.headers) {

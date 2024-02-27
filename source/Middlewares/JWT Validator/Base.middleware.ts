@@ -38,8 +38,8 @@ export default (TokenFieldName: string, SecretToken: string) => {
 
   return async (Request: Request, Response: Response, Next: NextFunction) => {
     // Change Response X-Powered-By Header & Server Header
-    Response.setHeader("X-Powered-By", XPoweredBy); // Set X-Powered-By Header
-    Response.setHeader("Server", ServerName); // Set Server Header
+    Response.setHeader("X-Powered-By", XPoweredBy()); // Set X-Powered-By Header
+    Response.setHeader("Server", ServerName()); // Set Server Header
 
     // Create Response Instances
     const EmptyToken = new JSON_Responser(
