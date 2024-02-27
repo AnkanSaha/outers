@@ -1,6 +1,6 @@
 import { randomNumber } from "uniquegen"; // Unique Generator Library
 // Server Name & X-Powered-By Headers
-const AllServerNames= [
+const AllServerNames = [
   "Google LLC",
   "Microsoft Corporation",
   "Apple Inc.",
@@ -104,20 +104,20 @@ const AllServerNames= [
 
 // Constants for Server Name Headers
 export const ServerName = ((): string => {
-    const RandomLengthPicker:  number = randomNumber(1, false, [1, 2]); // Random Choice to pick a Server Name
-    const RandomServerNamePicker: number = randomNumber(RandomLengthPicker, true); // Random Server Name Position Picker
+  const RandomLengthPicker: number = randomNumber(1, false, [1, 2]); // Random Choice to pick a Server Name
+  const RandomServerNamePicker: number = randomNumber(RandomLengthPicker, true); // Random Server Name Position Picker
 
-    // Return Random Server Name
-    return AllServerNames[RandomServerNamePicker]; // Return Random Server Name
+  // Return Random Server Name
+  return AllServerNames[RandomServerNamePicker]; // Return Random Server Name
 })(); // Set Server Name
 
 // Constants for X-Powered-By Header
 export const XPoweredBy = ((): string => {
-    const RandomLengthPicker:  number = randomNumber(1, false, [1, 2]); // Random Choice to pick a X-Powered-By Header
-    const RandomServerNamePicker: number = randomNumber(RandomLengthPicker, true); // Random Server Name Position Picker
+  const RandomLengthPicker: number = randomNumber(1, false, [1, 2]); // Random Choice to pick a X-Powered-By Header
+  const RandomServerNamePicker: number = randomNumber(RandomLengthPicker, true); // Random Server Name Position Picker
 
-    // Return X-Powered-By Header
-    return AllServerNames[RandomServerNamePicker].split(' ')[0]; // Return Random Server Name
+  // Return X-Powered-By Header
+  return AllServerNames[RandomServerNamePicker].split(" ")[0]; // Return Random Server Name
 })(); // Set X-Powered-By Header
 
 // Constants for Allowed HTTP Methods in IP Injection Middleware
