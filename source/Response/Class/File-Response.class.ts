@@ -75,7 +75,7 @@ export default class FileResponse {
       for (const Type of MIME_Types) {
         if (Type.toLowerCase().includes(this.#contentType.toLowerCase())) {
           this.#Response.setHeader("Content-Type", Type);
-          return;
+          break;
         }
       }
     }
