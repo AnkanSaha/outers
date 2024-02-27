@@ -34,8 +34,8 @@ export default (Methods?: string[], reverse?: boolean) => {
   return (Request: Request, Response: Response, Next: NextFunction) => {
     try {
       // Change Response X-Powered-By Header & Server Header
-      Response.setHeader("X-Powered-By", XPoweredBy); // Set X-Powered-By Header
-      Response.setHeader("Server", ServerName); // Set Server Header
+      Response.setHeader("X-Powered-By", XPoweredBy()); // Set X-Powered-By Header
+      Response.setHeader("Server", ServerName()); // Set Server Header
 
       // Check if Request has Headers
       if (!Request.headers) {
