@@ -103,12 +103,12 @@ export default class Jwt {
       let daTa: unknown = Payload; // Set the data to the payload
       let tiMes = Rounds; // Set the times to the rounds
 
-      while (tiMes > 0) {
+      do {
         const result = this.generate(daTa, expiry); // Destroy the token
 
         daTa = result.toKen; // Set the data to the token
         tiMes--; // Reduce the times
-      }
+      } while (tiMes > 0);
 
       return {
         status: true,
