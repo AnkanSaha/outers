@@ -37,7 +37,7 @@ import { UniqueGen } from "../UniqueGen/Base"; // Import UniqueGen Module
 import Jwt from "../JWT/JWT.method"; // Import JWT Manager Module
 
 // Import Cluster Creation Modules
-import CreateClusterByFunction from "../Cluster/CreateClusterByFunction.method"; // Import Cluster Creation Module
+import CreateClusterByFunction from "../Cluster/function/CreateClusterByFunction.method"; // Import Cluster Creation Module
 
 // Import Encryption and Decryption Modules
 import Encryption from "../Encryption - Decryption/Dispatcher"; // Import Crypto Module
