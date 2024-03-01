@@ -1,16 +1,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-await-in-loop */
 import { red } from "../Logs/Console.log"; // Importing from outers for coloring the output
-import { sign, verify } from "jsonwebtoken"; // Importing jsonwebtoken for generating the token
-import { todayDate } from "../Config/Constant/JWT.Constant"; // Importing todayDate from JWT.Constant
+import { verify } from "jsonwebtoken"; // Importing jsonwebtoken for generating the token
+import { todayDate, cipherList } from "../Config/Constant/JWT.Constant"; // Importing todayDate from JWT.Constant
+
+// Import Functions
+import GenerateJWT from "./Functions/Generate"; // Importing GenerateJWT from Functions
+import DestroyJWT from "./Functions/Destroy"; // Importing DestroyJWT from  functions
+import verifyCipher from "./Functions/verifyCipher"; // Importing verifyCipher from  functions
 
 // Class for all features
 /* The Jwt class is used to generate a token with a payload and optional expiry time. */
 export default class Jwt {
   // Token
-
-  readonly #signatureKey: string;
-  readonly #cipherList: string[];
+  #signatureKey: string; // Signature Key for the token
+  #cipherList: string[]; // List of ciphers used to destroy the token
 
   /**
    * The constructor function initializes the signatureKey property with the provided value or a default
@@ -22,20 +26,14 @@ export default class Jwt {
    */
   constructor(signatureKey: string) {
     this.#signatureKey = signatureKey ?? "secret";
-    this.#cipherList = [
-      "SIDF524",
-      "LHypk41",
-      "@thusngvgvergh",
-      "egfr##.gokro",
-      "frevnjnr@872@erge",
-    ]; // List of supported algorithms keys
+    this.#cipherList = cipherList; // List of ciphers used to destroy the token
   }
 
   // Generate the token
   /**
    * The function generates a token using a payload and an optional expiry time, and returns a record
    * containing information about the generated token.
-   * @param {unknown} Payload - The `Payload` parameter is of type `unknown`, which means it can accept
+   * @param {any} Payload - The `Payload` parameter is of type `unknown`, which means it can accept
    * any type of data. It represents the data that you want to include in the token.
    * @param [expiry=1h] - The `expiry` parameter is an optional parameter that specifies the expiration
    * time for the generated token. It is set to a default value of '1h', which means the token will
@@ -43,7 +41,7 @@ export default class Jwt {
    * @returns a Promise that resolves to a Record<string, unknown> object.
    */
 
-  public generate(Payload: unknown, expiry = "1h"): Record<string, any> {
+  public generate(Payload: any, expiry = "1h"): Record<string, any> {
     try {
       if (!Payload) {
         red("Payload is required"); // Log the error
@@ -55,10 +53,18 @@ export default class Jwt {
         }; // Return the error
       }
 
-      const signedData: string = sign({ data: Payload }, this.#signatureKey, {
-        expiresIn: expiry,
-      }); // Generate the token
-      const fullResult: Record<string, any> = {
+      const signedData = GenerateJWT(Payload, this.#signatureKey, expiry); // Generate the token
+
+      if (signedData == null) {
+        return {
+          status: "error",
+          message: "Something went wrong when generating the token",
+          algoRithm: "HS256 (Default)",
+          currentTimeStamp: todayDate,
+        };
+      }
+
+      return {
         status: "Success",
         message: "Token generated successfully",
         toKen: signedData,
@@ -66,16 +72,15 @@ export default class Jwt {
         expiry,
         currentTimeStamp: todayDate,
       }; // Create a result object
-      return fullResult; // Return the result
+
     } catch {
-      const errorResult: Record<string, any> = {
+      red("Error generating token"); // Log the error
+      return {
         status: "error",
         message: "Error generating token",
         currentTimeStamp: todayDate,
         algoRithm: "HS256 (Default)",
       }; // Create an error object
-      red("Error generating token"); // Log the error
-      return errorResult; // Return the error
     }
   }
 
@@ -98,9 +103,9 @@ export default class Jwt {
    * - expiry: a string indicating the expiration time of
    */
 
-  public generateLoginToken(Payload: unknown, Rounds = 5, expiry = "1h") {
+  public generateLoginToken(Payload: any, Rounds = 5, expiry = "1h") {
     try {
-      let daTa: unknown = Payload; // Set the data to the payload
+      let daTa = Payload; // Set the data to the payload
       let tiMes = Rounds; // Set the times to the rounds
 
       do {
@@ -119,14 +124,13 @@ export default class Jwt {
         currentTimeStamp: todayDate,
       }; // Return the result
     } catch {
-      const errorResult: Record<string, any> = {
+      red("Error generating token"); // Log the error
+      return {
         status: false,
         message: "Error generating login token",
         currentTimeStamp: todayDate,
         algoRithm: "HS256 (Default)",
-      }; // Create an error object
-      red("Error generating token"); // Log the error
-      return errorResult; // Return the error
+      }; // Return the error
     }
   }
 
@@ -141,25 +145,14 @@ export default class Jwt {
 
   public destroy(token: string): Record<string, any> {
     try {
-      const positions: number[] = [5, 3, 9, 4, 7]; // List of positions
-      let tokenArray: string[] = token.split(""); // Split the token
-
-      this.#cipherList.forEach((cipher: string, index: number) => {
-        tokenArray.splice(positions[index], 0, cipher); // Add the cipher to the token
-      }); // Loop through the list of supported algorithms
-
-      tokenArray = tokenArray.reverse(); // Reverse the token
-      const modifiedToken: string = tokenArray.join(""); // Join the token
-
-      const result: Record<string, any> = {
+      const modifiedToken: string = DestroyJWT(token, this.#cipherList); // Destroy the token
+      return {
         status: "Successfully destroyed",
         message: "Token destroyed successfully",
         token: modifiedToken,
         currentTimeStamp: todayDate,
         algoRithm: "HS256 (Default)",
-      }; // Create a result object
-
-      return result; // Return the result
+      }; // Create a result object; // Return the result
     } catch {
       return {
         status: "error",
@@ -190,7 +183,7 @@ export default class Jwt {
         }; // Create an error object
       }
 
-      const cipherResult = this.verifyCipher(token);
+      const cipherResult = verifyCipher(token, this.#cipherList); // Verify the cipher
 
       if (cipherResult.status === "Already Destroyed") {
         return cipherResult;
@@ -216,48 +209,16 @@ export default class Jwt {
     }
   }
 
-  /**
-   * The function `verifyCipher` checks if a given token has been manually destroyed by checking if it
-   * contains any ciphers from a list.
-   * @param {string} token - The `token` parameter is a string that represents a token.
-   * @returns an object with the following properties:
-   */
-
-  private verifyCipher(token: string) {
-    try {
-      // Checking if the token is destroyed by manually checking the token
-
-      let cipherResult = false; // Cipher result
-      this.#cipherList.forEach((cipher: string) => {
-        if (token.includes(cipher)) {
-          cipherResult = true;
-        } else {
-          cipherResult = false;
-        }
-      }); // Check if the token contains the cipher
-
-      if (!cipherResult) {
-        return {
-          status: "Not Destroyed",
-          message: "Token is not Destroyed Manually",
-          currentTimeStamp: todayDate,
-          algoRithm: "HS256 (Default)",
-        }; // Create an error object
-      }
-
-      return {
-        status: "Already Destroyed",
-        message: "Token is Destroyed Manually with the destroy() method",
-        currentTimeStamp: todayDate,
-        algoRithm: "HS256 (Default)",
-      }; // Create an error object
-    } catch {
-      return {
-        status: "error",
-        message: "Error verifying token",
-        currentTimeStamp: todayDate,
-        algoRithm: "HS256 (Default)",
-      }; // Create an error object
+  public setCipherList(cipherList: string[]) {
+    if(!cipherList) {
+      new Error("Cipher list is required to update the cipher list"); // Return the error
     }
+
+    if (!Array.isArray(cipherList)) {
+      new Error("Cipher list should be an array"); // Return the error
+    }
+
+    // Update the cipher list
+    this.#cipherList = cipherList; // Update the cipher list
   }
 }
