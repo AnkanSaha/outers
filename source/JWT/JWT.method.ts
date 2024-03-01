@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-await-in-loop */
+
 import { red } from "../Logs/Console.log"; // Importing from outers for coloring the output
 import { verify } from "jsonwebtoken"; // Importing jsonwebtoken for generating the token
 import { todayDate, cipherList } from "../Config/Constant/JWT.Constant"; // Importing todayDate from JWT.Constant
@@ -52,9 +53,10 @@ export default class Jwt {
           currentTimeStamp: todayDate,
         }; // Return the error
       }
-      console.log(this.#cipherList)
+      // Generate the token
       const signedData = GenerateJWT(Payload, this.#signatureKey, expiry); // Generate the token
 
+      // Check if the token is valid
       if (signedData == null) {
         return {
           status: "error",
@@ -72,7 +74,6 @@ export default class Jwt {
         expiry,
         currentTimeStamp: todayDate,
       }; // Create a result object
-
     } catch {
       red("Error generating token"); // Log the error
       return {
@@ -208,9 +209,18 @@ export default class Jwt {
       }; // Create an error object
     }
   }
-
+  /**
+   * Sets or updates the cipher list.
+   *
+   * This method updates the internal cipher list used for cryptographic operations.
+   * It validates the input to ensure that it is a non-empty array of strings. If the
+   * input does not meet these criteria, an error is thrown.
+   *
+   * @param {string[]} cipherList - An array of strings representing the new cipher list.
+   * @throws {Error} Throws an error if `cipherList` is not provided or is not an array.
+   */
   public setCipherList(cipherList: string[]) {
-    if(!cipherList) {
+    if (!cipherList) {
       new Error("Cipher list is required to update the cipher list"); // Return the error
     }
 
@@ -220,5 +230,27 @@ export default class Jwt {
 
     // Update the cipher list
     this.#cipherList = cipherList; // Update the cipher list
+  }
+  
+  /**
+   * Sets the signature key used for signing or verifying.
+   * This method updates the instance's signature key with the provided value.
+   *
+   * @param {string} signatureKey - The new signature key to be set. Must be a non-empty string.
+   * @throws Will throw an error if `signatureKey` is not provided or if it is not a string.
+   */
+  public setSignatureKey(signatureKey: string) {
+    // Check if the signature key is provided
+    if (!signatureKey) {
+      new Error("Signature key is required to update the signature key"); // Return the error
+    }
+
+    // Check if the signature key is a string
+    if (typeof signatureKey !== "string") {
+      new Error("Signature key should be a string"); // Return the error
+    }
+
+    // Update the signature key
+    this.#signatureKey = signatureKey; // Update the signature key
   }
 }
