@@ -221,7 +221,7 @@ export default class Jwt {
    */
   public setCipherList(cipherList: string[]) {
     if (!cipherList) {
-    throw new Error("Cipher list is required to update the cipher list"); // Return the error
+      throw new Error("Cipher list is required to update the cipher list"); // Return the error
     }
 
     if (!Array.isArray(cipherList)) {
