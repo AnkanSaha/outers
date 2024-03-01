@@ -221,11 +221,11 @@ export default class Jwt {
    */
   public setCipherList(cipherList: string[]) {
     if (!cipherList) {
-      new Error("Cipher list is required to update the cipher list"); // Return the error
+    throw new Error("Cipher list is required to update the cipher list"); // Return the error
     }
 
     if (!Array.isArray(cipherList)) {
-      new Error("Cipher list should be an array"); // Return the error
+      throw new Error("Cipher list should be an array"); // Return the error
     }
 
     // Update the cipher list
@@ -242,12 +242,12 @@ export default class Jwt {
   public setSignatureKey(signatureKey: string) {
     // Check if the signature key is provided
     if (!signatureKey) {
-      new Error("Signature key is required to update the signature key"); // Return the error
+      throw new Error("Signature key is required to update the signature key"); // Return the error
     }
 
     // Check if the signature key is a string
     if (typeof signatureKey !== "string") {
-      new Error("Signature key should be a string"); // Return the error
+      throw new Error("Signature key should be a string"); // Return the error
     }
 
     // Update the signature key
