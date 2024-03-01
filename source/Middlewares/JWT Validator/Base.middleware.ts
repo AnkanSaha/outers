@@ -47,6 +47,7 @@ export default (TokenFieldName: string, SecretToken: string) => {
       StatusCode.UNAUTHORIZED,
       "json",
       `${TokenFieldName} is Required`,
+      false,
       `${TokenFieldName} is Required to access this route`,
     ); // Create New JSON Response Instance for Empty Token
     const BAD_REQUEST = new JSON_Responser(
@@ -54,6 +55,7 @@ export default (TokenFieldName: string, SecretToken: string) => {
       StatusCode.BAD_REQUEST,
       "json",
       "Bad Request",
+      false,
       "No headers provided",
     ); // Create New JSON Response Instance
     const INTERNAL_SERVER_ERROR = new JSON_Responser(
@@ -61,6 +63,7 @@ export default (TokenFieldName: string, SecretToken: string) => {
       StatusCode.INTERNAL_SERVER_ERROR,
       "json",
       "Internal Server Error",
+      false,
       "Internal Server Error, Please Try Again",
     ); // Create New JSON Response Instance for Internal Server Error
 
@@ -69,6 +72,7 @@ export default (TokenFieldName: string, SecretToken: string) => {
       StatusCode.UNAUTHORIZED,
       "json",
       "Invalid Token",
+      false,
       "Invalid Token Provided to access this route",
     ); // Create New JSON Response Instance for Invalid Token
 
