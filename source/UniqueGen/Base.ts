@@ -44,7 +44,7 @@ export class UniqueGen {
    */
   public RandomWord(
     isCAPITAL: boolean = false,
-    CustomWords?: string[]
+    CustomWords?: string[],
   ): string {
     return randomWord(this.#_length, isCAPITAL, CustomWords); // Returns a random word
   }
@@ -65,7 +65,7 @@ export class UniqueGen {
    */
   public RandomMixed(
     isCAPITAL: boolean = false,
-    CustomMixeds?: string[]
+    CustomMixeds?: string[],
   ): string {
     return randomMixed(this.#_length, isCAPITAL, CustomMixeds); // Returns a random mixed string
   }

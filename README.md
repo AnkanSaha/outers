@@ -266,6 +266,7 @@ methods.CreateByFunction(app, PORT, 2); // create a cluster with custom worker c
 ```
 
 # Create Class Based Clusters in NodeJS Easily
+
 ```javascript
 const { methods } = require('outers'); // import the package
 const cluster = new methods.ClusterCreator.ClassBased(ExpressServer, PORT, numberOfWorkers); // create a cluster instance

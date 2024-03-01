@@ -8,7 +8,7 @@ import { red } from "../../Logs/Console.log"; // Importing from outers for color
 export default function GenerateJWT(
   Payload: any,
   signatureKey: string,
-  expiry: string
+  expiry: string,
 ): string | null {
   try {
     const signedData: string = sign({ data: Payload }, signatureKey, {

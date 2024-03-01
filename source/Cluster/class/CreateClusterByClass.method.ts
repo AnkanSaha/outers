@@ -45,7 +45,7 @@ export default class CreateClusterByClass {
     NumberOfWorkers?: number,
     BeforeListenFunctions?: any[],
     AfterListenFunctions?: any[],
-    FunctionMiddlewares?: any[]
+    FunctionMiddlewares?: any[],
   ) {
     this.#ExpressServer = ExpressServer ?? express(); // Express Server Instance
     this.#PORT = PORT; // Active Server Instance
@@ -105,7 +105,7 @@ export default class CreateClusterByClass {
           1024 /
           1024 /
           1024
-        ).toFixed(2)} GB Free Ram : ${cpus()[0].model}`
+        ).toFixed(2)} GB Free Ram : ${cpus()[0].model}`,
       );
 
       // Create a worker according to the number that is specified
@@ -118,7 +118,7 @@ export default class CreateClusterByClass {
       ClusterConfig.on("online", (worker) => {
         Console.green(`🚀 Worker ${worker.process.pid} started 🚀`);
         Console.blue(
-          `Environment Variables Loaded Successfully in Worker : ${worker.process.pid}`
+          `Environment Variables Loaded Successfully in Worker : ${worker.process.pid}`,
         );
         this.#GlobalResponseObject.ActiveWorker++; // Increment Active Worker Count by 1
         Console.yellow(`Worker ${worker.process.pid} is listening`);
@@ -131,7 +131,7 @@ export default class CreateClusterByClass {
         ClusterConfig.fork();
         Console.green(`🚀 Worker ${worker.process.pid} restarted 🚀`);
         Console.blue(
-          `Environment Variables Loaded Successfully in Worker : ${worker.process.pid}`
+          `Environment Variables Loaded Successfully in Worker : ${worker.process.pid}`,
         );
         this.#GlobalResponseObject.ActiveWorker++; // Increment Active Worker Count by 1
         Console.yellow(`Worker ${worker.process.pid} is listening`);
@@ -173,7 +173,7 @@ export default class CreateClusterByClass {
                 await ListenFunction(); // Run Function one by one
               }
             }
-          }
+          },
         ); // Start Server on Port
 
         // Return the Active Server Instance in Response Object
@@ -253,7 +253,7 @@ export default class CreateClusterByClass {
       throw new Error("Function to Run is not provided"); // Error Message for Server Start
     }
 
-    if (typeof FunctionToRun!== "function") {
+    if (typeof FunctionToRun !== "function") {
       throw new Error("Function to Run is not a Function"); // Error Message for Server Start
     }
 
@@ -273,7 +273,7 @@ export default class CreateClusterByClass {
       throw new Error("Function to Run is not provided"); // Error Message for Server Start
     }
 
-    if (typeof FunctionToRun!== "function") {
+    if (typeof FunctionToRun !== "function") {
       throw new Error("Function to Run is not a Function"); // Error Message for Server Start
     }
 

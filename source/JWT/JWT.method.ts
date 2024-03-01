@@ -231,7 +231,7 @@ export default class Jwt {
     // Update the cipher list
     this.#cipherList = cipherList; // Update the cipher list
   }
-  
+
   /**
    * Sets the signature key used for signing or verifying.
    * This method updates the instance's signature key with the provided value.

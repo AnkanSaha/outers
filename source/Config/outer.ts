@@ -103,8 +103,8 @@ export const Middleware = Object.freeze({
 export const methods = Object.freeze({
   JWT_Manager: Jwt, // Export JWT Manager Module
   MongoSuper: Mongo,
-  ClusterCreator:{
-    ClassBased : CreateClusterByClass, // CreateClusterByClass is used to create a cluster using the class based method
+  ClusterCreator: {
+    ClassBased: CreateClusterByClass, // CreateClusterByClass is used to create a cluster using the class based method
     FunctionBased: CreateClusterByFunction, // CreateClusterByFunction is used to create a cluster using the node instance
   }, // Export Cluster Creator Module
   UniqueGenerator: UniqueGen, // Export UniqueGen Module
