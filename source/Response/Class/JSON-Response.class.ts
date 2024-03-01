@@ -22,6 +22,11 @@ export default class JSONResponser {
   #Title?: string;
 
   /**
+   * The Status of Request Data
+   */
+  readonly #status?: boolean;
+
+  /**
    * The message of the response (e.g., "The request was successful.").
    */
   #Message?: string;
@@ -55,12 +60,14 @@ export default class JSONResponser {
     StatusCode: number,
     contentType: string,
     Title?: string,
+    status?: boolean,
     Message?: string,
     CookieData?: CookieType,
   ) {
     this.#StatusCode = StatusCode;
     this.#Title = Title;
     this.#Message = Message;
+    this.#status = status;
     this.#response = response;
     this.#contentType = contentType;
     this.#CookieData = CookieData;
@@ -112,7 +119,7 @@ export default class JSONResponser {
 
     // Send the JSON response.
     this.#response.status(this.#StatusCode).json({
-      status: this.#Title,
+      status: this.#status ?? undefined,
       statusCode: this.#StatusCode,
       Title: this.#Title ?? undefined,
       message: this.#Message ?? undefined,
