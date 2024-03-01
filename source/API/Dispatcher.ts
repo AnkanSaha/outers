@@ -15,16 +15,16 @@ export class APiCall {
     Domain: string,
     ContentType = {
       "Content-Type": "application/json",
-      "Accept": "application/json",
-      "Server": "Outer",
+      Accept: "application/json",
+      Server: "Outer",
       "X-Powered-By": "Outer",
       "Request Date": new Date().toUTCString(),
       "Access-Control-Allow-Origin": "*",
       "User-Agent": `${platform()} ${arch()} server`,
       "Total Ram": `${(totalmem() / 1024 / 1024 / 1024).toFixed(2)} GB`,
       "Available Ram": `${(freemem() / 1024 / 1024 / 1024).toFixed(2)} GB`,
-      "Model Name":  `${cpus()[0].model}`
-    }
+      "Model Name": `${cpus()[0].model}`,
+    },
   ) {
     this.#Domain = Domain; // Set Domain to the Domain passed in the constructor
     this.#ContentType = ContentType; // Set ContentType to the ContentType passed in the constructor
@@ -49,7 +49,7 @@ export class APiCall {
   public async Get(
     path: string,
     Responsejson = true,
-    headers: object = this.#ContentType
+    headers: object = this.#ContentType,
   ) {
     return await GetFetch(`${this.#Domain}${path}`, Responsejson, headers);
   }
@@ -78,14 +78,14 @@ export class APiCall {
     path: string,
     Data: any,
     Responsejson = true,
-    headers: object = this.#ContentType
+    headers: object = this.#ContentType,
   ) {
     // Function for POST requests
     return await PostFetch(
       `${this.#Domain}${path}`,
       Data,
       Responsejson,
-      headers
+      headers,
     );
   }
 
@@ -109,7 +109,7 @@ export class APiCall {
   public async Delete(
     path: string,
     Responsejson = true,
-    headers: object = this.#ContentType
+    headers: object = this.#ContentType,
   ) {
     // Function for DELETE requests
     return await DeleteFetch(`${this.#Domain}${path}`, Responsejson, headers);
@@ -137,14 +137,14 @@ export class APiCall {
     path: string,
     Data: any,
     Responsejson = true,
-    headers: object = this.#ContentType
+    headers: object = this.#ContentType,
   ) {
     // Function for PUT requests
     return await PutFetch(
       `${this.#Domain}${path}`,
       Data,
       Responsejson,
-      headers
+      headers,
     );
   }
 }
