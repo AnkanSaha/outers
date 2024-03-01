@@ -15,8 +15,8 @@ export class APiCall {
     Domain: string,
     ContentType = {
       "Content-Type": "application/json",
-      "Accept": "application/json",
-      "Server": "Outer",
+      Accept: "application/json",
+      Server: "Outer",
       "X-Powered-By": "Outer",
       "Access-Control-Allow-Origin": "*",
       "User-Agent": `${platform()} ${arch()} server`,
