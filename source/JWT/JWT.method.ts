@@ -52,7 +52,7 @@ export default class Jwt {
           currentTimeStamp: todayDate,
         }; // Return the error
       }
-
+      console.log(this.#cipherList)
       const signedData = GenerateJWT(Payload, this.#signatureKey, expiry); // Generate the token
 
       if (signedData == null) {
