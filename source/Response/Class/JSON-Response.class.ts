@@ -24,7 +24,7 @@ export default class JSONResponser {
   /**
    * The Status of Request Data
    */
-  readonly #status?: boolean
+  readonly #status?: boolean;
 
   /**
    * The message of the response (e.g., "The request was successful.").
@@ -60,7 +60,7 @@ export default class JSONResponser {
     StatusCode: number,
     contentType: string,
     Title?: string,
-    status? : boolean,
+    status?: boolean,
     Message?: string,
     CookieData?: CookieType,
   ) {
