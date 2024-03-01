@@ -219,7 +219,36 @@ export default class CreateClusterByClass {
   }
 
   // Add Before Listen Function Method
+  /**
+   * Adds a function to be executed before the server starts listening.
+   * This method appends the provided function to the list of functions to run
+   * before the server starts listening for incoming requests.
+   *
+   * @param {Function} FunctionToRun - The function to be added to the list of functions to run.
+   * @throws {Error} Throws an error if `FunctionToRun` is not provided or is not a function.
+   */
   public AddBeforeListenFunction(FunctionToRun: Function): void {
+    if (!FunctionToRun) {
+      throw new Error("Function to Run is not provided"); // Error Message for Server Start
+    }
+
+    if (typeof FunctionToRun !== "function") {
+      throw new Error("Function to Run is not a Function"); // Error Message for Server Start
+    }
+
+    this.#BeforeListenFunctions.push(FunctionToRun); // Add Function to Before Listen Functions
+  }
+
+  // Add After Listen Function Method
+  /**
+   * Adds a function to be executed after the server starts listening.
+   * This method appends the provided function to the list of functions to run
+   * after the server starts listening for incoming requests.
+   *
+   * @param {Function} FunctionToRun - The function to be added to the list of functions to run.
+   * @throws {Error} Throws an error if `FunctionToRun` is not provided or is not a function.
+   */
+  public AddAfterListenFunction(FunctionToRun: Function): void {
     if (!FunctionToRun) {
       throw new Error("Function to Run is not provided"); // Error Message for Server Start
     }
@@ -228,6 +257,26 @@ export default class CreateClusterByClass {
       throw new Error("Function to Run is not a Function"); // Error Message for Server Start
     }
 
-    this.#BeforeListenFunctions.push(FunctionToRun); // Add Function to Before Listen Functions
+    this.#AfterListenFunctions.push(FunctionToRun); // Add Function to After Listen Functions
+  }
+
+  // Add Function Middleware Method
+  /**
+   * Adds a middleware function to the list of middleware functions to be applied
+   * to the Express server instance.
+   *
+   * @param {Function} FunctionToRun - The function to be added to the list of middleware functions to run.
+   * @throws {Error} Throws an error if `FunctionToRun` is not provided or is not a function.
+   */
+  public AddFunctionMiddleware(FunctionToRun: Function): void {
+    if (!FunctionToRun) {
+      throw new Error("Function to Run is not provided"); // Error Message for Server Start
+    }
+
+    if (typeof FunctionToRun!== "function") {
+      throw new Error("Function to Run is not a Function"); // Error Message for Server Start
+    }
+
+    this.#FunctionMiddlewares.push(FunctionToRun); // Add Function to Function Middlewares
   }
 }
