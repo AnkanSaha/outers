@@ -18,7 +18,6 @@ export class APiCall {
       Accept: "application/json",
       Server: "Outer",
       "X-Powered-By": "Outer",
-      "Request Date": new Date().toUTCString(),
       "Access-Control-Allow-Origin": "*",
       "User-Agent": `${platform()} ${arch()} server`,
       "Total Ram": `${(totalmem() / 1024 / 1024 / 1024).toFixed(2)} GB`,
