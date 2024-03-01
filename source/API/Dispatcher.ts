@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // Import API from internal module
 import { GetFetch, PostFetch, DeleteFetch, PutFetch } from "./functions/Fetch"; // Import Fetch Module
-import { cpus, platform, arch, freemem, totalmem } from "node:os"; // Import OS Module
+import { platform, arch } from "node:os"; // Import OS Module
 
 // Create A Class for API
 /* The `APiCall` class is a TypeScript class that provides a method for making GET requests to a
@@ -15,14 +15,11 @@ export class APiCall {
     Domain: string,
     ContentType = {
       "Content-Type": "application/json",
-      Accept: "application/json",
-      Server: "Outer",
+      "Accept": "application/json",
+      "Server": "Outer",
       "X-Powered-By": "Outer",
       "Access-Control-Allow-Origin": "*",
-      "User-Agent": `${platform()} ${arch()} server`,
-      "Total Ram": `${(totalmem() / 1024 / 1024 / 1024).toFixed(2)} GB`,
-      "Available Ram": `${(freemem() / 1024 / 1024 / 1024).toFixed(2)} GB`,
-      "Model Name": `${cpus()[0].model}`,
+      "User-Agent": `${platform()} ${arch()} server`
     },
   ) {
     this.#Domain = Domain; // Set Domain to the Domain passed in the constructor
