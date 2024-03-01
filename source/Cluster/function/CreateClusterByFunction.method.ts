@@ -4,10 +4,10 @@ import { cpus, platform, arch, freemem } from "node:os"; // Import os module
 import express, { Express } from "express"; // Import express module
 import ClusterConfig from "node:cluster"; // Import Cluster module
 const { isPrimary } = ClusterConfig; // Import isPrimary from Cluster
-import { Console } from "../Config/outer"; // Import Console module
+import { Console } from "../../Config/outer"; // Import Console module
 
 // Import Interfaces
-import { ResponseObject } from "../Config/Interfaces/Cluster/CreateClusterByFunction.interfaces"; // Import Interfaces
+import { ResponseObject } from "../../Config/Interfaces/Cluster/CreateClusterByFunction.interfaces"; // Import Interfaces
 
 // Main Function
 /**

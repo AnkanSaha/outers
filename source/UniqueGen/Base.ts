@@ -7,7 +7,7 @@ import {
 } from "uniquegen"; // Import the module
 
 export class UniqueGen {
-  readonly #_length?: number;
+  #_length?: number;
 
   constructor(length: number) {
     this.#_length = length;
@@ -42,7 +42,10 @@ export class UniqueGen {
    * don't provide any custom words, the function will use a default set of words.
    * @returns a random word.
    */
-  public RandomWord(isCAPITAL = false, CustomWords?: string[]): string {
+  public RandomWord(
+    isCAPITAL: boolean = false,
+    CustomWords?: string[],
+  ): string {
     return randomWord(this.#_length, isCAPITAL, CustomWords); // Returns a random word
   }
 
@@ -60,7 +63,10 @@ export class UniqueGen {
    * @returns The function `RandomMixed` returns the result of calling the `randomMixed` function with
    * the `_length` property, `isCAPITAL` argument, and `CustomMixeds` argument.
    */
-  public RandomMixed(isCAPITAL = false, CustomMixeds?: string[]): string {
+  public RandomMixed(
+    isCAPITAL: boolean = false,
+    CustomMixeds?: string[],
+  ): string {
     return randomMixed(this.#_length, isCAPITAL, CustomMixeds); // Returns a random mixed string
   }
 
@@ -86,5 +92,29 @@ export class UniqueGen {
    */
   public RandomBoolean(): boolean {
     return randomBoolean(); // Returns a random boolean value
+  }
+
+  /**
+   * Sets the length property of the instance.
+   * This method updates the instance's length with the provided numeric value, ensuring that it is a positive number.
+   *
+   * @param {number} length - The new length value to be set. Must be a positive number.
+   * @throws {Error} Throws an error if `length` is not provided, is not a number, or is less than or equal to zero.
+   */
+  public setLength(length: number): void {
+    if (!length) {
+      throw new Error("Length cannot be empty"); // Throw an error if the length is empty
+    }
+
+    if (typeof length !== "number") {
+      throw new Error("Length must be a number"); // Throw an error if the length is not a number
+    }
+
+    if (length <= 0) {
+      throw new Error("Length must be greater than zero"); // Throw an error if the length is less than or equal to zero
+    }
+
+    // Set the length property
+    this.#_length = length; // Set the length property to the number
   }
 }

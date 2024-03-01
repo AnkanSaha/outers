@@ -37,7 +37,8 @@ import { UniqueGen } from "../UniqueGen/Base"; // Import UniqueGen Module
 import Jwt from "../JWT/JWT.method"; // Import JWT Manager Module
 
 // Import Cluster Creation Modules
-import CreateClusterByFunction from "../Cluster/CreateClusterByFunction.method"; // Import Cluster Creation Module
+import CreateClusterByFunction from "../Cluster/function/CreateClusterByFunction.method"; // Import Cluster Creation Module
+import CreateClusterByClass from "../Cluster/class/CreateClusterByClass.method"; // Import Cluster Creation Module
 
 // Import Encryption and Decryption Modules
 import Encryption from "../Encryption - Decryption/Dispatcher"; // Import Crypto Module
@@ -102,7 +103,10 @@ export const Middleware = Object.freeze({
 export const methods = Object.freeze({
   JWT_Manager: Jwt, // Export JWT Manager Module
   MongoSuper: Mongo,
-  ClusterCreator: CreateClusterByFunction, // Export Cluster Creator Module
+  ClusterCreator: {
+    ClassBased: CreateClusterByClass, // CreateClusterByClass is used to create a cluster using the class based method
+    FunctionBased: CreateClusterByFunction, // CreateClusterByFunction is used to create a cluster using the node instance
+  }, // Export Cluster Creator Module
   UniqueGenerator: UniqueGen, // Export UniqueGen Module
   CryptoGraphy: Encryption, // Export Crypto Module
   APiCall: {

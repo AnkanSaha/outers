@@ -218,11 +218,11 @@ app.use("/api", Middleware.RequestInjectIP(["PUT", "POST"]), MainFunction); // i
 - You Need to Set X-Forwarded-For in the Header of the Request in Nginx or Apache or any other server
 - Example : proxy_set_header X-Forwarded-For $remote_addr;
 
-## Create Cluster in NodeJS Easily
+## Create Function Based Cluster in NodeJS Easily
 
 ```javascript
 const { methods } = require('outers'); // import the package
-methods.ClusterCreator(ExpressServer, PORT, CustomWorkerCount, BeforeListenFunctions? AfterListenFunctions?, ...FunctionMiddlewares?); // create a cluster with custom worker count
+methods.ClusterCreator.FunctionBased(ExpressServer, PORT, CustomWorkerCount, BeforeListenFunctions? AfterListenFunctions?, ...FunctionMiddlewares?); // create a cluster with custom worker count
 ```
 
 # Full Example
@@ -265,7 +265,25 @@ methods.CreateByFunction(app, PORT, 2); // create a cluster with custom worker c
 // If you want to use the function middlewares, then you can pass the function middlewares in the seventh parameter of the function or you can pass undefined if you don't want to use function middlewares or you want to use outside of the cluster, you can pass as many as you want
 ```
 
+# Create Class Based Clusters in NodeJS Easily
+
+```javascript
+const { methods } = require('outers'); // import the package
+const cluster = new methods.ClusterCreator.ClassBased(ExpressServer, PORT, numberOfWorkers); // create a cluster instance
+
+cluster.AddBeforeListenFunction(function () {}); //To Add a function to the cluster that will be called before server starts
+
+cluster.AddAfterListenFunction(function () {}); //To Add a function to the cluster that will be called after server
+
+cluster.AddFunctionMiddleware(function (Request , Response, Next) {}); // To Add a function to the cluster that linked to the middleware function
+
+cluster.AddFunctionMiddleware(CORS()); //To Add  CORS middleware to the cluster that will be called after server starts
+
+cluster.StartServer(); // start the cluster server
+
 # Store Temporary Data in Server Side like localStorage in Client Side
+
+```
 
 ```javascript
 const { methods } = require('outers'); // import the package

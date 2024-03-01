@@ -3,6 +3,9 @@
 import { GetFetch, PostFetch, DeleteFetch, PutFetch } from "./functions/Fetch"; // Import Fetch Module
 import { platform, arch } from "node:os"; // Import OS Module
 
+// Import Variables
+import { ServerName, XPoweredBy } from "../Config/Constant/Middleware.Constant"; // Import Middleware Constant Module
+
 // Create A Class for API
 /* The `APiCall` class is a TypeScript class that provides a method for making GET requests to a
 specified API endpoint and returning the response as JSON. */
@@ -15,9 +18,9 @@ export class APiCall {
     Domain: string,
     ContentType = {
       "Content-Type": "application/json",
+      "X-Powered-By": `${XPoweredBy()}`,
       Accept: "application/json",
-      Server: "Outer",
-      "X-Powered-By": "Outer",
+      Server: `${ServerName()}`,
       "Access-Control-Allow-Origin": "*",
       "User-Agent": `${platform()} ${arch()} server`,
     },
