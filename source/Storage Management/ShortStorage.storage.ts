@@ -147,14 +147,14 @@ export default class CreateNewShortStorage {
     const EncryptedData = await Promise.all(
       ParsedData.map(async (Data) => {
         const DecryptedTitle = JSON.parse(
-          await new ClassBased.CryptoGraphy(String(this.#EncryptionKey)).Decrypt(
-            Data.Title,
-          ),
+          await new ClassBased.CryptoGraphy(
+            String(this.#EncryptionKey),
+          ).Decrypt(Data.Title),
         ); // Decrypt Title if Encryption Key is Provided
         const DecryptedData = JSON.parse(
-          await new ClassBased.CryptoGraphy(String(this.#EncryptionKey)).Decrypt(
-            Data.Data,
-          ),
+          await new ClassBased.CryptoGraphy(
+            String(this.#EncryptionKey),
+          ).Decrypt(Data.Data),
         ); // Decrypt Data if Encryption Key is Provided
 
         // Check if Title is Provided and Match with Decrypted Title

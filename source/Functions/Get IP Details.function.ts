@@ -1,11 +1,7 @@
-import {
-  Console,
-  StatusCodes,
-  FunctionBased,
-} from "../Config/outer"; // Import Methods from outers
+import { Console, StatusCodes, FunctionBased } from "../Config/outer"; // Import Methods from outers
 
 // Import Storage
-import Storage from '../Storage Management/ShortStorage.storage'; // Import Short Storage Module
+import Storage from "../Storage Management/ShortStorage.storage"; // Import Short Storage Module
 
 // Import Interfaces
 import { IGetIPDetails } from "../Config/Interfaces/Functions/Get IP Details.interface"; // Import IGetIPDetails from IP Details.utils.interface
@@ -14,12 +10,11 @@ import { IGetIPDetails } from "../Config/Interfaces/Functions/Get IP Details.int
 import { APiCall } from "../Config/Constant/Functions.constant"; // Import APiCall from IP Details.utils.constant
 
 // Register IP Details Short Storage for IP Details Cache
-export const IPDetailsShortStorage =
-  new Storage(
-    "cache-ip-details",
-    99999,
-    "cache-ip-details",
-  ); // Create New Short Storage for IP Details
+export const IPDetailsShortStorage = new Storage(
+  "cache-ip-details",
+  99999,
+  "cache-ip-details",
+); // Create New Short Storage for IP Details
 
 // Main Function
 /**
