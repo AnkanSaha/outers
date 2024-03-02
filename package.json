@@ -1,6 +1,6 @@
 {
   "name": "@AnkanSaha/outers",
-  "version": "8.0.0",
+  "version": "8.1.0",
   "description": "outers - a all in one package for your day to day use",
   "main": "./lib/Config/outer.js",
   "types": "./lib/Config/outer.d.ts",

@@ -32,6 +32,13 @@ import FileResponse from "../Response/Class/File-Response.class"; // Import File
 
 // Import Random Generator Modules
 import { UniqueGen } from "../UniqueGen/Base"; // Import UniqueGen Module
+import {
+  randomBoolean,
+  randomMixed,
+  randomNumber,
+  randomSymbol,
+  randomWord,
+} from "uniquegen"; // Import Random Number Generator Module
 
 // Import JWT Manager Modules
 import Jwt from "../JWT/JWT.method"; // Import JWT Manager Module
@@ -63,6 +70,10 @@ import IP_Controller from "../Middlewares/IP Controller/Base.middleware"; // Imp
 import UserAccessController from "../Middlewares/User Agent Controller/Base.middleware"; // Import User Access Controller Module
 import RequestController from "../Middlewares/Request Controller/Base.middleware"; // Import Request Controller Module
 import JWTValidator from "../Middlewares/JWT Validator/Base.middleware"; // Import JWT Validator Middleware
+
+// Import Functions Related Modules
+import IPChecker from "../Functions/IP Type Checker.function"; // Import IP Type Checker Module
+import getIPDetails from "../Functions/Get IP Details.function"; // Import Get IP Details Module
 
 // Export Console Color Related Modules
 export const Console = Object.freeze({
@@ -99,25 +110,14 @@ export const Middleware = Object.freeze({
   JWTValidator, // Export JWT Validator Middleware
 }); // Export IP Injector Module as Middleware
 
-// Export All Methods with Freeze
-export const methods = Object.freeze({
+// Export All Class based with Freeze
+export const ClassBased = Object.freeze({
   JWT_Manager: Jwt, // Export JWT Manager Module
   MongoSuper: Mongo,
-  ClusterCreator: {
-    ClassBased: CreateClusterByClass, // CreateClusterByClass is used to create a cluster using the class based method
-    FunctionBased: CreateClusterByFunction, // CreateClusterByFunction is used to create a cluster using the node instance
-  }, // Export Cluster Creator Module
+  ClusterCreator: CreateClusterByClass, // CreateClusterByClass is used to create a cluster using the class based method
   UniqueGenerator: UniqueGen, // Export UniqueGen Module
   CryptoGraphy: Encryption, // Export Crypto Module
-  APiCall: {
-    FunctionBased: {
-      Get: GetFetch, // Export Get Fetch Module
-      Post: PostFetch, // Export Post Fetch Module
-      Put: PutFetch, // Export Put Fetch Module
-      Delete: DeleteFetch, // Export Delete
-    }, // Export Direct Function Based API Call Function
-    ClassBased: APiCall, // Export Class Based API Call Function
-  },
+  API: APiCall,
   Response: {
     JSON: JSONResponser, // Export Class Based JSON Response Sender Module
     File: FileResponse, // Export Class Based File Response Sender Module
@@ -131,3 +131,25 @@ export const methods = Object.freeze({
   }, // Export Command Related Module
   GitCloner: GitCloner, // Export Git Cloning Module
 }); // Export All Methods
+
+// Export Functions with Freeze
+export const FunctionBased = Object.freeze({
+  RandomGenerator: {
+    Boolean: randomBoolean, // Export Random Boolean Generator Module
+    Mixed: randomMixed, // Export Random Mixed Generator Module
+    Number: randomNumber, // Export Random Number Generator Module
+    Symbol: randomSymbol, // Export Random Symbol Generator Module
+    Word: randomWord, // Export Random Word Generator Module
+  }, // Export UniqueGen Module
+  IP: {
+    TypeCheck: IPChecker, // Export IP Type Checker Module
+    Info: getIPDetails, // Export Get IP Details Function
+  },
+  ClusterCreator: CreateClusterByFunction, // CreateClusterByFunction is used to create a cluster using the function based method
+  API: {
+    GET: GetFetch, // Export Get Fetch Module
+    POST: PostFetch, // Export Post Fetch Module
+    PUT: PutFetch, // Export Put Fetch Module
+    DELETE: DeleteFetch, // Export Delete
+  },
+}); // Export
