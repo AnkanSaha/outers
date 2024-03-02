@@ -6,7 +6,7 @@ type str = string; // String type
 type bool = boolean; // Boolean Type
 
 // Import Package for executeCommand
-import { methods } from "../../Config/outer"; // import package from outer
+import { ClassBased } from "../../Config/outer"; // import package from outer
 import { BitbucketURL } from "../../Config/Constant/Git Cloner.Constant"; // Import Bitbucket URL
 
 export default async function BitBucketCloner(
@@ -16,7 +16,7 @@ export default async function BitBucketCloner(
   BranchName: str,
 ): Promise<bool> {
   // Execute git clone command for BitBucket repository
-  const BitBucketStatus = await methods.Command.Execute(
+  const BitBucketStatus = await ClassBased.Command.Execute(
     `git clone -b ${BranchName} ${BitbucketURL}${UserName}/${RepositoryName}.git ./${Directory}`,
   );
 
