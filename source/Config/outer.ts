@@ -32,7 +32,13 @@ import FileResponse from "../Response/Class/File-Response.class"; // Import File
 
 // Import Random Generator Modules
 import { UniqueGen } from "../UniqueGen/Base"; // Import UniqueGen Module
-import { randomBoolean, randomMixed, randomNumber, randomSymbol, randomWord } from "uniquegen"; // Import Random Number Generator Module
+import {
+  randomBoolean,
+  randomMixed,
+  randomNumber,
+  randomSymbol,
+  randomWord,
+} from "uniquegen"; // Import Random Number Generator Module
 
 // Import JWT Manager Modules
 import Jwt from "../JWT/JWT.method"; // Import JWT Manager Module
@@ -126,7 +132,6 @@ export const ClassBased = Object.freeze({
   GitCloner: GitCloner, // Export Git Cloning Module
 }); // Export All Methods
 
-
 // Export Functions with Freeze
 export const FunctionBased = Object.freeze({
   RandomGenerator: {
@@ -137,7 +142,7 @@ export const FunctionBased = Object.freeze({
     Word: randomWord, // Export Random Word Generator Module
   }, // Export UniqueGen Module
   IP: {
-    TypeCheck : IPChecker, // Export IP Type Checker Module
+    TypeCheck: IPChecker, // Export IP Type Checker Module
     Info: getIPDetails, // Export Get IP Details Function
   },
   ClusterCreator: CreateClusterByFunction, // CreateClusterByFunction is used to create a cluster using the function based method
@@ -146,5 +151,5 @@ export const FunctionBased = Object.freeze({
     POST: PostFetch, // Export Post Fetch Module
     PUT: PutFetch, // Export Put Fetch Module
     DELETE: DeleteFetch, // Export Delete
-  }
+  },
 }); // Export

@@ -63,13 +63,13 @@ export default (Methods?: string[]) => {
           Request.headers["x-real-ip"] ||
           Request.ip; // Get Requester IP Address
 
-          // Check if Requester IP is IPv4 or IPv6
-          const IPType = IPChecker(String(RequesterIPaddress)); // Get IP Type
+        // Check if Requester IP is IPv4 or IPv6
+        const IPType = IPChecker(String(RequesterIPaddress)); // Get IP Type
 
         // Inject Requester IP Address
         Request.body.RequesterIPaddress = RequesterIPaddress; // Inject Requester IP Address
         Request.body.IPType = IPType; // Inject IP Type
-        
+
         Next(); // Next Middleware
       } else {
         Next(); // Proceed Without Injecting IP Address
