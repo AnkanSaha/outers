@@ -4,7 +4,7 @@ type str = string;
 type bool = boolean;
 
 // Import Package for executeCommand
-import { methods } from "../Config/outer"; // import package from outer
+import { ClassBased } from "../Config/outer"; // import package from outer
 import checkFileExists from "./functions/CheckFolderExistence"; // import package from outer
 
 // Import Cloner Functions
@@ -131,7 +131,7 @@ export default class repositoryCloner {
     Branch = "main",
   ): Promise<bool | undefined> {
     // Execute the git clone command to clone the repository specified by RepositoryURL
-    const GitStatus = await methods.Command.Execute(
+    const GitStatus = await ClassBased.Command.Execute(
       `git clone -b ${Branch} ${RepositoryURL}.git`,
     );
 

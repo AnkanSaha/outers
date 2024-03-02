@@ -1,9 +1,11 @@
 import {
-  ClassBased,
   Console,
   StatusCodes,
   FunctionBased,
 } from "../Config/outer"; // Import Methods from outers
+
+// Import Storage
+import Storage from '../Storage Management/ShortStorage.storage'; // Import Short Storage Module
 
 // Import Interfaces
 import { IGetIPDetails } from "../Config/Interfaces/Functions/Get IP Details.interface"; // Import IGetIPDetails from IP Details.utils.interface
@@ -13,7 +15,7 @@ import { APiCall } from "../Config/Constant/Functions.constant"; // Import APiCa
 
 // Register IP Details Short Storage for IP Details Cache
 export const IPDetailsShortStorage =
-  new ClassBased.Storage.CreateNewShortStorage(
+  new Storage(
     "cache-ip-details",
     99999,
     "cache-ip-details",
