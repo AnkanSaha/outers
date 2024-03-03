@@ -10,7 +10,7 @@ import {
 } from "node:fs/promises"; // Import Node.js Dependencies
 
 // Import Encryption and Decryption Functions
-import { ClassBased } from "../Config/outer"; // Import Encryption and Decryption Functions
+import CryptoGraphy from '../Encryption - Decryption/Dispatcher'; // Import Encryption and Decryption Functions
 
 // Interfaces for ShortStorage Response
 import { ShortStorage } from "../Config/Interfaces/Storage Management/ShortStorage.interface"; // Import ShortStorage Interface
@@ -102,10 +102,10 @@ export default class CreateNewShortStorage {
     const ParsedData: any[] = JSON.parse(RawData); // Parsed The Data
 
     // Encrypt Data if Encryption Key is Provided
-    const UserProvidedData = await new ClassBased.CryptoGraphy(
+    const UserProvidedData = await new CryptoGraphy(
       String(this.#EncryptionKey),
     ).Encrypt(Data); // Set User Provided Data
-    const UserProvidedTitle = await new ClassBased.CryptoGraphy(
+    const UserProvidedTitle = await new CryptoGraphy(
       String(this.#EncryptionKey),
     ).Encrypt(Title); // Set User Provided Title
 
@@ -147,12 +147,12 @@ export default class CreateNewShortStorage {
     const EncryptedData = await Promise.all(
       ParsedData.map(async (Data) => {
         const DecryptedTitle = JSON.parse(
-          await new ClassBased.CryptoGraphy(
+          await new CryptoGraphy(
             String(this.#EncryptionKey),
           ).Decrypt(Data.Title),
         ); // Decrypt Title if Encryption Key is Provided
         const DecryptedData = JSON.parse(
-          await new ClassBased.CryptoGraphy(
+          await new CryptoGraphy(
             String(this.#EncryptionKey),
           ).Decrypt(Data.Data),
         ); // Decrypt Data if Encryption Key is Provided
@@ -365,11 +365,11 @@ export default class CreateNewShortStorage {
     // Encrypt Data if Encryption Key is Provided
     const EncryptedData = await Promise.all(
       UnEncryptedData.map(async (Data: { Title: any; Data: any }) => {
-        const EncryptedTitle = await new ClassBased.CryptoGraphy(
+        const EncryptedTitle = await new CryptoGraphy(
           String(this.#EncryptionKey),
         ).Encrypt(Data.Title);
         // Encrypt Title if Encryption Key is Provided
-        const EncryptedData = await new ClassBased.CryptoGraphy(
+        const EncryptedData = await new CryptoGraphy(
           String(this.#EncryptionKey),
         ).Encrypt(Data.Data); // Encrypt Data if Encryption Key is Provided
 
