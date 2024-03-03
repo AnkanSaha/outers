@@ -58,7 +58,7 @@ import Executor from "../command/exec.command"; // Linux Command Executor
 import SpawnCommander from "../command/spawn.command"; // Linux Command Executor
 
 // Import MongoDB Related Modules
-import { Mongo } from "mongosuper"; //  Mongo Super Module
+import MongoSuper from "../MongoSuper/Connection/Connection"; //  Mongo Super Module
 
 // Import Git Cloning Modules
 import GitCloner from "../Git Cloner/Cloner"; // Import Git Cloner Module
@@ -113,7 +113,7 @@ export const Middleware = Object.freeze({
 // Export All Class based with Freeze
 export const ClassBased = Object.freeze({
   JWT_Manager: Jwt, // Export JWT Manager Module
-  MongoSuper: Mongo,
+  MongoSuper: MongoSuper,
   ClusterCreator: CreateClusterByClass, // CreateClusterByClass is used to create a cluster using the class based method
   UniqueGenerator: UniqueGen, // Export UniqueGen Module
   CryptoGraphy: Encryption, // Export Crypto Module
