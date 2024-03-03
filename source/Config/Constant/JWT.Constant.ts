@@ -3,7 +3,9 @@ type str = string; // String Type
 type int = number; // Integer Type
 
 // import Uniquegen
-import { randomNumber, randomMixed, randomBoolean } from "uniquegen"; // Import Uniquegen
+import randomNumber from "../../UniqueGen/Function/NumFunction"; // Import Number Generator
+import randomMixed from "../../UniqueGen/Function/MixedFunction"; // Import Mixed Generator
+import randomBoolean from "../../UniqueGen/Function/BooleanFunction"; // Import Boolean Generator
 
 // Current Time
 export const todayDate: str = `${new Date().getDate()}-${new Date().getMonth()}-${new Date().getFullYear()} ${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`;

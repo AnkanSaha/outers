@@ -32,13 +32,13 @@ import FileResponse from "../Response/Class/File-Response.class"; // Import File
 
 // Import Random Generator Modules
 import { UniqueGen } from "../UniqueGen/Base"; // Import UniqueGen Module
-import {
-  randomBoolean,
-  randomMixed,
-  randomNumber,
-  randomSymbol,
-  randomWord,
-} from "uniquegen"; // Import Random Number Generator Module
+
+// Import Random Generator Module
+import randomBoolean from "../UniqueGen/Function/BooleanFunction"; // Random Boolean Generator
+import randomMixed from "../UniqueGen/Function/MixedFunction"; // Random Mixed Generator
+import randomWord from "../UniqueGen/Function/WordFunction"; // Random Word Generator
+import randomSymbol from "../UniqueGen/Function/SymbolFunction"; // Random Symbol Generator
+import randomNumber from "../UniqueGen/Function/NumFunction"; // Random Number Generator
 
 // Import JWT Manager Modules
 import Jwt from "../JWT/JWT.method"; // Import JWT Manager Module
