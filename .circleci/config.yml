@@ -17,7 +17,25 @@ jobs:
           command: npm test
 
       - run:
+          name: Build Package
+          command: npm run build
+
+      - run:
           name: Publish to NPM
           command: |
             echo "//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}" > ~/.npmrc
-            npm publish
+
+      - run:
+          name: Publish to NPM
+          command: npm publish
+
+workflows:
+  version: 2
+  custom_build_process:
+    jobs:
+      - build:
+          name: Publish To NPM Registry  # Custom name for the build process
+          filters:
+            branches:
+              only:
+                - main
