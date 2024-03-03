@@ -4,7 +4,6 @@ jobs:
   build:
     docker:
       - image: node:latest
-    name: Publish to NPM Registry
 
     steps:
       - checkout
