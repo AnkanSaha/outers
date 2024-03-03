@@ -3,7 +3,8 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/node:latest
+      - image: node:latest
+    name: Publish to NPM Registry
 
     steps:
       - checkout
