@@ -52,5 +52,8 @@
     "jsonwebtoken": "^9.0.2",
     "mongosuper": "^4.4.3",
     "uniquegen": "^8.5.0"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   }
 }
