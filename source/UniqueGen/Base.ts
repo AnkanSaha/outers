@@ -1,10 +1,9 @@
-import {
-  randomMixed,
-  randomNumber,
-  randomSymbol,
-  randomWord,
-  randomBoolean,
-} from "uniquegen"; // Import the module
+// Import Functions
+import GenerateBooleanID from "./Function/BooleanFunction"; // Import the Boolean Function
+import GenerateMixedID from "./Function/MixedFunction";  // Import the Mixed Function
+import GenerateNumberID from "./Function/NumFunction"; // Import the Number Function
+import GenerateSymbolID from "./Function/SymbolFunction"; // Import the Symbol Function
+import GenerateWordID from "./Function/WordFunction"; // Import the Word Function
 
 export class UniqueGen {
   #_length?: number;
@@ -26,8 +25,8 @@ export class UniqueGen {
    * parameter, the function will generate a random number
    * @returns a random number.
    */
-  public RandomNumber(withzero = true, CustomNumbers?: number[]): number {
-    return randomNumber(this.#_length, withzero, CustomNumbers); // Returns a random number
+  public RandomNumber(withzero: boolean = true, CustomNumbers?: number[]): number {
+    return GenerateNumberID(this.#_length, withzero, CustomNumbers); // Returns a random number
   }
 
   // Random Word
@@ -46,7 +45,7 @@ export class UniqueGen {
     isCAPITAL: boolean = false,
     CustomWords?: string[],
   ): string {
-    return randomWord(this.#_length, isCAPITAL, CustomWords); // Returns a random word
+    return GenerateWordID(this.#_length, isCAPITAL, CustomWords); // Returns a random word
   }
 
   // Mixed
@@ -67,7 +66,7 @@ export class UniqueGen {
     isCAPITAL: boolean = false,
     CustomMixeds?: string[],
   ): string {
-    return randomMixed(this.#_length, isCAPITAL, CustomMixeds); // Returns a random mixed string
+    return GenerateMixedID(this.#_length, isCAPITAL, CustomMixeds); // Returns a random mixed string
   }
 
   // Symbol
@@ -82,7 +81,7 @@ export class UniqueGen {
    * `CustomSymbols` array as arguments.
    */
   public RandomSymbol(CustomSymbols?: string[]): string {
-    return randomSymbol(this.#_length, CustomSymbols); // Returns a random symbol
+    return GenerateSymbolID(this.#_length, CustomSymbols); // Returns a random symbol
   }
 
   // Boolean
@@ -91,7 +90,7 @@ export class UniqueGen {
    * @returns {boolean} A random boolean value.
    */
   public RandomBoolean(): boolean {
-    return randomBoolean(); // Returns a random boolean value
+    return GenerateBooleanID(); // Returns a random boolean value
   }
 
   /**
