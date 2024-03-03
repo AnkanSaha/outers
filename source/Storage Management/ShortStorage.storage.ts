@@ -55,7 +55,7 @@ export default class CreateNewShortStorage {
         .split("")
         .reverse()
         .join("")
-        .toUpperCase()}-${process.versions.v8
+        .toUpperCase()}-${process.versions.node
         .trim()
         .split("")
         .reverse()
