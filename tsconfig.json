@@ -12,7 +12,6 @@
     "skipLibCheck": true, // Skip type checking of declaration files from dependencies
     "forceConsistentCasingInFileNames": true,
     "lib": ["ES6", "DOM"], // Include the necessary TypeScript library declarations
-    "types": ["react", "react-dom"], // Include typings for React and ReactDOM
     "rootDir": "./source" // Specify the root directory for your source code
   },
   "include": ["source/**/*.ts", "source/**/*.tsx"], // Include TypeScript and TSX files
