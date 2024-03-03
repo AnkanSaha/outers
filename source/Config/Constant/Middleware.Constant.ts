@@ -1,4 +1,5 @@
-import { randomNumber } from "uniquegen"; // Unique Generator Library
+import randomNumber from "../../UniqueGen/Function/NumFunction"; // Unique Generator Library
+
 // Server Name & X-Powered-By Headers
 const AllServerNames = [
   "Google LLC",

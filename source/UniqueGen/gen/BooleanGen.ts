@@ -2,7 +2,7 @@
 type bool = boolean; // Type for boolean
 
 // Import Random Number Function
-import { randomNumber } from "../uniquegen"; // function for generating a random word
+import randomNumber from "../Function/NumFunction"; // function for generating a random word
 
 // Main Function to Generate Random Boolean
 /**
