@@ -1,7 +1,7 @@
 source
 tsconfig.json
 tslint.json
-.eslintrc.json
+.eslintrc.yml
 .github
 library
 dist
@@ -13,3 +13,7 @@ node_modules
 .deepsource.toml
 .gitpod.yml
 docker-compose.yml
+CODE_OF_CONDUCT.md
+CONTRIBUTING.md
+LEARN.md
+SECURITY.md
