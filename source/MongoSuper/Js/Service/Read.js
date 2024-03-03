@@ -1,6 +1,6 @@
 /* This File is used to Find Data From Database. */
 
-import findValidator from "../Validator/FindValidator"; // Import the findValidator function from the FindValidator.js file.
+import findValidator from '../Validator/FindValidator' // Import the findValidator function from the FindValidator.js file.
 
 /**
  * The Find function takes in a filter, model, and limit, validates the filter, and returns the result
@@ -16,37 +16,34 @@ import findValidator from "../Validator/FindValidator"; // Import the findValida
  * array of documents that match the Filter and are limited by the specified limit.
  */
 // Main Find Function
-export async function Find(type, Filter, model, limit, skip) {
-    try {
-        const validate = await findValidator(Filter); // Validate the Filter
-        switch (validate) {
-            case false:
-                return [];
-            case true:
-                switch (Filter.length) {
-                    case 0:
-                        const result = await model
-                            .find({})
-                            .limit(limit)
-                            .skip(skip); // find the document
-                        return result; // return the result
-                    default:
-                        if (type === "OR") {
-                            const orResult = await model
-                                .find({ $or: Filter })
-                                .limit(limit)
-                                .skip(skip); // find the document
-                            return orResult; // return the result
-                        } else if (type === "AND") {
-                            const andResult = await model
-                                .find({ $and: Filter })
-                                .limit(limit)
-                                .skip(skip); // find the document
-                            return andResult; // return the result
-                        }
-                }
+export async function Find (type, Filter, model, limit, skip) {
+  try {
+    const validate = await findValidator(Filter) // Validate the Filter
+    switch (validate) {
+      case false:
+        return []
+      case true:
+        switch (Filter.length) {
+          case 0:
+            const result = await model.find({}).limit(limit).skip(skip) // find the document
+            return result // return the result
+          default:
+            if (type === 'OR') {
+              const orResult = await model
+                .find({ $or: Filter })
+                .limit(limit)
+                .skip(skip) // find the document
+              return orResult // return the result
+            } else if (type === 'AND') {
+              const andResult = await model
+                .find({ $and: Filter })
+                .limit(limit)
+                .skip(skip) // find the document
+              return andResult // return the result
+            }
         }
-    } catch (err) {
-        console.log(err);
-    } // catch any errors
+    }
+  } catch (err) {
+    console.log(err)
+  } // catch any errors
 } // Export the Find function.

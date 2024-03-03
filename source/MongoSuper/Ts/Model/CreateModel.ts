@@ -17,18 +17,18 @@ type str = string;
  * is being returned based on the `DataSchema` and `CollectionName`.
  */
 export function CreateModel(
-    DataSchema: globe,
-    CollectionName?: str
+  DataSchema: globe,
+  CollectionName?: str,
 ): undefined | globe {
-    switch (CollectionName) {
-        case undefined:
-            return undefined;
-        default:
-            try {
-                return model(CollectionName, DataSchema);
-            } catch (err) {
-                console.log(err);
-                return undefined;
-            }
-    }
+  switch (CollectionName) {
+    case undefined:
+      return undefined;
+    default:
+      try {
+        return model(CollectionName, DataSchema);
+      } catch (err) {
+        console.log(err);
+        return undefined;
+      }
+  }
 } // end of function

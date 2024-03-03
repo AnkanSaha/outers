@@ -13,22 +13,22 @@
  * `status` is `true`, `message` is `"Successfully Created Data"`, `NewCount` is the length of the
  * array containing the newly created document (which is 1),
  */
-export async function Create(data, model) {
-    try {
-        const result = await model.create(data); // Create the document and save it to the database.
-        return {
-            status: true,
-            message: "Successfully Created Data",
-            NewCount: 1,
-            NewData: [result]
-        };
-    } catch (err) {
-        console.error(err); // Log the error for debugging purposes
-        return {
-            status: false,
-            message: "Failed to Create Data",
-            NewCount: 0,
-            NewData: []
-        };
+export async function Create (data, model) {
+  try {
+    const result = await model.create(data) // Create the document and save it to the database.
+    return {
+      status: true,
+      message: 'Successfully Created Data',
+      NewCount: 1,
+      NewData: [result]
     }
+  } catch (err) {
+    console.error(err) // Log the error for debugging purposes
+    return {
+      status: false,
+      message: 'Failed to Create Data',
+      NewCount: 0,
+      NewData: []
+    }
+  }
 }

@@ -21,6 +21,6 @@ export const DeleteData = Delete;
 
 // Export With Default Export
 export default Object.freeze({
-    CreateModel,
-    CreateSchema
+  CreateModel,
+  CreateSchema,
 });
