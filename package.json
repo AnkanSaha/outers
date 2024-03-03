@@ -1,5 +1,5 @@
 {
-  "name": "@AnkanSaha/outers",
+  "name": "outers",
   "version": "8.1.0",
   "description": "outers - a all in one package for your day to day use",
   "main": "./lib/Config/outer.js",
@@ -52,8 +52,5 @@
     "jsonwebtoken": "^9.0.2",
     "mongosuper": "^4.4.3",
     "uniquegen": "^8.5.0"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
   }
 }
