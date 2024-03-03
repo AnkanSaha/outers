@@ -1,6 +1,6 @@
 import { red } from "../Logs/Console.log"; // Import Color Console Log
 import { StatusCode } from "../StatusCode/Code"; // Import Status Code
-import TypeCheck from './IP Type Checker.function'; // Import IP Type Checker Function
+import TypeCheck from "./IP Type Checker.function"; // Import IP Type Checker Function
 
 // Import Storage
 import Storage from "../Storage Management/ShortStorage.storage"; // Import Short Storage Module

@@ -10,7 +10,7 @@ import {
 } from "node:fs/promises"; // Import Node.js Dependencies
 
 // Import Encryption and Decryption Functions
-import CryptoGraphy from '../Encryption - Decryption/Dispatcher'; // Import Encryption and Decryption Functions
+import CryptoGraphy from "../Encryption - Decryption/Dispatcher"; // Import Encryption and Decryption Functions
 
 // Interfaces for ShortStorage Response
 import { ShortStorage } from "../Config/Interfaces/Storage Management/ShortStorage.interface"; // Import ShortStorage Interface
@@ -147,14 +147,14 @@ export default class CreateNewShortStorage {
     const EncryptedData = await Promise.all(
       ParsedData.map(async (Data) => {
         const DecryptedTitle = JSON.parse(
-          await new CryptoGraphy(
-            String(this.#EncryptionKey),
-          ).Decrypt(Data.Title),
+          await new CryptoGraphy(String(this.#EncryptionKey)).Decrypt(
+            Data.Title,
+          ),
         ); // Decrypt Title if Encryption Key is Provided
         const DecryptedData = JSON.parse(
-          await new CryptoGraphy(
-            String(this.#EncryptionKey),
-          ).Decrypt(Data.Data),
+          await new CryptoGraphy(String(this.#EncryptionKey)).Decrypt(
+            Data.Data,
+          ),
         ); // Decrypt Data if Encryption Key is Provided
 
         // Check if Title is Provided and Match with Decrypted Title
