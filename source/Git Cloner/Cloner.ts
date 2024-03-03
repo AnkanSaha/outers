@@ -4,7 +4,7 @@ type str = string;
 type bool = boolean;
 
 // Import Package for executeCommand
-import { ClassBased } from "../Config/outer"; // import package from outer
+import Execute from "../command/exec.command"; // import package from outer
 import checkFileExists from "./functions/CheckFolderExistence"; // import package from outer
 
 // Import Cloner Functions
@@ -30,7 +30,7 @@ export default class repositoryCloner {
   constructor(
     Provider: str,
     UserName: str,
-    AutoDelete = false,
+    AutoDelete: boolean = false,
     DirectoryName?: str,
   ) {
     this.#Provider = Provider.toUpperCase();
@@ -131,7 +131,7 @@ export default class repositoryCloner {
     Branch = "main",
   ): Promise<bool | undefined> {
     // Execute the git clone command to clone the repository specified by RepositoryURL
-    const GitStatus = await ClassBased.Command.Execute(
+    const GitStatus = await Execute(
       `git clone -b ${Branch} ${RepositoryURL}.git`,
     );
 

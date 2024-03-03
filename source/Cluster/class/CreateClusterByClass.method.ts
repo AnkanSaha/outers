@@ -5,7 +5,7 @@ import { cpus, platform, arch, freemem } from "node:os"; // Import os module
 import express, { Express } from "express"; // Import express module
 import ClusterConfig from "node:cluster"; // Import Cluster module
 const { isPrimary } = ClusterConfig; // Import isPrimary from Cluster
-import { Console } from "../../Config/outer"; // Import Console module
+import { bright, red, green, yellow, blue } from "../../Logs/Console.log"; // Import Console module
 
 // Import Interfaces
 import { ResponseObject } from "../../Config/Interfaces/Cluster/CreateClusterByFunction.interfaces"; // Import Interfaces
@@ -99,7 +99,7 @@ export default class CreateClusterByClass {
     if (isPrimary) {
       // If the cluster is the primary node
       // Print CPU Count
-      Console.bright(
+      bright(
         `${platform()} ${arch()} server : ${(
           freemem() /
           1024 /
@@ -116,25 +116,25 @@ export default class CreateClusterByClass {
 
       // Listen for Cluster Online
       ClusterConfig.on("online", (worker) => {
-        Console.green(`🚀 Worker ${worker.process.pid} started 🚀`);
-        Console.blue(
+        green(`🚀 Worker ${worker.process.pid} started 🚀`);
+        blue(
           `Environment Variables Loaded Successfully in Worker : ${worker.process.pid}`,
         );
         this.#GlobalResponseObject.ActiveWorker++; // Increment Active Worker Count by 1
-        Console.yellow(`Worker ${worker.process.pid} is listening`);
+        yellow(`Worker ${worker.process.pid} is listening`);
       });
 
       // Listen for Cluster Exit
       ClusterConfig.on("exit", (worker) => {
-        Console.red(`Worker ${worker.process.pid} died`);
+        red(`Worker ${worker.process.pid} died`);
         this.#GlobalResponseObject.ActiveWorker++; // Increment Active Worker Count by 1
         ClusterConfig.fork();
-        Console.green(`🚀 Worker ${worker.process.pid} restarted 🚀`);
-        Console.blue(
+        green(`🚀 Worker ${worker.process.pid} restarted 🚀`);
+        blue(
           `Environment Variables Loaded Successfully in Worker : ${worker.process.pid}`,
         );
         this.#GlobalResponseObject.ActiveWorker++; // Increment Active Worker Count by 1
-        Console.yellow(`Worker ${worker.process.pid} is listening`);
+        yellow(`Worker ${worker.process.pid} is listening`);
       });
     } else {
       // Apply Function Middlewares to Express Server Instance like CORS, Body Parser, etc.
@@ -162,7 +162,7 @@ export default class CreateClusterByClass {
         const ActiveServer = this.#ExpressServer.listen(
           this.#PORT,
           async () => {
-            Console.green(`🚀 Server is listening on Port ${this.#PORT} 🚀`); // Print Message for Server Start
+            green(`🚀 Server is listening on Port ${this.#PORT} 🚀`); // Print Message for Server Start
 
             // Run After Listen Functions
             if (
@@ -181,7 +181,7 @@ export default class CreateClusterByClass {
 
         return Object.freeze(this.#GlobalResponseObject); // Return Response Object to User for further use
       } catch (error) {
-        Console.red(`Error in Starting Server : ${error}`); // Print Error Message for Server Start
+        red(`Error in Starting Server : ${error}`); // Print Error Message for Server Start
         return Object.freeze({
           Error: error,
           ...this.#GlobalResponseObject, // Spread the Global Response Object

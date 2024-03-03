@@ -6,7 +6,7 @@ type str = string; // String type
 type bool = boolean; // Boolean Type
 
 // Import Package for executeCommand
-import { ClassBased } from "../../Config/outer"; // import package from outer
+import Execute from "../../command/exec.command"; // import executeCommand from outer
 import { GitlabURL } from "../../Config/Constant/Git Cloner.Constant"; // Import Gitlab URL
 
 export default async function GitlabCloner(
@@ -16,7 +16,7 @@ export default async function GitlabCloner(
   BranchName: str,
 ): Promise<bool> {
   // Execute git clone command for Gitlab repository
-  const GitlabStatus = await ClassBased.Command.Execute(
+  const GitlabStatus = await Execute(
     `git clone -b ${BranchName} ${GitlabURL}${UserName}/${RepositoryName}.git ./${Directory}`,
   );
 

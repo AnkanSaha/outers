@@ -4,8 +4,8 @@ import {
   ServerName,
 } from "../../Config/Constant/Middleware.Constant"; // Import X-Powered-By Header
 
-// Import Interfaces
-import { Serve, StatusCodes } from "../../Config/outer"; // Import red from outers
+// Import Server Module
+import { Serve, StatusCodes } from "../../Config/outer"; // Import Status Code
 
 // Main Function
 /**
