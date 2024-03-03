@@ -1,6 +1,6 @@
 // Import Functions
 import GenerateBooleanID from "./Function/BooleanFunction"; // Import the Boolean Function
-import GenerateMixedID from "./Function/MixedFunction";  // Import the Mixed Function
+import GenerateMixedID from "./Function/MixedFunction"; // Import the Mixed Function
 import GenerateNumberID from "./Function/NumFunction"; // Import the Number Function
 import GenerateSymbolID from "./Function/SymbolFunction"; // Import the Symbol Function
 import GenerateWordID from "./Function/WordFunction"; // Import the Word Function
@@ -25,7 +25,10 @@ export class UniqueGen {
    * parameter, the function will generate a random number
    * @returns a random number.
    */
-  public RandomNumber(withzero: boolean = true, CustomNumbers?: number[]): number {
+  public RandomNumber(
+    withzero: boolean = true,
+    CustomNumbers?: number[],
+  ): number {
     return GenerateNumberID(this.#_length, withzero, CustomNumbers); // Returns a random number
   }
 

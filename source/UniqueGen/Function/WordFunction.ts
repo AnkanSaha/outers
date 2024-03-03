@@ -4,7 +4,7 @@ type str = string; // Type for string
 type bool = boolean; // Type for boolean
 
 // import Gen functions
-import GenerateWord from '../gen/WordGen'; // function for generating a random word
+import GenerateWord from "../gen/WordGen"; // function for generating a random word
 // function for generating a random number
 
 /**
@@ -25,43 +25,50 @@ import GenerateWord from '../gen/WordGen'; // function for generating a random w
  * default, but can be customized by passing in a different array of characters as an argument
  * (`CustomWords`). The
  */
-export default function GenerateWordID(length: num = 1, isCAPITAL: bool = false, CustomWords?: str[]): str {
-    /* This line of code is creating an array of all possible letters from 'a' to 'z' that will be used to
+export default function GenerateWordID(
+  length: num = 1,
+  isCAPITAL: bool = false,
+  CustomWords?: str[],
+): str {
+  /* This line of code is creating an array of all possible letters from 'a' to 'z' that will be used to
 generate a random string of characters. The array is stored in the constant variable `Words` and has
 a type of `str[]`, which means it is an array of strings. */
-    const Words: str[] = [
-        'a',
-        'b',
-        'c',
-        'd',
-        'e',
-        'f',
-        'g',
-        'h',
-        'i',
-        'j',
-        'k',
-        'l',
-        'm',
-        'n',
-        'o',
-        'p',
-        'q',
-        'r',
-        's',
-        't',
-        'u',
-        'v',
-        'w',
-        'x',
-        'y',
-        'z',
-    ]; // All Possible Words to generate
-    const Result: str = GenerateWord(length, CustomWords !== undefined ? CustomWords : Words); // Generate the Random Number
-    // Checking if the Word should be Capital
-    if (isCAPITAL === true) {
-        return Result.toUpperCase(); // Return the Result in Capital
-    } else {
-        return Result; // Return the Result
-    }
+  const Words: str[] = [
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "f",
+    "g",
+    "h",
+    "i",
+    "j",
+    "k",
+    "l",
+    "m",
+    "n",
+    "o",
+    "p",
+    "q",
+    "r",
+    "s",
+    "t",
+    "u",
+    "v",
+    "w",
+    "x",
+    "y",
+    "z",
+  ]; // All Possible Words to generate
+  const Result: str = GenerateWord(
+    length,
+    CustomWords !== undefined ? CustomWords : Words,
+  ); // Generate the Random Number
+  // Checking if the Word should be Capital
+  if (isCAPITAL === true) {
+    return Result.toUpperCase(); // Return the Result in Capital
+  } else {
+    return Result; // Return the Result
+  }
 }

@@ -3,7 +3,7 @@ type num = number; // Type for number
 type str = string; // Type for string
 
 // import Gen functions
-import GenerateSymbol from '../gen/SymbolGen'; // function for generating a random word
+import GenerateSymbol from "../gen/SymbolGen"; // function for generating a random word
 // function for generating a random number
 
 /**
@@ -18,42 +18,48 @@ import GenerateSymbol from '../gen/SymbolGen'; // function for generating a rand
  * (`Promise<str>`). The string is a randomly generated sequence of symbols of length `length`, using
  * either the default symbol array or a custom symbol array if provided.
  */
-export default function GenerateSymbolID(length: num = 1, CustomSymbols?: str[]): str {
-    /* Defining an array of symbols that will be used to generate a random string of symbols in the
+export default function GenerateSymbolID(
+  length: num = 1,
+  CustomSymbols?: str[],
+): str {
+  /* Defining an array of symbols that will be used to generate a random string of symbols in the
 `GenerateSymbol` function. The array contains various symbols such as exclamation mark, at sign,
 hash, dollar sign, etc. */
-    // Symbol Array
-    const Symbols: str[] = [
-        '!',
-        '@',
-        '#',
-        '$',
-        '%',
-        '^',
-        '&',
-        '*',
-        '(',
-        ')',
-        '-',
-        '_',
-        '=',
-        '+',
-        '[',
-        ']',
-        '{',
-        '}',
-        ';',
-        ':',
-        '<',
-        '.',
-        '>',
-        '/',
-        '?',
-        '|',
-        '\\',
-        '~',
-        '`',
-    ]; // Symbol Array
-    const Result: str = GenerateSymbol(length, CustomSymbols !== undefined ? CustomSymbols : Symbols); // Generate the Random Number
-    return Result; // Return the Result
+  // Symbol Array
+  const Symbols: str[] = [
+    "!",
+    "@",
+    "#",
+    "$",
+    "%",
+    "^",
+    "&",
+    "*",
+    "(",
+    ")",
+    "-",
+    "_",
+    "=",
+    "+",
+    "[",
+    "]",
+    "{",
+    "}",
+    ";",
+    ":",
+    "<",
+    ".",
+    ">",
+    "/",
+    "?",
+    "|",
+    "\\",
+    "~",
+    "`",
+  ]; // Symbol Array
+  const Result: str = GenerateSymbol(
+    length,
+    CustomSymbols !== undefined ? CustomSymbols : Symbols,
+  ); // Generate the Random Number
+  return Result; // Return the Result
 }
