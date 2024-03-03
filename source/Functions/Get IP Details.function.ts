@@ -1,4 +1,6 @@
-import { Console, StatusCodes, FunctionBased } from "../Config/outer"; // Import Methods from outers
+import { red } from "../Logs/Console.log"; // Import Color Console Log
+import { StatusCode } from "../StatusCode/Code"; // Import Status Code
+import TypeCheck from './IP Type Checker.function'; // Import IP Type Checker Function
 
 // Import Storage
 import Storage from "../Storage Management/ShortStorage.storage"; // Import Short Storage Module
@@ -60,7 +62,7 @@ export default async function getIPDetails(
     const IPDetails = await IPDetailsShortStorage.Get(ClientIP); // Get IP Details from Short Storage
 
     // Check if IP Details are available in Short Storage
-    if (IPDetails.status == StatusCodes.OK) {
+    if (IPDetails.status == StatusCode.OK) {
       return {
         status: 200,
         message: "Success",
@@ -71,7 +73,7 @@ export default async function getIPDetails(
       `/${ClientIP}/json?token=${IP_INFO_API_KEY}`,
       true,
     );
-    const IPType = FunctionBased.IP.TypeCheck(ClientIP); // Check if IP is IPv4 or IPv6
+    const IPType = TypeCheck(ClientIP); // Check if IP is IPv4 or IPv6
 
     // Save to Short Storage
     await IPDetailsShortStorage.Save(ClientIP, {
@@ -91,7 +93,7 @@ export default async function getIPDetails(
       },
     };
   } catch (error) {
-    Console.red(error); // Log Error
+    red(error); // Log Error
     return {
       status: 500,
       message: "Internal Server Error",

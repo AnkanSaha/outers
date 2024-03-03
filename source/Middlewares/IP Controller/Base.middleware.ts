@@ -4,8 +4,9 @@ import {
   ServerName,
 } from "../../Config/Constant/Middleware.Constant"; // Import X-Powered-By Header
 
-// Import Interfaces
-import { Serve, StatusCodes } from "../../Config/outer"; // Import red from outers
+// Import Server Module
+import {JSONSendResponse} from "../../Response/JSON-Response"; // Import Serve
+import StatusCode from "../../StatusCode/Code"; // Import Status Code
 
 // Main Function
 /**
@@ -31,10 +32,10 @@ export default function (
 
     // Check if Request has Headers
     if (!Request.headers) {
-      return Serve.JSON({
+      return JSONSendResponse({
         response: Response,
         status: false,
-        statusCode: StatusCodes.BAD_REQUEST,
+        statusCode: StatusCode.BAD_REQUEST,
         Title: "Bad Request",
         message: "No headers provided",
         data: null,
