@@ -31,10 +31,10 @@ jobs:
 
 workflows:
   version: 2
-  custom_build_process:
+  NPM_Registry:
     jobs:
       - build:
-          name: Publish To NPM Registry  # Custom name for the build process
+          name: Publish To NPM Registry # Custom name for the build process
           filters:
             branches:
               only:
