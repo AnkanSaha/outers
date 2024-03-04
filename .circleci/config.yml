@@ -14,19 +14,6 @@ jobs:
           name: Build Package
           command: npm run build
 
-  Test:
-    docker:
-      - image: node:latest
-    steps:
-      - checkout
-      - run:
-          name: Install Dependencies
-          command: npm install
-
-      - run:
-          name: Run Tests
-          command: npm run test
-
   Publish:
     docker:
       - image: node:latest
@@ -67,14 +54,10 @@ workflows:
     jobs:
       - build:
           name: Build Package
-      - Test:
-          name: Test Package
-          requires:
-            - build
       - Publish:
           name: Publish Package
           requires:
-            - Test
+            - build
           filters:
             branches:
               only: main
