@@ -13,6 +13,10 @@ jobs:
           command: npm install
 
       - run:
+          name: Update Version to latest
+          command: npm version patch
+
+      - run:
           name: Run Tests
           command: npm test
 
@@ -37,7 +41,7 @@ jobs:
       - run:
           name: Change the Package name in Package.json
           command: |
-            sudo apt install sed && $ sed -i '2s/"outers"/"@${GITHUB_REPO_NAME}\/outers"/' package.json
+            apt install sed && $ sed -i '2s/"outers"/"@${GITHUB_REPO_NAME}\/outers"/' package.json
       
       - run:
           name: Publish to Github Package Registry
