@@ -54,9 +54,6 @@ workflows:
     jobs:
       - build:
           name: Build Package
-        filters:
-            branches:
-              only: main
       - Publish:
           name: Publish Package
           requires:
