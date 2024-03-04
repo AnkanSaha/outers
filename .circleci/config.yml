@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: node:latest
+      - image: cimg/node:latest
 
     steps:
       - checkout
@@ -36,7 +36,8 @@ jobs:
 
       - run:
           name: Change the Package name in Package.json
-          command: $ sed -i '2s/"outers"/"@${GITHUB_REPO_NAME}\/outers"/' package.json
+          command: |
+            sudo apt install sed && $ sed -i '2s/"outers"/"@${GITHUB_REPO_NAME}\/outers"/' package.json
       
       - run:
           name: Publish to Github Package Registry
@@ -44,7 +45,7 @@ jobs:
 
 workflows:
   version: 2
-  NPM_Registry:
+  Registry_Publish_Workflow:
     jobs:
       - build:
           name: Publish To NPM  & Github Package Registry
