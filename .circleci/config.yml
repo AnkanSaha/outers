@@ -63,7 +63,6 @@ jobs:
           command: npm publish --registry=https://npm.pkg.github.com --scope=@${GITHUB_USER_NAME} --access public
 
 workflows:
-  version: 2
   Registry_Publish:
     jobs:
       - build:
