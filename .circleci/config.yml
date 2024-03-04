@@ -21,7 +21,7 @@ jobs:
           command: npm run build
 
       - run:
-          name: Publish to NPM
+          name: Set NPM Auth Token
           command: |
             echo "//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}" > ~/.npmrc
 
