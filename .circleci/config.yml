@@ -1,19 +1,6 @@
 version: 2.1
 
 jobs:
-  build:
-    docker:
-      - image: node:latest
-    steps:
-      - checkout
-      - run:
-          name: Install Dependencies
-          command: npm install
-
-      - run:
-          name: Build Package
-          command: npm run build
-
   Publish_To_NPM:
     docker:
       - image: node:latest
@@ -37,7 +24,7 @@ jobs:
           name: Publish to NPM Registry
           command: npm publish --registry https://registry.npmjs.org --access public
 
-  Publish_To_Github_Package:
+  Publish_To_Github:
     docker:
         - image: node:latest
     steps:
@@ -66,21 +53,19 @@ jobs:
 
 
 workflows:
+  version: 2
   Registry_Publish:
     jobs:
       - build:
           name: Build Package
       - Publish_To_NPM:
-          name: Publish to NPM Package
-          requires:
-            - Build Package
+          name: Publish to NPM Registry
           filters:
             branches:
               only: main
-      - Publish_To_Github_Package:
-          name: Publish to Github Package
+      - Publish_To_Github:
+          name: Publish to Github Registry
           requires:
-            - Build Package
             - Publish to NPM Package
           filters:
             branches:
