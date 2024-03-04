@@ -13,10 +13,6 @@ jobs:
           command: npm install
 
       - run:
-          name: Update Version to latest
-          command: npm version patch
-
-      - run:
           name: Run Tests
           command: npm test
 
