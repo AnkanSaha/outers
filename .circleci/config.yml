@@ -4,42 +4,60 @@ jobs:
   build:
     docker:
       - image: node:latest
-
     steps:
       - checkout
+      - run:
+          name: Install Dependencies
+          command: npm install
 
+      - run:
+          name: Build Package
+          command: npm run build
+
+  Test:
+    docker:
+      - image: node:latest
+    steps:
+      - checkout
       - run:
           name: Install Dependencies
           command: npm install
 
       - run:
           name: Run Tests
-          command: npm test
+          command: npm run test
+
+  Publish:
+    docker:
+      - image: node:latest
+    steps:
+      - checkout
+      - run:
+          name: Install Dependencies
+          command: npm install
 
       - run:
           name: Build Package
-          command: npm run build
-
+          command: npm run Build
+      - run:
+          name: Test Package
+          command: npm run test
       - run:
           name: Set NPM Auth Token
           command: |
             echo "//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}" > ~/.npmrc
-
       - run:
           name: Set Github Auth Token
           command: |
             echo "//npm.pkg.github.com/:_authToken=${GITHUB_AUTH_TOKEN}" >> ~/.npmrc
-
       - run:
           name: Publish to NPM Registry
           command: npm publish --registry https://registry.npmjs.org --access public
-
       - run:
           name: Change the Package name in Package.json
           command: |
             apt-get update && apt-get install -y sed
             sed -i "2s/\"outers\"/\"@${GITHUB_USER_NAME}\/outers\"/" package.json
-      
       - run:
           name: Publish to Github Package Registry
           command: npm publish --registry=https://npm.pkg.github.com --scope=@${GITHUB_USER_NAME} --access public
@@ -49,8 +67,15 @@ workflows:
   Registry_Publish_Workflow:
     jobs:
       - build:
-          name: Publish To NPM  & Github Package Registry
+          name: Build Package
+      - Test:
+          name: Test Package
+          requires:
+            - build
+      - Publish:
+          name: Publish Package
+          requires:
+            - Test
           filters:
             branches:
-              only:
-                - main
+              only: main
