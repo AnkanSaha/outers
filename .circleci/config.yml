@@ -64,7 +64,7 @@ workflows:
       - Publish_To_Github:
           name: Publish to Github Registry
           requires:
-            - Publish to NPM Package
+            - Publish to NPM Registry
           filters:
             branches:
               only: main
