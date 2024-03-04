@@ -14,7 +14,7 @@ jobs:
           name: Build Package
           command: npm run build
 
-  Publish:
+  Publish_To_NPM:
     docker:
       - image: node:latest
     steps:
@@ -25,7 +25,7 @@ jobs:
 
       - run:
           name: Build Package
-          command: npm run Build
+          command: npm run build
       - run:
           name: Test Package
           command: npm run test
@@ -34,30 +34,54 @@ jobs:
           command: |
             echo "//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}" > ~/.npmrc
       - run:
-          name: Set Github Auth Token
-          command: |
-            echo "//npm.pkg.github.com/:_authToken=${GITHUB_AUTH_TOKEN}" >> ~/.npmrc
-      - run:
           name: Publish to NPM Registry
           command: npm publish --registry https://registry.npmjs.org --access public
-      - run:
-          name: Change the Package name in Package.json
-          command: |
-            apt-get update && apt-get install -y sed
-            sed -i "2s/\"outers\"/\"@${GITHUB_USER_NAME}\/outers\"/" package.json
-      - run:
-          name: Publish to Github Package Registry
-          command: npm publish --registry=https://npm.pkg.github.com --scope=@${GITHUB_USER_NAME} --access public
+
+  Publish_To_Github_Package:
+    docker:
+        - image: node:latest
+    steps:
+        - checkout
+        - run:
+            name: Install Dependencies
+            command: npm install
+        - run:
+            name: Build Package
+            command: npm run build
+        - run:
+            name: Test Package
+            command: npm run test
+        - run:
+            name: Set Github Auth Token
+            command: |
+              echo "//npm.pkg.github.com/:_authToken=${GITHUB_AUTH_TOKEN}" >> ~/.npmrc
+        - run:
+            name: Change the Package name in Package.json
+            command: |
+              apt-get update && apt-get install -y sed
+              sed -i "2s/\"outers\"/\"@${GITHUB_USER_NAME}\/outers\"/" package.json
+        - run:
+            name: Publish to Github Package Registry
+            command: npm publish --registry=https://npm.pkg.github.com --scope=@${GITHUB_USER_NAME} --access public
+
 
 workflows:
   Registry_Publish:
     jobs:
       - build:
           name: Build Package
-      - Publish:
-          name: Publish Package
+      - Publish_To_NPM:
+          name: Publish to NPM Package
           requires:
             - Build Package
+          filters:
+            branches:
+              only: main
+      - Publish_To_Github_Package:
+          name: Publish to Github Package
+          requires:
+            - Build Package
+            - Publish to NPM Package
           filters:
             branches:
               only: main
