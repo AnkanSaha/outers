@@ -26,15 +26,28 @@ jobs:
             echo "//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}" > ~/.npmrc
 
       - run:
-          name: Publish to NPM
-          command: npm publish
+          name: Set Github Auth Token
+          command: |
+            echo "//npm.pkg.github.com/:_authToken=${GITHUB_AUTH_TOKEN}" >> ~/.npmrc
+
+      - run:
+          name: Publish to NPM Registry
+          command: npm publish --registry https://registry.npmjs.org --access public
+
+      - run:
+          name: Change the Package name in Package.json
+          command: $ sed -i '2s/"outers"/"@${GITHUB_REPO_NAME}\/outers"/' package.json
+      
+      - run:
+          name: Publish to Github Package Registry
+          command: npm publish --registry=https://npm.pkg.github.com --scope=@${GITHUB_REPO_NAME} --access public
 
 workflows:
   version: 2
   NPM_Registry:
     jobs:
       - build:
-          name: Publish To NPM Registry # Custom name for the build process
+          name: Publish To NPM  & Github Package Registry
           filters:
             branches:
               only:
