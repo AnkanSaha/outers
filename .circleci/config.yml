@@ -56,8 +56,6 @@ workflows:
   version: 2
   Registry_Publish:
     jobs:
-      - build:
-          name: Build Package
       - Publish_To_NPM:
           name: Publish to NPM Registry
           filters:
