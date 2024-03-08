@@ -337,7 +337,7 @@ const { Middleware } = require("outers"); // import the package
 
 app.use(
   "/api",
-  Middleware.AccessController(
+  Middleware.URL_Controller(
     ["ARRAY OF URLs"],
     FailedStatusCode,
     ErrorMessage,
@@ -412,7 +412,7 @@ const { Middleware } = require("outers"); // import the package
 
 app.use(
   "/api",
-  Middleware.UserAccessController(
+  Middleware.User_AgentController(
     ["ARRAY OF BROWSERS NAMES"],
     ["ARRAY OF BROWSERS VERSIONS"]
     FailedStatusCode,

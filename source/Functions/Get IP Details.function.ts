@@ -13,9 +13,9 @@ import { APiCall } from "../Config/Constant/Functions.constant"; // Import APiCa
 
 // Register IP Details Short Storage for IP Details Cache
 export const IPDetailsShortStorage = new Storage(
-  "cache-ip-details",
+  "cache-ip-details-for-nodejs",
   99999,
-  "cache-ip-details",
+  "cache-ip-details-for-nodejs",
 ); // Create New Short Storage for IP Details
 
 // Main Function
