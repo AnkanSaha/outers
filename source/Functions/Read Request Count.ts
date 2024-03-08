@@ -1,14 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {StorageInstance} from '../Middlewares/User Counter/Base.middleware'; // Import The Storage for Read Request Count
+import { StorageInstance } from "../Middlewares/User Counter/Base.middleware"; // Import The Storage for Read Request Count
 
 // Interface for Read Request Count
-interface ReturnData
-    {
-        status: number;
-        message: string;
-        Data: any[];
-        TotalData: number;
-    }
+interface ReturnData {
+  status: number;
+  message: string;
+  Data: any[];
+  TotalData: number;
+}
 
 // Main Function
 /**
@@ -21,15 +20,17 @@ interface ReturnData
  * @throws {Error} - If unable to read the request count from the storage.
  */
 export default async function (RequestDate: string): Promise<ReturnData> {
-    try {
-        if(RequestDate === undefined || RequestDate === null || RequestDate === '') {
-            return  await StorageInstance.Get(); // Get All Data in Storage File
-        }
-        else {
-            return await StorageInstance.Get(RequestDate)
-        }
+  try {
+    if (
+      RequestDate === undefined ||
+      RequestDate === null ||
+      RequestDate === ""
+    ) {
+      return await StorageInstance.Get(); // Get All Data in Storage File
+    } else {
+      return await StorageInstance.Get(RequestDate);
     }
-    catch (error) {
-        throw new Error("Unable to read the request count from the storage.");
-    }
+  } catch (error) {
+    throw new Error("Unable to read the request count from the storage.");
+  }
 }
