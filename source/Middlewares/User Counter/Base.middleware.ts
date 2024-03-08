@@ -8,7 +8,7 @@ import { Serve } from "../../Config/outer"; // Importing Serve
 export const StorageInstance = new Storage(
   "Request-Counter-details-for-nodejs",
   999999, // 999999 MB = 1TB
-  "Request-Counter-details-for-nodejs"
+  "Request-Counter-details-for-nodejs",
 );
 
 // Main middleware function
@@ -17,7 +17,7 @@ export default function (
   SaveUserAgent: boolean = true,
   SaveRequestTime: boolean = true,
   SaveContentType: boolean = true,
-  SaveMethod: boolean = true
+  SaveMethod: boolean = true,
 ) {
   return async (Request: Request, Response: Response, Next: NextFunction) => {
     const GetPreviousData = await StorageInstance.Get(TodayDate); // Get previous data
