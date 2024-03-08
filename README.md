@@ -455,7 +455,24 @@ app.use("/api", Middleware.JWTValidator("FieldName", Token), MainRouter); // use
 
 // You can pass as many as you want methods in the first parameter of the function
 
+## Count the Number of Requests in NodeJS
+
+```javascript
+const { Middleware } = require("outers"); // import the package
+
+app.use("/api", Middleware.RequestCounter(true, true, true, true, true), MainRouter); // count the number of requests in NodeJS with the Middleware function
 ```
+- Note : You can pass true/false in all parameters of the function, by default it is set to true, if you set it to true then it will count the number of requests in the console
+
+- Note : The First Parameter is SaveIP which is used to save the IP Address in the Request Object, by default it is set to true, if you set it to true then it will save the IP Address in the Request Object
+
+- Note : The Second Parameter is SaveUserAgent which is used to save the User Agent in the Request Object, by default it is set to true, if you set it to true then it will save the User Agent in the Request Object
+
+- Note : The Third Parameter is SaveRequestTime which is used to save the Request Time in the Request Object, by default it is set to true, if you set it to true then it will save the Request Time in the Request Object
+
+- Note :  The Fourth Parameter is  SaveContentType which is used to save the Content Type in the Request Object, by default it is set to true, if you set it to true then it will save the Content Type in the Request Object
+
+- Note : The Fifth Parameter is SaveMethod which is used to save the Method in the Request Object, by default it is set to true, if you set it to true then it will save the Method in the Request Object
 
 ## License
 

@@ -70,6 +70,7 @@ import IP_Controller from "../Middlewares/IP Controller/Base.middleware"; // Imp
 import UserAccessController from "../Middlewares/User Agent Controller/Base.middleware"; // Import User Access Controller Module
 import RequestController from "../Middlewares/Request Controller/Base.middleware"; // Import Request Controller Module
 import JWTValidator from "../Middlewares/JWT Validator/Base.middleware"; // Import JWT Validator Middleware
+import RequestCounter from "../Middlewares/User Counter/Base.middleware"; // Import Request Counter Middleware
 
 // Import Functions Related Modules
 import IPChecker from "../Functions/IP Type Checker.function"; // Import IP Type Checker Module
@@ -108,6 +109,7 @@ export const Middleware = Object.freeze({
   User_AgentController: UserAccessController, // Export User Access Controller Module as Middleware
   MethodsController: RequestController, // Export Request Controller Module as Middleware
   JWTValidator, // Export JWT Validator Middleware
+  RequestCounter, // Export Request Counter Middleware
 }); // Export IP Injector Module as Middleware
 
 // Export All Class based with Freeze

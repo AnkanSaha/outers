@@ -16,6 +16,7 @@ import { ResponseObject } from "../../Config/Interfaces/Cluster/CreateClusterByF
  * @param ExpressServer - The main Express server instance.
  * @param PORT - The port number to listen on.
  * @param NumberOfWorkers - The number of worker copies to create.
+ * @param EnableTrustProxy - Whether to enable trust proxy or not.
  * @param BeforeListenFunctions - Any functions to run before listening.
  * @param AfterListenFunctions - Any functions to run after listening.
  * @param FunctionMiddlewares - Any middlewares to apply to the Express server instance.
@@ -26,9 +27,10 @@ export default async function Config(
   ExpressServer: Express = express(), // Main Express Server Instance
   PORT = 3000, // Port Number to Listen
   NumberOfWorkers: number = cpus().length, // Number of Copies of Workers
+  EnableTrustProxy: boolean = true, // Enable Trust Proxy
   BeforeListenFunctions: any[] = [], // Any Functions to run before listen
   AfterListenFunctions: any[] = [], // Any Functions to run after listen
-  FunctionMiddlewares: any[] = [], // Any Middlewares to apply
+  FunctionMiddlewares: any[] = [] // Any Middlewares to apply
 ): Promise<ResponseObject | undefined> {
   // Check if User Provided Express Server or not
   if (!ExpressServer || ExpressServer === undefined) {
@@ -66,7 +68,7 @@ export default async function Config(
         1024 /
         1024 /
         1024
-      ).toFixed(2)} GB Free Ram : ${cpus()[0].model}`,
+      ).toFixed(2)} GB Free Ram : ${cpus()[0].model}`
     );
 
     // Create a worker according to the number that is specified
@@ -79,7 +81,7 @@ export default async function Config(
     ClusterConfig.on("online", (worker) => {
       green(`🚀 Worker ${worker.process.pid} started 🚀`);
       blue(
-        `Environment Variables Loaded Successfully in Worker : ${worker.process.pid}`,
+        `Environment Variables Loaded Successfully in Worker : ${worker.process.pid}`
       );
       GlobalResponseObject.ActiveWorker++; // Increment Active Worker Count by 1
       yellow(`Worker ${worker.process.pid} is listening`);
@@ -92,12 +94,19 @@ export default async function Config(
       ClusterConfig.fork();
       green(`🚀 Worker ${worker.process.pid} restarted 🚀`);
       blue(
-        `Environment Variables Loaded Successfully in Worker : ${worker.process.pid}`,
+        `Environment Variables Loaded Successfully in Worker : ${worker.process.pid}`
       );
       GlobalResponseObject.ActiveWorker++; // Increment Active Worker Count by 1
       yellow(`Worker ${worker.process.pid} is listening`);
     });
   } else {
+    // Enable trust proxy for Express Server
+    EnableTrustProxy
+      ? ExpressServer.set("trust proxy", () => true)
+      : yellow(
+          "Trust Proxy is not enabled, if you are working behind a proxy, please enable it to get the real IP Address"
+        );
+
     // Apply Function Middlewares to Express Server Instance like CORS, Body Parser, etc.
     if (FunctionMiddlewares.length > 0 || FunctionMiddlewares !== undefined) {
       FunctionMiddlewares.forEach((FunctionMiddleware) => {

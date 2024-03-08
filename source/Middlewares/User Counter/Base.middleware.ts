@@ -1,0 +1,89 @@
+import { Request, Response, NextFunction } from "express"; // Importing express types
+import Storage from "../../Storage Management/ShortStorage.storage"; // Importing ShortStorage
+import { TodayDate } from "../../Config/Constant/Middleware.Constant"; // Importing Today's Date
+import { StatusCode } from "../../StatusCode/Code"; // Importing Status Code
+import { Serve } from "../../Config/outer"; // Importing Serve
+
+// Create new ShortStorage instance
+export const StorageInstance = new Storage(
+  "Request-Counter-details-for-nodejs",
+  999999, // 999999 MB = 1TB
+  "Request-Counter-details-for-nodejs"
+);
+
+// Main middleware function
+export default function (
+  SaveIP: boolean = true,
+  SaveUserAgent: boolean = true,
+  SaveRequestTime: boolean = true,
+  SaveContentType: boolean = true,
+  SaveMethod: boolean = true
+) {
+  return async (Request: Request, Response: Response, Next: NextFunction) => {
+    const GetPreviousData = await StorageInstance.Get(TodayDate); // Get previous data
+
+    // Check if previous data is available or not
+    if (GetPreviousData.status == StatusCode.NOT_FOUND) {
+      const SaveStatus = await StorageInstance.Save(TodayDate, {
+        TotalRequest: 0,
+        TotalDetails: [
+          {
+            RequestDate: TodayDate,
+            RequestTime: SaveRequestTime ? new Date().getTime() : undefined,
+            RequestIP: SaveIP ? Request.ip : undefined,
+            RequestUserAgent: SaveUserAgent
+              ? Request.headers["user-agent"]
+              : undefined,
+            RequestContentType: SaveContentType
+              ? Request.headers["content-type"]
+              : undefined,
+            RequestMethod: SaveMethod ? Request.method : undefined,
+          },
+        ],
+      });
+
+      // Check if data is saved or not
+      SaveStatus.status == StatusCode.OK
+        ? Next()
+        : Serve.JSON({
+            response: Response,
+            status: false,
+            message: "Unable to process your request, please try again later",
+            Title: "Error",
+            statusCode: StatusCode.INTERNAL_SERVER_ERROR,
+            data: undefined,
+          });
+    } else {
+      const UpdateStatus = await StorageInstance.Update(TodayDate, {
+        TotalRequest: GetPreviousData.Data[0].Data.TotalRequest + 1,
+        TotalDetails: [
+          ...GetPreviousData.Data[0].Data.TotalDetails,
+          {
+            RequestDate: TodayDate,
+            RequestTime: SaveRequestTime ? new Date().getTime() : undefined,
+            RequestIP: SaveIP ? Request.ip : undefined,
+            RequestUserAgent: SaveUserAgent
+              ? Request.headers["user-agent"]
+              : undefined,
+            RequestContentType: SaveContentType
+              ? Request.headers["content-type"]
+              : undefined,
+            RequestMethod: SaveMethod ? Request.method : undefined,
+          },
+        ],
+      });
+
+      // Check if data is updated or not
+      UpdateStatus.status == StatusCode.OK
+        ? Next()
+        : Serve.JSON({
+            response: Response,
+            status: false,
+            message: "Unable to process your request, please try again later",
+            Title: "Error",
+            statusCode: StatusCode.INTERNAL_SERVER_ERROR,
+            data: undefined,
+          });
+    }
+  };
+}
