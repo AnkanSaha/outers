@@ -29,7 +29,9 @@ export default function (
         TotalDetails: [
           {
             RequestDate: TodayDate,
-            RequestTime: SaveRequestTime ? new Date().toLocaleTimeString() : undefined,
+            RequestTime: SaveRequestTime
+              ? new Date().toLocaleTimeString()
+              : undefined,
             RequestIP: SaveIP ? Request.ip : undefined,
             RequestUserAgent: SaveUserAgent
               ? Request.headers["user-agent"]
@@ -39,7 +41,7 @@ export default function (
               : undefined,
             RequestMethod: SaveMethod ? Request.method : undefined,
             RequestURL: `${Request.protocol}://${Request.hostname}${Request.originalUrl}`,
-            DateTimeFormat: 'Coordinated Universal Time',
+            DateTimeFormat: "Coordinated Universal Time",
           },
         ],
       });
@@ -72,7 +74,7 @@ export default function (
               : undefined,
             RequestMethod: SaveMethod ? Request.method : undefined,
             RequestURL: `${Request.protocol}://${Request.hostname}${Request.originalUrl}`,
-            DateTimeFormat: 'Coordinated Universal Time',
+            DateTimeFormat: "Coordinated Universal Time",
           },
         ],
       });
