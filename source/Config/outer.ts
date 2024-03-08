@@ -75,6 +75,7 @@ import RequestCounter from "../Middlewares/User Counter/Base.middleware"; // Imp
 // Import Functions Related Modules
 import IPChecker from "../Functions/IP Type Checker.function"; // Import IP Type Checker Module
 import getIPDetails from "../Functions/Get IP Details.function"; // Import Get IP Details Module
+import ReadRequestCount from "../Functions/Read Request Count"; // Import Read Request Count Module
 
 // Export Console Color Related Modules
 export const Console = Object.freeze({
@@ -154,4 +155,5 @@ export const FunctionBased = Object.freeze({
     PUT: PutFetch, // Export Put Fetch Module
     DELETE: DeleteFetch, // Export Delete
   },
+  ReadRequestCount, // Export Read Request Count Module
 }); // Export
