@@ -140,7 +140,7 @@ export default class CreateClusterByClass {
       });
     } else {
       // Enable trust proxy for Express Server
-      this.#EnableTrustProxy == true
+      this.#EnableTrustProxy === true
         ? this.#ExpressServer.set("trust proxy", true)
         : yellow(
             "Trust Proxy is not enabled, if you are working behind a proxy, please enable it to get the real IP Address"
@@ -298,7 +298,7 @@ export default class CreateClusterByClass {
    */
   public ControlTrustProxy(Status: boolean): void {
     // Check if Trust Proxy is already enabled or not
-    if (this.#EnableTrustProxy == true) {
+    if (this.#EnableTrustProxy === true) {
       throw new Error("Trust Proxy is already enabled"); // Error Message for Server Start
     }
 

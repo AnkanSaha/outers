@@ -23,7 +23,7 @@ export default function (
     const GetPreviousData = await StorageInstance.Get(TodayDate); // Get previous data
 
     // Check if previous data is available or not
-    if (GetPreviousData.status == StatusCode.NOT_FOUND) {
+    if (GetPreviousData.status === StatusCode.NOT_FOUND) {
       const SaveStatus = await StorageInstance.Save(TodayDate, {
         TotalRequest: 0,
         TotalDetails: [
@@ -43,7 +43,7 @@ export default function (
       });
 
       // Check if data is saved or not
-      SaveStatus.status == StatusCode.OK
+      SaveStatus.status === StatusCode.OK
         ? Next()
         : Serve.JSON({
             response: Response,
@@ -74,7 +74,7 @@ export default function (
       });
 
       // Check if data is updated or not
-      UpdateStatus.status == StatusCode.OK
+      UpdateStatus.status === StatusCode.OK
         ? Next()
         : Serve.JSON({
             response: Response,
