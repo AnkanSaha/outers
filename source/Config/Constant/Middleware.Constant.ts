@@ -126,3 +126,6 @@ export const IPAllowedMethods = ["PUT", "POST", "PATCH", "DELETE"]; // Allowed M
 
 // Constants for Allowed HTTP Methods in Request Controller Middleware
 export const AllowedMethods = [...IPAllowedMethods, "OPTIONS"]; // Allowed Methods
+
+// Constants for Request Counter Storage
+export const TodayDate = new Date().toLocaleDateString(); // Get Today's Date

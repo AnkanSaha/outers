@@ -16,6 +16,7 @@ import { ResponseObject } from "../../Config/Interfaces/Cluster/CreateClusterByF
  * @param ExpressServer - The main Express server instance.
  * @param PORT - The port number to listen on.
  * @param NumberOfWorkers - The number of worker copies to create.
+ * @param EnableTrustProxy - Whether to enable trust proxy or not.
  * @param BeforeListenFunctions - Any functions to run before listening.
  * @param AfterListenFunctions - Any functions to run after listening.
  * @param FunctionMiddlewares - Any middlewares to apply to the Express server instance.
@@ -26,6 +27,7 @@ export default async function Config(
   ExpressServer: Express = express(), // Main Express Server Instance
   PORT = 3000, // Port Number to Listen
   NumberOfWorkers: number = cpus().length, // Number of Copies of Workers
+  EnableTrustProxy: boolean = true, // Enable Trust Proxy
   BeforeListenFunctions: any[] = [], // Any Functions to run before listen
   AfterListenFunctions: any[] = [], // Any Functions to run after listen
   FunctionMiddlewares: any[] = [], // Any Middlewares to apply
@@ -98,6 +100,13 @@ export default async function Config(
       yellow(`Worker ${worker.process.pid} is listening`);
     });
   } else {
+    // Enable trust proxy for Express Server
+    EnableTrustProxy
+      ? ExpressServer.set("trust proxy", () => true)
+      : yellow(
+          "Trust Proxy is not enabled, if you are working behind a proxy, please enable it to get the real IP Address",
+        );
+
     // Apply Function Middlewares to Express Server Instance like CORS, Body Parser, etc.
     if (FunctionMiddlewares.length > 0 || FunctionMiddlewares !== undefined) {
       FunctionMiddlewares.forEach((FunctionMiddleware) => {

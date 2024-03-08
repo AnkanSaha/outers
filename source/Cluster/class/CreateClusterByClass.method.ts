@@ -24,6 +24,7 @@ export default class CreateClusterByClass {
   #AfterListenFunctions: any[]; // Any Functions to run after listen
   #FunctionMiddlewares: any[]; // Any Middlewares to apply
   #GlobalResponseObject: ResponseObject; // Any ResponseObject
+  #EnableTrustProxy: boolean; // Enable Trust Proxy
 
   // Constructor
   /**
@@ -60,6 +61,7 @@ export default class CreateClusterByClass {
       TotalAfterFunctions: this.#AfterListenFunctions.length,
       ActiveMiddlewares: this.#FunctionMiddlewares,
     };
+    this.#EnableTrustProxy = true; // Enable Trust Proxy
   }
 
   // Start Server Method
@@ -137,6 +139,13 @@ export default class CreateClusterByClass {
         yellow(`Worker ${worker.process.pid} is listening`);
       });
     } else {
+      // Enable trust proxy for Express Server
+      this.#EnableTrustProxy === true
+        ? this.#ExpressServer.set("trust proxy", true)
+        : yellow(
+            "Trust Proxy is not enabled, if you are working behind a proxy, please enable it to get the real IP Address",
+          );
+
       // Apply Function Middlewares to Express Server Instance like CORS, Body Parser, etc.
       if (
         this.#FunctionMiddlewares.length > 0 ||
@@ -278,5 +287,27 @@ export default class CreateClusterByClass {
     }
 
     this.#FunctionMiddlewares.push(FunctionToRun); // Add Function to Function Middlewares
+  }
+
+  // Enable Trust Proxy Method
+  /**
+   * Controls the Trust Proxy setting.
+   * @param {boolean} Status - The value indicating whether to enable or disable Trust Proxy.
+   * @throws {Error} If Trust Proxy is already enabled.
+   * @throws {Error} If the provided value is not a boolean.
+   */
+  public ControlTrustProxy(Status: boolean): void {
+    // Check if Trust Proxy is already enabled or not
+    if (this.#EnableTrustProxy === true) {
+      throw new Error("Trust Proxy is already enabled"); // Error Message for Server Start
+    }
+
+    // Check inserted value is boolean or not
+    if (typeof Status !== "boolean") {
+      throw new Error("TPlease provide a boolean value to enable Trust Proxy"); // Error Message for Server Start
+    }
+
+    // Enable Trust Proxy
+    this.#EnableTrustProxy = Status; // Enable Trust Proxy
   }
 }
