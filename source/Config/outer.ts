@@ -65,7 +65,7 @@ import GitCloner from "../Git Cloner/Cloner"; // Import Git Cloner Module
 
 // Import All Middlewares
 import InjectIP from "../Middlewares/Request IP Injector/Base.middleware"; // Import Inject IP Module
-import URL_Controller from "../Middlewares/URL Controller/Base.middleware"; // Import URL Controller Module
+import AccessController from "../Middlewares/URL Controller/Base.middleware"; // Import URL Controller Module
 import IP_Controller from "../Middlewares/IP Controller/Base.middleware"; // Import IP Controller Module
 import UserAccessController from "../Middlewares/User Agent Controller/Base.middleware"; // Import User Access Controller Module
 import RequestController from "../Middlewares/Request Controller/Base.middleware"; // Import Request Controller Module
@@ -103,9 +103,9 @@ export const Serve = Object.freeze({
 // Export All Middlewares
 export const Middleware = Object.freeze({
   RequestInjectIP: InjectIP, // Export IP Injector Module as Middleware
-  AccessController: URL_Controller, // Export URL Controller Module as Middleware
+  URL_Controller: AccessController, // Export URL Controller Module as Middleware
   IPAccessController: IP_Controller, // Export IP Controller Module as Middleware
-  UserAccessController, // Export User Access Controller Module as Middleware
+  User_AgentController: UserAccessController, // Export User Access Controller Module as Middleware
   MethodsController: RequestController, // Export Request Controller Module as Middleware
   JWTValidator, // Export JWT Validator Middleware
 }); // Export IP Injector Module as Middleware
