@@ -19,7 +19,7 @@ interface ReturnData {
  * @returns {Promise<number>} - A promise that resolves to the request count.
  * @throws {Error} - If unable to read the request count from the storage.
  */
-export default async function (RequestDate: string): Promise<ReturnData> {
+export default async function (RequestDate?: string): Promise<ReturnData> {
   try {
     if (
       RequestDate === undefined ||
