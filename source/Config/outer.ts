@@ -65,7 +65,7 @@ import GitCloner from "../Git Cloner/Cloner"; // Import Git Cloner Module
 
 // Import All Middlewares
 import InjectIP from "../Middlewares/Request IP Injector/Base.middleware"; // Import Inject IP Module
-import AccessController  from "../Middlewares/URL Controller/Base.middleware"; // Import URL Controller Module
+import AccessController from "../Middlewares/URL Controller/Base.middleware"; // Import URL Controller Module
 import IP_Controller from "../Middlewares/IP Controller/Base.middleware"; // Import IP Controller Module
 import UserAccessController from "../Middlewares/User Agent Controller/Base.middleware"; // Import User Access Controller Module
 import RequestController from "../Middlewares/Request Controller/Base.middleware"; // Import Request Controller Module
