@@ -47,7 +47,7 @@ export default class CreateClusterByClass {
     BeforeListenFunctions?: any[],
     AfterListenFunctions?: any[],
     FunctionMiddlewares?: any[],
-    EnableTrustProxy?: boolean
+    EnableTrustProxy?: boolean,
   ) {
     this.#ExpressServer = ExpressServer ?? express(); // Express Server Instance
     this.#PORT = PORT; // Active Server Instance
@@ -113,7 +113,7 @@ export default class CreateClusterByClass {
           1024 /
           1024 /
           1024
-        ).toFixed(2)} GB Free Ram : ${cpus()[0].model}`
+        ).toFixed(2)} GB Free Ram : ${cpus()[0].model}`,
       );
 
       // Create a worker according to the number that is specified
@@ -126,7 +126,7 @@ export default class CreateClusterByClass {
       ClusterConfig.on("online", (worker) => {
         green(`🚀 Worker ${worker.process.pid} started 🚀`);
         blue(
-          `Environment Variables Loaded Successfully in Worker : ${worker.process.pid}`
+          `Environment Variables Loaded Successfully in Worker : ${worker.process.pid}`,
         );
         this.#GlobalResponseObject.ActiveWorker++; // Increment Active Worker Count by 1
         yellow(`Worker ${worker.process.pid} is listening`);
@@ -139,7 +139,7 @@ export default class CreateClusterByClass {
         ClusterConfig.fork();
         green(`🚀 Worker ${worker.process.pid} restarted 🚀`);
         blue(
-          `Environment Variables Loaded Successfully in Worker : ${worker.process.pid}`
+          `Environment Variables Loaded Successfully in Worker : ${worker.process.pid}`,
         );
         this.#GlobalResponseObject.ActiveWorker++; // Increment Active Worker Count by 1
         yellow(`Worker ${worker.process.pid} is listening`);
@@ -149,7 +149,7 @@ export default class CreateClusterByClass {
       this.#EnableTrustProxy === true
         ? this.#ExpressServer.set("trust proxy", true)
         : yellow(
-            "Trust Proxy is not enabled, if you are working behind a proxy, please enable it to get the real IP Address"
+            "Trust Proxy is not enabled, if you are working behind a proxy, please enable it to get the real IP Address",
           );
 
       // Apply Function Middlewares to Express Server Instance like CORS, Body Parser, etc.
@@ -188,7 +188,7 @@ export default class CreateClusterByClass {
                 await ListenFunction(); // Run Function one by one
               }
             }
-          }
+          },
         ); // Start Server on Port
 
         // Return the Active Server Instance in Response Object
