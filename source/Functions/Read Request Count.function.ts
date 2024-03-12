@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { StorageInstance } from "../Middlewares/User Counter/Base.middleware"; // Import The Storage for Read Request Count
+import { StorageInstance } from "../Middlewares/Request Logger/Base.middleware"; // Import The Storage for Read Request Count
 
 // Interface for Read Request Count
 interface ReturnData {
