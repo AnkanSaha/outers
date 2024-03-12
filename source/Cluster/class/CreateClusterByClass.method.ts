@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // main code for creating a cluster in node js
-import { cpus, platform, arch, freemem } from "node:os"; // Import os module
+import { cpus, platform, arch, freemem, totalmem } from "node:os"; // Import os module
 import express, { Express } from "express"; // Import express module
 import ClusterConfig from "node:cluster"; // Import Cluster module
 const { isPrimary } = ClusterConfig; // Import isPrimary from Cluster
@@ -47,6 +47,7 @@ export default class CreateClusterByClass {
     BeforeListenFunctions?: any[],
     AfterListenFunctions?: any[],
     FunctionMiddlewares?: any[],
+    EnableTrustProxy?: boolean,
   ) {
     this.#ExpressServer = ExpressServer ?? express(); // Express Server Instance
     this.#PORT = PORT; // Active Server Instance
@@ -60,8 +61,13 @@ export default class CreateClusterByClass {
       TotalBeforeFunctions: this.#BeforeListenFunctions.length,
       TotalAfterFunctions: this.#AfterListenFunctions.length,
       ActiveMiddlewares: this.#FunctionMiddlewares,
+      TotalCPU: cpus().length,
+      TotalFreeRam: `${(freemem() / 1024 / 1024 / 1024).toFixed(2)} GB`,
+      TotalRam: `${(totalmem() / 1024 / 1024 / 1024).toFixed(2)} GB`,
+      Architecture: arch(),
+      Platform: platform(),
     };
-    this.#EnableTrustProxy = true; // Enable Trust Proxy
+    this.#EnableTrustProxy = EnableTrustProxy ?? false; // Enable Trust Proxy
   }
 
   // Start Server Method

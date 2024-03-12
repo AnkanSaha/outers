@@ -6,9 +6,9 @@ import { Serve } from "../../Config/outer"; // Importing Serve
 
 // Create new ShortStorage instance
 export const StorageInstance = new Storage(
-  "Request-Counter-details-for-nodejs",
+  "Request-Log-details-for-nodejs",
   999999, // 999999 MB = 1TB
-  "Request-Counter-details-for-nodejs",
+  "Request-Log-details-for-nodejs",
 );
 
 // Main middleware function

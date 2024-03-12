@@ -27,7 +27,7 @@ export default async function Config(
   ExpressServer: Express = express(), // Main Express Server Instance
   PORT = 3000, // Port Number to Listen
   NumberOfWorkers: number = cpus().length, // Number of Copies of Workers
-  EnableTrustProxy: boolean = true, // Enable Trust Proxy
+  EnableTrustProxy: boolean = false, // Enable Trust Proxy
   BeforeListenFunctions: any[] = [], // Any Functions to run before listen
   AfterListenFunctions: any[] = [], // Any Functions to run after listen
   FunctionMiddlewares: any[] = [], // Any Middlewares to apply

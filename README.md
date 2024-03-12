@@ -455,14 +455,14 @@ app.use("/api", Middleware.JWTValidator("FieldName", Token), MainRouter); // use
 
 // You can pass as many as you want methods in the first parameter of the function
 
-## Count the Number of Requests in NodeJS
+## Save Request Logs
 
 ```javascript
 const { Middleware } = require("outers"); // import the package
 
 app.use(
   "/api",
-  Middleware.RequestCounter(true, true, true, true, true),
+  Middleware.RequestLogger(true, true, true, true, true),
   MainRouter,
 ); // count the number of requests in NodeJS with the Middleware function
 ```
