@@ -270,20 +270,24 @@ methods.CreateByFunction(app, PORT, 2); // create a cluster with custom worker c
 # Create Class Based Clusters in NodeJS Easily
 
 ```javascript
-const { methods } = require('outers'); // import the package
-const cluster = new methods.ClusterCreator.ClassBased(ExpressServer, PORT, numberOfWorkers); // create a cluster instance
+const { methods } = require("outers"); // import the package
+const cluster = new methods.ClusterCreator.ClassBased(
+  ExpressServer,
+  PORT,
+  numberOfWorkers,
+); // create a cluster instance
 
 cluster.AddBeforeListenFunction(function () {}); //To Add a function to the cluster that will be called before server starts
 
 cluster.AddAfterListenFunction(function () {}); //To Add a function to the cluster that will be called after server
 
-cluster.AddFunctionMiddleware(function (Request , Response, Next) {}); // To Add a function to the cluster that linked to the middleware function
+cluster.AddFunctionMiddleware(function (Request, Response, Next) {}); // To Add a function to the cluster that linked to the middleware function
 
 cluster.AddFunctionMiddleware(CORS()); //To Add  CORS middleware to the cluster that will be called after server starts
 
 cluster.StartServer(); // start the cluster server
-
 ```
+
 # Store Temporary Data in Server Side like localStorage in Client Side
 
 ```javascript
