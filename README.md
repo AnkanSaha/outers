@@ -283,9 +283,8 @@ cluster.AddFunctionMiddleware(CORS()); //To Add  CORS middleware to the cluster 
 
 cluster.StartServer(); // start the cluster server
 
-# Store Temporary Data in Server Side like localStorage in Client Side
-
 ```
+# Store Temporary Data in Server Side like localStorage in Client Side
 
 ```javascript
 const { methods } = require('outers'); // import the package
