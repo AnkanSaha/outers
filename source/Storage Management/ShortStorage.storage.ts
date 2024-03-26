@@ -118,8 +118,6 @@ export default class CreateNewShortStorage {
     // Write The New Data in File
     await writeFile(this.#StorageFullPATH, JSON.stringify(ParsedData), "utf-8"); // Write Data in File
 
-    // Lock File After Write Data
-
     return {
       status: 200,
       message: "Data Saved Successfully",
