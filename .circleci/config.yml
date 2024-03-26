@@ -95,8 +95,8 @@ jobs:
       - run:
           name: Set Gitlab Auth Token
           command: |
-             echo "@scope:registry=https://gitlab.com/api/v4/projects/${GITLAB_PROJECT_ID}/packages/npm/" > .npmrc
-             echo "//gitlab.com/api/v4/projects/${GITLAB_PROJECT_ID}/packages/npm/:_authToken=${GITLAB_PERMANENT_ACCESS_TOKEN}" >> .npmrc
+             echo "@scope:registry=https://gitlab.com/api/v4/projects/${GITLAB_PROJECT_ID}/packages/npm/" > ~/.npmrc
+             echo "//gitlab.com/api/v4/projects/${GITLAB_PROJECT_ID}/packages/npm/:_authToken=${GITLAB_PERMANENT_ACCESS_TOKEN}" >> ~/.npmrc
       - run:
           name: Change the Package name in Package.json
           command: |
