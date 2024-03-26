@@ -97,9 +97,9 @@ export const Years = (years: number) => {
  * Delays the execution of a function for a specified number of decades.
  * @param Decade - The number of decades to delay the execution.
  * @returns A promise that resolves after the specified number of decades.
-  */
+ */
 
- export const Decades = (decades: number) => {
+export const Decades = (decades: number) => {
   return new Promise((resolve) => {
     setTimeout(resolve, decades * 365 * 24 * 60 * 60 * 1000);
   });
@@ -121,9 +121,9 @@ export const Centuries = (centuries: number) => {
  * Delays the execution of a function for a specified number of millenia.
  * @param Millenia - The number of millenia to delay the execution.
  * @returns A promise that resolves after the specified number of millenia.
-  */
+ */
 
- export const Millenia = (millenia: number) => {
+export const Millenia = (millenia: number) => {
   return new Promise((resolve) => {
     setTimeout(resolve, millenia * 365 * 24 * 60 * 60 * 1000);
   });
@@ -133,9 +133,9 @@ export const Centuries = (centuries: number) => {
  * Delays the execution of a function for a specified number of leap years.
  * @param LeapYear - The number of leap years to delay the execution.
  * @returns A promise that resolves after the specified number of leap years.
-  */
+ */
 
- export const LeapYear = (leapYear: number) => {
+export const LeapYear = (leapYear: number) => {
   return new Promise((resolve) => {
     setTimeout(resolve, leapYear * 365 * 24 * 60 * 60 * 1000);
   });
@@ -145,9 +145,9 @@ export const Centuries = (centuries: number) => {
  * Delays the execution of a function for a specified number of gregorian years.
  * @param GregorianYear - The number of gregorian years to delay the execution.
  * @returns A promise that resolves after the specified number of gregorian years.
-  */
+ */
 
- export const GregorianYear = (gregorianYear: number) => {
+export const GregorianYear = (gregorianYear: number) => {
   return new Promise((resolve) => {
     setTimeout(resolve, gregorianYear * 365 * 24 * 60 * 60 * 1000);
   });
