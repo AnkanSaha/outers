@@ -30,6 +30,23 @@ import RenderResponse from "../Response/Render-Response"; // Import Render Respo
 import JSONResponser from "../Response/Class/JSON-Response.class"; // Import JSON Responser Class
 import FileResponse from "../Response/Class/File-Response.class"; // Import File Responser Class
 
+// Import Waiter Functions
+import {
+  Centuries,
+  Days,
+  Decades,
+  GregorianYear,
+  Hours,
+  LeapYear,
+  Millenia,
+  Minutes,
+  Months,
+  Ms,
+  Seconds,
+  Weeks,
+  Years,
+} from "../Functions/Waiter.function"; // Waiter Functions
+
 // Import Random Generator Modules
 import { UniqueGen } from "../UniqueGen/Base"; // Import UniqueGen Module
 
@@ -94,6 +111,23 @@ export const Console = Object.freeze({
 
 // Export HTTP Status Code Related Modules
 export const StatusCodes = StatusCode; // Export StatusCode Module
+
+// Export Waiter Modules
+export const Wait = Object.freeze({
+  MS: Ms,
+  Seconds: Seconds,
+  Minutes: Minutes,
+  Hours: Hours,
+  Days: Days,
+  Weeks: Weeks,
+  Months: Months,
+  Centuries: Centuries,
+  Decades: Decades,
+  GregorianYear: GregorianYear,
+  LeapYear: LeapYear,
+  Millenia: Millenia,
+  Year: Years,
+});
 
 // Export Direct Function Based HTTP Response Sender Modules
 export const Serve = Object.freeze({
