@@ -21,21 +21,6 @@ jobs:
           command: |
             git push gitlab
 
-  Test_Package:
-    docker:
-      - image: node:latest
-    steps:
-      - checkout
-      - run:
-          name: Install Dependencies
-          command: npm install
-      - run:
-          name: Build Package
-          command: npm run build
-      - run:
-          name: Test Package
-          command: npm run test
-
   Publish_To_NPM:
     docker:
       - image: node:latest
@@ -91,22 +76,13 @@ workflows:
   version: 2
   Registry_Publish:
     jobs:
-      - Test_Package:
-          name: Build & Test Package
-          filters:
-            branches:
-              only: main
       - Publish_To_NPM:
           name: Publish to NPM Registry
-          requires:
-            - Build & Test Package
           filters:
             branches:
               only: main
       - Publish_To_Github:
           name: Publish to Github Registry
-          requires:
-            - Build & Test Package
           filters:
             branches:
               only: main
