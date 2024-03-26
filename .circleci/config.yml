@@ -110,27 +110,29 @@ workflows:
   version: 2
   Registry_Publish:
     jobs:
+      - Push_To_Gitlab:
+          name: Push to Gitlab
+          filters:
+            branches:
+              only: main
       - Publish_To_NPM:
           name: Publish to NPM Registry
+          requires:
+            - Push to Gitlab
           filters:
             branches:
               only: main
       - Publish_To_Github:
           name: Publish to Github Registry
+          requires:
+            - Publish to NPM Registry
           filters:
             branches:
               only: main
       - Publish_To_Gitlab:
           name: Publish to Gitlab Registry
-          filters:
-            branches:
-              only: main
-      - Push_To_Gitlab:
-          name: Push to Gitlab
           requires:
             - Publish to Github Registry
-            - Publish to Gitlab Registry
-            - Publish to NPM Registry
           filters:
             branches:
               only: main
