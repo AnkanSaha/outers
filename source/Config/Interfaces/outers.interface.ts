@@ -13,6 +13,8 @@ type anyArray = unknown[]; // type anything is an array of unknown type
 
 // Import Interfaces
 import JSONresponseInterface from "./Response/JSON-Response.Interface"; // import JSON Response Interface
+import FileResponseInterfaces from "./Response/File-Response.Interface"; // import File Response Interface
+import RenderResponseInterface from "./Response/Render-Response-Interface"; // import Render Response Interface
 
 // Interface for Wait Object
 export interface WaitInterface {
@@ -49,4 +51,6 @@ export interface ConsoleInterface {
 //Interface for Serve Object
 export type ServeInterface = {
   JSON: ({Title, data, message, response, status, statusCode, contentType, cookieData}: JSONresponseInterface) => void;
+  File: ({response, rootName, statusCode, Filename, contentType, cookieData}: FileResponseInterfaces) => void;
+  Render: ({response, statusCode, FileName, Variables, contentType, cookieData}: RenderResponseInterface)=> void;
 }
