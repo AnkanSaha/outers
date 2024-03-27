@@ -7,8 +7,8 @@ import { Serve } from "../../Config/outer"; // Importing Serve
 // Create new ShortStorage instance
 export const StorageInstance = new Storage(
   "Request-Log-details-for-nodejs",
-  999999, // 999999 MB = 1TB
-  "Request-Log-details-for-nodejs",
+  99000000, // Default Storage is 99TB
+  "Request-Log-details-for-nodejs"
 );
 
 // Main middleware function
@@ -17,7 +17,7 @@ export default function (
   SaveUserAgent: boolean = true,
   SaveRequestTime: boolean = true,
   SaveContentType: boolean = true,
-  SaveMethod: boolean = true,
+  SaveMethod: boolean = true
 ) {
   return async (Request: Request, Response: Response, Next: NextFunction) => {
     const GetPreviousData = await StorageInstance.Get(TodayDate); // Get previous data
