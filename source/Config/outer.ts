@@ -1,3 +1,6 @@
+// Import Interface
+import { WaitInterface, ConsoleInterface } from "./Interfaces/outers.interface"; // import interface
+
 // Import Console Color Related Modules
 import {
   blue,
@@ -95,7 +98,7 @@ import getIPDetails from "../Functions/Get IP Details.function"; // Import Get I
 import ReadRequestCount from "../Functions/Read Request Count.function"; // Import Read Request Count Module
 
 // Export Console Color Related Modules
-export const Console = Object.freeze({
+export const Console: ConsoleInterface = Object.freeze({
   blue,
   bright,
   cyan,
@@ -109,11 +112,12 @@ export const Console = Object.freeze({
   yellow,
 }); // Export Console Module
 
+
 // Export HTTP Status Code Related Modules
 export const StatusCodes = StatusCode; // Export StatusCode Module
 
 // Export Waiter Modules
-export const Wait = Object.freeze({
+export const Wait: WaitInterface = Object.freeze({
   MS: Ms,
   Seconds: Seconds,
   Minutes: Minutes,
