@@ -1,5 +1,5 @@
 // Import Interface
-import { WaitInterface, ConsoleInterface } from "./Interfaces/outers.interface"; // import interface
+import { WaitInterface, ConsoleInterface, ServeInterface } from "./Interfaces/outers.interface"; // import interface
 
 // Import Console Color Related Modules
 import {
@@ -134,7 +134,7 @@ export const Wait: WaitInterface = Object.freeze({
 });
 
 // Export Direct Function Based HTTP Response Sender Modules
-export const Serve = Object.freeze({
+export const Serve: ServeInterface = Object.freeze({
   JSON: JSONSendResponse,
   File: SendFileResponse,
   Render: RenderResponse,

@@ -11,6 +11,9 @@ type globe =
 
 type anyArray = unknown[]; // type anything is an array of unknown type
 
+// Import Interfaces
+import JSONresponseInterface from "./Response/JSON-Response.Interface"; // import JSON Response Interface
+
 // Interface for Wait Object
 export interface WaitInterface {
   MS: (ms: number) => Promise<unknown>;
@@ -41,4 +44,9 @@ export interface ConsoleInterface {
   reverse: (...Payload: anyArray) => globe;
   underscore: (...Payload: anyArray) => globe;
   yellow: (...Payload: anyArray) => globe;
+}
+
+//Interface for Serve Object
+export type ServeInterface = {
+  JSON: ({Title, data, message, response, status, statusCode, contentType, cookieData}: JSONresponseInterface) => void;
 }
