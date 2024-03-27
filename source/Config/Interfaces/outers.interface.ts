@@ -64,4 +64,5 @@ export interface MiddlewareInterface {
   User_AgentController: (  BrowserNames: string[], BrowserVersions?: string[], StatusCode?: number, ErrorMessage?: string, Reverse?: boolean,) => (Request: Request, Response: Response, Next: NextFunction) => void;
   MethodsController: (Methods?: string[], reverse?: boolean)=> (Request: Request, Response: Response, Next: NextFunction) => void;
   JWTValidator: (TokenFieldName: string, SecretToken: string) => (Request: Request, Response: Response, Next: NextFunction) => void;
+  RequestLogger: (SaveIP: boolean, SaveUserAgent: boolean, SaveRequestTime: boolean, SaveContentType: boolean, SaveMethod: boolean)=> (Request: Request, Response: Response, Next: NextFunction) => void;
 }
