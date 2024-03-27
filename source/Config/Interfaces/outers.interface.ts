@@ -15,6 +15,7 @@ type anyArray = unknown[]; // type anything is an array of unknown type
 import JSONresponseInterface from "./Response/JSON-Response.Interface"; // import JSON Response Interface
 import FileResponseInterfaces from "./Response/File-Response.Interface"; // import File Response Interface
 import RenderResponseInterface from "./Response/Render-Response-Interface"; // import Render Response Interface
+import { Request, Response, NextFunction } from "express"; // Import Request, Response, NextFunction from express
 
 // Interface for Wait Object
 export interface WaitInterface {
@@ -53,4 +54,9 @@ export type ServeInterface = {
   JSON: ({Title, data, message, response, status, statusCode, contentType, cookieData}: JSONresponseInterface) => void;
   File: ({response, rootName, statusCode, Filename, contentType, cookieData}: FileResponseInterfaces) => void;
   Render: ({response, statusCode, FileName, Variables, contentType, cookieData}: RenderResponseInterface)=> void;
+}
+
+// Interface for Middleware Object
+export interface MiddlewareInterface {
+  RequestInjectIP: (Methods?: string[]) => (Request: Request, Response: Response, Next: NextFunction)=> void;
 }
