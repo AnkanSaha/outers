@@ -60,4 +60,5 @@ export type ServeInterface = {
 export interface MiddlewareInterface {
   RequestInjectIP: (Methods?: string[]) => (Request: Request, Response: Response, Next: NextFunction)=> void;
   URL_Controller: ( AllowedURLs: string[], StatusCode?: number, ErrorMessage?: string, Reverse?: boolean,)=> (Request: Request, Response: Response, Next: NextFunction)=> void;
+  IPAccessController: (  AllowedIP: string[], StatusCode?: number, ErrorMessage?: string, Reverse?: false,) => (Request: Request, Response: Response, Next: NextFunction)=> void;
 }
