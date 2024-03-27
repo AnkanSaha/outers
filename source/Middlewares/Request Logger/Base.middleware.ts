@@ -1,15 +1,11 @@
 import { Request, Response, NextFunction } from "express"; // Importing express types
 import Storage from "../../Storage Management/ShortStorage.storage"; // Importing ShortStorage
-import { TodayDate } from "../../Config/Constant/Middleware.Constant"; // Importing Today's Date
+import {
+  TodayDate,
+  RequestLoggerCredentials,
+} from "../../Config/Constant/Middleware.Constant"; // Importing Today's Date
 import { StatusCode } from "../../StatusCode/Code"; // Importing Status Code
 import { Serve } from "../../Config/outer"; // Importing Serve
-
-// Create new ShortStorage instance
-export const StorageInstance = new Storage(
-  "Request-Log-details-for-nodejs",
-  999999, // 999999 MB = 1TB
-  "Request-Log-details-for-nodejs",
-);
 
 // Main middleware function
 export default function (
@@ -19,6 +15,12 @@ export default function (
   SaveContentType: boolean = true,
   SaveMethod: boolean = true,
 ) {
+  // Create new ShortStorage instance
+  const StorageInstance = new Storage(
+    RequestLoggerCredentials.RequestLoggerStorageName,
+    RequestLoggerCredentials.RequestLoggerStorageDefaultSize, // Default Storage is 99TB
+    RequestLoggerCredentials.RequestLoggerStorageEncryptionKey,
+  );
   return async (Request: Request, Response: Response, Next: NextFunction) => {
     const GetPreviousData = await StorageInstance.Get(TodayDate); // Get previous data
 

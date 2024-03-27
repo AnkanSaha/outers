@@ -11,13 +11,6 @@ import { IGetIPDetails } from "../Config/Interfaces/Functions/Get IP Details.int
 // Import Constant Values
 import { APiCall } from "../Config/Constant/Functions.constant"; // Import APiCall from IP Details.utils.constant
 
-// Register IP Details Short Storage for IP Details Cache
-export const IPDetailsShortStorage = new Storage(
-  "cache-ip-details-for-nodejs",
-  999999, // 999999 MB = 1TB
-  "cache-ip-details-for-nodejs",
-); // Create New Short Storage for IP Details
-
 // Main Function
 /**
  * Retrieves details for a given IP address using an API.
@@ -32,6 +25,13 @@ export default async function getIPDetails(
   ClientIP: string,
 ): Promise<IGetIPDetails> {
   try {
+    // Register IP Details Short Storage for IP Details Cache
+    const IPDetailsShortStorage = new Storage(
+      "cache-ip-details-for-nodejs",
+      99000000, // Default Storage is 99TB
+      "cache-ip-details-for-nodejs",
+    ); // Create New Short Storage for IP Details
+
     // Check if user provided IP_INFO_API_KEY
     if (
       IP_INFO_API_KEY === undefined ||

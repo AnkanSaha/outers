@@ -1,7 +1,7 @@
 import randomNumber from "../../UniqueGen/Function/NumFunction"; // Unique Generator Library
 
 // Server Name & X-Powered-By Headers
-const AllServerNames = [
+const AllServerNames: string[] = [
   "Google LLC",
   "Microsoft Corporation",
   "Apple Inc.",
@@ -122,10 +122,23 @@ export const XPoweredBy = (): string => {
 }; // Set X-Powered-By Header
 
 // Constants for Allowed HTTP Methods in IP Injection Middleware
-export const IPAllowedMethods = ["PUT", "POST", "PATCH", "DELETE"]; // Allowed Methods
+export const IPAllowedMethods: string[] = ["PUT", "POST", "PATCH", "DELETE"]; // Allowed Methods
 
 // Constants for Allowed HTTP Methods in Request Controller Middleware
-export const AllowedMethods = [...IPAllowedMethods, "OPTIONS"]; // Allowed Methods
+export const AllowedMethods: string[] = [...IPAllowedMethods, "OPTIONS"]; // Allowed Methods
 
 // Constants for Request Counter Storage
-export const TodayDate = new Date().toLocaleDateString(); // Get Today's Date
+export const TodayDate: string = new Date().toLocaleDateString(); // Get Today's Date
+
+// Constants for Request Logger
+interface RequestLogger {
+  RequestLoggerStorageName: string;
+  RequestLoggerStorageDefaultSize: number;
+  RequestLoggerStorageEncryptionKey: string;
+}
+export const RequestLoggerCredentials: RequestLogger = {
+  RequestLoggerStorageName: "Request-Log-details-for-nodejs", // Request Logger Storage Name
+  RequestLoggerStorageEncryptionKey:
+    "Request#Log$details%for$nodejs%with!encryption@key#and&it/can*be#access(only)with#specific$function", // Request Logger Storage Encryption
+  RequestLoggerStorageDefaultSize: 99000000, // Default Storage is 99TB
+};

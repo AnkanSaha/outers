@@ -1,3 +1,11 @@
+// Import Interface
+import {
+  WaitInterface,
+  ConsoleInterface,
+  ServeInterface,
+  MiddlewareInterface,
+} from "./Interfaces/outers.interface"; // import interface
+
 // Import Console Color Related Modules
 import {
   blue,
@@ -95,7 +103,7 @@ import getIPDetails from "../Functions/Get IP Details.function"; // Import Get I
 import ReadRequestCount from "../Functions/Read Request Count.function"; // Import Read Request Count Module
 
 // Export Console Color Related Modules
-export const Console = Object.freeze({
+export const Console: ConsoleInterface = Object.freeze({
   blue,
   bright,
   cyan,
@@ -113,7 +121,7 @@ export const Console = Object.freeze({
 export const StatusCodes = StatusCode; // Export StatusCode Module
 
 // Export Waiter Modules
-export const Wait = Object.freeze({
+export const Wait: WaitInterface = Object.freeze({
   MS: Ms,
   Seconds: Seconds,
   Minutes: Minutes,
@@ -130,14 +138,14 @@ export const Wait = Object.freeze({
 });
 
 // Export Direct Function Based HTTP Response Sender Modules
-export const Serve = Object.freeze({
+export const Serve: ServeInterface = Object.freeze({
   JSON: JSONSendResponse,
   File: SendFileResponse,
   Render: RenderResponse,
 });
 
 // Export All Middlewares
-export const Middleware = Object.freeze({
+export const Middleware: MiddlewareInterface = Object.freeze({
   RequestInjectIP: InjectIP, // Export IP Injector Module as Middleware
   URL_Controller: AccessController, // Export URL Controller Module as Middleware
   IPAccessController: IP_Controller, // Export IP Controller Module as Middleware

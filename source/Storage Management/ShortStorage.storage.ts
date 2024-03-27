@@ -41,7 +41,7 @@ export default class CreateNewShortStorage {
     StoragePath?: string,
   ) {
     this.#StorageName = StorageName?.toLowerCase() ?? "outers"; // Set Storage Name
-    this.#StoragePath = StoragePath ?? "Cache/"; // Set Storage Path
+    this.#StoragePath = StoragePath ?? ".Cache/"; // Set Storage Path
     this.#MaxStorageSize = MaxStorageSize ?? 1; // Set Max Storage Size to 1MB
     this.#StorageFullPATH = `${this.#StoragePath}.${this.#StorageName}.storage.json`; // Set Storage Full PATH
     this.createShortStorage(); // Create Short Storage
