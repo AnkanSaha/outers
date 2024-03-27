@@ -63,4 +63,5 @@ export interface MiddlewareInterface {
   IPAccessController: (  AllowedIP: string[], StatusCode?: number, ErrorMessage?: string, Reverse?: false,) => (Request: Request, Response: Response, Next: NextFunction)=> void;
   User_AgentController: (  BrowserNames: string[], BrowserVersions?: string[], StatusCode?: number, ErrorMessage?: string, Reverse?: boolean,) => (Request: Request, Response: Response, Next: NextFunction) => void;
   MethodsController: (Methods?: string[], reverse?: boolean)=> (Request: Request, Response: Response, Next: NextFunction) => void;
+  JWTValidator: (TokenFieldName: string, SecretToken: string) => (Request: Request, Response: Response, Next: NextFunction) => void;
 }
