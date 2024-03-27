@@ -1,5 +1,5 @@
 // Import Interface
-import { WaitInterface, ConsoleInterface, ServeInterface } from "./Interfaces/outers.interface"; // import interface
+import { WaitInterface, ConsoleInterface, ServeInterface, MiddlewareInterface } from "./Interfaces/outers.interface"; // import interface
 
 // Import Console Color Related Modules
 import {
@@ -141,7 +141,7 @@ export const Serve: ServeInterface = Object.freeze({
 });
 
 // Export All Middlewares
-export const Middleware = Object.freeze({
+export const Middleware: MiddlewareInterface = Object.freeze({
   RequestInjectIP: InjectIP, // Export IP Injector Module as Middleware
   URL_Controller: AccessController, // Export URL Controller Module as Middleware
   IPAccessController: IP_Controller, // Export IP Controller Module as Middleware
