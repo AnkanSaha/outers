@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { StorageInstance } from "../Middlewares/Request Logger/Base.middleware"; // Import The Storage for Read Request Count
-
+import Storage from "../Storage Management/ShortStorage.storage"; // Importing ShortStorage
+import { RequestLoggerCredentials } from "../Config/Constant/Middleware.Constant"; // Importing Today's Date
 // Interface for Read Request Count
 interface ReturnData {
   status: number;
@@ -21,6 +21,11 @@ interface ReturnData {
  */
 export default async function (RequestDate?: string): Promise<ReturnData> {
   try {
+    const StorageInstance = new Storage(
+      RequestLoggerCredentials.RequestLoggerStorageName,
+      RequestLoggerCredentials.RequestLoggerStorageDefaultSize,
+      RequestLoggerCredentials.RequestLoggerStorageEncryptionKey
+    ); // Create new ShortStorage instance
     if (
       RequestDate === undefined ||
       RequestDate === null ||
