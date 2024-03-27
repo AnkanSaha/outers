@@ -22,14 +22,14 @@ import { APiCall } from "../Config/Constant/Functions.constant"; // Import APiCa
  */
 export default async function getIPDetails(
   IP_INFO_API_KEY: string,
-  ClientIP: string
+  ClientIP: string,
 ): Promise<IGetIPDetails> {
   try {
     // Register IP Details Short Storage for IP Details Cache
     const IPDetailsShortStorage = new Storage(
       "cache-ip-details-for-nodejs",
       99000000, // Default Storage is 99TB
-      "cache-ip-details-for-nodejs"
+      "cache-ip-details-for-nodejs",
     ); // Create New Short Storage for IP Details
 
     // Check if user provided IP_INFO_API_KEY
@@ -71,7 +71,7 @@ export default async function getIPDetails(
     }
     const ClientIPData = await APiCall.Get(
       `/${ClientIP}/json?token=${IP_INFO_API_KEY}`,
-      true
+      true,
     );
     const IPType = TypeCheck(ClientIP); // Check if IP is IPv4 or IPv6
 

@@ -1,5 +1,10 @@
 // Import Interface
-import { WaitInterface, ConsoleInterface, ServeInterface, MiddlewareInterface } from "./Interfaces/outers.interface"; // import interface
+import {
+  WaitInterface,
+  ConsoleInterface,
+  ServeInterface,
+  MiddlewareInterface,
+} from "./Interfaces/outers.interface"; // import interface
 
 // Import Console Color Related Modules
 import {
@@ -111,7 +116,6 @@ export const Console: ConsoleInterface = Object.freeze({
   underscore,
   yellow,
 }); // Export Console Module
-
 
 // Export HTTP Status Code Related Modules
 export const StatusCodes = StatusCode; // Export StatusCode Module

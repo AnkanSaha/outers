@@ -24,7 +24,7 @@ export default async function (RequestDate?: string): Promise<ReturnData> {
     const StorageInstance = new Storage(
       RequestLoggerCredentials.RequestLoggerStorageName,
       RequestLoggerCredentials.RequestLoggerStorageDefaultSize,
-      RequestLoggerCredentials.RequestLoggerStorageEncryptionKey
+      RequestLoggerCredentials.RequestLoggerStorageEncryptionKey,
     ); // Create new ShortStorage instance
     if (
       RequestDate === undefined ||
