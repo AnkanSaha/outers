@@ -131,7 +131,12 @@ export const AllowedMethods: string[] = [...IPAllowedMethods, "OPTIONS"]; // All
 export const TodayDate: string = new Date().toLocaleDateString(); // Get Today's Date
 
 // Constants for Request Logger
-export const RequestLoggerCredentials = {
+interface RequestLogger {
+  RequestLoggerStorageName: string;
+  RequestLoggerStorageDefaultSize: number;
+  RequestLoggerStorageEncryptionKey: string;
+}
+export const RequestLoggerCredentials: RequestLogger = {
   RequestLoggerStorageName: "Request-Log-details-for-nodejs", // Request Logger Storage Name
   RequestLoggerStorageEncryptionKey:
     "Request#Log$details%for$nodejs%with!encryption@key#and&it/can*be#access(only)with#specific$function", // Request Logger Storage Encryption
