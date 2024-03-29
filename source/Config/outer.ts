@@ -5,6 +5,7 @@ import {
   ServeInterface,
   MiddlewareInterface,
   ClassBasedInterface,
+  FunctionBasedInterface
 } from "./Interfaces/outers.interface"; // import interface
 
 // Import Console Color Related Modules
@@ -179,7 +180,7 @@ export const ClassBased: ClassBasedInterface = Object.freeze({
 }); // Export All Methods
 
 // Export Functions with Freeze
-export const FunctionBased = Object.freeze({
+export const FunctionBased: FunctionBasedInterface = Object.freeze({
   RandomGenerator: {
     Boolean: randomBoolean, // Export Random Boolean Generator Module
     Mixed: randomMixed, // Export Random Mixed Generator Module
