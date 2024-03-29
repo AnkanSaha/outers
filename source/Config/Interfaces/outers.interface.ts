@@ -156,30 +156,63 @@ export interface ClassBasedInterface {
   GitCloner: typeof GitCloner;
 }
 
-
 // FunctionBased Interface
 import { IGetIPDetails } from "./Functions/Get IP Details.interface"; // Get IP Details Interface
 import { Express } from "express"; // Express Interface
 import { ResponseObject } from "./Cluster/CreateClusterByFunction.interfaces"; // Create Cluster Interface
 import { ReturnData } from "../../Functions/Read Request Count.function"; // Read Request Count Interface
 export interface FunctionBasedInterface {
-  RandomGenerator : {
-    Boolean: ()=> boolean;
-    Mixed: (length?: number, isCAPITAL?: boolean, CustomMixeds?: string[]) => string;
-    Number: (length?: number, WithZero?: boolean, CustomNumbers?: number[]) => number;
+  RandomGenerator: {
+    Boolean: () => boolean;
+    Mixed: (
+      length?: number,
+      isCAPITAL?: boolean,
+      CustomMixeds?: string[],
+    ) => string;
+    Number: (
+      length?: number,
+      WithZero?: boolean,
+      CustomNumbers?: number[],
+    ) => number;
     Symbol: (length?: number, CustomSymbols?: string[]) => string;
-    Word: (length?: number, isCAPITAL?: boolean, CustomWords?: string[]) => string;
+    Word: (
+      length?: number,
+      isCAPITAL?: boolean,
+      CustomWords?: string[],
+    ) => string;
   };
   IP: {
     TypeCheck: (IP: string) => string | unknown;
     Info: (IP_INFO_API_KEY: string, ClientIP: string) => Promise<IGetIPDetails>;
   };
-  ClusterCreator: (ExpressServer?: Express, PORT?: number, NumberOfWorkers?: number, EnableTrustProxy?: boolean, BeforeListenFunctions?: any[], AfterListenFunctions?: any[], FunctionMiddlewares?: any[]) => Promise<ResponseObject | undefined>;
+  ClusterCreator: (
+    ExpressServer?: Express,
+    PORT?: number,
+    NumberOfWorkers?: number,
+    EnableTrustProxy?: boolean,
+    BeforeListenFunctions?: any[],
+    AfterListenFunctions?: any[],
+    FunctionMiddlewares?: any[],
+  ) => Promise<ResponseObject | undefined>;
   API: {
     GET: (API: string, Responsejson?: boolean, Headers?: any) => Promise<any>;
-    POST: (API: string, Data: any, Responsejson?: boolean, Headers?: any) => Promise<any>;
-    PUT: (API: string, Data: any, Responsejson?: boolean, Headers?: any) => Promise<any>;
-    DELETE: (API: string, Responsejson?: boolean, Headers?: any) => Promise<any>;
+    POST: (
+      API: string,
+      Data: any,
+      Responsejson?: boolean,
+      Headers?: any,
+    ) => Promise<any>;
+    PUT: (
+      API: string,
+      Data: any,
+      Responsejson?: boolean,
+      Headers?: any,
+    ) => Promise<any>;
+    DELETE: (
+      API: string,
+      Responsejson?: boolean,
+      Headers?: any,
+    ) => Promise<any>;
   };
   GetRequestLog: (RequestDate?: string) => Promise<ReturnData>;
 }

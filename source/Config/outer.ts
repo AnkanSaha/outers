@@ -5,7 +5,7 @@ import {
   ServeInterface,
   MiddlewareInterface,
   ClassBasedInterface,
-  FunctionBasedInterface
+  FunctionBasedInterface,
 } from "./Interfaces/outers.interface"; // import interface
 
 // Import Console Color Related Modules
