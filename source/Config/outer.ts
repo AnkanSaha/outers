@@ -4,6 +4,8 @@ import {
   ConsoleInterface,
   ServeInterface,
   MiddlewareInterface,
+  ClassBasedInterface,
+  FunctionBasedInterface,
 } from "./Interfaces/outers.interface"; // import interface
 
 // Import Console Color Related Modules
@@ -156,7 +158,7 @@ export const Middleware: MiddlewareInterface = Object.freeze({
 }); // Export IP Injector Module as Middleware
 
 // Export All Class based with Freeze
-export const ClassBased = Object.freeze({
+export const ClassBased: ClassBasedInterface = Object.freeze({
   JWT_Manager: Jwt, // Export JWT Manager Module
   MongoSuper: MongoSuper,
   ClusterCreator: CreateClusterByClass, // CreateClusterByClass is used to create a cluster using the class based method
@@ -178,7 +180,7 @@ export const ClassBased = Object.freeze({
 }); // Export All Methods
 
 // Export Functions with Freeze
-export const FunctionBased = Object.freeze({
+export const FunctionBased: FunctionBasedInterface = Object.freeze({
   RandomGenerator: {
     Boolean: randomBoolean, // Export Random Boolean Generator Module
     Mixed: randomMixed, // Export Random Mixed Generator Module

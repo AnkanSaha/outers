@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // global types
 type globe =
   | string
@@ -15,7 +16,7 @@ type anyArray = unknown[]; // type anything is an array of unknown type
 import JSONresponseInterface from "./Response/JSON-Response.Interface"; // import JSON Response Interface
 import FileResponseInterfaces from "./Response/File-Response.Interface"; // import File Response Interface
 import RenderResponseInterface from "./Response/Render-Response-Interface"; // import Render Response Interface
-import { Request, Response, NextFunction } from "express"; // Import Request, Response, NextFunction from express
+import { Request, Response, NextFunction, Express } from "express"; // Import Request, Response, NextFunction from express
 
 // Interface for Wait Object
 export interface WaitInterface {
@@ -118,4 +119,99 @@ export interface MiddlewareInterface {
     SaveContentType: boolean,
     SaveMethod: boolean,
   ) => (Request: Request, Response: Response, Next: NextFunction) => void;
+}
+
+// Interface for ClassBased Methods
+import Jwt from "../../JWT/JWT.method"; // Import JWT Manager Module
+import MongoSuper from "../../MongoSuper/Connection/Connection"; //  Mongo Super Module
+import CreateClusterByClass from "../../Cluster/class/CreateClusterByClass.method"; // Import Cluster Creation Module
+import { UniqueGen } from "../../UniqueGen/Base"; // Import UniqueGen Module
+import Encryption from "../../Encryption - Decryption/Dispatcher"; // Import Crypto Module
+import { APiCall } from "../../API/Dispatcher"; // Import API Module
+import JSONResponser from "../../Response/Class/JSON-Response.class"; // Import JSON Responser Class
+import FileResponse from "../../Response/Class/File-Response.class"; // Import File Responser Class
+import CreateNewShortStorage from "../../Storage Management/ShortStorage.storage"; // Import Short Storage
+import Executor from "../../command/exec.command"; // Linux Command Executor
+import SpawnCommander from "../../command/spawn.command"; // Linux Command Executor
+import GitCloner from "../../Git Cloner/Cloner"; // Import Git Cloner Module
+
+export interface ClassBasedInterface {
+  JWT_Manager: typeof Jwt;
+  MongoSuper: typeof MongoSuper;
+  ClusterCreator: typeof CreateClusterByClass;
+  UniqueGenerator: typeof UniqueGen;
+  CryptoGraphy: typeof Encryption;
+  API: typeof APiCall;
+  Response: {
+    JSON: typeof JSONResponser;
+    File: typeof FileResponse;
+  };
+  Storage: {
+    CreateNewShortStorage: typeof CreateNewShortStorage;
+  };
+  Command: {
+    Execute: typeof Executor;
+    Spawn: typeof SpawnCommander;
+  };
+  GitCloner: typeof GitCloner;
+}
+
+// FunctionBased Interface
+import { IGetIPDetails } from "./Functions/Get IP Details.interface"; // Get IP Details Interface
+import { ResponseObject } from "./Cluster/CreateClusterByFunction.interfaces"; // Create Cluster Interface
+import { ReturnData } from "../../Functions/Read Request Count.function"; // Read Request Count Interface
+export interface FunctionBasedInterface {
+  RandomGenerator: {
+    Boolean: () => boolean;
+    Mixed: (
+      length?: number,
+      isCAPITAL?: boolean,
+      CustomMixeds?: string[],
+    ) => string;
+    Number: (
+      length?: number,
+      WithZero?: boolean,
+      CustomNumbers?: number[],
+    ) => number;
+    Symbol: (length?: number, CustomSymbols?: string[]) => string;
+    Word: (
+      length?: number,
+      isCAPITAL?: boolean,
+      CustomWords?: string[],
+    ) => string;
+  };
+  IP: {
+    TypeCheck: (IP: string) => string | unknown;
+    Info: (IP_INFO_API_KEY: string, ClientIP: string) => Promise<IGetIPDetails>;
+  };
+  ClusterCreator: (
+    ExpressServer?: Express,
+    PORT?: number,
+    NumberOfWorkers?: number,
+    EnableTrustProxy?: boolean,
+    BeforeListenFunctions?: any[],
+    AfterListenFunctions?: any[],
+    FunctionMiddlewares?: any[],
+  ) => Promise<ResponseObject | undefined>;
+  API: {
+    GET: (API: string, Responsejson?: boolean, Headers?: any) => Promise<any>;
+    POST: (
+      API: string,
+      Data: any,
+      Responsejson?: boolean,
+      Headers?: any,
+    ) => Promise<any>;
+    PUT: (
+      API: string,
+      Data: any,
+      Responsejson?: boolean,
+      Headers?: any,
+    ) => Promise<any>;
+    DELETE: (
+      API: string,
+      Responsejson?: boolean,
+      Headers?: any,
+    ) => Promise<any>;
+  };
+  GetRequestLog: (RequestDate?: string) => Promise<ReturnData>;
 }

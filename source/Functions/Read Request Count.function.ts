@@ -2,7 +2,7 @@
 import Storage from "../Storage Management/ShortStorage.storage"; // Importing ShortStorage
 import { RequestLoggerCredentials } from "../Config/Constant/Middleware.Constant"; // Importing Today's Date
 // Interface for Read Request Count
-interface ReturnData {
+export interface ReturnData {
   status: number;
   message: string;
   Data: any[];
