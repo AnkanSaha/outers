@@ -133,7 +133,7 @@ workflows:
           name: Publish to Gitlab Registry
           requires:
             - Push to Gitlab
-            - Publish to Github Registry
+            - Publish to NPM Registry
           filters:
             branches:
               only: main
