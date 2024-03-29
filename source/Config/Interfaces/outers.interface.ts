@@ -82,40 +82,75 @@ export type ServeInterface = {
 // Interface for Middleware Object
 export interface MiddlewareInterface {
   RequestInjectIP: (
-    Methods?: string[],
+    Methods?: string[]
   ) => (Request: Request, Response: Response, Next: NextFunction) => void;
   URL_Controller: (
     AllowedURLs: string[],
     StatusCode?: number,
     ErrorMessage?: string,
-    Reverse?: boolean,
+    Reverse?: boolean
   ) => (Request: Request, Response: Response, Next: NextFunction) => void;
   IPAccessController: (
     AllowedIP: string[],
     StatusCode?: number,
     ErrorMessage?: string,
-    Reverse?: false,
+    Reverse?: false
   ) => (Request: Request, Response: Response, Next: NextFunction) => void;
   User_AgentController: (
     BrowserNames: string[],
     BrowserVersions?: string[],
     StatusCode?: number,
     ErrorMessage?: string,
-    Reverse?: boolean,
+    Reverse?: boolean
   ) => (Request: Request, Response: Response, Next: NextFunction) => void;
   MethodsController: (
     Methods?: string[],
-    reverse?: boolean,
+    reverse?: boolean
   ) => (Request: Request, Response: Response, Next: NextFunction) => void;
   JWTValidator: (
     TokenFieldName: string,
-    SecretToken: string,
+    SecretToken: string
   ) => (Request: Request, Response: Response, Next: NextFunction) => void;
   RequestLogger: (
     SaveIP: boolean,
     SaveUserAgent: boolean,
     SaveRequestTime: boolean,
     SaveContentType: boolean,
-    SaveMethod: boolean,
+    SaveMethod: boolean
   ) => (Request: Request, Response: Response, Next: NextFunction) => void;
+}
+
+// Interface for ClassBased Methods
+import Jwt from "../../JWT/JWT.method"; // Import JWT Manager Module
+import MongoSuper from "../../MongoSuper/Connection/Connection"; //  Mongo Super Module
+import CreateClusterByClass from "../../Cluster/class/CreateClusterByClass.method"; // Import Cluster Creation Module
+import { UniqueGen } from "../../UniqueGen/Base"; // Import UniqueGen Module
+import Encryption from "../../Encryption - Decryption/Dispatcher"; // Import Crypto Module
+import { APiCall } from "../../API/Dispatcher"; // Import API Module
+import JSONResponser from "../../Response/Class/JSON-Response.class"; // Import JSON Responser Class
+import FileResponse from "../../Response/Class/File-Response.class"; // Import File Responser Class
+import CreateNewShortStorage from "../../Storage Management/ShortStorage.storage"; // Import Short Storage
+import Executor from "../../command/exec.command"; // Linux Command Executor
+import SpawnCommander from "../../command/spawn.command"; // Linux Command Executor
+import GitCloner from "../../Git Cloner/Cloner"; // Import Git Cloner Module
+
+export interface ClassBasedInterface {
+  JWT_Manager: typeof Jwt;
+  MongoSuper: typeof MongoSuper;
+  ClusterCreator: typeof CreateClusterByClass;
+  UniqueGenerator: typeof UniqueGen;
+  CryptoGraphy: typeof Encryption;
+  API: typeof APiCall;
+  Response: {
+    JSON: typeof JSONResponser;
+    File: typeof FileResponse;
+  };
+  Storage: {
+    CreateNewShortStorage: typeof CreateNewShortStorage;
+  };
+  Command: {
+    Execute: typeof Executor;
+    Spawn: typeof SpawnCommander;
+  };
+  GitCloner: typeof GitCloner;
 }
