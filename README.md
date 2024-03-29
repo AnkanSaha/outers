@@ -21,9 +21,9 @@ npm i react-caches@latest --save
 ## Encrypt and Decrypt
 
 ```javascript
-const { methods } = require("outers"); // import the package
+const { ClassBased } = require("outers"); // import the package
 
-const Crypto = new methods.CryptoGraphy("secretKey"); // create a new instance of CryptoGraphy class
+const Crypto = new ClassBased.CryptoGraphy("secretKey"); // create a new instance of CryptoGraphy class
 
 const ASYNCencrypted = Crypto.Encrypt("Hello World!"); // encrypt the string with secret key in async way
 
@@ -89,10 +89,10 @@ Serve.File({ // send a file to the client
 ## Class Based Response Sender
 
 ```javascript
-const { methods } = require('outers'); // import the package
+const { ClassBased } = require('outers'); // import the package
 
 // Create a new instance of ResponseSender class
-const OK = new methods.Response.JSON(response, StatusCode, contentType?); // create a new instance of JSON class with response, status code and content type
+const OK = new ClassBased.Response.JSON(response, StatusCode, contentType?); // create a new instance of JSON class with response, status code and content type
 
 OK.Send(Data, Message, Title, CookieData?); // send a JSON response to the client
 ```
@@ -100,9 +100,9 @@ OK.Send(Data, Message, Title, CookieData?); // send a JSON response to the clien
 ## API Call in Efficient Way
 
 ```javascript
-const { methods } = require('outers'); // import the package
+const { ClassBased } = require('outers'); // import the package
 
-const Call = new methods.APiCall.ClassBased("https://jsonplaceholder.typicode.com"); // create a new instance of API class with base URL
+const Call = new ClassBased.API("https://jsonplaceholder.typicode.com"); // create a new instance of API class with base URL
 
 Call.Get('/todos/1', true, {"Custom Headers"}).then((response) => {
     Console.log(response)
@@ -159,9 +159,9 @@ Call.Delete('/posts/1', false, {"Custom Headers"}).then((response) => {}); // se
 
 ```javascript
 
-const { methods } = require('outers'); // import the package
+const { ClassBased } = require('outers'); // import the package
 
-const Unique = new methods.UniqueGenerator(10); // create a new instance of UniqueGenerator class with length of the random string or number or symbol
+const Unique = new ClassBased.UniqueGenerator(10); // create a new instance of UniqueGenerator class with length of the random string or number or symbol
 
 const Number = Unique.RandomNumber(true, ["Custom Numbers"]); // generate a random number with custom numbers with Zero
 
@@ -223,15 +223,15 @@ app.use("/api", Middleware.RequestInjectIP(["PUT", "POST"]), MainFunction); // i
 ## Create Function Based Cluster in NodeJS Easily
 
 ```javascript
-const { methods } = require('outers'); // import the package
-methods.ClusterCreator.FunctionBased(ExpressServer, PORT, CustomWorkerCount, BeforeListenFunctions? AfterListenFunctions?, ...FunctionMiddlewares?); // create a cluster with custom worker count
+const { ClassBased } = require('outers'); // import the package
+ClassBased.ClusterCreator.FunctionBased(ExpressServer, PORT, CustomWorkerCount, BeforeListenFunctions? AfterListenFunctions?, ...FunctionMiddlewares?); // create a cluster with custom worker count
 ```
 
 # Full Example
 
 ```javascript
 const Express = require("express"); // import express
-const { methods } = require("outers"); // import the package
+const { ClassBased } = require("outers"); // import the package
 const app = Express(); // create a new express app
 const CORS = require("cors"); // import cors
 const PORT = process.env.PORT || 3000; // set the port
@@ -248,7 +248,7 @@ app.use(Middleware.RequestInjectIP); // inject the IP Address in Request.body
 app.use("/api", Routes); // set the routes
 
 // At Last Create a Cluster with the Express App
-methods.CreateByFunction(app, PORT, 2); // create a cluster with custom worker count
+ClassBased.CreateByFunction(app, PORT, 2); // create a cluster with custom worker count
 
 // Default Value of CustomWorkerCount is length of the CPU Core & Default Value of PORT is 3000
 
@@ -270,8 +270,8 @@ methods.CreateByFunction(app, PORT, 2); // create a cluster with custom worker c
 # Create Class Based Clusters in NodeJS Easily
 
 ```javascript
-const { methods } = require("outers"); // import the package
-const cluster = new methods.ClusterCreator.ClassBased(
+const { ClassBased } = require("outers"); // import the package
+const cluster = new ClassBased.ClusterCreator.ClassBased(
   ExpressServer,
   PORT,
   numberOfWorkers,
@@ -291,8 +291,8 @@ cluster.StartServer(); // start the cluster server
 # Store Temporary Data in Server Side like localStorage in Client Side
 
 ```javascript
-const { methods } = require('outers'); // import the package
-const storage = new methods.Storage.CreateNewShortStorage('Ankan Saha', 100, "ANCNCE", "Cache/"); // create a new instance of Storage class with name of the storage with 100 MB of storage size with secret key with storage directory
+const { ClassBased } = require('outers'); // import the package
+const storage = new ClassBased.Storage.CreateNewShortStorage('Ankan Saha', 100, "ANCNCE", "Cache/"); // create a new instance of Storage class with name of the storage with 100 MB of storage size with secret key with storage directory
 
 storage.Save("Ankan", { // save a data in the storage with key and value with .then() method
         Name: "Ankan",
@@ -327,8 +327,8 @@ await storage.DeleteStorage() // Delete The All Data & also Delete the Data Stor
 # Use MongoSuper Within Outers
 
 ```javascript
-const { methods } = require("outers"); // import the package
-const MongoSuper = new methods.MongoSuper(); // create a new instance of MongoSuper class
+const { ClassBased } = require("outers"); // import the package
+const MongoSuper = new ClassBased.MongoSuper(); // create a new instance of MongoSuper class
 ```
 
 ## [Follow MongoSuper Documentation for Usage](https://www.npmjs.com/package/mongosuper)
@@ -380,8 +380,8 @@ app.use(
 # Download Git Repository in NodeJS
 
 ```javascript
-const { methods } = require("outers"); // import the package
-const Git = new methods.GitCloner("PROVIDER_NAME", "USERNAME"); // create a new instance of GitCloner class
+const { ClassBased } = require("outers"); // import the package
+const Git = new ClassBased.GitCloner("PROVIDER_NAME", "USERNAME"); // create a new instance of GitCloner class
 ```
 
 - Note : You can pass the Provider Name in the first parameter of the function, it can be anything like GitHub, GitLab, BitBucket etc.
@@ -401,9 +401,9 @@ Git.Clone("RepositoryName").then((res) => {
 ```
 
 ```javascript
-const { methods } = require("outers"); // import the package
+const { ClassBased } = require("outers"); // import the package
 
-methods.GitCloner.Clone("REPOSITORY_URL").then((res) => {
+ClassBased.GitCloner.Clone("REPOSITORY_URL").then((res) => {
   console.log(res);
 }); // it will clone the repository in the current directory;
 ```
@@ -439,7 +439,7 @@ const { Middleware } = require("outers"); // import the package
 
 app.use(
   "/api",
-  Middleware.MethodsController(["GET", "POST", "PUT", "DELETE"]),
+  Middleware.ClassBasedController(["GET", "POST", "PUT", "DELETE"]),
   MainRouter,
 ); // control the method access in NodeJS with the Middleware function
 ```
@@ -456,7 +456,7 @@ app.use("/api", Middleware.JWTValidator("FieldName", Token), MainRouter); // use
 - Note : The Field Name is anywhere in the Request Object, it can be in the Header, Body, Query, Params etc. it automatically find the Field Name in the Request Object when you provide the Field Name
 - Note : You can pass the JWT Secret Token in the second parameter of the function, it can be anything like SecretKey, SecretToken, Secret etc. to verify the JWT Token
 
-// You can pass as many as you want methods in the first parameter of the function
+// You can pass as many as you want ClassBased in the first parameter of the function
 
 ## Save Request Logs
 
