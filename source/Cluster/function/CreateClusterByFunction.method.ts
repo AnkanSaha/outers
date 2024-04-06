@@ -94,7 +94,7 @@ export default async function Config(
       ClusterConfig.fork();
       green(`🚀 Worker ${worker.process.pid} restarted 🚀`);
       blue(
-        `Environment Variables Loaded Successfully in Worker : ${worker.process.pid}`,
+        `Environment Variables Loaded Successfully in Worker's variables : ${worker.process.pid}`,
       );
       GlobalResponseObject.ActiveWorker++; // Increment Active Worker Count by 1
       yellow(`Worker ${worker.process.pid} is listening`);
