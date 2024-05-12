@@ -6,6 +6,7 @@ import {
   MiddlewareInterface,
   ClassBasedInterface,
   FunctionBasedInterface,
+  RetryInterface,
 } from "./Interfaces/outers.interface"; // import interface
 
 // Import Console Color Related Modules
@@ -45,9 +46,7 @@ import {
   Centuries,
   Days,
   Decades,
-  GregorianYear,
   Hours,
-  LeapYear,
   Millenia,
   Minutes,
   Months,
@@ -56,6 +55,20 @@ import {
   Weeks,
   Years,
 } from "../Functions/Waiter.function"; // Waiter Functions
+
+import {
+  Centuries as RetryCenturies,
+  Days as RetryDays,
+  Decades as RetryDecades,
+  Hours as RetryHours,
+  Millenia as RetryMillenia,
+  Minutes as RetryMinutes,
+  Months as RetryMonths,
+  Ms as RetryMs,
+  Seconds as RetrySeconds,
+  Weeks as RetryWeeks,
+  Years as RetryYears,
+} from '../Functions/Retry.function'; // Import Retry Function
 
 // Import Random Generator Modules
 import { UniqueGen } from "../UniqueGen/Base"; // Import UniqueGen Module
@@ -133,10 +146,23 @@ export const Wait: WaitInterface = Object.freeze({
   Months: Months,
   Centuries: Centuries,
   Decades: Decades,
-  GregorianYear: GregorianYear,
-  LeapYear: LeapYear,
   Millenia: Millenia,
   Year: Years,
+});
+
+// Export Retry Modules
+export const Retry: RetryInterface = Object.freeze({
+  MS: RetryMs,
+  Seconds: RetrySeconds,
+  Minutes: RetryMinutes,
+  Hours: RetryHours,
+  Days: RetryDays,
+  Weeks: RetryWeeks,
+  Months: RetryMonths,
+  Centuries: RetryCenturies,
+  Decades: RetryDecades,
+  Millenia: RetryMillenia,
+  Year: RetryYears,
 });
 
 // Export Direct Function Based HTTP Response Sender Modules

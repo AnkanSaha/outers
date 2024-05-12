@@ -20,19 +20,31 @@ import { Request, Response, NextFunction, Express } from "express"; // Import Re
 
 // Interface for Wait Object
 export interface WaitInterface {
-  MS: (ms: number) => Promise<unknown>;
-  Seconds: (seconds: number) => Promise<unknown>;
-  Minutes: (minutes: number) => Promise<unknown>;
-  Hours: (hours: number) => Promise<unknown>;
-  Days: (days: number) => Promise<unknown>;
-  Weeks: (weeks: number) => Promise<unknown>;
-  Months: (months: number) => Promise<unknown>;
-  Centuries: (centuries: number) => Promise<unknown>;
-  Decades: (decades: number) => Promise<unknown>;
-  GregorianYear: (gregorianYear: number) => Promise<unknown>;
-  LeapYear: (leapYear: number) => Promise<unknown>;
-  Millenia: (millenia: number) => Promise<unknown>;
-  Year: (year: number) => Promise<unknown>;
+  MS: (func: () => any, ms: number) => Promise<unknown>;
+  Seconds: (func: () => any, seconds: number) => Promise<unknown>;
+  Minutes: (func: () => any, minutes: number) => Promise<unknown>;
+  Hours: (func: () => any, hours: number) => Promise<unknown>;
+  Days: (func: () => any, days: number) => Promise<unknown>;
+  Weeks: (func: () => any, weeks: number) => Promise<unknown>;
+  Months: (func: () => any, months: number) => Promise<unknown>;
+  Centuries: (func: () => any, centuries: number) => Promise<unknown>;
+  Decades: (func: () => any, decades: number) => Promise<unknown>;
+  Millenia: (func: () => any, millenia: number) => Promise<unknown>;
+  Year: (func: () => any, year: number) => Promise<unknown>;
+}
+
+export interface RetryInterface {
+  MS: (Function: () => Promise<void>, ms: number, firstEffect: boolean) => Promise<unknown>;
+  Seconds: (Function: () => Promise<void>, ms: number, firstEffect: boolean) => Promise<unknown>;
+  Minutes: (Function: () => Promise<void>, ms: number, firstEffect: boolean) => Promise<unknown>;
+  Hours: (Function: () => Promise<void>, ms: number, firstEffect: boolean) => Promise<unknown>;
+  Days: (Function: () => Promise<void>, ms: number, firstEffect: boolean) => Promise<unknown>;
+  Weeks: (Function: () => Promise<void>, ms: number, firstEffect: boolean) => Promise<unknown>;
+  Months: (Function: () => Promise<void>, ms: number, firstEffect: boolean) => Promise<unknown>;
+  Centuries: (Function: () => Promise<void>, ms: number, firstEffect: boolean) => Promise<unknown>;
+  Decades: (Function: () => Promise<void>, ms: number, firstEffect: boolean) => Promise<unknown>;
+  Millenia: (Function: () => Promise<void>, ms: number, firstEffect: boolean) => Promise<unknown>;
+  Year: (Function: () => Promise<void>, ms: number, firstEffect: boolean) => Promise<unknown>;
 }
 
 // Interface for Console Colors
