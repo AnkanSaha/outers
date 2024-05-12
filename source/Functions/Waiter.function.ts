@@ -37,10 +37,13 @@ export const Seconds = (func: () => any, seconds: number) => {
  */
 export const Minutes = (func: () => any, minutes: number) => {
   return new Promise<void>((resolve) => {
-    setTimeout(async () => {
-      await func();
-      resolve();
-    }, minutes * 60 * 1000);
+    setTimeout(
+      async () => {
+        await func();
+        resolve();
+      },
+      minutes * 60 * 1000,
+    );
   });
 };
 
@@ -52,10 +55,13 @@ export const Minutes = (func: () => any, minutes: number) => {
  */
 export const Hours = (func: () => any, hours: number) => {
   return new Promise<void>((resolve) => {
-    setTimeout(async () => {
-      await func();
-      resolve();
-    }, hours * 60 * 60 * 1000);
+    setTimeout(
+      async () => {
+        await func();
+        resolve();
+      },
+      hours * 60 * 60 * 1000,
+    );
   });
 };
 
@@ -67,10 +73,13 @@ export const Hours = (func: () => any, hours: number) => {
  */
 export const Days = (func: () => any, days: number) => {
   return new Promise<void>((resolve) => {
-    setTimeout(async () => {
-      await func();
-      resolve();
-    }, days * 24 * 60 * 60 * 1000);
+    setTimeout(
+      async () => {
+        await func();
+        resolve();
+      },
+      days * 24 * 60 * 60 * 1000,
+    );
   });
 };
 
@@ -82,10 +91,13 @@ export const Days = (func: () => any, days: number) => {
  */
 export const Weeks = (func: () => any, weeks: number) => {
   return new Promise<void>((resolve) => {
-    setTimeout(async () => {
-      await func();
-      resolve();
-    }, weeks * 7 * 24 * 60 * 60 * 1000);
+    setTimeout(
+      async () => {
+        await func();
+        resolve();
+      },
+      weeks * 7 * 24 * 60 * 60 * 1000,
+    );
   });
 };
 
@@ -97,10 +109,13 @@ export const Weeks = (func: () => any, weeks: number) => {
  */
 export const Months = (func: () => any, months: number) => {
   return new Promise<void>((resolve) => {
-    setTimeout(async () => {
-      await func();
-      resolve();
-    }, months * 30 * 24 * 60 * 60 * 1000);
+    setTimeout(
+      async () => {
+        await func();
+        resolve();
+      },
+      months * 30 * 24 * 60 * 60 * 1000,
+    );
   });
 };
 
@@ -112,10 +127,13 @@ export const Months = (func: () => any, months: number) => {
  */
 export const Years = (func: () => any, years: number) => {
   return new Promise<void>((resolve) => {
-    setTimeout(async () => {
-      await func();
-      resolve();
-    }, years * 365 * 24 * 60 * 60 * 1000);
+    setTimeout(
+      async () => {
+        await func();
+        resolve();
+      },
+      years * 365 * 24 * 60 * 60 * 1000,
+    );
   });
 };
 
@@ -127,10 +145,13 @@ export const Years = (func: () => any, years: number) => {
  */
 export const Decades = (func: () => any, decades: number) => {
   return new Promise<void>((resolve) => {
-    setTimeout(async () => {
-      await func();
-      resolve();
-    }, decades * 10 * 365 * 24 * 60 * 60 * 1000);
+    setTimeout(
+      async () => {
+        await func();
+        resolve();
+      },
+      decades * 10 * 365 * 24 * 60 * 60 * 1000,
+    );
   });
 };
 
@@ -142,10 +163,13 @@ export const Decades = (func: () => any, decades: number) => {
  */
 export const Centuries = (func: () => any, centuries: number) => {
   return new Promise<void>((resolve) => {
-    setTimeout(async () => {
-      await func();
-      resolve();
-    }, centuries * 100 * 365 * 24 * 60 * 60 * 1000);
+    setTimeout(
+      async () => {
+        await func();
+        resolve();
+      },
+      centuries * 100 * 365 * 24 * 60 * 60 * 1000,
+    );
   });
 };
 
@@ -157,9 +181,12 @@ export const Centuries = (func: () => any, centuries: number) => {
  */
 export const Millenia = (func: () => any, millenia: number) => {
   return new Promise<void>((resolve) => {
-    setTimeout(async () => {
-      await func();
-      resolve();
-    }, millenia * 1000 * 365 * 24 * 60 * 60 * 1000);
+    setTimeout(
+      async () => {
+        await func();
+        resolve();
+      },
+      millenia * 1000 * 365 * 24 * 60 * 60 * 1000,
+    );
   });
 };

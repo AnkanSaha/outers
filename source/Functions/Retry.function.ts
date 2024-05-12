@@ -5,79 +5,95 @@
  * @param firstEffect Determines whether the function should be executed immediately or not.
  * @returns A function that can be used to clear the interval when needed.
  */
-export const Ms = async (Function: () => Promise<void>, ms: number, firstEffect: boolean) => {
-    const executeFunction = async () => {
-        try {
-            await Function();
-        } catch (error) {
-            console.error("Error occurred during function execution:", error);
-        }
-    };
-
-    if (firstEffect === true) {
-        await executeFunction();
+export const Ms = async (
+  Function: () => Promise<void>,
+  ms: number,
+  firstEffect: boolean,
+) => {
+  const executeFunction = async () => {
+    try {
+      await Function();
+    } catch (error) {
+      console.error("Error occurred during function execution:", error);
     }
+  };
 
-    const intervalId: NodeJS.Timeout = setInterval(executeFunction, ms);
+  if (firstEffect === true) {
+    await executeFunction();
+  }
 
-    // Returning a function to clear the interval when needed
-    return () => clearInterval(intervalId);
+  const intervalId: NodeJS.Timeout = setInterval(executeFunction, ms);
+
+  // Returning a function to clear the interval when needed
+  return () => clearInterval(intervalId);
 };
-
 
 /**
  * Executes a given function repeatedly at a specified interval.
- * 
+ *
  * @param Function - The function to be executed.
  * @param Seconds - The interval in seconds at which the function should be executed.
  * @param firstEffect - A boolean indicating whether the function should be executed immediately.
  * @returns A function that can be used to clear the interval.
  */
-export const Seconds = async (Function: () => Promise<void>, Seconds: number, firstEffect: boolean) => {
-    const executeFunction = async () => {
-        try {
-            await Function();
-        } catch (error) {
-            console.error("Error occurred during function execution:", error);
-        }
-    };
-
-    if (firstEffect === true) {
-        await executeFunction();
+export const Seconds = async (
+  Function: () => Promise<void>,
+  Seconds: number,
+  firstEffect: boolean,
+) => {
+  const executeFunction = async () => {
+    try {
+      await Function();
+    } catch (error) {
+      console.error("Error occurred during function execution:", error);
     }
+  };
 
-    const intervalId: NodeJS.Timeout = setInterval(executeFunction, Seconds * 1000);
+  if (firstEffect === true) {
+    await executeFunction();
+  }
 
-    // Returning a function to clear the interval when needed
-    return () => clearInterval(intervalId);
+  const intervalId: NodeJS.Timeout = setInterval(
+    executeFunction,
+    Seconds * 1000,
+  );
+
+  // Returning a function to clear the interval when needed
+  return () => clearInterval(intervalId);
 };
-
 
 /**
  * Executes a given function repeatedly at a specified interval.
- * 
+ *
  * @param Function - The function to be executed.
  * @param Minutes - The interval in minutes at which the function should be executed.
  * @param firstEffect - A boolean indicating whether the function should be executed immediately.
  * @returns A function that can be used to clear the interval when needed.
  */
-export const Minutes = async (Function: () => Promise<void>, Minutes: number, firstEffect: boolean) => {
-    const executeFunction = async () => {
-        try {
-            await Function();
-        } catch (error) {
-            console.error("Error occurred during function execution:", error);
-        }
-    };
-
-    if (firstEffect === true) {
-        await executeFunction();
+export const Minutes = async (
+  Function: () => Promise<void>,
+  Minutes: number,
+  firstEffect: boolean,
+) => {
+  const executeFunction = async () => {
+    try {
+      await Function();
+    } catch (error) {
+      console.error("Error occurred during function execution:", error);
     }
+  };
 
-    const intervalId: NodeJS.Timeout = setInterval(executeFunction, Minutes * 60 * 1000);
+  if (firstEffect === true) {
+    await executeFunction();
+  }
 
-    // Returning a function to clear the interval when needed
-    return () => clearInterval(intervalId);
+  const intervalId: NodeJS.Timeout = setInterval(
+    executeFunction,
+    Minutes * 60 * 1000,
+  );
+
+  // Returning a function to clear the interval when needed
+  return () => clearInterval(intervalId);
 };
 
 /**
@@ -87,23 +103,30 @@ export const Minutes = async (Function: () => Promise<void>, Minutes: number, fi
  * @param firstEffect - Determines whether to execute the function immediately or not.
  * @returns A function that can be used to clear the interval.
  */
-export const Hours = async (Function: () => Promise<void>, Hours: number, firstEffect: boolean) => {
-    const executeFunction = async () => {
-        try {
-            await Function();
-        } catch (error) {
-            console.error("Error occurred during function execution:", error);
-        }
-    };
-
-    if (firstEffect === true) {
-        await executeFunction();
+export const Hours = async (
+  Function: () => Promise<void>,
+  Hours: number,
+  firstEffect: boolean,
+) => {
+  const executeFunction = async () => {
+    try {
+      await Function();
+    } catch (error) {
+      console.error("Error occurred during function execution:", error);
     }
+  };
 
-    const intervalId: NodeJS.Timeout = setInterval(executeFunction, Hours * 60 * 60 * 1000);
+  if (firstEffect === true) {
+    await executeFunction();
+  }
 
-    // Returning a function to clear the interval when needed
-    return () => clearInterval(intervalId);
+  const intervalId: NodeJS.Timeout = setInterval(
+    executeFunction,
+    Hours * 60 * 60 * 1000,
+  );
+
+  // Returning a function to clear the interval when needed
+  return () => clearInterval(intervalId);
 };
 
 /**
@@ -113,23 +136,30 @@ export const Hours = async (Function: () => Promise<void>, Hours: number, firstE
  * @param firstEffect - Determines whether the function should be executed immediately.
  * @returns A function that can be used to clear the interval.
  */
-export const Days = async (Function: () => Promise<void>, Days: number, firstEffect: boolean) => {
-    const executeFunction = async () => {
-        try {
-            await Function();
-        } catch (error) {
-            console.error("Error occurred during function execution:", error);
-        }
-    };
-
-    if (firstEffect === true) {
-        await executeFunction();
+export const Days = async (
+  Function: () => Promise<void>,
+  Days: number,
+  firstEffect: boolean,
+) => {
+  const executeFunction = async () => {
+    try {
+      await Function();
+    } catch (error) {
+      console.error("Error occurred during function execution:", error);
     }
+  };
 
-    const intervalId: NodeJS.Timeout = setInterval(executeFunction, Days * 24 * 60 * 60 * 1000);
+  if (firstEffect === true) {
+    await executeFunction();
+  }
 
-    // Returning a function to clear the interval when needed
-    return () => clearInterval(intervalId);
+  const intervalId: NodeJS.Timeout = setInterval(
+    executeFunction,
+    Days * 24 * 60 * 60 * 1000,
+  );
+
+  // Returning a function to clear the interval when needed
+  return () => clearInterval(intervalId);
 };
 
 /**
@@ -139,23 +169,30 @@ export const Days = async (Function: () => Promise<void>, Days: number, firstEff
  * @param firstEffect - A boolean indicating whether to execute the function immediately.
  * @returns A function that can be used to clear the interval.
  */
-export const Weeks = async (Function: () => Promise<void>, Weeks: number, firstEffect: boolean) => {
-    const executeFunction = async () => {
-        try {
-            await Function();
-        } catch (error) {
-            console.error("Error occurred during function execution:", error);
-        }
-    };
-
-    if (firstEffect === true) {
-        await executeFunction();
+export const Weeks = async (
+  Function: () => Promise<void>,
+  Weeks: number,
+  firstEffect: boolean,
+) => {
+  const executeFunction = async () => {
+    try {
+      await Function();
+    } catch (error) {
+      console.error("Error occurred during function execution:", error);
     }
+  };
 
-    const intervalId: NodeJS.Timeout = setInterval(executeFunction, Weeks * 7 * 24 * 60 * 60 * 1000);
+  if (firstEffect === true) {
+    await executeFunction();
+  }
 
-    // Returning a function to clear the interval when needed
-    return () => clearInterval(intervalId);
+  const intervalId: NodeJS.Timeout = setInterval(
+    executeFunction,
+    Weeks * 7 * 24 * 60 * 60 * 1000,
+  );
+
+  // Returning a function to clear the interval when needed
+  return () => clearInterval(intervalId);
 };
 
 /**
@@ -165,23 +202,30 @@ export const Weeks = async (Function: () => Promise<void>, Weeks: number, firstE
  * @param firstEffect - Determines whether the function should be executed immediately.
  * @returns A function that can be used to clear the interval.
  */
-export const Months = async (Function: () => Promise<void>, Months: number, firstEffect: boolean) => {
-    const executeFunction = async () => {
-        try {
-            await Function();
-        } catch (error) {
-            console.error("Error occurred during function execution:", error);
-        }
-    };
-
-    if (firstEffect === true) {
-        await executeFunction();
+export const Months = async (
+  Function: () => Promise<void>,
+  Months: number,
+  firstEffect: boolean,
+) => {
+  const executeFunction = async () => {
+    try {
+      await Function();
+    } catch (error) {
+      console.error("Error occurred during function execution:", error);
     }
+  };
 
-    const intervalId: NodeJS.Timeout = setInterval(executeFunction, Months * 30 * 24 * 60 * 60 * 1000);
+  if (firstEffect === true) {
+    await executeFunction();
+  }
 
-    // Returning a function to clear the interval when needed
-    return () => clearInterval(intervalId);
+  const intervalId: NodeJS.Timeout = setInterval(
+    executeFunction,
+    Months * 30 * 24 * 60 * 60 * 1000,
+  );
+
+  // Returning a function to clear the interval when needed
+  return () => clearInterval(intervalId);
 };
 
 /**
@@ -191,23 +235,30 @@ export const Months = async (Function: () => Promise<void>, Months: number, firs
  * @param firstEffect - A boolean indicating whether to execute the function immediately.
  * @returns A function that can be used to clear the interval.
  */
-export const Years = async (Function: () => Promise<void>, Years: number, firstEffect: boolean) => {
-    const executeFunction = async () => {
-        try {
-            await Function();
-        } catch (error) {
-            console.error("Error occurred during function execution:", error);
-        }
-    };
-
-    if (firstEffect === true) {
-        await executeFunction();
+export const Years = async (
+  Function: () => Promise<void>,
+  Years: number,
+  firstEffect: boolean,
+) => {
+  const executeFunction = async () => {
+    try {
+      await Function();
+    } catch (error) {
+      console.error("Error occurred during function execution:", error);
     }
+  };
 
-    const intervalId: NodeJS.Timeout = setInterval(executeFunction, Years * 365 * 24 * 60 * 60 * 1000);
+  if (firstEffect === true) {
+    await executeFunction();
+  }
 
-    // Returning a function to clear the interval when needed
-    return () => clearInterval(intervalId);
+  const intervalId: NodeJS.Timeout = setInterval(
+    executeFunction,
+    Years * 365 * 24 * 60 * 60 * 1000,
+  );
+
+  // Returning a function to clear the interval when needed
+  return () => clearInterval(intervalId);
 };
 
 /**
@@ -217,23 +268,30 @@ export const Years = async (Function: () => Promise<void>, Years: number, firstE
  * @param firstEffect - A boolean indicating whether to execute the function immediately.
  * @returns A function that can be used to clear the interval.
  */
-export const Decades = async (Function: () => Promise<void>, Decades: number, firstEffect: boolean) => {
-    const executeFunction = async () => {
-        try {
-            await Function();
-        } catch (error) {
-            console.error("Error occurred during function execution:", error);
-        }
-    };
-
-    if (firstEffect === true) {
-        await executeFunction();
+export const Decades = async (
+  Function: () => Promise<void>,
+  Decades: number,
+  firstEffect: boolean,
+) => {
+  const executeFunction = async () => {
+    try {
+      await Function();
+    } catch (error) {
+      console.error("Error occurred during function execution:", error);
     }
+  };
 
-    const intervalId: NodeJS.Timeout = setInterval(executeFunction, Decades * 10 * 365 * 24 * 60 * 60 * 1000);
+  if (firstEffect === true) {
+    await executeFunction();
+  }
 
-    // Returning a function to clear the interval when needed
-    return () => clearInterval(intervalId);
+  const intervalId: NodeJS.Timeout = setInterval(
+    executeFunction,
+    Decades * 10 * 365 * 24 * 60 * 60 * 1000,
+  );
+
+  // Returning a function to clear the interval when needed
+  return () => clearInterval(intervalId);
 };
 
 /**
@@ -243,23 +301,30 @@ export const Decades = async (Function: () => Promise<void>, Decades: number, fi
  * @param firstEffect - Determines whether the function should be executed immediately.
  * @returns A function that can be used to clear the interval.
  */
-export const Centuries = async (Function: () => Promise<void>, Centuries: number, firstEffect: boolean) => {
-    const executeFunction = async () => {
-        try {
-            await Function();
-        } catch (error) {
-            console.error("Error occurred during function execution:", error);
-        }
-    };
-
-    if (firstEffect === true) {
-        await executeFunction();
+export const Centuries = async (
+  Function: () => Promise<void>,
+  Centuries: number,
+  firstEffect: boolean,
+) => {
+  const executeFunction = async () => {
+    try {
+      await Function();
+    } catch (error) {
+      console.error("Error occurred during function execution:", error);
     }
+  };
 
-    const intervalId: NodeJS.Timeout = setInterval(executeFunction, Centuries * 100 * 365 * 24 * 60 * 60 * 1000);
+  if (firstEffect === true) {
+    await executeFunction();
+  }
 
-    // Returning a function to clear the interval when needed
-    return () => clearInterval(intervalId);
+  const intervalId: NodeJS.Timeout = setInterval(
+    executeFunction,
+    Centuries * 100 * 365 * 24 * 60 * 60 * 1000,
+  );
+
+  // Returning a function to clear the interval when needed
+  return () => clearInterval(intervalId);
 };
 
 /**
@@ -269,21 +334,28 @@ export const Centuries = async (Function: () => Promise<void>, Centuries: number
  * @param firstEffect - A boolean indicating whether the function should be executed immediately.
  * @returns A function that can be used to clear the interval.
  */
-export const Millenia = async (Function: () => Promise<void>, Millenia: number, firstEffect: boolean) => {
-    const executeFunction = async () => {
-        try {
-            await Function();
-        } catch (error) {
-            console.error("Error occurred during function execution:", error);
-        }
-    };
-
-    if (firstEffect === true) {
-        await executeFunction();
+export const Millenia = async (
+  Function: () => Promise<void>,
+  Millenia: number,
+  firstEffect: boolean,
+) => {
+  const executeFunction = async () => {
+    try {
+      await Function();
+    } catch (error) {
+      console.error("Error occurred during function execution:", error);
     }
+  };
 
-    const intervalId: NodeJS.Timeout = setInterval(executeFunction, Millenia * 1000 * 365 * 24 * 60 * 60 * 1000);
+  if (firstEffect === true) {
+    await executeFunction();
+  }
 
-    // Returning a function to clear the interval when needed
-    return () => clearInterval(intervalId);
+  const intervalId: NodeJS.Timeout = setInterval(
+    executeFunction,
+    Millenia * 1000 * 365 * 24 * 60 * 60 * 1000,
+  );
+
+  // Returning a function to clear the interval when needed
+  return () => clearInterval(intervalId);
 };
