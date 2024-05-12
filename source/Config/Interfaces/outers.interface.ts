@@ -34,17 +34,61 @@ export interface WaitInterface {
 }
 
 export interface RetryInterface {
-  MS: (Function: () => Promise<void>, ms: number, firstEffect: boolean) => Promise<unknown>;
-  Seconds: (Function: () => Promise<void>, ms: number, firstEffect: boolean) => Promise<unknown>;
-  Minutes: (Function: () => Promise<void>, ms: number, firstEffect: boolean) => Promise<unknown>;
-  Hours: (Function: () => Promise<void>, ms: number, firstEffect: boolean) => Promise<unknown>;
-  Days: (Function: () => Promise<void>, ms: number, firstEffect: boolean) => Promise<unknown>;
-  Weeks: (Function: () => Promise<void>, ms: number, firstEffect: boolean) => Promise<unknown>;
-  Months: (Function: () => Promise<void>, ms: number, firstEffect: boolean) => Promise<unknown>;
-  Centuries: (Function: () => Promise<void>, ms: number, firstEffect: boolean) => Promise<unknown>;
-  Decades: (Function: () => Promise<void>, ms: number, firstEffect: boolean) => Promise<unknown>;
-  Millenia: (Function: () => Promise<void>, ms: number, firstEffect: boolean) => Promise<unknown>;
-  Year: (Function: () => Promise<void>, ms: number, firstEffect: boolean) => Promise<unknown>;
+  MS: (
+    Function: () => Promise<void>,
+    ms: number,
+    firstEffect: boolean,
+  ) => Promise<unknown>;
+  Seconds: (
+    Function: () => Promise<void>,
+    ms: number,
+    firstEffect: boolean,
+  ) => Promise<unknown>;
+  Minutes: (
+    Function: () => Promise<void>,
+    ms: number,
+    firstEffect: boolean,
+  ) => Promise<unknown>;
+  Hours: (
+    Function: () => Promise<void>,
+    ms: number,
+    firstEffect: boolean,
+  ) => Promise<unknown>;
+  Days: (
+    Function: () => Promise<void>,
+    ms: number,
+    firstEffect: boolean,
+  ) => Promise<unknown>;
+  Weeks: (
+    Function: () => Promise<void>,
+    ms: number,
+    firstEffect: boolean,
+  ) => Promise<unknown>;
+  Months: (
+    Function: () => Promise<void>,
+    ms: number,
+    firstEffect: boolean,
+  ) => Promise<unknown>;
+  Centuries: (
+    Function: () => Promise<void>,
+    ms: number,
+    firstEffect: boolean,
+  ) => Promise<unknown>;
+  Decades: (
+    Function: () => Promise<void>,
+    ms: number,
+    firstEffect: boolean,
+  ) => Promise<unknown>;
+  Millenia: (
+    Function: () => Promise<void>,
+    ms: number,
+    firstEffect: boolean,
+  ) => Promise<unknown>;
+  Year: (
+    Function: () => Promise<void>,
+    ms: number,
+    firstEffect: boolean,
+  ) => Promise<unknown>;
 }
 
 // Interface for Console Colors

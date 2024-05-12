@@ -68,7 +68,7 @@ import {
   Seconds as RetrySeconds,
   Weeks as RetryWeeks,
   Years as RetryYears,
-} from '../Functions/Retry.function'; // Import Retry Function
+} from "../Functions/Retry.function"; // Import Retry Function
 
 // Import Random Generator Modules
 import { UniqueGen } from "../UniqueGen/Base"; // Import UniqueGen Module
