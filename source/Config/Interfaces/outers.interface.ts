@@ -41,52 +41,52 @@ export interface RetryInterface {
   ) => Promise<unknown>;
   Seconds: (
     Function: () => Promise<void>,
-    ms: number,
+    Seconds: number,
     firstEffect: boolean,
   ) => Promise<unknown>;
   Minutes: (
     Function: () => Promise<void>,
-    ms: number,
+    Minutes: number,
     firstEffect: boolean,
   ) => Promise<unknown>;
   Hours: (
     Function: () => Promise<void>,
-    ms: number,
+    Hours: number,
     firstEffect: boolean,
   ) => Promise<unknown>;
   Days: (
     Function: () => Promise<void>,
-    ms: number,
+    Days: number,
     firstEffect: boolean,
   ) => Promise<unknown>;
   Weeks: (
     Function: () => Promise<void>,
-    ms: number,
+    Weeks: number,
     firstEffect: boolean,
   ) => Promise<unknown>;
   Months: (
     Function: () => Promise<void>,
-    ms: number,
+    Months: number,
     firstEffect: boolean,
   ) => Promise<unknown>;
   Centuries: (
     Function: () => Promise<void>,
-    ms: number,
+    Centuries: number,
     firstEffect: boolean,
   ) => Promise<unknown>;
   Decades: (
     Function: () => Promise<void>,
-    ms: number,
+    Decades: number,
     firstEffect: boolean,
   ) => Promise<unknown>;
   Millenia: (
     Function: () => Promise<void>,
-    ms: number,
+    Millenia: number,
     firstEffect: boolean,
   ) => Promise<unknown>;
   Year: (
     Function: () => Promise<void>,
-    ms: number,
+    Year: number,
     firstEffect: boolean,
   ) => Promise<unknown>;
 }
