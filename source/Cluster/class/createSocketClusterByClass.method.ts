@@ -163,11 +163,11 @@ export default class createSocketCluster {
       ClusterConfig.on("exit", (worker) => {
         red(`Worker ${worker.process.pid} died`);
         ClusterConfig.fork();
-        green(`🚀 Worker restarted 🚀`);
+        green("🚀 Worker restarted 🚀");
         blue(
           `Environment Variables Loaded Successfully in Worker : ${worker.process.pid}`,
         );
-        yellow(`Worker is listening`);
+        yellow("Worker is listening");
       });
     } else {
       this.#EnableTrustProxy === true
