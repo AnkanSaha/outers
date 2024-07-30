@@ -116,6 +116,8 @@ import RequestLogger from "../Middlewares/Request Logger/Base.middleware"; // Im
 import IPChecker from "../Functions/IP Type Checker.function"; // Import IP Type Checker Module
 import getIPDetails from "../Functions/Get IP Details.function"; // Import Get IP Details Module
 import ReadRequestCount from "../Functions/Read Request Count.function"; // Import Read Request Count Module
+import createSocketCluster from "../Cluster/class/createSocketClusterByClass.method";
+import SocketClusterConfig from "../Cluster/function/CreateSocketClusterByFunction.method";
 
 // Export Console Color Related Modules
 export const Console: ConsoleInterface = Object.freeze({
@@ -188,6 +190,7 @@ export const ClassBased: ClassBasedInterface = Object.freeze({
   JWT_Manager: Jwt, // Export JWT Manager Module
   MongoSuper: MongoSuper,
   ClusterCreator: CreateClusterByClass, // CreateClusterByClass is used to create a cluster using the class based method
+  SocketClusterCreator: createSocketCluster, // CreateSocketCluster is used to create
   UniqueGenerator: UniqueGen, // Export UniqueGen Module
   CryptoGraphy: Encryption, // Export Crypto Module
   API: APiCall,
@@ -219,6 +222,7 @@ export const FunctionBased: FunctionBasedInterface = Object.freeze({
     Info: getIPDetails, // Export Get IP Details Function
   },
   ClusterCreator: CreateClusterByFunction, // CreateClusterByFunction is used to create a cluster using the function based method
+  SocketClusterCreator: SocketClusterConfig, // CreateSocketCluster is used to create a socket cluster using the function based method
   API: {
     GET: GetFetch, // Export Get Fetch Module
     POST: PostFetch, // Export Post Fetch Module
