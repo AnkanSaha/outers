@@ -1,6 +1,6 @@
 {
   "name": "outers",
-  "version": "8.5.1",
+  "version": "8.5.2",
   "description": "outers - a all in one package for your day to day use",
   "main": "./lib/Config/outer.js",
   "types": "./lib/Config/outer.d.ts",
@@ -29,6 +29,7 @@
     "@types/crypto-js": "^4.2.1",
     "@types/express": "^4.17.21",
     "@types/jsonwebtoken": "^9.0.5",
+    "@types/ws": "^8.5.12",
     "@typescript-eslint/eslint-plugin": "^7.1.0",
     "@typescript-eslint/parser": "^7.1.0",
     "eslint": "^8.57.0",
@@ -45,6 +46,7 @@
     "crypto-js": "^4.2.0",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
-    "mongosuper": "^4.5.8"
+    "mongosuper": "^4.5.8",
+    "ws": "^8.18.0"
   }
 }

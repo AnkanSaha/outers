@@ -195,6 +195,7 @@ export interface ClassBasedInterface {
   JWT_Manager: typeof Jwt;
   MongoSuper: typeof MongoSuper;
   ClusterCreator: typeof CreateClusterByClass;
+  SocketClusterCreator: typeof createSocketCluster;
   UniqueGenerator: typeof UniqueGen;
   CryptoGraphy: typeof Encryption;
   API: typeof APiCall;
@@ -216,6 +217,7 @@ export interface ClassBasedInterface {
 import { IGetIPDetails } from "./Functions/Get IP Details.interface"; // Get IP Details Interface
 import { ResponseObject } from "./Cluster/CreateClusterByFunction.interfaces"; // Create Cluster Interface
 import { ReturnData } from "../../Functions/Read Request Count.function"; // Read Request Count Interface
+import createSocketCluster from "../../Cluster/class/createSocketClusterByClass.method";
 export interface FunctionBasedInterface {
   RandomGenerator: {
     Boolean: () => boolean;
@@ -249,6 +251,7 @@ export interface FunctionBasedInterface {
     AfterListenFunctions?: any[],
     FunctionMiddlewares?: any[],
   ) => Promise<ResponseObject | undefined>;
+  SocketClusterCreator: () => Promise<ResponseObject | undefined>;
   API: {
     GET: (API: string, Responsejson?: boolean, Headers?: any) => Promise<any>;
     POST: (
