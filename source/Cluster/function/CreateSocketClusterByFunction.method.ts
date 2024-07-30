@@ -31,7 +31,7 @@ export default async function SocketClusterConfig(
   EnableTrustProxy: boolean = false, // Enable Trust Proxy
   BeforeListenFunctions: any[] = [], // Any Functions to run before listen
   AfterListenFunctions: any[] = [], // Any Functions to run after listen
-  FunctionMiddlewares: any[] = [] // Any Middlewares to apply
+  FunctionMiddlewares: any[] = [], // Any Middlewares to apply
 ): Promise<ResponseObject | undefined> {
   // Check if User Provided Express Server or not
   if (!ExpressServer || ExpressServer === undefined) {
@@ -69,7 +69,7 @@ export default async function SocketClusterConfig(
         1024 /
         1024 /
         1024
-      ).toFixed(2)} GB Free Ram : ${cpus()[0].model}`
+      ).toFixed(2)} GB Free Ram : ${cpus()[0].model}`,
     );
 
     // Create a worker according to the number that is specified
@@ -82,7 +82,7 @@ export default async function SocketClusterConfig(
     ClusterConfig.on("online", (worker) => {
       green(`🚀 Worker ${worker.process.pid} started 🚀`);
       blue(
-        `Environment Variables Loaded Successfully in Worker : ${worker.process.pid}`
+        `Environment Variables Loaded Successfully in Worker : ${worker.process.pid}`,
       );
       GlobalResponseObject.ActiveWorker++; // Increment Active Worker Count by 1
       yellow(`Worker ${worker.process.pid} is listening`);
@@ -95,7 +95,7 @@ export default async function SocketClusterConfig(
       ClusterConfig.fork();
       green(`🚀 Worker ${worker.process.pid} restarted 🚀`);
       blue(
-        `Environment Variables Loaded Successfully in Worker's variables : ${worker.process.pid}`
+        `Environment Variables Loaded Successfully in Worker's variables : ${worker.process.pid}`,
       );
       GlobalResponseObject.ActiveWorker++; // Increment Active Worker Count by 1
       yellow(`Worker ${worker.process.pid} is listening`);
@@ -105,7 +105,7 @@ export default async function SocketClusterConfig(
     EnableTrustProxy
       ? ExpressServer.set("trust proxy", () => true)
       : yellow(
-          "Trust Proxy is not enabled, if you are working behind a proxy, please enable it to get the real IP Address"
+          "Trust Proxy is not enabled, if you are working behind a proxy, please enable it to get the real IP Address",
         );
 
     // Apply Function Middlewares to Express Server Instance like CORS, Body Parser, etc.

@@ -239,7 +239,7 @@ export default class createSocketCluster {
    * Gets the WebSocket connection handler.
    * @returns The WebSocket connection handler or null.
    */
-  public getWebSocketConnectionHandler(): WebSocket| null {
+  public getWebSocketConnectionHandler(): WebSocket | null {
     return this.#WebSocketConnectionHandler;
   }
 
