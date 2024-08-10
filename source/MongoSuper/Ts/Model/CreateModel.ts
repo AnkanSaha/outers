@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { model } from "mongoose"; // Import mongoose types
 
 // Global types
