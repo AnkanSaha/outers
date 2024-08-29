@@ -4,7 +4,7 @@
 import { cpus, platform, arch, freemem, totalmem } from "node:os"; // Import os module
 import express, { Express } from "express"; // Import express module
 import { Server as HTTPServer } from "http"; // Import HTTP Server module
-import { WebSocketServer, WebSocket } from "ws"; // Import WebSocket module
+import { WebSocketServer } from "ws"; // Import WebSocket module
 import ClusterConfig from "node:cluster"; // Import Cluster module
 const { isPrimary } = ClusterConfig; // Import isPrimary from Cluster
 import { bright, red, green, yellow, blue } from "../../Logs/Console.log"; // Import Console module
@@ -75,7 +75,7 @@ export default class createSocketCluster {
   /**
    * Store WebSocket connection handler.
    */
-  #WebSocketConnectionHandler: WebSocket | null;
+  #WebSocketConnectionHandler: WebSocketServer;
 
   /**
    * Creates an instance of CreateClusterByClass.
@@ -117,7 +117,7 @@ export default class createSocketCluster {
       Platform: platform(),
     };
     this.#EnableTrustProxy = EnableTrustProxy ?? false;
-    this.#WebSocketConnectionHandler = null;
+    this.#WebSocketConnectionHandler = this.#WebSocketServer;
   }
 
   /**
@@ -210,7 +210,7 @@ export default class createSocketCluster {
 
         this.#GlobalResponseObject.ActiveServer = ActiveServer;
 
-        this.#WebSocketServer.on("connection", (ws: WebSocket) => {
+        this.#WebSocketServer.on("connection", (ws: WebSocketServer) => {
           green("Client connected");
 
           ws.on("message", (message: any) => {
@@ -239,7 +239,7 @@ export default class createSocketCluster {
    * Gets the WebSocket connection handler.
    * @returns The WebSocket connection handler or null.
    */
-  public getWebSocketConnectionHandler(): WebSocket | null {
+  public getWebSocketConnectionHandler(): WebSocketServer {
     return this.#WebSocketConnectionHandler;
   }
 
