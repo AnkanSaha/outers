@@ -117,7 +117,7 @@ export default class createSocketCluster {
       Platform: platform(),
     };
     this.#EnableTrustProxy = EnableTrustProxy ?? false;
-    this.#WebSocketConnectionHandler= this.#WebSocketServer;
+    this.#WebSocketConnectionHandler = this.#WebSocketServer;
   }
 
   /**
