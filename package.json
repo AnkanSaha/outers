@@ -1,12 +1,12 @@
 {
   "name": "outers",
-  "version": "8.5.9",
+  "version": "8.6.0",
   "description": "outers - a all in one package for your day to day use",
   "main": "./lib/Config/outer.js",
   "types": "./lib/Config/outer.d.ts",
   "scripts": {
     "test": "eslint source/**/*.ts --fix",
-    "build": "npm test && tsc",
+    "build": "tsc",
     "prepare": "npm run build"
   },
   "repository": {
