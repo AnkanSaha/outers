@@ -8,6 +8,7 @@
     "checkJs": false, // Disable checking of JavaScript files
     "allowJs": true, // Allow JavaScript files to be included
     "sourceMap": true,
+    "removeComments": false,
     "jsx": "react", // Specify the JSX factory function
     "strict": true,
     "esModuleInterop": true,

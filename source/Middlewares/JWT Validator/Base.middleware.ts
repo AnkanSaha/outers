@@ -23,7 +23,7 @@ import { StatusCode } from "../../StatusCode/Code"; // Import Status Codes
  * @param SecretToken - The secret token used to verify the JWT.
  * @returns The middleware function.
  */
-export default (TokenFieldName: string, SecretToken: string) => {
+export default (TokenFieldName: string, SecretToken: string, bearerToken?: boolean, excludingText?: string) => {
   // Check if User Provided Token Field Name & Secret Token
   if (!TokenFieldName) {
     throw new Error("Token Field Name is Required"); // Throw Error if Token Field Name is not Provided
@@ -126,6 +126,21 @@ export default (TokenFieldName: string, SecretToken: string) => {
           }
         }
       } else {
+        if (bearerToken && excludingText) {
+          if (String(Request.headers[TokenFieldName]).includes(excludingText)) {
+            Request.headers[TokenFieldName] = String(
+              Request.headers[TokenFieldName],
+            ).replace(excludingText, ""); // Remove excludingText from Token
+          }
+        }
+        else if (bearerToken && !excludingText) {
+          if (String(Request.headers[TokenFieldName]).includes("Bearer")) {
+            Request.headers[TokenFieldName] = String(
+              Request.headers[TokenFieldName],
+            ).replace("Bearer", ""); // Remove Bearer from Token
+          }
+        }
+        
         const toKenValidation = await JWT_Manager.decode(
           String(Request.headers[TokenFieldName]),
         ); // Verify Token
