@@ -1,0 +1,46 @@
+name: Publish To Registry
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish-to-npm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Node.js
+        run: |
+          sudo apt-get update && sudo apt-get install -y nodejs npm
+      - name: Install Dependencies
+        run: npm install
+      - name: Build Package
+        run: npm run build
+      - name: Test Package
+        run: npm run test
+      - name: Set NPM Auth Token
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_AUTH_TOKEN }}" > ~/.npmrc
+      - name: Publish to NPM Registry
+        run: npm publish --registry https://registry.npmjs.org --access public
+
+  publish-to-github:
+    needs: publish-to-npm
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Node.js & sed
+        run: |
+          sudo apt-get update && sudo apt-get install -y nodejs npm sed
+      - name: Install Dependencies
+        run: npm install
+      - name: Build Package
+        run: npm run build
+      - name: Test Package
+        run: npm run test
+      - name: Set GitHub Auth Token
+        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GIT_AUTH_TOKEN }}" >> ~/.npmrc
+      - name: Change the Package name in package.json
+        run: sed -i "2s/\"outers\"/\"@${{ secrets.GITHUB_USER_NAME }}\/outers\"/" package.json
+      - name: Publish to GitHub Package Registry
+        run: npm publish --registry=https://npm.pkg.github.com --scope=@${{ secrets.GIT_USER_NAME }} --access public
