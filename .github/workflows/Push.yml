@@ -12,7 +12,8 @@ jobs:
       - uses: actions/checkout@v3
       - name: Install Node.js
         run: |
-          sudo apt-get update && sudo apt-get install -y nodejs npm
+          curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+          sudo apt-get install -y nodejs sed
       - name: Install Dependencies
         run: npm install
       - name: Build Package
@@ -31,7 +32,8 @@ jobs:
       - uses: actions/checkout@v3
       - name: Install Node.js & sed
         run: |
-          sudo apt-get update && sudo apt-get install -y nodejs npm sed
+          curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+          sudo apt-get install -y nodejs sed
       - name: Install Dependencies
         run: npm install
       - name: Build Package
@@ -41,6 +43,6 @@ jobs:
       - name: Set GitHub Auth Token
         run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GIT_AUTH_TOKEN }}" >> ~/.npmrc
       - name: Change the Package name in package.json
-        run: sed -i "2s/\"outers\"/\"@${{ secrets.GITHUB_USER_NAME }}\/outers\"/" package.json
+        run: sed -i "2s/\"outers\"/\"@${{ secrets.GIT_USER_NAME }}\/outers\"/" package.json
       - name: Publish to GitHub Package Registry
         run: npm publish --registry=https://npm.pkg.github.com --scope=@${{ secrets.GIT_USER_NAME }} --access public
